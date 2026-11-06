@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "DUDUQ_TWO_LANE_GENERATION_CHECKPOINT_V1",
+  "createdAt": "2026-11-05T23:53:26.658Z",
+  "updatedAt": "2026-11-05T23:53:26.658Z",
+  "status": "Y3M05_GENERATION_CANDIDATES_COMPLETE",
+  "projectStatus": "INCOMPLETE",
+  "lane": "generation",
+  "moduleId": "Y3M05",
+  "sourceAudit": {
+    "questions": 20,
+    "pendingMediaIds": 46,
+    "semanticConcepts": 26,
+    "allSemanticTargets": 30,
+    "globalPendingMediaIds": 1055,
+    "questionSourceSha256": "34c761a8288e9ebdebbec2a62cea7a33097e88d4a5b9779677a84e641e227077",
+    "registrySha256": "f11c12fe929379947e7d4f76736f8f73bc6320618bf01265bfb48a4e18ef5e30"
+  },
+  "candidateAssets": 26,
+  "newlyGeneratedAssets": 13,
+  "reusedVerifiedNativeOriginalAssets": 13,
+  "generatorAttempts": {
+    "failedModerationNoFile": 0,
+    "quotaOrLimitBlock": false,
+    "blockedGenerator": false
+  },
+  "coverage": {
+    "sourcePendingMediaIds": 46,
+    "coveredSourceMediaIds": 46,
+    "occurrenceScopedBindingPlans": 74,
+    "missingConcepts": []
+  },
+  "writeBoundary": "qa/media-candidates/y3m05-official-20261105",
+  "questionsModified": false,
+  "registryModified": false,
+  "runtimeModified": false,
+  "goldMastersModified": false,
+  "approvalFlagsModified": false,
+  "productionModified": false,
+  "mediaOverlaysApplied": false,
+  "existingReferencedAssetsRemoved": false,
+  "humanApprovalClaimed": false,
+  "productionApproved": false,
+  "integrated": false,
+  "deployed": false,
+  "candidateBundleCommit": null,
+  "candidateReviewPushBranch": null,
+  "reviewBranch": "automation/duduq-media-source-only-fix-20261029",
+  "nextAction": "SCHEDULER_SELECT_OTHER_LANE",
+  "completionClaim": "MODULE_CANDIDATE_SCOPE_ONLY_PROJECT_REMAINS_INCOMPLETE"
+}

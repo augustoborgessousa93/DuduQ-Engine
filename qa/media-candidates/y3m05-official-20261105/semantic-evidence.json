@@ -1,0 +1,1081 @@
+{
+  "schemaVersion": "DUDUQ_Y3M05_GENERATION_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-11-05T23:53:26.658Z",
+  "moduleId": "Y3M05",
+  "lane": "generation",
+  "sourceQuestionFile": "dist-pages/content/english/year-3/module-05/questions.json",
+  "sourceQuestionSha256": "34c761a8288e9ebdebbec2a62cea7a33097e88d4a5b9779677a84e641e227077",
+  "questionContractsReviewed": 20,
+  "semanticConceptsReviewed": 26,
+  "modelVisualReviewOnly": true,
+  "humanApprovalClaimed": false,
+  "assets": [
+    {
+      "assetKey": "Y3M05-CANDIDATE-BLACK",
+      "concept": "black",
+      "file": "images/DUDUQ-Y3M05-BLACK.png",
+      "sha256": "26f14f9c23067dd533ecf1cdb10d0626c3a2f42d82e3d7c281611104c23dc3ed",
+      "expectedObjectCount": 1,
+      "visualObservation": "One unmistakable glossy black color token is isolated on real alpha.",
+      "pedagogicalFit": "Exact verified color concept reused without semantic broadening.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q015",
+          "sourceMediaId": "IMG-Y1M03-Q001-BLACK",
+          "plannedMediaId": "IMG-Y3M05-Q015-CTX-C9E0FCFB9421",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "sourceQuestionContractSha256": "76a6d334c2687534879dd200e1e2250c77cad065f6cab9f2cf759e523265674f"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-BROWN",
+      "concept": "brown",
+      "file": "images/DUDUQ-Y3M05-BROWN.png",
+      "sha256": "21b68caf46fe4984d6109b7e3f015c6824e7a4ebc43a8ebe9fdea2e509a42d48",
+      "expectedObjectCount": 1,
+      "visualObservation": "One unmistakable glossy brown color token is isolated on real alpha.",
+      "pedagogicalFit": "Exact verified color concept reused without semantic broadening.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q015",
+          "sourceMediaId": "IMG-Y1M03-Q006-BROWN",
+          "plannedMediaId": "IMG-Y3M05-Q015-CTX-41238920A0D2",
+          "contractPaths": [
+            "pairs[5].b"
+          ],
+          "sourceQuestionContractSha256": "76a6d334c2687534879dd200e1e2250c77cad065f6cab9f2cf759e523265674f"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-CIRCLE",
+      "concept": "circle",
+      "file": "images/DUDUQ-Y3M05-CIRCLE.png",
+      "sha256": "e38ac53f15b7aae61fb2e24030da5c6c65cc546ca7623dafce76d429676aa9c0",
+      "expectedObjectCount": 1,
+      "visualObservation": "Exactly one sky-blue circular token with an exact round silhouette is visible; no other shape or distractor is present.",
+      "pedagogicalFit": "Exact nonverbal visual support for the geometric concept circle.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q012",
+          "sourceMediaId": "IMG-V11-2B-83F595D41CD1AEDF",
+          "plannedMediaId": "IMG-Y3M05-Q012-CTX-9055C8B6D5ED",
+          "contractPaths": [
+            "targets[3]"
+          ],
+          "sourceQuestionContractSha256": "65ec1f547cfa331988fd9ff718d05e9d1de983ae99e5bdaf6a0c5f85a92957fa"
+        },
+        {
+          "questionId": "Y3M05-Q014",
+          "sourceMediaId": "IMG-V11-2B-D3B7141F6BE01C58",
+          "plannedMediaId": "IMG-Y3M05-Q014-CTX-8773CA6FA541",
+          "contractPaths": [
+            "pairs[1].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "2855d4a1848fb97b91408a6e0a8b0f00be043b10d609d036b54a088a56bf54a2"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-DIVIDED-BY",
+      "concept": "divided by",
+      "file": "images/DUDUQ-Y3M05-DIVIDED-BY.png",
+      "sha256": "b07b53607afa38594f90f5528ffa8fd26bdb74bf913aa7d2d9dc99518f2f7304",
+      "expectedObjectCount": 1,
+      "visualObservation": "One exact teal division symbol is visible as one bar with one dot above and one below; no competing operator or distractor is present.",
+      "pedagogicalFit": "Exact visual support for the spoken English operator divided by.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q002",
+          "sourceMediaId": "IMG-V11-2B-C59B066C6037FEE5",
+          "plannedMediaId": "IMG-Y3M05-Q002-CTX-4C9CC16929FA",
+          "contractPaths": [
+            "targets[0]"
+          ],
+          "sourceQuestionContractSha256": "b36e90cef4b0afd736a31c449cbf4b7c3fca752e7e7de5577c73baef6e34bc09"
+        },
+        {
+          "questionId": "Y3M05-Q020",
+          "sourceMediaId": "IMG-V11-2B-C59B066C6037FEE5",
+          "plannedMediaId": "IMG-Y3M05-Q020-CTX-70EBFD500736",
+          "contractPaths": [
+            "targets[1]"
+          ],
+          "sourceQuestionContractSha256": "35f650eaeaaff53ad6ecda749f5b8003a31d4d97923f9504d942248cb82bba6e"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-EIGHT",
+      "concept": "eight",
+      "file": "images/DUDUQ-Y3M05-EIGHT.png",
+      "sha256": "f1f51c261a1662616fcdc24eff0cab7761aa886c48189ed48adee1c81129bf23",
+      "expectedObjectCount": 8,
+      "visualObservation": "Exactly eight glossy red apples are visible and individually countable.",
+      "pedagogicalFit": "Verified quantity-eight asset reused for the exact number concept.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q003",
+          "sourceMediaId": "IMG-Y1M02-Q002-EIGHT",
+          "plannedMediaId": "IMG-Y3M05-Q003-CTX-5C0228F65B9D",
+          "contractPaths": [
+            "pairs[5].b"
+          ],
+          "sourceQuestionContractSha256": "9d8d2a3e7868e6298d90e508a97aa9701bcec7ca30417f4b54c96336bb17ba09"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-EQUALS",
+      "concept": "equals",
+      "file": "images/DUDUQ-Y3M05-EQUALS.png",
+      "sha256": "db61c51e508f1a1115ef3aa03d00dd6db9414faf08c32c2348ffaeee02f89070",
+      "expectedObjectCount": 1,
+      "visualObservation": "Exactly two aligned golden-yellow parallel bars form one equals sign; no competing operator or distractor is present.",
+      "pedagogicalFit": "Exact visual support for the spoken English operator equals.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q004",
+          "sourceMediaId": "IMG-V11-2B-091647FA0E3E3E68",
+          "plannedMediaId": "IMG-Y3M05-Q004-CTX-EFE6516B73BD",
+          "contractPaths": [
+            "pairs[2].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "11462a6451e794f43bbe6dbc443b9a7fcaccfbce35024b3b13aff2ade5deef15"
+        },
+        {
+          "questionId": "Y3M05-Q011",
+          "sourceMediaId": "IMG-V11-2B-3C01681DAFE96F83",
+          "plannedMediaId": "IMG-Y3M05-Q011-CTX-C38492C5C0D1",
+          "contractPaths": [
+            "bubbleDistractorPool[2]",
+            "options[3]"
+          ],
+          "sourceQuestionContractSha256": "d109e0cb82f138b0ab5558667bfb107128fdcad96430b5fa8a9b140c3878d805"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-FIVE",
+      "concept": "five",
+      "file": "images/DUDUQ-Y3M05-FIVE.png",
+      "sha256": "b12f817867e3fa002e1468cadbfdda80932b8965ae74e1255db41016f9b57eee",
+      "expectedObjectCount": 5,
+      "visualObservation": "Exactly five glossy red apples are visible and individually countable.",
+      "pedagogicalFit": "Verified quantity-five asset reused for the exact number concept.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q003",
+          "sourceMediaId": "IMG-Y1M02-Q002-FIVE",
+          "plannedMediaId": "IMG-Y3M05-Q003-CTX-93E08AF7D1E7",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "sourceQuestionContractSha256": "9d8d2a3e7868e6298d90e508a97aa9701bcec7ca30417f4b54c96336bb17ba09"
+        },
+        {
+          "questionId": "Y3M05-Q018",
+          "sourceMediaId": "IMG-Y1M02-Q002-FIVE",
+          "plannedMediaId": "IMG-Y3M05-Q018-CTX-3FB33E8353F1",
+          "contractPaths": [
+            "mediaBindings[0]"
+          ],
+          "sourceQuestionContractSha256": "49aaf2d344777440bbe948a33339cbff8390b02eada70d8cc25eac819e273be1"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-FOUR",
+      "concept": "four",
+      "file": "images/DUDUQ-Y3M05-FOUR.png",
+      "sha256": "d7e0f1fd9f5b565a62b75b0dcf8f07fb257096a33947c6ec6ee1fadd87c61505",
+      "expectedObjectCount": 4,
+      "visualObservation": "Exactly four glossy red apples are visible and individually countable.",
+      "pedagogicalFit": "Verified quantity-four asset reused for the exact number concept.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q003",
+          "sourceMediaId": "IMG-Y1M02-Q001-FOUR",
+          "plannedMediaId": "IMG-Y3M05-Q003-CTX-F87685887FDF",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "sourceQuestionContractSha256": "9d8d2a3e7868e6298d90e508a97aa9701bcec7ca30417f4b54c96336bb17ba09"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-GRAY",
+      "concept": "gray",
+      "file": "images/DUDUQ-Y3M05-GRAY.png",
+      "sha256": "a495b16ffedf658cee6e8e4c9c48f2ba051d6d5d664317c9a7545b1956c8e904",
+      "expectedObjectCount": 1,
+      "visualObservation": "One unmistakable glossy neutral gray color token is isolated on real alpha.",
+      "pedagogicalFit": "Exact verified color concept reused without semantic broadening.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q015",
+          "sourceMediaId": "IMG-Y1M03-Q006-GRAY",
+          "plannedMediaId": "IMG-Y3M05-Q015-CTX-F0A96C428C5A",
+          "contractPaths": [
+            "pairs[4].b"
+          ],
+          "sourceQuestionContractSha256": "76a6d334c2687534879dd200e1e2250c77cad065f6cab9f2cf759e523265674f"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-MINUS",
+      "concept": "minus",
+      "file": "images/DUDUQ-Y3M05-MINUS.png",
+      "sha256": "75c41fcbd2c9f0173bd79d9cbc4b53fbc2d735185d496762247d73a8e111add8",
+      "expectedObjectCount": 1,
+      "visualObservation": "Exactly one royal-blue horizontal minus bar is visible; no competing operator or distractor is present.",
+      "pedagogicalFit": "Exact visual support for the spoken English operator minus.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q004",
+          "sourceMediaId": "IMG-V11-2B-4E8B1F3C6B88B0EC",
+          "plannedMediaId": "IMG-Y3M05-Q004-CTX-FA0A95196B76",
+          "contractPaths": [
+            "pairs[1].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "11462a6451e794f43bbe6dbc443b9a7fcaccfbce35024b3b13aff2ade5deef15"
+        },
+        {
+          "questionId": "Y3M05-Q011",
+          "sourceMediaId": "IMG-V11-2B-37302AEA2B306D70",
+          "plannedMediaId": "IMG-Y3M05-Q011-CTX-162C98CDF557",
+          "contractPaths": [
+            "bubbleDistractorPool[1]",
+            "options[2]"
+          ],
+          "sourceQuestionContractSha256": "d109e0cb82f138b0ab5558667bfb107128fdcad96430b5fa8a9b140c3878d805"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-NINE-MINUS-FIVE-EQUALS-FOUR",
+      "concept": "nine minus five equals four",
+      "file": "images/DUDUQ-Y3M05-NINE-MINUS-FIVE-EQUALS-FOUR.png",
+      "sha256": "8e90c7afe1fbc9c1bd55470adc657b76f69833ff579a4abe67a4c24d3964c0a1",
+      "expectedObjectCount": 5,
+      "visualObservation": "The exact token sequence 9 − 5 = 4 is visible in order, with no extra digit, operator or distractor.",
+      "pedagogicalFit": "Exact visual answer support for the source-backed arithmetic phrase nine minus five equals four.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q001",
+          "sourceMediaId": "IMG-V11-2B-3465A65536CB1E46",
+          "plannedMediaId": "IMG-Y3M05-Q001-CTX-AE3C82D307C8",
+          "contractPaths": [
+            "options[3]"
+          ],
+          "sourceQuestionContractSha256": "4d7cb2082bb1724c46a6c41f35c2d8a9cdb6e6e404d5a6dcba2b769962c1fc1c"
+        },
+        {
+          "questionId": "Y3M05-Q005",
+          "sourceMediaId": "IMG-V11-2B-3465A65536CB1E46",
+          "plannedMediaId": "IMG-Y3M05-Q005-CTX-536FA2586D0F",
+          "contractPaths": [
+            "options[3]"
+          ],
+          "sourceQuestionContractSha256": "41b92fb18dd516e35b1d95d5a91c0e7521181b8cb26e7008857c6e215c8d6cdc"
+        },
+        {
+          "questionId": "Y3M05-Q007",
+          "sourceMediaId": "IMG-V11-2B-7717FDD290CE55EF",
+          "plannedMediaId": "IMG-Y3M05-Q007-CTX-D2399DB7EFED",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "sourceQuestionContractSha256": "3a375b59fb02c66dd332ddd5f6d6869dad799e83f42f9581c43d8a0f67aa1d90"
+        },
+        {
+          "questionId": "Y3M05-Q010",
+          "sourceMediaId": "IMG-V11-2B-7717FDD290CE55EF",
+          "plannedMediaId": "IMG-Y3M05-Q010-CTX-F674C2955444",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "sourceQuestionContractSha256": "db0f1425f9e770f5be5739adb123941d817ec6964c1f3d405c76eac38e05337c"
+        },
+        {
+          "questionId": "Y3M05-Q013",
+          "sourceMediaId": "IMG-V11-2B-7717FDD290CE55EF",
+          "plannedMediaId": "IMG-Y3M05-Q013-CTX-D22D07A13161",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "sourceQuestionContractSha256": "fbcd2bbc368ec9379f1147376a40ee64bcc5cc8dd79a8e50f1702fe03bda80c3"
+        },
+        {
+          "questionId": "Y3M05-Q016",
+          "sourceMediaId": "IMG-V11-2B-D74453328D45A91B",
+          "plannedMediaId": "IMG-Y3M05-Q016-CTX-6F379553EB4A",
+          "contractPaths": [
+            "targets[0]"
+          ],
+          "sourceQuestionContractSha256": "ad1b730f9807c305ca3579c6451e6ec362c28892722ab80c8ae5abf477c31bd5"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-ONE",
+      "concept": "one",
+      "file": "images/DUDUQ-Y3M05-ONE.png",
+      "sha256": "e65ad687b4d68c317b065a9fce4a7d3dfbd7cffbe45835899dd9826ccaf4d8f5",
+      "expectedObjectCount": 1,
+      "visualObservation": "Exactly one glossy red apple is visible and individually countable.",
+      "pedagogicalFit": "Verified quantity-one asset reused for the exact number concept.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q011",
+          "sourceMediaId": "IMG-Y1M02-Q001-ONE",
+          "plannedMediaId": "IMG-Y3M05-Q011-CTX-4007A7284855",
+          "contractPaths": [
+            "options[0]",
+            "targetsToFind[0]"
+          ],
+          "sourceQuestionContractSha256": "d109e0cb82f138b0ab5558667bfb107128fdcad96430b5fa8a9b140c3878d805"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-ORANGE",
+      "concept": "orange",
+      "file": "images/DUDUQ-Y3M05-ORANGE.png",
+      "sha256": "273f0b5d5f124f2880b1164a9aa19d4c5f9f55a1e29e57b2125563363b521195",
+      "expectedObjectCount": 1,
+      "visualObservation": "One unmistakable glossy orange color token is isolated on real alpha.",
+      "pedagogicalFit": "Exact verified color concept reused without semantic broadening.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q015",
+          "sourceMediaId": "IMG-Y1M03-Q001-ORANGE",
+          "plannedMediaId": "IMG-Y3M05-Q015-CTX-D310381F0D38",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "sourceQuestionContractSha256": "76a6d334c2687534879dd200e1e2250c77cad065f6cab9f2cf759e523265674f"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-PLUS",
+      "concept": "plus",
+      "file": "images/DUDUQ-Y3M05-PLUS.png",
+      "sha256": "a674851dbdb2f469668f7f3c324ca1cb88e9f7d20aa910684a7d06abd3d559d9",
+      "expectedObjectCount": 1,
+      "visualObservation": "Exactly one coral-red plus sign with balanced crossing arms is visible; no competing operator or distractor is present.",
+      "pedagogicalFit": "Exact visual support for the spoken English operator plus.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q004",
+          "sourceMediaId": "IMG-V11-2B-E2302199CB7460B5",
+          "plannedMediaId": "IMG-Y3M05-Q004-CTX-EA4B13253C39",
+          "contractPaths": [
+            "pairs[0].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "11462a6451e794f43bbe6dbc443b9a7fcaccfbce35024b3b13aff2ade5deef15"
+        },
+        {
+          "questionId": "Y3M05-Q011",
+          "sourceMediaId": "IMG-V11-2B-8138254DEC43D7BC",
+          "plannedMediaId": "IMG-Y3M05-Q011-CTX-B5BD836A5279",
+          "contractPaths": [
+            "bubbleDistractorPool[0]",
+            "options[1]"
+          ],
+          "sourceQuestionContractSha256": "d109e0cb82f138b0ab5558667bfb107128fdcad96430b5fa8a9b140c3878d805"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-PURPLE",
+      "concept": "purple",
+      "file": "images/DUDUQ-Y3M05-PURPLE.png",
+      "sha256": "a6d34d1ea1e3b72b967ae2ff0ac7224aa4f39b32af9ee0990bc6520b6fba1394",
+      "expectedObjectCount": 1,
+      "visualObservation": "One unmistakable glossy purple color token is isolated on real alpha.",
+      "pedagogicalFit": "Exact verified color concept reused without semantic broadening.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q015",
+          "sourceMediaId": "IMG-Y1M03-Q006-PURPLE",
+          "plannedMediaId": "IMG-Y3M05-Q015-CTX-EEE097A7E7F5",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "sourceQuestionContractSha256": "76a6d334c2687534879dd200e1e2250c77cad065f6cab9f2cf759e523265674f"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-RECTANGLE",
+      "concept": "rectangle",
+      "file": "images/DUDUQ-Y3M05-RECTANGLE.png",
+      "sha256": "1f72edf7ef51981f968773c877c4a15c54c9c035d8ac82b348f85413df75a8d3",
+      "expectedObjectCount": 1,
+      "visualObservation": "Exactly one green horizontal rectangle token, clearly wider than tall, is visible; no other shape or distractor is present.",
+      "pedagogicalFit": "Exact nonverbal visual support for the geometric concept rectangle.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q002",
+          "sourceMediaId": "IMG-V11-2B-E38C0DE05DFDDD8F",
+          "plannedMediaId": "IMG-Y3M05-Q002-CTX-09797C4E1352",
+          "contractPaths": [
+            "targets[3]"
+          ],
+          "sourceQuestionContractSha256": "b36e90cef4b0afd736a31c449cbf4b7c3fca752e7e7de5577c73baef6e34bc09"
+        },
+        {
+          "questionId": "Y3M05-Q009",
+          "sourceMediaId": "IMG-V11-2B-0B8FB65CFC9F4ED3",
+          "plannedMediaId": "IMG-Y3M05-Q009-CTX-83343C7C9323",
+          "contractPaths": [
+            "options[3]"
+          ],
+          "sourceQuestionContractSha256": "e5403c98177e7199aa811c69b27eb74c9cc02c22852f58eaa1886c742cd7db2a"
+        },
+        {
+          "questionId": "Y3M05-Q012",
+          "sourceMediaId": "IMG-V11-2B-E38C0DE05DFDDD8F",
+          "plannedMediaId": "IMG-Y3M05-Q012-CTX-6C543D4EE85D",
+          "contractPaths": [
+            "targets[1]"
+          ],
+          "sourceQuestionContractSha256": "65ec1f547cfa331988fd9ff718d05e9d1de983ae99e5bdaf6a0c5f85a92957fa"
+        },
+        {
+          "questionId": "Y3M05-Q014",
+          "sourceMediaId": "IMG-V11-2B-E1AAAB4F605F42A1",
+          "plannedMediaId": "IMG-Y3M05-Q014-CTX-22D1EC08155E",
+          "contractPaths": [
+            "pairs[4].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "2855d4a1848fb97b91408a6e0a8b0f00be043b10d609d036b54a088a56bf54a2"
+        },
+        {
+          "questionId": "Y3M05-Q017",
+          "sourceMediaId": "IMG-V11-2B-0B8FB65CFC9F4ED3",
+          "plannedMediaId": "IMG-Y3M05-Q017-CTX-004DB6BBB92E",
+          "contractPaths": [
+            "bubbleDistractorPool[1]",
+            "options[2]"
+          ],
+          "sourceQuestionContractSha256": "ac496fcc4538195ae191c9641e10d8f9d06dcae437b0a989986030c75b4f83a7"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-SEVEN",
+      "concept": "seven",
+      "file": "images/DUDUQ-Y3M05-SEVEN.png",
+      "sha256": "b675fb761c6054b737cf35ba6b9d36e9fe50ed7a317ae07e4a3dc30000272667",
+      "expectedObjectCount": 7,
+      "visualObservation": "Exactly seven glossy red apples are visible and individually countable.",
+      "pedagogicalFit": "Verified quantity-seven asset reused for the exact number concept.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q003",
+          "sourceMediaId": "IMG-Y1M02-Q002-SEVEN",
+          "plannedMediaId": "IMG-Y3M05-Q003-CTX-02FEA0E9B3FA",
+          "contractPaths": [
+            "pairs[4].b"
+          ],
+          "sourceQuestionContractSha256": "9d8d2a3e7868e6298d90e508a97aa9701bcec7ca30417f4b54c96336bb17ba09"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-SIX",
+      "concept": "six",
+      "file": "images/DUDUQ-Y3M05-SIX.png",
+      "sha256": "d6482204a9c9caf61913193ac2369abd3e3681226568a0b4262fed3460faef66",
+      "expectedObjectCount": 6,
+      "visualObservation": "Exactly six glossy red apples are visible and individually countable.",
+      "pedagogicalFit": "Verified quantity-six asset reused for the exact number concept.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q003",
+          "sourceMediaId": "IMG-Y1M02-Q002-SIX",
+          "plannedMediaId": "IMG-Y3M05-Q003-CTX-8A348D90A671",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "sourceQuestionContractSha256": "9d8d2a3e7868e6298d90e508a97aa9701bcec7ca30417f4b54c96336bb17ba09"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-SIX-MINUS-TWO-EQUALS-FOUR",
+      "concept": "six minus two equals four",
+      "file": "images/DUDUQ-Y3M05-SIX-MINUS-TWO-EQUALS-FOUR.png",
+      "sha256": "96aa1db791e1f383952547a0e7fde89c18256bbbc275474601a7f0afcea8c849",
+      "expectedObjectCount": 5,
+      "visualObservation": "The exact token sequence 6 − 2 = 4 is visible in order, with no extra digit, operator or distractor.",
+      "pedagogicalFit": "Exact visual answer support for the source-backed arithmetic phrase six minus two equals four.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q001",
+          "sourceMediaId": "IMG-V11-2B-BE34171D033BB875",
+          "plannedMediaId": "IMG-Y3M05-Q001-CTX-690C39E57460",
+          "contractPaths": [
+            "options[1]"
+          ],
+          "sourceQuestionContractSha256": "4d7cb2082bb1724c46a6c41f35c2d8a9cdb6e6e404d5a6dcba2b769962c1fc1c"
+        },
+        {
+          "questionId": "Y3M05-Q005",
+          "sourceMediaId": "IMG-V11-2B-BE34171D033BB875",
+          "plannedMediaId": "IMG-Y3M05-Q005-CTX-C58CFA09934E",
+          "contractPaths": [
+            "options[1]"
+          ],
+          "sourceQuestionContractSha256": "41b92fb18dd516e35b1d95d5a91c0e7521181b8cb26e7008857c6e215c8d6cdc"
+        },
+        {
+          "questionId": "Y3M05-Q007",
+          "sourceMediaId": "IMG-V11-2B-7C65FD581AACF741",
+          "plannedMediaId": "IMG-Y3M05-Q007-CTX-0A1A1137451D",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "sourceQuestionContractSha256": "3a375b59fb02c66dd332ddd5f6d6869dad799e83f42f9581c43d8a0f67aa1d90"
+        },
+        {
+          "questionId": "Y3M05-Q010",
+          "sourceMediaId": "IMG-V11-2B-7C65FD581AACF741",
+          "plannedMediaId": "IMG-Y3M05-Q010-CTX-DB08A78CFA68",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "sourceQuestionContractSha256": "db0f1425f9e770f5be5739adb123941d817ec6964c1f3d405c76eac38e05337c"
+        },
+        {
+          "questionId": "Y3M05-Q011",
+          "sourceMediaId": "IMG-V11-2B-BE34171D033BB875",
+          "plannedMediaId": "IMG-Y3M05-Q011-CTX-226EB9524158",
+          "contractPaths": [
+            "bubbleDistractorPool[4]"
+          ],
+          "sourceQuestionContractSha256": "d109e0cb82f138b0ab5558667bfb107128fdcad96430b5fa8a9b140c3878d805"
+        },
+        {
+          "questionId": "Y3M05-Q013",
+          "sourceMediaId": "IMG-V11-2B-7C65FD581AACF741",
+          "plannedMediaId": "IMG-Y3M05-Q013-CTX-9A47571709E1",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "sourceQuestionContractSha256": "fbcd2bbc368ec9379f1147376a40ee64bcc5cc8dd79a8e50f1702fe03bda80c3"
+        },
+        {
+          "questionId": "Y3M05-Q016",
+          "sourceMediaId": "IMG-V11-2B-6FFE58151EAD0CA0",
+          "plannedMediaId": "IMG-Y3M05-Q016-CTX-C62244891434",
+          "contractPaths": [
+            "targets[2]"
+          ],
+          "sourceQuestionContractSha256": "ad1b730f9807c305ca3579c6451e6ec362c28892722ab80c8ae5abf477c31bd5"
+        },
+        {
+          "questionId": "Y3M05-Q017",
+          "sourceMediaId": "IMG-V11-2B-BE34171D033BB875",
+          "plannedMediaId": "IMG-Y3M05-Q017-CTX-32186B27B135",
+          "contractPaths": [
+            "bubbleDistractorPool[4]"
+          ],
+          "sourceQuestionContractSha256": "ac496fcc4538195ae191c9641e10d8f9d06dcae437b0a989986030c75b4f83a7"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-SQUARE",
+      "concept": "square",
+      "file": "images/DUDUQ-Y3M05-SQUARE.png",
+      "sha256": "4b3619ca515cb1e0c29f294931187e7ff7a4f4a3c3b2e05020c5df2c6e50f33e",
+      "expectedObjectCount": 1,
+      "visualObservation": "Exactly one red square token with four equal sides is visible; no other shape or distractor is present.",
+      "pedagogicalFit": "Exact nonverbal visual support for the geometric concept square.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q002",
+          "sourceMediaId": "IMG-V11-2B-380271DED3F3D31E",
+          "plannedMediaId": "IMG-Y3M05-Q002-CTX-40B6ECD7C062",
+          "contractPaths": [
+            "targets[2]"
+          ],
+          "sourceQuestionContractSha256": "b36e90cef4b0afd736a31c449cbf4b7c3fca752e7e7de5577c73baef6e34bc09"
+        },
+        {
+          "questionId": "Y3M05-Q008",
+          "sourceMediaId": "IMG-V11-2B-380271DED3F3D31E",
+          "plannedMediaId": "IMG-Y3M05-Q008-CTX-C339CD5D0DBC",
+          "contractPaths": [
+            "mediaBindings[0]"
+          ],
+          "sourceQuestionContractSha256": "9f707d3f7d36784619b90f19320e0029a3e918f7386657c02de448a0fbe95007"
+        },
+        {
+          "questionId": "Y3M05-Q009",
+          "sourceMediaId": "IMG-V11-2B-77460DE9537EEBF0",
+          "plannedMediaId": "IMG-Y3M05-Q009-CTX-19B37F774160",
+          "contractPaths": [
+            "options[2]"
+          ],
+          "sourceQuestionContractSha256": "e5403c98177e7199aa811c69b27eb74c9cc02c22852f58eaa1886c742cd7db2a"
+        },
+        {
+          "questionId": "Y3M05-Q012",
+          "sourceMediaId": "IMG-V11-2B-380271DED3F3D31E",
+          "plannedMediaId": "IMG-Y3M05-Q012-CTX-0C5D3994393D",
+          "contractPaths": [
+            "targets[0]"
+          ],
+          "sourceQuestionContractSha256": "65ec1f547cfa331988fd9ff718d05e9d1de983ae99e5bdaf6a0c5f85a92957fa"
+        },
+        {
+          "questionId": "Y3M05-Q014",
+          "sourceMediaId": "IMG-V11-2B-FDB30064EAC5CF0E",
+          "plannedMediaId": "IMG-Y3M05-Q014-CTX-0AD2CD60D760",
+          "contractPaths": [
+            "pairs[3].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "2855d4a1848fb97b91408a6e0a8b0f00be043b10d609d036b54a088a56bf54a2"
+        },
+        {
+          "questionId": "Y3M05-Q017",
+          "sourceMediaId": "IMG-V11-2B-77460DE9537EEBF0",
+          "plannedMediaId": "IMG-Y3M05-Q017-CTX-503EC05F4D8B",
+          "contractPaths": [
+            "options[0]",
+            "targetsToFind[0]"
+          ],
+          "sourceQuestionContractSha256": "ac496fcc4538195ae191c9641e10d8f9d06dcae437b0a989986030c75b4f83a7"
+        },
+        {
+          "questionId": "Y3M05-Q020",
+          "sourceMediaId": "IMG-V11-2B-380271DED3F3D31E",
+          "plannedMediaId": "IMG-Y3M05-Q020-CTX-C5631B59DF29",
+          "contractPaths": [
+            "targets[3]"
+          ],
+          "sourceQuestionContractSha256": "35f650eaeaaff53ad6ecda749f5b8003a31d4d97923f9504d942248cb82bba6e"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-STAR",
+      "concept": "star",
+      "file": "images/DUDUQ-Y3M05-STAR.png",
+      "sha256": "87b101f6e1f4fab155617204ee560831fa5b67bbe9b84c229ed855a81d257f82",
+      "expectedObjectCount": 1,
+      "visualObservation": "Exactly one purple five-point star token is visible; no other shape or distractor is present.",
+      "pedagogicalFit": "Exact nonverbal visual support for the geometric concept star.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q009",
+          "sourceMediaId": "IMG-V11-2B-ADC02C547ED88AAB",
+          "plannedMediaId": "IMG-Y3M05-Q009-CTX-B8E9CECF19B1",
+          "contractPaths": [
+            "options[0]"
+          ],
+          "sourceQuestionContractSha256": "e5403c98177e7199aa811c69b27eb74c9cc02c22852f58eaa1886c742cd7db2a"
+        },
+        {
+          "questionId": "Y3M05-Q012",
+          "sourceMediaId": "IMG-V11-2B-8C9B8850C95A943E",
+          "plannedMediaId": "IMG-Y3M05-Q012-CTX-5815071750F4",
+          "contractPaths": [
+            "targets[2]"
+          ],
+          "sourceQuestionContractSha256": "65ec1f547cfa331988fd9ff718d05e9d1de983ae99e5bdaf6a0c5f85a92957fa"
+        },
+        {
+          "questionId": "Y3M05-Q014",
+          "sourceMediaId": "IMG-V11-2B-D004AA4E54494A38",
+          "plannedMediaId": "IMG-Y3M05-Q014-CTX-F07A9F22C944",
+          "contractPaths": [
+            "pairs[0].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "2855d4a1848fb97b91408a6e0a8b0f00be043b10d609d036b54a088a56bf54a2"
+        },
+        {
+          "questionId": "Y3M05-Q017",
+          "sourceMediaId": "IMG-V11-2B-ADC02C547ED88AAB",
+          "plannedMediaId": "IMG-Y3M05-Q017-CTX-12E794C42125",
+          "contractPaths": [
+            "bubbleDistractorPool[2]",
+            "options[3]"
+          ],
+          "sourceQuestionContractSha256": "ac496fcc4538195ae191c9641e10d8f9d06dcae437b0a989986030c75b4f83a7"
+        },
+        {
+          "questionId": "Y3M05-Q020",
+          "sourceMediaId": "IMG-V11-2B-8C9B8850C95A943E",
+          "plannedMediaId": "IMG-Y3M05-Q020-CTX-D7ACDF9AFE5C",
+          "contractPaths": [
+            "targets[0]"
+          ],
+          "sourceQuestionContractSha256": "35f650eaeaaff53ad6ecda749f5b8003a31d4d97923f9504d942248cb82bba6e"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-THREE",
+      "concept": "three",
+      "file": "images/DUDUQ-Y3M05-THREE.png",
+      "sha256": "346c0cd7a52c9c2685187551e1fcb6a71721f2c53639e37f2a06fdb857939398",
+      "expectedObjectCount": 3,
+      "visualObservation": "Exactly three glossy red apples are visible and individually countable.",
+      "pedagogicalFit": "Verified quantity-three asset reused for the exact number concept.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q003",
+          "sourceMediaId": "IMG-Y1M02-Q001-THREE",
+          "plannedMediaId": "IMG-Y3M05-Q003-CTX-6BE7C3635C25",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "sourceQuestionContractSha256": "9d8d2a3e7868e6298d90e508a97aa9701bcec7ca30417f4b54c96336bb17ba09"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-THREE-PLUS-FOUR-EQUALS-SEVEN",
+      "concept": "three plus four equals seven",
+      "file": "images/DUDUQ-Y3M05-THREE-PLUS-FOUR-EQUALS-SEVEN.png",
+      "sha256": "def1d12aec14a94dc931c80f1128d56c44a18aa16e0b0912ac05e9f56025abec",
+      "expectedObjectCount": 5,
+      "visualObservation": "The exact token sequence 3 + 4 = 7 is visible in order, with no extra digit, operator or distractor.",
+      "pedagogicalFit": "Exact visual answer support for the source-backed arithmetic phrase three plus four equals seven.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q001",
+          "sourceMediaId": "IMG-V11-2B-0C1635162CC65DF3",
+          "plannedMediaId": "IMG-Y3M05-Q001-CTX-D04FE179C8A5",
+          "contractPaths": [
+            "options[2]"
+          ],
+          "sourceQuestionContractSha256": "4d7cb2082bb1724c46a6c41f35c2d8a9cdb6e6e404d5a6dcba2b769962c1fc1c"
+        },
+        {
+          "questionId": "Y3M05-Q005",
+          "sourceMediaId": "IMG-V11-2B-0C1635162CC65DF3",
+          "plannedMediaId": "IMG-Y3M05-Q005-CTX-25264C9513BD",
+          "contractPaths": [
+            "options[2]"
+          ],
+          "sourceQuestionContractSha256": "41b92fb18dd516e35b1d95d5a91c0e7521181b8cb26e7008857c6e215c8d6cdc"
+        },
+        {
+          "questionId": "Y3M05-Q007",
+          "sourceMediaId": "IMG-V11-2B-2DF5CFF0C304AAF1",
+          "plannedMediaId": "IMG-Y3M05-Q007-CTX-36601B9F3583",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "sourceQuestionContractSha256": "3a375b59fb02c66dd332ddd5f6d6869dad799e83f42f9581c43d8a0f67aa1d90"
+        },
+        {
+          "questionId": "Y3M05-Q010",
+          "sourceMediaId": "IMG-V11-2B-2DF5CFF0C304AAF1",
+          "plannedMediaId": "IMG-Y3M05-Q010-CTX-D9E1DEA89FB5",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "sourceQuestionContractSha256": "db0f1425f9e770f5be5739adb123941d817ec6964c1f3d405c76eac38e05337c"
+        },
+        {
+          "questionId": "Y3M05-Q013",
+          "sourceMediaId": "IMG-V11-2B-2DF5CFF0C304AAF1",
+          "plannedMediaId": "IMG-Y3M05-Q013-CTX-AA31D375CF4A",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "sourceQuestionContractSha256": "fbcd2bbc368ec9379f1147376a40ee64bcc5cc8dd79a8e50f1702fe03bda80c3"
+        },
+        {
+          "questionId": "Y3M05-Q016",
+          "sourceMediaId": "IMG-V11-2B-C1BC182FD8E80824",
+          "plannedMediaId": "IMG-Y3M05-Q016-CTX-5B80C7111794",
+          "contractPaths": [
+            "targets[3]"
+          ],
+          "sourceQuestionContractSha256": "ad1b730f9807c305ca3579c6451e6ec362c28892722ab80c8ae5abf477c31bd5"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-TRIANGLE",
+      "concept": "triangle",
+      "file": "images/DUDUQ-Y3M05-TRIANGLE.png",
+      "sha256": "b571b8a8331a445814a635e62fae5f9db942a713c4bd8444fb5b34eda3991dd7",
+      "expectedObjectCount": 1,
+      "visualObservation": "Exactly one yellow three-sided triangle token is visible; no other shape or distractor is present.",
+      "pedagogicalFit": "Exact nonverbal visual support for the geometric concept triangle.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q002",
+          "sourceMediaId": "IMG-V11-2B-0042C60C0B4DAA2B",
+          "plannedMediaId": "IMG-Y3M05-Q002-CTX-6C784A7ED043",
+          "contractPaths": [
+            "targets[1]"
+          ],
+          "sourceQuestionContractSha256": "b36e90cef4b0afd736a31c449cbf4b7c3fca752e7e7de5577c73baef6e34bc09"
+        },
+        {
+          "questionId": "Y3M05-Q009",
+          "sourceMediaId": "IMG-V11-2B-DD4F6C5D17D9EA26",
+          "plannedMediaId": "IMG-Y3M05-Q009-CTX-199F00D65E7C",
+          "contractPaths": [
+            "options[1]"
+          ],
+          "sourceQuestionContractSha256": "e5403c98177e7199aa811c69b27eb74c9cc02c22852f58eaa1886c742cd7db2a"
+        },
+        {
+          "questionId": "Y3M05-Q014",
+          "sourceMediaId": "IMG-V11-2B-8124DC99DF0EDFC5",
+          "plannedMediaId": "IMG-Y3M05-Q014-CTX-31707B4F278A",
+          "contractPaths": [
+            "pairs[2].cards[1]"
+          ],
+          "sourceQuestionContractSha256": "2855d4a1848fb97b91408a6e0a8b0f00be043b10d609d036b54a088a56bf54a2"
+        },
+        {
+          "questionId": "Y3M05-Q017",
+          "sourceMediaId": "IMG-V11-2B-DD4F6C5D17D9EA26",
+          "plannedMediaId": "IMG-Y3M05-Q017-CTX-369AEB856E86",
+          "contractPaths": [
+            "bubbleDistractorPool[0]",
+            "options[1]"
+          ],
+          "sourceQuestionContractSha256": "ac496fcc4538195ae191c9641e10d8f9d06dcae437b0a989986030c75b4f83a7"
+        },
+        {
+          "questionId": "Y3M05-Q020",
+          "sourceMediaId": "IMG-V11-2B-0042C60C0B4DAA2B",
+          "plannedMediaId": "IMG-Y3M05-Q020-CTX-E360D5A16951",
+          "contractPaths": [
+            "targets[2]"
+          ],
+          "sourceQuestionContractSha256": "35f650eaeaaff53ad6ecda749f5b8003a31d4d97923f9504d942248cb82bba6e"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-TWO-PLUS-THREE-EQUALS-FIVE",
+      "concept": "two plus three equals five",
+      "file": "images/DUDUQ-Y3M05-TWO-PLUS-THREE-EQUALS-FIVE.png",
+      "sha256": "ce5c6aa028b3a430aaf613acc46f0f22549466af91d66ae734dbd1094ea3f831",
+      "expectedObjectCount": 5,
+      "visualObservation": "The exact token sequence 2 + 3 = 5 is visible in order, with no extra digit, operator or distractor.",
+      "pedagogicalFit": "Exact visual answer support for the source-backed arithmetic phrase two plus three equals five.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q001",
+          "sourceMediaId": "IMG-V11-2B-CFBD6FF69645CF3F",
+          "plannedMediaId": "IMG-Y3M05-Q001-CTX-E7110629B27C",
+          "contractPaths": [
+            "options[0]"
+          ],
+          "sourceQuestionContractSha256": "4d7cb2082bb1724c46a6c41f35c2d8a9cdb6e6e404d5a6dcba2b769962c1fc1c"
+        },
+        {
+          "questionId": "Y3M05-Q005",
+          "sourceMediaId": "IMG-V11-2B-CFBD6FF69645CF3F",
+          "plannedMediaId": "IMG-Y3M05-Q005-CTX-A9337761C057",
+          "contractPaths": [
+            "options[0]"
+          ],
+          "sourceQuestionContractSha256": "41b92fb18dd516e35b1d95d5a91c0e7521181b8cb26e7008857c6e215c8d6cdc"
+        },
+        {
+          "questionId": "Y3M05-Q007",
+          "sourceMediaId": "IMG-V11-2B-13DCE385AE7A4FDD",
+          "plannedMediaId": "IMG-Y3M05-Q007-CTX-A96A4429B5DD",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "sourceQuestionContractSha256": "3a375b59fb02c66dd332ddd5f6d6869dad799e83f42f9581c43d8a0f67aa1d90"
+        },
+        {
+          "questionId": "Y3M05-Q010",
+          "sourceMediaId": "IMG-V11-2B-13DCE385AE7A4FDD",
+          "plannedMediaId": "IMG-Y3M05-Q010-CTX-3383AF6DCD2F",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "sourceQuestionContractSha256": "db0f1425f9e770f5be5739adb123941d817ec6964c1f3d405c76eac38e05337c"
+        },
+        {
+          "questionId": "Y3M05-Q011",
+          "sourceMediaId": "IMG-V11-2B-CFBD6FF69645CF3F",
+          "plannedMediaId": "IMG-Y3M05-Q011-CTX-C5CDEA42EFD8",
+          "contractPaths": [
+            "bubbleDistractorPool[3]"
+          ],
+          "sourceQuestionContractSha256": "d109e0cb82f138b0ab5558667bfb107128fdcad96430b5fa8a9b140c3878d805"
+        },
+        {
+          "questionId": "Y3M05-Q013",
+          "sourceMediaId": "IMG-V11-2B-13DCE385AE7A4FDD",
+          "plannedMediaId": "IMG-Y3M05-Q013-CTX-F0A9FCE1D976",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "sourceQuestionContractSha256": "fbcd2bbc368ec9379f1147376a40ee64bcc5cc8dd79a8e50f1702fe03bda80c3"
+        },
+        {
+          "questionId": "Y3M05-Q016",
+          "sourceMediaId": "IMG-V11-2B-D479ABE00CDCCB74",
+          "plannedMediaId": "IMG-Y3M05-Q016-CTX-0DF4BDA0848F",
+          "contractPaths": [
+            "targets[1]"
+          ],
+          "sourceQuestionContractSha256": "ad1b730f9807c305ca3579c6451e6ec362c28892722ab80c8ae5abf477c31bd5"
+        },
+        {
+          "questionId": "Y3M05-Q017",
+          "sourceMediaId": "IMG-V11-2B-CFBD6FF69645CF3F",
+          "plannedMediaId": "IMG-Y3M05-Q017-CTX-6456D0209276",
+          "contractPaths": [
+            "bubbleDistractorPool[3]"
+          ],
+          "sourceQuestionContractSha256": "ac496fcc4538195ae191c9641e10d8f9d06dcae437b0a989986030c75b4f83a7"
+        }
+      ]
+    },
+    {
+      "assetKey": "Y3M05-CANDIDATE-WHITE",
+      "concept": "white",
+      "file": "images/DUDUQ-Y3M05-WHITE.png",
+      "sha256": "d5f415a9a15f3a20236b6fb8b1e5f2feb9069873c86074159a2f8a2e2731e6ca",
+      "expectedObjectCount": 1,
+      "visualObservation": "One unmistakable glossy white color token with a subtle gray rim is isolated on real alpha.",
+      "pedagogicalFit": "Exact verified color concept reused without semantic broadening.",
+      "semanticVerdict": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "noWrongDistractorObserved": true,
+      "transparentCutoutObserved": true,
+      "humanPedagogicalApproval": false,
+      "questionBindings": [
+        {
+          "questionId": "Y3M05-Q015",
+          "sourceMediaId": "IMG-Y1M03-Q001-WHITE",
+          "plannedMediaId": "IMG-Y3M05-Q015-CTX-EADCC9949852",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "sourceQuestionContractSha256": "76a6d334c2687534879dd200e1e2250c77cad065f6cab9f2cf759e523265674f"
+        }
+      ]
+    }
+  ],
+  "candidateOnly": true,
+  "productionApproved": false,
+  "integrated": false
+}

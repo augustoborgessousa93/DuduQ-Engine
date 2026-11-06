@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "DUDUQ_Y3M05_GENERATION_VERIFICATION_SUMMARY_V1",
+  "verifiedAt": "2026-11-05T23:58:00.000Z",
+  "moduleId": "Y3M05",
+  "lane": "generation",
+  "status": "Y3M05_GENERATION_CANDIDATES_COMPLETE",
+  "projectStatus": "INCOMPLETE",
+  "sourceAudit": {
+    "questionCount": 20,
+    "allSemanticTargetCount": 30,
+    "visualConceptCount": 26,
+    "sourcePendingMediaIds": 46,
+    "coveredSourcePendingMediaIds": 46,
+    "occurrenceScopedBindingPlans": 74,
+    "globalPendingMediaIdsRemain": 1055,
+    "questionSourceSha256": "34c761a8288e9ebdebbec2a62cea7a33097e88d4a5b9779677a84e641e227077",
+    "questionSourceHashStillMatches": true,
+    "registrySha256": "f11c12fe929379947e7d4f76736f8f73bc6320618bf01265bfb48a4e18ef5e30",
+    "registryHashStillMatches": true
+  },
+  "candidateAudit": {
+    "candidatePngCount": 26,
+    "nativeGeneratedCount": 13,
+    "verifiedPreexistingReuseCount": 13,
+    "nativeGenerator": "OpenAI Codex image_gen.imagegen",
+    "generatorLimitReached": false,
+    "blockedGenerator": false,
+    "allPngsValidRgbaWithRealAlpha": true,
+    "assetsWithMicroOpaqueIslands": 0,
+    "duplicateCandidateHashes": 0,
+    "builderSecondRunFileCount": 68,
+    "builderSecondRunIdempotent": true,
+    "modelVisualReview": "PASS_ALL_13_NEW_CANDIDATES_EXACT_CONCEPT_NO_WRONG_DISTRACTOR",
+    "humanPedagogicalApprovalClaimed": false
+  },
+  "checks": [
+    {
+      "command": "node qa/media-candidates/y3m05-official-20261105/prepare-generation-bundle.mjs",
+      "result": "PASS"
+    },
+    {
+      "command": "node qa/png-alpha-component-audit.mjs --candidate-dir=qa/media-candidates/y3m05-official-20261105 --manifest=qa/media-candidates/y3m05-official-20261105/batch-manifest.json --output=qa/media-candidates/y3m05-official-20261105/alpha-component-audit-independent.json",
+      "result": "PASS_26_ASSETS_ZERO_MICRO_OPAQUE_ISLANDS"
+    },
+    {
+      "command": "node --test qa/tests/duduq-two-lane-plan.test.mjs",
+      "result": "PASS_7_OF_7"
+    },
+    {
+      "command": "node qa/duduq-two-lane-plan.mjs --output=qa/media-candidates/y3m05-official-20261105/two-lane-plan-verification.json",
+      "result": "PASS_TWO_LANES_READY_RELEASE_NOT_APPROVED"
+    }
+  ],
+  "safety": {
+    "writeBoundary": "qa/media-candidates/y3m05-official-20261105/**",
+    "questionJsonModified": false,
+    "mediaRegistryModified": false,
+    "runtimeModified": false,
+    "goldMastersModified": false,
+    "approvalFlagsModified": false,
+    "mediaOverlayApplied": false,
+    "existingReferencedAssetsRemoved": false,
+    "productionMergedOrDeployed": false,
+    "secondCodexProcessStarted": false
+  },
+  "completionClaim": "MODULE_CANDIDATE_SCOPE_ONLY_PROJECT_REMAINS_INCOMPLETE"
+}

@@ -1,0 +1,1115 @@
+{
+  "schemaVersion": "DUDUQ_Y3M05_PNG_VALIDATION_V1",
+  "createdAt": "2026-11-05T23:53:26.658Z",
+  "moduleId": "Y3M05",
+  "validator": "qa/validate-duduq-png.mjs",
+  "assetCount": 26,
+  "allPass": true,
+  "assets": [
+    {
+      "concept": "black",
+      "file": "images/DUDUQ-Y3M05-BLACK.png",
+      "sha256": "26f14f9c23067dd533ecf1cdb10d0626c3a2f42d82e3d7c281611104c23dc3ed",
+      "width": 1287,
+      "height": 1222,
+      "transparentPixels": 822796,
+      "opaquePixels": 740388,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 154,
+          "y": 137,
+          "width": 977,
+          "height": 955
+        },
+        "canvasCoverage": 0.59326426,
+        "widthFill": 0.75912976,
+        "heightFill": 0.78150573,
+        "margins": {
+          "left": 154,
+          "top": 137,
+          "right": 156,
+          "bottom": 130
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-sources/DUDUQ-Y3M05-BLACK-SOURCE.png",
+      "originalSha256": "26f14f9c23067dd533ecf1cdb10d0626c3a2f42d82e3d7c281611104c23dc3ed",
+      "originalTechnical": {
+        "width": 1287,
+        "height": 1222,
+        "transparentPixels": 822796,
+        "opaquePixels": 740388,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "brown",
+      "file": "images/DUDUQ-Y3M05-BROWN.png",
+      "sha256": "21b68caf46fe4984d6109b7e3f015c6824e7a4ebc43a8ebe9fdea2e509a42d48",
+      "width": 1287,
+      "height": 1222,
+      "transparentPixels": 639981,
+      "opaquePixels": 917082,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 101,
+          "y": 92,
+          "width": 1089,
+          "height": 1059
+        },
+        "canvasCoverage": 0.73328717,
+        "widthFill": 0.84615385,
+        "heightFill": 0.86661211,
+        "margins": {
+          "left": 101,
+          "top": 92,
+          "right": 97,
+          "bottom": 71
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M05-BROWN-SOURCE-ORIGINAL.png",
+      "originalSha256": "21b68caf46fe4984d6109b7e3f015c6824e7a4ebc43a8ebe9fdea2e509a42d48",
+      "originalTechnical": {
+        "width": 1287,
+        "height": 1222,
+        "transparentPixels": 639981,
+        "opaquePixels": 917082,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "circle",
+      "file": "images/DUDUQ-Y3M05-CIRCLE.png",
+      "sha256": "e38ac53f15b7aae61fb2e24030da5c6c65cc546ca7623dafce76d429676aa9c0",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 671644,
+      "opaquePixels": 889672,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 84,
+          "y": 105,
+          "width": 1063,
+          "height": 1078
+        },
+        "canvasCoverage": 0.72871373,
+        "widthFill": 0.8476874,
+        "heightFill": 0.85964912,
+        "margins": {
+          "left": 84,
+          "top": 105,
+          "right": 107,
+          "bottom": 71
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M05-CIRCLE-ORIGINAL.png",
+      "originalSha256": "d858523cfcac3067b0652f815a705e22d688940384ebb5bad5b83db51257e62e",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 651795,
+        "opaquePixels": 889672,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 1,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "d858523cfcac3067b0652f815a705e22d688940384ebb5bad5b83db51257e62e",
+        "outputSha256": "e38ac53f15b7aae61fb2e24030da5c6c65cc546ca7623dafce76d429676aa9c0"
+      }
+    },
+    {
+      "concept": "divided by",
+      "file": "images/DUDUQ-Y3M05-DIVIDED-BY.png",
+      "sha256": "b07b53607afa38594f90f5528ffa8fd26bdb74bf913aa7d2d9dc99518f2f7304",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1093542,
+      "opaquePixels": 463158,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 106,
+          "y": 127,
+          "width": 1042,
+          "height": 1088
+        },
+        "canvasCoverage": 0.72094402,
+        "widthFill": 0.83094099,
+        "heightFill": 0.8676236,
+        "margins": {
+          "left": 106,
+          "top": 127,
+          "right": 106,
+          "bottom": 39
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M05-DIVIDED-BY-ORIGINAL.png",
+      "originalSha256": "872c84308c2f0554d9c9f45c70653afb1ffb0811d26e507abee43ae764c40cb9",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 959042,
+        "opaquePixels": 463158,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 3,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "872c84308c2f0554d9c9f45c70653afb1ffb0811d26e507abee43ae764c40cb9",
+        "outputSha256": "b07b53607afa38594f90f5528ffa8fd26bdb74bf913aa7d2d9dc99518f2f7304"
+      }
+    },
+    {
+      "concept": "eight",
+      "file": "images/DUDUQ-Y3M05-EIGHT.png",
+      "sha256": "f1f51c261a1662616fcdc24eff0cab7761aa886c48189ed48adee1c81129bf23",
+      "width": 1774,
+      "height": 1536,
+      "transparentPixels": 1860986,
+      "opaquePixels": 829203,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 69,
+          "y": 385,
+          "width": 1633,
+          "height": 746
+        },
+        "canvasCoverage": 0.44707479,
+        "widthFill": 0.9205186,
+        "heightFill": 0.48567708,
+        "margins": {
+          "left": 69,
+          "top": 385,
+          "right": 72,
+          "bottom": 405
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M05-EIGHT-SOURCE-ORIGINAL.png",
+      "originalSha256": "63fb7f3eb46635f62903a2790c7fdf3353433a0c738e1cd19b0f683455e19fe2",
+      "originalTechnical": {
+        "width": 1774,
+        "height": 887,
+        "transparentPixels": 694522,
+        "opaquePixels": 829203,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "equals",
+      "file": "images/DUDUQ-Y3M05-EQUALS.png",
+      "sha256": "db61c51e508f1a1115ef3aa03d00dd6db9414faf08c32c2348ffaeee02f89070",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1057365,
+      "opaquePixels": 501352,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 78,
+          "y": 384,
+          "width": 1092,
+          "height": 540
+        },
+        "canvasCoverage": 0.37499142,
+        "widthFill": 0.8708134,
+        "heightFill": 0.43062201,
+        "margins": {
+          "left": 78,
+          "top": 384,
+          "right": 84,
+          "bottom": 330
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M05-EQUALS-ORIGINAL.png",
+      "originalSha256": "2357c8aa1bbff39e4c864db50700a82a937c5ceb891751c1d07a4a7e90ce6e46",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 1038816,
+        "opaquePixels": 501352,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 2,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "2357c8aa1bbff39e4c864db50700a82a937c5ceb891751c1d07a4a7e90ce6e46",
+        "outputSha256": "db61c51e508f1a1115ef3aa03d00dd6db9414faf08c32c2348ffaeee02f89070"
+      }
+    },
+    {
+      "concept": "five",
+      "file": "images/DUDUQ-Y3M05-FIVE.png",
+      "sha256": "b12f817867e3fa002e1468cadbfdda80932b8965ae74e1255db41016f9b57eee",
+      "width": 1536,
+      "height": 1536,
+      "transparentPixels": 1594400,
+      "opaquePixels": 735818,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 36,
+          "y": 308,
+          "width": 1458,
+          "height": 923
+        },
+        "canvasCoverage": 0.57039642,
+        "widthFill": 0.94921875,
+        "heightFill": 0.60091146,
+        "margins": {
+          "left": 36,
+          "top": 308,
+          "right": 42,
+          "bottom": 305
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M05-FIVE-SOURCE-ORIGINAL.png",
+      "originalSha256": "3f7bfb852d53dd43ed1aa0e9051ff4f9f6cd36971da3470467d61b525b3eb4a5",
+      "originalTechnical": {
+        "width": 1536,
+        "height": 1024,
+        "transparentPixels": 800787,
+        "opaquePixels": 735818,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "four",
+      "file": "images/DUDUQ-Y3M05-FOUR.png",
+      "sha256": "d7e0f1fd9f5b565a62b75b0dcf8f07fb257096a33947c6ec6ee1fadd87c61505",
+      "width": 1536,
+      "height": 1536,
+      "transparentPixels": 1533449,
+      "opaquePixels": 797370,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 208,
+          "y": 211,
+          "width": 1148,
+          "height": 1104
+        },
+        "canvasCoverage": 0.53719076,
+        "widthFill": 0.74739583,
+        "heightFill": 0.71875,
+        "margins": {
+          "left": 208,
+          "top": 211,
+          "right": 180,
+          "bottom": 221
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M05-FOUR-SOURCE-ORIGINAL.png",
+      "originalSha256": "eb9a66a2a51d34c01bb660918d1a30a43e80b92f539bb06bed8b8976ea4b148a",
+      "originalTechnical": {
+        "width": 1305,
+        "height": 1206,
+        "transparentPixels": 732489,
+        "opaquePixels": 797370,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "gray",
+      "file": "images/DUDUQ-Y3M05-GRAY.png",
+      "sha256": "a495b16ffedf658cee6e8e4c9c48f2ba051d6d5d664317c9a7545b1956c8e904",
+      "width": 1287,
+      "height": 1222,
+      "transparentPixels": 641541,
+      "opaquePixels": 917704,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 102,
+          "y": 94,
+          "width": 1088,
+          "height": 1058
+        },
+        "canvasCoverage": 0.73192202,
+        "widthFill": 0.84537685,
+        "heightFill": 0.86579378,
+        "margins": {
+          "left": 102,
+          "top": 94,
+          "right": 97,
+          "bottom": 70
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M05-GRAY-SOURCE-ORIGINAL.png",
+      "originalSha256": "a495b16ffedf658cee6e8e4c9c48f2ba051d6d5d664317c9a7545b1956c8e904",
+      "originalTechnical": {
+        "width": 1287,
+        "height": 1222,
+        "transparentPixels": 641541,
+        "opaquePixels": 917704,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "minus",
+      "file": "images/DUDUQ-Y3M05-MINUS.png",
+      "sha256": "75c41fcbd2c9f0173bd79d9cbc4b53fbc2d735185d496762247d73a8e111add8",
+      "width": 2172,
+      "height": 1024,
+      "transparentPixels": 1566828,
+      "opaquePixels": 644241,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 128,
+          "y": 339,
+          "width": 1913,
+          "height": 353
+        },
+        "canvasCoverage": 0.30361967,
+        "widthFill": 0.88075506,
+        "heightFill": 0.34472656,
+        "margins": {
+          "left": 128,
+          "top": 339,
+          "right": 131,
+          "bottom": 332
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M05-MINUS-ORIGINAL.png",
+      "originalSha256": "60e08958d3d1485199850498a675f3c6f81356fcefd6d1eeef2c5e38b41acbad",
+      "originalTechnical": {
+        "width": 2172,
+        "height": 724,
+        "transparentPixels": 908003,
+        "opaquePixels": 644241,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 1,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "60e08958d3d1485199850498a675f3c6f81356fcefd6d1eeef2c5e38b41acbad",
+        "outputSha256": "75c41fcbd2c9f0173bd79d9cbc4b53fbc2d735185d496762247d73a8e111add8"
+      }
+    },
+    {
+      "concept": "nine minus five equals four",
+      "file": "images/DUDUQ-Y3M05-NINE-MINUS-FIVE-EQUALS-FOUR.png",
+      "sha256": "8e90c7afe1fbc9c1bd55470adc657b76f69833ff579a4abe67a4c24d3964c0a1",
+      "width": 2172,
+      "height": 1024,
+      "transparentPixels": 1537770,
+      "opaquePixels": 649514,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 34,
+          "y": 250,
+          "width": 2125,
+          "height": 568
+        },
+        "canvasCoverage": 0.54268459,
+        "widthFill": 0.97836096,
+        "heightFill": 0.5546875,
+        "margins": {
+          "left": 34,
+          "top": 250,
+          "right": 13,
+          "bottom": 206
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M05-NINE-MINUS-FIVE-EQUALS-FOUR-ORIGINAL.png",
+      "originalSha256": "3c7ec33d8018ea18b51d290f0a83fad1c4137359374342d1a956e259c4670c82",
+      "originalTechnical": {
+        "width": 2172,
+        "height": 724,
+        "transparentPixels": 768702,
+        "opaquePixels": 649514,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 6,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "3c7ec33d8018ea18b51d290f0a83fad1c4137359374342d1a956e259c4670c82",
+        "outputSha256": "8e90c7afe1fbc9c1bd55470adc657b76f69833ff579a4abe67a4c24d3964c0a1"
+      }
+    },
+    {
+      "concept": "one",
+      "file": "images/DUDUQ-Y3M05-ONE.png",
+      "sha256": "e65ad687b4d68c317b065a9fce4a7d3dfbd7cffbe45835899dd9826ccaf4d8f5",
+      "width": 1536,
+      "height": 1536,
+      "transparentPixels": 1567932,
+      "opaquePixels": 777087,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 274,
+          "y": 219,
+          "width": 988,
+          "height": 1086
+        },
+        "canvasCoverage": 0.45478312,
+        "widthFill": 0.64322917,
+        "heightFill": 0.70703125,
+        "margins": {
+          "left": 274,
+          "top": 219,
+          "right": 274,
+          "bottom": 231
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M05-ONE-SOURCE-ORIGINAL.png",
+      "originalSha256": "db5c25dc3d048532af972dba45f58faf2158093beae6f3fb48ae3041f5900eec",
+      "originalTechnical": {
+        "width": 1312,
+        "height": 1199,
+        "transparentPixels": 777056,
+        "opaquePixels": 777087,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "orange",
+      "file": "images/DUDUQ-Y3M05-ORANGE.png",
+      "sha256": "273f0b5d5f124f2880b1164a9aa19d4c5f9f55a1e29e57b2125563363b521195",
+      "width": 1287,
+      "height": 1222,
+      "transparentPixels": 643352,
+      "opaquePixels": 917716,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 100,
+          "y": 91,
+          "width": 1090,
+          "height": 1060
+        },
+        "canvasCoverage": 0.7346536,
+        "widthFill": 0.84693085,
+        "heightFill": 0.86743044,
+        "margins": {
+          "left": 100,
+          "top": 91,
+          "right": 97,
+          "bottom": 71
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M05-ORANGE-SOURCE-ORIGINAL.png",
+      "originalSha256": "273f0b5d5f124f2880b1164a9aa19d4c5f9f55a1e29e57b2125563363b521195",
+      "originalTechnical": {
+        "width": 1287,
+        "height": 1222,
+        "transparentPixels": 643352,
+        "opaquePixels": 917716,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "plus",
+      "file": "images/DUDUQ-Y3M05-PLUS.png",
+      "sha256": "a674851dbdb2f469668f7f3c324ca1cb88e9f7d20aa910684a7d06abd3d559d9",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 976661,
+      "opaquePixels": 584374,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 42,
+          "y": 76,
+          "width": 1168,
+          "height": 1129
+        },
+        "canvasCoverage": 0.83857462,
+        "widthFill": 0.93141946,
+        "heightFill": 0.90031898,
+        "margins": {
+          "left": 42,
+          "top": 76,
+          "right": 44,
+          "bottom": 49
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M05-PLUS-ORIGINAL.png",
+      "originalSha256": "0245f3063322fa4b08be867fc2632f57ac850722ac20f7fc7ddb79eddfeaed39",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 960510,
+        "opaquePixels": 584374,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 1,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "0245f3063322fa4b08be867fc2632f57ac850722ac20f7fc7ddb79eddfeaed39",
+        "outputSha256": "a674851dbdb2f469668f7f3c324ca1cb88e9f7d20aa910684a7d06abd3d559d9"
+      }
+    },
+    {
+      "concept": "purple",
+      "file": "images/DUDUQ-Y3M05-PURPLE.png",
+      "sha256": "a6d34d1ea1e3b72b967ae2ff0ac7224aa4f39b32af9ee0990bc6520b6fba1394",
+      "width": 1287,
+      "height": 1222,
+      "transparentPixels": 642162,
+      "opaquePixels": 921223,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 99,
+          "y": 92,
+          "width": 1092,
+          "height": 1060
+        },
+        "canvasCoverage": 0.73600159,
+        "widthFill": 0.84848485,
+        "heightFill": 0.86743044,
+        "margins": {
+          "left": 99,
+          "top": 92,
+          "right": 96,
+          "bottom": 70
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M05-PURPLE-SOURCE-ORIGINAL.png",
+      "originalSha256": "7fa798cbf3f3f22c6f2a508ab073de7ec2f9209c3dd2c989c5c3643fa99c9d69",
+      "originalTechnical": {
+        "width": 1287,
+        "height": 1222,
+        "transparentPixels": 639256,
+        "opaquePixels": 921223,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "rectangle",
+      "file": "images/DUDUQ-Y3M05-RECTANGLE.png",
+      "sha256": "1f72edf7ef51981f968773c877c4a15c54c9c035d8ac82b348f85413df75a8d3",
+      "width": 1774,
+      "height": 1024,
+      "transparentPixels": 745156,
+      "opaquePixels": 1060995,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 60,
+          "y": 190,
+          "width": 1655,
+          "height": 647
+        },
+        "canvasCoverage": 0.58945235,
+        "widthFill": 0.93291995,
+        "heightFill": 0.63183594,
+        "margins": {
+          "left": 60,
+          "top": 190,
+          "right": 59,
+          "bottom": 187
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M05-RECTANGLE-ORIGINAL.png",
+      "originalSha256": "564fe911a88c41dee01e7f6946bcc0060b6cc7fb2ddfd0f40d09fcfabfd4f9a3",
+      "originalTechnical": {
+        "width": 1774,
+        "height": 887,
+        "transparentPixels": 491646,
+        "opaquePixels": 1060995,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 1,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "564fe911a88c41dee01e7f6946bcc0060b6cc7fb2ddfd0f40d09fcfabfd4f9a3",
+        "outputSha256": "1f72edf7ef51981f968773c877c4a15c54c9c035d8ac82b348f85413df75a8d3"
+      }
+    },
+    {
+      "concept": "seven",
+      "file": "images/DUDUQ-Y3M05-SEVEN.png",
+      "sha256": "b675fb761c6054b737cf35ba6b9d36e9fe50ed7a317ae07e4a3dc30000272667",
+      "width": 1536,
+      "height": 1536,
+      "transparentPixels": 1489321,
+      "opaquePixels": 833500,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 142,
+          "y": 182,
+          "width": 1244,
+          "height": 1176
+        },
+        "canvasCoverage": 0.6200765,
+        "widthFill": 0.80989583,
+        "heightFill": 0.765625,
+        "margins": {
+          "left": 142,
+          "top": 182,
+          "right": 150,
+          "bottom": 178
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M05-SEVEN-SOURCE-ORIGINAL.png",
+      "originalSha256": "cf8eaa0b36b46893e4b8ef2962f2ac42c5e806ef81d4426f907484fc0c3270cb",
+      "originalTechnical": {
+        "width": 1295,
+        "height": 1215,
+        "transparentPixels": 678314,
+        "opaquePixels": 833500,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "six",
+      "file": "images/DUDUQ-Y3M05-SIX.png",
+      "sha256": "d6482204a9c9caf61913193ac2369abd3e3681226568a0b4262fed3460faef66",
+      "width": 1536,
+      "height": 1536,
+      "transparentPixels": 1405322,
+      "opaquePixels": 913960,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 39,
+          "y": 292,
+          "width": 1457,
+          "height": 943
+        },
+        "canvasCoverage": 0.58235635,
+        "widthFill": 0.94856771,
+        "heightFill": 0.61393229,
+        "margins": {
+          "left": 39,
+          "top": 292,
+          "right": 40,
+          "bottom": 301
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M05-SIX-SOURCE-ORIGINAL.png",
+      "originalSha256": "2a4e1df89aac1d90b8652fc98047f3b900213da886355e57ca2ea630c3f3ac90",
+      "originalTechnical": {
+        "width": 1536,
+        "height": 1024,
+        "transparentPixels": 598292,
+        "opaquePixels": 913960,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "six minus two equals four",
+      "file": "images/DUDUQ-Y3M05-SIX-MINUS-TWO-EQUALS-FOUR.png",
+      "sha256": "96aa1db791e1f383952547a0e7fde89c18256bbbc275474601a7f0afcea8c849",
+      "width": 2172,
+      "height": 1024,
+      "transparentPixels": 1527557,
+      "opaquePixels": 667393,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 11,
+          "y": 230,
+          "width": 2157,
+          "height": 588
+        },
+        "canvasCoverage": 0.57025315,
+        "widthFill": 0.99309392,
+        "heightFill": 0.57421875,
+        "margins": {
+          "left": 11,
+          "top": 230,
+          "right": 4,
+          "bottom": 206
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M05-SIX-MINUS-TWO-EQUALS-FOUR-ORIGINAL.png",
+      "originalSha256": "c04df3bdf031a0b39287919527d3cb77fae744a2a16a0b9061e396a790652327",
+      "originalTechnical": {
+        "width": 2172,
+        "height": 724,
+        "transparentPixels": 863028,
+        "opaquePixels": 667393,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 6,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "c04df3bdf031a0b39287919527d3cb77fae744a2a16a0b9061e396a790652327",
+        "outputSha256": "96aa1db791e1f383952547a0e7fde89c18256bbbc275474601a7f0afcea8c849"
+      }
+    },
+    {
+      "concept": "square",
+      "file": "images/DUDUQ-Y3M05-SQUARE.png",
+      "sha256": "4b3619ca515cb1e0c29f294931187e7ff7a4f4a3c3b2e05020c5df2c6e50f33e",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 590289,
+      "opaquePixels": 972884,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 125,
+          "y": 141,
+          "width": 992,
+          "height": 994
+        },
+        "canvasCoverage": 0.62705117,
+        "widthFill": 0.79106858,
+        "heightFill": 0.79266348,
+        "margins": {
+          "left": 125,
+          "top": 141,
+          "right": 137,
+          "bottom": 119
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M05-SQUARE-ORIGINAL.png",
+      "originalSha256": "f1df1bfa1a01c223f42dc493b4790b4eddfe143fe7b7b86a1eeba07b65bb7fd6",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 538629,
+        "opaquePixels": 972884,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 1,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "f1df1bfa1a01c223f42dc493b4790b4eddfe143fe7b7b86a1eeba07b65bb7fd6",
+        "outputSha256": "4b3619ca515cb1e0c29f294931187e7ff7a4f4a3c3b2e05020c5df2c6e50f33e"
+      }
+    },
+    {
+      "concept": "star",
+      "file": "images/DUDUQ-Y3M05-STAR.png",
+      "sha256": "87b101f6e1f4fab155617204ee560831fa5b67bbe9b84c229ed855a81d257f82",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1047315,
+      "opaquePixels": 513353,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 96,
+          "y": 135,
+          "width": 1061,
+          "height": 1007
+        },
+        "canvasCoverage": 0.67943792,
+        "widthFill": 0.8460925,
+        "heightFill": 0.8030303,
+        "margins": {
+          "left": 96,
+          "top": 135,
+          "right": 97,
+          "bottom": 112
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M05-STAR-ORIGINAL.png",
+      "originalSha256": "8860c18737af26b8ef6f2ef9aa2cc0a199b40c99d7a0f23e286611ac0405d8f7",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 1012002,
+        "opaquePixels": 513353,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 1,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "8860c18737af26b8ef6f2ef9aa2cc0a199b40c99d7a0f23e286611ac0405d8f7",
+        "outputSha256": "87b101f6e1f4fab155617204ee560831fa5b67bbe9b84c229ed855a81d257f82"
+      }
+    },
+    {
+      "concept": "three",
+      "file": "images/DUDUQ-Y3M05-THREE.png",
+      "sha256": "346c0cd7a52c9c2685187551e1fcb6a71721f2c53639e37f2a06fdb857939398",
+      "width": 2172,
+      "height": 1536,
+      "transparentPixels": 2369018,
+      "opaquePixels": 942557,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 57,
+          "y": 420,
+          "width": 2096,
+          "height": 675
+        },
+        "canvasCoverage": 0.42407631,
+        "widthFill": 0.96500921,
+        "heightFill": 0.43945313,
+        "margins": {
+          "left": 57,
+          "top": 420,
+          "right": 19,
+          "bottom": 441
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-originals/DUDUQ-Y3M05-THREE-SOURCE-ORIGINAL.png",
+      "originalSha256": "f7d841143ad970661a842e33385aae4cc765860834b4e0cfc85761079da4ad4b",
+      "originalTechnical": {
+        "width": 2172,
+        "height": 724,
+        "transparentPixels": 600265,
+        "opaquePixels": 942557,
+        "valid": true
+      },
+      "normalization": null
+    },
+    {
+      "concept": "three plus four equals seven",
+      "file": "images/DUDUQ-Y3M05-THREE-PLUS-FOUR-EQUALS-SEVEN.png",
+      "sha256": "def1d12aec14a94dc931c80f1128d56c44a18aa16e0b0912ac05e9f56025abec",
+      "width": 2172,
+      "height": 1024,
+      "transparentPixels": 1523364,
+      "opaquePixels": 669938,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 35,
+          "y": 245,
+          "width": 2106,
+          "height": 564
+        },
+        "canvasCoverage": 0.5340448,
+        "widthFill": 0.96961326,
+        "heightFill": 0.55078125,
+        "margins": {
+          "left": 35,
+          "top": 245,
+          "right": 31,
+          "bottom": 215
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M05-THREE-PLUS-FOUR-EQUALS-SEVEN-ORIGINAL.png",
+      "originalSha256": "f26c70418e149e0478eea2f34bc6b3c7bbfe660755f5e5fec742a23a9d8aa04c",
+      "originalTechnical": {
+        "width": 2172,
+        "height": 724,
+        "transparentPixels": 851802,
+        "opaquePixels": 669938,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 6,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "f26c70418e149e0478eea2f34bc6b3c7bbfe660755f5e5fec742a23a9d8aa04c",
+        "outputSha256": "def1d12aec14a94dc931c80f1128d56c44a18aa16e0b0912ac05e9f56025abec"
+      }
+    },
+    {
+      "concept": "triangle",
+      "file": "images/DUDUQ-Y3M05-TRIANGLE.png",
+      "sha256": "b571b8a8331a445814a635e62fae5f9db942a713c4bd8444fb5b34eda3991dd7",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 921219,
+      "opaquePixels": 641157,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 63,
+          "y": 135,
+          "width": 1121,
+          "height": 1004
+        },
+        "canvasCoverage": 0.71572181,
+        "widthFill": 0.89393939,
+        "heightFill": 0.80063796,
+        "margins": {
+          "left": 63,
+          "top": 135,
+          "right": 70,
+          "bottom": 115
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M05-TRIANGLE-ORIGINAL.png",
+      "originalSha256": "75e519e575093249e8ba308c7f1ae31664cff7fddab7ee2538b0a598ddaefb3a",
+      "originalTechnical": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 901587,
+        "opaquePixels": 641157,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 1,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "75e519e575093249e8ba308c7f1ae31664cff7fddab7ee2538b0a598ddaefb3a",
+        "outputSha256": "b571b8a8331a445814a635e62fae5f9db942a713c4bd8444fb5b34eda3991dd7"
+      }
+    },
+    {
+      "concept": "two plus three equals five",
+      "file": "images/DUDUQ-Y3M05-TWO-PLUS-THREE-EQUALS-FIVE.png",
+      "sha256": "ce5c6aa028b3a430aaf613acc46f0f22549466af91d66ae734dbd1094ea3f831",
+      "width": 2172,
+      "height": 1024,
+      "transparentPixels": 1405633,
+      "opaquePixels": 780864,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 11,
+          "y": 222,
+          "width": 2154,
+          "height": 608
+        },
+        "canvasCoverage": 0.58882942,
+        "widthFill": 0.99171271,
+        "heightFill": 0.59375,
+        "margins": {
+          "left": 11,
+          "top": 222,
+          "right": 7,
+          "bottom": 194
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/originals/DUDUQ-Y3M05-TWO-PLUS-THREE-EQUALS-FIVE-ORIGINAL.png",
+      "originalSha256": "539664c1209be97e3a76208befcc496c8da64fac8fa185562e0caaa644a76f2f",
+      "originalTechnical": {
+        "width": 2172,
+        "height": 724,
+        "transparentPixels": 721683,
+        "opaquePixels": 780864,
+        "valid": true
+      },
+      "normalization": {
+        "status": "ALPHA_NORMALIZED_IN_PROCESS",
+        "expectedComponents": 6,
+        "coreAlpha": 128,
+        "edgeRadius": 3,
+        "minWidth": 1024,
+        "minHeight": 1024,
+        "sourceSha256": "539664c1209be97e3a76208befcc496c8da64fac8fa185562e0caaa644a76f2f",
+        "outputSha256": "ce5c6aa028b3a430aaf613acc46f0f22549466af91d66ae734dbd1094ea3f831"
+      }
+    },
+    {
+      "concept": "white",
+      "file": "images/DUDUQ-Y3M05-WHITE.png",
+      "sha256": "d5f415a9a15f3a20236b6fb8b1e5f2feb9069873c86074159a2f8a2e2731e6ca",
+      "width": 1283,
+      "height": 1226,
+      "transparentPixels": 818249,
+      "opaquePixels": 744588,
+      "valid": true,
+      "bounds": {
+        "union": {
+          "x": 162,
+          "y": 133,
+          "width": 958,
+          "height": 980
+        },
+        "canvasCoverage": 0.59686273,
+        "widthFill": 0.74668745,
+        "heightFill": 0.79934747,
+        "margins": {
+          "left": 162,
+          "top": 133,
+          "right": 163,
+          "bottom": 113
+        },
+        "touchesCanvasEdge": false
+      },
+      "originalFile": "provenance/reused-sources/DUDUQ-Y3M05-WHITE-SOURCE.png",
+      "originalSha256": "d5f415a9a15f3a20236b6fb8b1e5f2feb9069873c86074159a2f8a2e2731e6ca",
+      "originalTechnical": {
+        "width": 1283,
+        "height": 1226,
+        "transparentPixels": 818249,
+        "opaquePixels": 744588,
+        "valid": true
+      },
+      "normalization": null
+    }
+  ]
+}

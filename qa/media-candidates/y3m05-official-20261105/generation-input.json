@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "DUDUQ_Y3M05_GENERATION_INPUT_V1",
+  "moduleId": "Y3M05",
+  "lane": "generation",
+  "writeBoundary": "qa/media-candidates/y3m05-official-20261105",
+  "provider": "OpenAI Codex native image generation",
+  "tool": "image_gen.imagegen",
+  "apiPurchaseOrExternalCredentialUsed": false,
+  "transparentBackgroundRequested": true,
+  "generated": [
+    {
+      "concept": "circle",
+      "slug": "CIRCLE",
+      "expectedObjectCount": 1,
+      "normalizationExpectedComponents": 1,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-3391664f-9150-439c-802a-56cdb86244a1.png",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational concept cutout for children ages 7–10\nPrimary request: one unmistakable geometric circle represented as a single premium 3D learning manipulative\nSubject: a perfectly circular solid sky-blue token with a smooth rounded rim and shallow thickness, viewed almost straight-on so its circular silhouette is exact\nStyle/medium: polished child-friendly 3D animation render, clean toy-like material, crisp silhouette\nComposition/framing: one centered object only, large enough to fill roughly 80% of the square canvas while fully inside it, even transparent safe margin\nLighting/mood: soft bright studio lighting with gentle highlights contained on the object\nConstraints: genuinely transparent alpha background; exactly one circle object; no other shapes; no letters, words, numbers, mathematical symbols, labels, border, frame, floor, cast shadow, halo, logo, watermark, collage or scenery; do not crop any edge",
+      "visualObservation": "Exactly one sky-blue circular token with an exact round silhouette is visible; no other shape or distractor is present.",
+      "pedagogicalFit": "Exact nonverbal visual support for the geometric concept circle."
+    },
+    {
+      "concept": "triangle",
+      "slug": "TRIANGLE",
+      "expectedObjectCount": 1,
+      "normalizationExpectedComponents": 1,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-688bddc5-9ee5-4791-b714-7908c5c64d30.png",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational concept cutout for children ages 7–10\nPrimary request: one unmistakable geometric triangle represented as a single premium 3D learning manipulative\nSubject: a solid equilateral yellow triangle tile with softly rounded corners, a smooth beveled rim and shallow thickness, viewed almost straight-on so its three-sided silhouette is exact\nStyle/medium: polished child-friendly 3D animation render, clean toy-like material, crisp silhouette\nComposition/framing: one centered object only, large enough to fill roughly 80% of the square canvas while fully inside it, even transparent safe margin\nLighting/mood: soft bright studio lighting with gentle highlights contained on the object\nConstraints: genuinely transparent alpha background; exactly one triangle object; exactly three sides and three corners; no other shapes; no letters, words, numbers, mathematical symbols, labels, border, frame, floor, cast shadow, halo, logo, watermark, collage or scenery; do not crop any edge",
+      "visualObservation": "Exactly one yellow three-sided triangle token is visible; no other shape or distractor is present.",
+      "pedagogicalFit": "Exact nonverbal visual support for the geometric concept triangle."
+    },
+    {
+      "concept": "square",
+      "slug": "SQUARE",
+      "expectedObjectCount": 1,
+      "normalizationExpectedComponents": 1,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-bf988227-539c-45dc-a284-4b4b1a800c94.png",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational concept cutout for children ages 7–10\nPrimary request: one unmistakable geometric square represented as a single premium 3D learning manipulative\nSubject: a solid red square tile with four equal sides, softly rounded corners, a smooth beveled rim and shallow thickness, viewed straight-on so equal width and height are exact\nStyle/medium: polished child-friendly 3D animation render, clean toy-like material, crisp silhouette\nComposition/framing: one centered object only, large enough to fill roughly 80% of the square canvas while fully inside it, even transparent safe margin\nLighting/mood: soft bright studio lighting with gentle highlights contained on the object\nConstraints: genuinely transparent alpha background; exactly one square object; four equal sides; no rectangle proportions and no other shapes; no letters, words, numbers, mathematical symbols, labels, border, frame, floor, cast shadow, halo, logo, watermark, collage or scenery; do not crop any edge",
+      "visualObservation": "Exactly one red square token with four equal sides is visible; no other shape or distractor is present.",
+      "pedagogicalFit": "Exact nonverbal visual support for the geometric concept square."
+    },
+    {
+      "concept": "rectangle",
+      "slug": "RECTANGLE",
+      "expectedObjectCount": 1,
+      "normalizationExpectedComponents": 1,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-328cc21d-9318-43a2-982e-5116a8f0fa28.png",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational concept cutout for children ages 7–10\nPrimary request: one unmistakable geometric rectangle represented as a single premium 3D learning manipulative\nSubject: a solid green horizontal rectangle tile, clearly twice as wide as it is tall, with four right-angle corners slightly softened, a smooth beveled rim and shallow thickness, viewed almost straight-on\nStyle/medium: polished child-friendly 3D animation render, clean toy-like material, crisp silhouette\nComposition/framing: one centered object only, filling most of the canvas width while fully inside it, even transparent safe margin\nLighting/mood: soft bright studio lighting with gentle highlights contained on the object\nConstraints: genuinely transparent alpha background; exactly one rectangle object; width clearly greater than height; not a square; no other shapes; no letters, words, numbers, mathematical symbols, labels, border, frame, floor, cast shadow, halo, logo, watermark, collage or scenery; do not crop any edge",
+      "visualObservation": "Exactly one green horizontal rectangle token, clearly wider than tall, is visible; no other shape or distractor is present.",
+      "pedagogicalFit": "Exact nonverbal visual support for the geometric concept rectangle."
+    },
+    {
+      "concept": "star",
+      "slug": "STAR",
+      "expectedObjectCount": 1,
+      "normalizationExpectedComponents": 1,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-2d2b654a-bfe8-435e-a099-4d8f5efbe346.png",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational concept cutout for children ages 7–10\nPrimary request: one unmistakable five-point geometric star represented as a single premium 3D learning manipulative\nSubject: a solid purple five-point star tile with exactly five evenly spaced points, a smooth beveled rim and shallow thickness, viewed almost straight-on\nStyle/medium: polished child-friendly 3D animation render, clean toy-like material, crisp silhouette\nComposition/framing: one centered object only, large enough to fill roughly 80% of the square canvas while fully inside it, even transparent safe margin\nLighting/mood: soft bright studio lighting with gentle highlights contained on the object\nConstraints: genuinely transparent alpha background; exactly one star object; exactly five points; no face, other shapes, letters, words, numbers, mathematical symbols, labels, border, frame, floor, cast shadow, halo, logo, watermark, collage or scenery; do not crop any edge",
+      "visualObservation": "Exactly one purple five-point star token is visible; no other shape or distractor is present.",
+      "pedagogicalFit": "Exact nonverbal visual support for the geometric concept star."
+    },
+    {
+      "concept": "plus",
+      "slug": "PLUS",
+      "expectedObjectCount": 1,
+      "normalizationExpectedComponents": 1,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-716fa25a-4e3a-4902-b449-f3689aae4af7.png",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational math-operator cutout for children ages 7–10\nPrimary request: one unmistakable PLUS math operator represented as a premium 3D learning token\nSubject: a single bold coral-red plus sign made from one vertical rounded bar crossing one horizontal rounded bar at the exact center, equal stroke weight, balanced arms and smooth beveled depth\nStyle/medium: polished child-friendly 3D animation render, clean toy-like material, crisp silhouette\nComposition/framing: one centered symbol only, filling roughly 75% of the square canvas while fully inside it, even transparent safe margin\nLighting/mood: soft bright studio lighting with gentle highlights contained on the symbol\nConstraints: genuinely transparent alpha background; exactly one plus sign; no minus, equals, division, digits, letters, words, labels, border, frame, floor, cast shadow, halo, logo, watermark, collage or scenery; do not crop any edge",
+      "visualObservation": "Exactly one coral-red plus sign with balanced crossing arms is visible; no competing operator or distractor is present.",
+      "pedagogicalFit": "Exact visual support for the spoken English operator plus."
+    },
+    {
+      "concept": "minus",
+      "slug": "MINUS",
+      "expectedObjectCount": 1,
+      "normalizationExpectedComponents": 1,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-5447510f-68b7-4a2d-aea7-2fc70d589855.png",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational math-operator cutout for children ages 7–10\nPrimary request: one unmistakable MINUS math operator represented as a premium 3D learning token\nSubject: a single bold royal-blue horizontal minus sign made from one thick rounded bar only, smoothly beveled and clearly wider than tall\nStyle/medium: polished child-friendly 3D animation render, clean toy-like material, crisp silhouette\nComposition/framing: one centered symbol only, filling roughly 75% of the canvas width while fully inside it, even transparent safe margin\nLighting/mood: soft bright studio lighting with gentle highlights contained on the symbol\nConstraints: genuinely transparent alpha background; exactly one minus sign and exactly one bar; no plus, equals, division, digits, letters, words, labels, border, frame, floor, cast shadow, halo, logo, watermark, collage or scenery; do not crop any edge",
+      "visualObservation": "Exactly one royal-blue horizontal minus bar is visible; no competing operator or distractor is present.",
+      "pedagogicalFit": "Exact visual support for the spoken English operator minus."
+    },
+    {
+      "concept": "equals",
+      "slug": "EQUALS",
+      "expectedObjectCount": 1,
+      "normalizationExpectedComponents": 2,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-bcaeec88-d19d-430b-b9c2-4755e3977f43.png",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational math-operator cutout for children ages 7–10\nPrimary request: one unmistakable EQUALS math operator represented as a premium 3D learning token\nSubject: exactly two separate parallel horizontal golden-yellow rounded bars, identical in width and thickness, evenly spaced and perfectly aligned, with smooth beveled depth\nStyle/medium: polished child-friendly 3D animation render, clean toy-like material, crisp silhouettes\nComposition/framing: the two-bar symbol centered, filling roughly 75% of the canvas width while fully inside it, even transparent safe margin\nLighting/mood: soft bright studio lighting with gentle highlights contained on the bars\nConstraints: genuinely transparent alpha background; exactly two bars; no third bar, dots, plus, minus, division, digits, letters, words, labels, border, frame, floor, cast shadow, halo, logo, watermark, collage or scenery; do not crop any edge",
+      "visualObservation": "Exactly two aligned golden-yellow parallel bars form one equals sign; no competing operator or distractor is present.",
+      "pedagogicalFit": "Exact visual support for the spoken English operator equals."
+    },
+    {
+      "concept": "divided by",
+      "slug": "DIVIDED-BY",
+      "expectedObjectCount": 1,
+      "normalizationExpectedComponents": 3,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-10099c21-ccae-4f34-8b1d-aa70a9abca7b.png",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational math-operator cutout for children ages 7–10\nPrimary request: one unmistakable DIVIDED BY operator represented as the exact ÷ symbol in a premium 3D learning token\nSubject: exactly one teal horizontal rounded bar with one matching round dot centered above it and one matching round dot centered below it, all with smooth beveled depth\nStyle/medium: polished child-friendly 3D animation render, clean toy-like material, crisp silhouettes\nComposition/framing: the three-part symbol centered, filling roughly 75% of the square canvas while fully inside it, even transparent safe margin\nLighting/mood: soft bright studio lighting with gentle highlights contained on the symbol\nConstraints: genuinely transparent alpha background; exact division symbol with one bar and exactly two dots; no plus, minus, equals, digits, letters, words, labels, border, frame, floor, cast shadow, halo, logo, watermark, collage or scenery; do not crop any edge",
+      "visualObservation": "One exact teal division symbol is visible as one bar with one dot above and one below; no competing operator or distractor is present.",
+      "pedagogicalFit": "Exact visual support for the spoken English operator divided by."
+    },
+    {
+      "concept": "two plus three equals five",
+      "slug": "TWO-PLUS-THREE-EQUALS-FIVE",
+      "expectedObjectCount": 5,
+      "normalizationExpectedComponents": 6,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-cb74c0e5-d9e9-4aed-b02b-00d698c9de4c.png",
+      "prompt": "Use case: scientific-educational\nAsset type: DUDUQ English visual answer asset for children ages 7–10\nPrimary request: render the exact arithmetic equation \"2 + 3 = 5\" as five separate premium 3D toy-like tokens on one horizontal baseline\nSubject: the exact sequence digit 2, plus sign +, digit 3, equals sign =, digit 5, in that exact order\nStyle/medium: bold rounded sans-serif token forms, glossy colorful plastic, highly legible at small size, polished child-friendly 3D animation render\nComposition/framing: centered horizontal sequence, evenly spaced, filling most of a wide transparent canvas while every token remains fully visible\nLighting/mood: soft bright studio lighting with highlights contained on each token\nText/symbols verbatim: 2 + 3 = 5\nConstraints: genuinely transparent alpha background; exactly the five requested tokens in the exact order; numerals must be exact; one plus and one equals sign; no words, extra digits, extra operators, decorative objects, border, frame, floor, cast shadow, halo, logo, watermark, collage or scenery; do not crop any edge",
+      "visualObservation": "The exact token sequence 2 + 3 = 5 is visible in order, with no extra digit, operator or distractor.",
+      "pedagogicalFit": "Exact visual answer support for the source-backed arithmetic phrase two plus three equals five."
+    },
+    {
+      "concept": "three plus four equals seven",
+      "slug": "THREE-PLUS-FOUR-EQUALS-SEVEN",
+      "expectedObjectCount": 5,
+      "normalizationExpectedComponents": 6,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-6c378283-1ef9-4d5e-b0e0-98fbd94b1225.png",
+      "prompt": "Use case: scientific-educational\nAsset type: DUDUQ English visual answer asset for children ages 7–10\nPrimary request: render the exact arithmetic equation \"3 + 4 = 7\" as five separate premium 3D toy-like tokens on one horizontal baseline\nSubject: the exact sequence digit 3, plus sign +, digit 4, equals sign =, digit 7, in that exact order\nStyle/medium: bold rounded sans-serif token forms, glossy colorful plastic, highly legible at small size, polished child-friendly 3D animation render\nComposition/framing: centered horizontal sequence, evenly spaced, filling most of a wide transparent canvas while every token remains fully visible\nLighting/mood: soft bright studio lighting with highlights contained on each token\nText/symbols verbatim: 3 + 4 = 7\nConstraints: genuinely transparent alpha background; exactly the five requested tokens in the exact order; numerals must be exact; one plus and one equals sign; no words, extra digits, extra operators, decorative objects, border, frame, floor, cast shadow, halo, logo, watermark, collage or scenery; do not crop any edge",
+      "visualObservation": "The exact token sequence 3 + 4 = 7 is visible in order, with no extra digit, operator or distractor.",
+      "pedagogicalFit": "Exact visual answer support for the source-backed arithmetic phrase three plus four equals seven."
+    },
+    {
+      "concept": "six minus two equals four",
+      "slug": "SIX-MINUS-TWO-EQUALS-FOUR",
+      "expectedObjectCount": 5,
+      "normalizationExpectedComponents": 6,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-243d535b-68ef-422a-b702-0fe3aa529d56.png",
+      "prompt": "Use case: scientific-educational\nAsset type: DUDUQ English visual answer asset for children ages 7–10\nPrimary request: render the exact arithmetic equation \"6 − 2 = 4\" as five separate premium 3D toy-like tokens on one horizontal baseline\nSubject: the exact sequence digit 6, horizontal minus sign −, digit 2, equals sign =, digit 4, in that exact order\nStyle/medium: bold rounded sans-serif token forms, glossy colorful plastic, highly legible at small size, polished child-friendly 3D animation render\nComposition/framing: centered horizontal sequence, evenly spaced, filling most of a wide transparent canvas while every token remains fully visible\nLighting/mood: soft bright studio lighting with highlights contained on each token\nText/symbols verbatim: 6 − 2 = 4\nConstraints: genuinely transparent alpha background; exactly the five requested tokens in the exact order; numerals must be exact; one horizontal minus and one equals sign; no plus, words, extra digits, extra operators, decorative objects, border, frame, floor, cast shadow, halo, logo, watermark, collage or scenery; do not crop any edge",
+      "visualObservation": "The exact token sequence 6 − 2 = 4 is visible in order, with no extra digit, operator or distractor.",
+      "pedagogicalFit": "Exact visual answer support for the source-backed arithmetic phrase six minus two equals four."
+    },
+    {
+      "concept": "nine minus five equals four",
+      "slug": "NINE-MINUS-FIVE-EQUALS-FOUR",
+      "expectedObjectCount": 5,
+      "normalizationExpectedComponents": 6,
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1ae0f-3653-7b70-baaa-ef30afa9b99b/exec-4c29824c-4864-4add-82cc-6e46a567b567.png",
+      "prompt": "Use case: scientific-educational\nAsset type: DUDUQ English visual answer asset for children ages 7–10\nPrimary request: render the exact arithmetic equation \"9 − 5 = 4\" as five separate premium 3D toy-like tokens on one horizontal baseline\nSubject: the exact sequence digit 9, horizontal minus sign −, digit 5, equals sign =, digit 4, in that exact order\nStyle/medium: bold rounded sans-serif token forms, glossy colorful plastic, highly legible at small size, polished child-friendly 3D animation render\nComposition/framing: centered horizontal sequence, evenly spaced, filling most of a wide transparent canvas while every token remains fully visible\nLighting/mood: soft bright studio lighting with highlights contained on each token\nText/symbols verbatim: 9 − 5 = 4\nConstraints: genuinely transparent alpha background; exactly the five requested tokens in the exact order; numerals must be exact; one horizontal minus and one equals sign; no plus, words, extra digits, extra operators, decorative objects, border, frame, floor, cast shadow, halo, logo, watermark, collage or scenery; do not crop any edge",
+      "visualObservation": "The exact token sequence 9 − 5 = 4 is visible in order, with no extra digit, operator or distractor.",
+      "pedagogicalFit": "Exact visual answer support for the source-backed arithmetic phrase nine minus five equals four."
+    }
+  ],
+  "reused": [
+    {"concept":"one","slug":"ONE","sourceSemanticTarget":"one","sourceBatch":"qa/media-candidates/y1m02-official-20261030","sourceFile":"images/DUDUQ-Y1M02-ONE.png","sourceOriginal":"provenance/originals/ONE-ORIGINAL.png","sourceManifest":"batch-manifest.json","expectedObjectCount":1,"visualObservation":"Exactly one glossy red apple is visible and individually countable.","pedagogicalFit":"Verified quantity-one asset reused for the exact number concept."},
+    {"concept":"three","slug":"THREE","sourceSemanticTarget":"three","sourceBatch":"qa/media-candidates/y1m02-official-20261030","sourceFile":"images/DUDUQ-Y1M02-THREE.png","sourceOriginal":"provenance/originals/THREE-ORIGINAL.png","sourceManifest":"batch-manifest.json","expectedObjectCount":3,"visualObservation":"Exactly three glossy red apples are visible and individually countable.","pedagogicalFit":"Verified quantity-three asset reused for the exact number concept."},
+    {"concept":"four","slug":"FOUR","sourceSemanticTarget":"four","sourceBatch":"qa/media-candidates/y1m02-official-20261030","sourceFile":"images/DUDUQ-Y1M02-FOUR.png","sourceOriginal":"provenance/originals/FOUR-ORIGINAL.png","sourceManifest":"batch-manifest.json","expectedObjectCount":4,"visualObservation":"Exactly four glossy red apples are visible and individually countable.","pedagogicalFit":"Verified quantity-four asset reused for the exact number concept."},
+    {"concept":"five","slug":"FIVE","sourceSemanticTarget":"five","sourceBatch":"qa/media-candidates/y1m02-official-20261030","sourceFile":"images/DUDUQ-Y1M02-FIVE.png","sourceOriginal":"provenance/originals/FIVE-ORIGINAL.png","sourceManifest":"batch-manifest.json","expectedObjectCount":5,"visualObservation":"Exactly five glossy red apples are visible and individually countable.","pedagogicalFit":"Verified quantity-five asset reused for the exact number concept."},
+    {"concept":"six","slug":"SIX","sourceSemanticTarget":"six","sourceBatch":"qa/media-candidates/y1m02-official-20261030","sourceFile":"images/DUDUQ-Y1M02-SIX.png","sourceOriginal":"provenance/originals/SIX-ORIGINAL.png","sourceManifest":"batch-manifest.json","expectedObjectCount":6,"visualObservation":"Exactly six glossy red apples are visible and individually countable.","pedagogicalFit":"Verified quantity-six asset reused for the exact number concept."},
+    {"concept":"seven","slug":"SEVEN","sourceSemanticTarget":"seven","sourceBatch":"qa/media-candidates/y1m02-official-20261030","sourceFile":"images/DUDUQ-Y1M02-SEVEN.png","sourceOriginal":"provenance/originals/SEVEN-ORIGINAL.png","sourceManifest":"batch-manifest.json","expectedObjectCount":7,"visualObservation":"Exactly seven glossy red apples are visible and individually countable.","pedagogicalFit":"Verified quantity-seven asset reused for the exact number concept."},
+    {"concept":"eight","slug":"EIGHT","sourceSemanticTarget":"eight","sourceBatch":"qa/media-candidates/y1m02-official-20261030","sourceFile":"images/DUDUQ-Y1M02-EIGHT.png","sourceOriginal":"provenance/originals/EIGHT-ORIGINAL.png","sourceManifest":"batch-manifest.json","expectedObjectCount":8,"visualObservation":"Exactly eight glossy red apples are visible and individually countable.","pedagogicalFit":"Verified quantity-eight asset reused for the exact number concept."},
+    {"concept":"black","slug":"BLACK","sourceSemanticTarget":"black","sourceBatch":"qa/media-candidates/y2m04-official-20261102","sourceFile":"images/DUDUQ-Y2M04-BLACK.png","sourceManifest":"batch-manifest.json","sourceGenerationProvenance":"generation-provenance.json","expectedObjectCount":1,"visualObservation":"One unmistakable glossy black color token is isolated on real alpha.","pedagogicalFit":"Exact verified color concept reused without semantic broadening."},
+    {"concept":"white","slug":"WHITE","sourceSemanticTarget":"white","sourceBatch":"qa/media-candidates/y2m04-official-20261102","sourceFile":"images/DUDUQ-Y2M04-WHITE.png","sourceManifest":"batch-manifest.json","sourceGenerationProvenance":"generation-provenance.json","expectedObjectCount":1,"visualObservation":"One unmistakable glossy white color token with a subtle gray rim is isolated on real alpha.","pedagogicalFit":"Exact verified color concept reused without semantic broadening."},
+    {"concept":"orange","slug":"ORANGE","sourceSemanticTarget":"orange","sourceBatch":"qa/media-candidates/y2m04-official-20261102","sourceFile":"images/DUDUQ-Y2M04-ORANGE.png","sourceOriginal":"provenance/originals/DUDUQ-Y2M04-ORANGE-ORIGINAL.png","sourceManifest":"batch-manifest.json","sourceGenerationProvenance":"generation-provenance.json","expectedObjectCount":1,"visualObservation":"One unmistakable glossy orange color token is isolated on real alpha.","pedagogicalFit":"Exact verified color concept reused without semantic broadening."},
+    {"concept":"purple","slug":"PURPLE","sourceSemanticTarget":"purple","sourceBatch":"qa/media-candidates/y2m04-official-20261102","sourceFile":"images/DUDUQ-Y2M04-PURPLE.png","sourceOriginal":"provenance/originals/DUDUQ-Y2M04-PURPLE-ORIGINAL.png","sourceManifest":"batch-manifest.json","sourceGenerationProvenance":"generation-provenance.json","expectedObjectCount":1,"visualObservation":"One unmistakable glossy purple color token is isolated on real alpha.","pedagogicalFit":"Exact verified color concept reused without semantic broadening."},
+    {"concept":"gray","slug":"GRAY","sourceSemanticTarget":"gray","sourceBatch":"qa/media-candidates/y2m04-official-20261102","sourceFile":"images/DUDUQ-Y2M04-GRAY.png","sourceOriginal":"provenance/originals/DUDUQ-Y2M04-GRAY-ORIGINAL.png","sourceManifest":"batch-manifest.json","sourceGenerationProvenance":"generation-provenance.json","expectedObjectCount":1,"visualObservation":"One unmistakable glossy neutral gray color token is isolated on real alpha.","pedagogicalFit":"Exact verified color concept reused without semantic broadening."},
+    {"concept":"brown","slug":"BROWN","sourceSemanticTarget":"brown","sourceBatch":"qa/media-candidates/y2m04-official-20261102","sourceFile":"images/DUDUQ-Y2M04-BROWN.png","sourceOriginal":"provenance/originals/DUDUQ-Y2M04-BROWN-ORIGINAL.png","sourceManifest":"batch-manifest.json","sourceGenerationProvenance":"generation-provenance.json","expectedObjectCount":1,"visualObservation":"One unmistakable glossy brown color token is isolated on real alpha.","pedagogicalFit":"Exact verified color concept reused without semantic broadening."}
+  ],
+  "failedAttempts": []
+}

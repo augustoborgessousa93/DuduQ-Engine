@@ -1,0 +1,1380 @@
+{
+  "schemaVersion": "DUDUQ_Y3M05_QUESTION_INVENTORY_V1",
+  "createdAt": "2026-11-05T23:53:26.658Z",
+  "moduleId": "Y3M05",
+  "lane": "generation",
+  "candidateOnly": true,
+  "sourceQuestionFile": "dist-pages/content/english/year-3/module-05/questions.json",
+  "sourceQuestionSha256": "34c761a8288e9ebdebbec2a62cea7a33097e88d4a5b9779677a84e641e227077",
+  "questionCount": 20,
+  "allSemanticTargetCount": 30,
+  "allSemanticTargets": [
+    "black",
+    "brown",
+    "circle",
+    "divided by",
+    "eight",
+    "equals",
+    "five",
+    "four",
+    "four plus two",
+    "gray",
+    "minus",
+    "nine minus five equals four",
+    "nine minus three",
+    "one",
+    "orange",
+    "plus",
+    "purple",
+    "rectangle",
+    "seven",
+    "six",
+    "six minus one",
+    "six minus two equals four",
+    "square",
+    "star",
+    "three",
+    "three plus four equals seven",
+    "triangle",
+    "two plus three",
+    "two plus three equals five",
+    "white"
+  ],
+  "visualSemanticTargetCount": 26,
+  "visualSemanticTargets": [
+    "black",
+    "brown",
+    "circle",
+    "divided by",
+    "eight",
+    "equals",
+    "five",
+    "four",
+    "gray",
+    "minus",
+    "nine minus five equals four",
+    "one",
+    "orange",
+    "plus",
+    "purple",
+    "rectangle",
+    "seven",
+    "six",
+    "six minus two equals four",
+    "square",
+    "star",
+    "three",
+    "three plus four equals seven",
+    "triangle",
+    "two plus three equals five",
+    "white"
+  ],
+  "nonVisualOnlySemanticTargets": [
+    "four plus two",
+    "nine minus three",
+    "six minus one",
+    "two plus three"
+  ],
+  "sourcePendingMediaIdCount": 46,
+  "sourcePendingMediaIds": [
+    "IMG-V11-2B-0042C60C0B4DAA2B",
+    "IMG-V11-2B-091647FA0E3E3E68",
+    "IMG-V11-2B-0B8FB65CFC9F4ED3",
+    "IMG-V11-2B-0C1635162CC65DF3",
+    "IMG-V11-2B-13DCE385AE7A4FDD",
+    "IMG-V11-2B-2DF5CFF0C304AAF1",
+    "IMG-V11-2B-3465A65536CB1E46",
+    "IMG-V11-2B-37302AEA2B306D70",
+    "IMG-V11-2B-380271DED3F3D31E",
+    "IMG-V11-2B-3C01681DAFE96F83",
+    "IMG-V11-2B-4E8B1F3C6B88B0EC",
+    "IMG-V11-2B-6FFE58151EAD0CA0",
+    "IMG-V11-2B-7717FDD290CE55EF",
+    "IMG-V11-2B-77460DE9537EEBF0",
+    "IMG-V11-2B-7C65FD581AACF741",
+    "IMG-V11-2B-8124DC99DF0EDFC5",
+    "IMG-V11-2B-8138254DEC43D7BC",
+    "IMG-V11-2B-83F595D41CD1AEDF",
+    "IMG-V11-2B-8C9B8850C95A943E",
+    "IMG-V11-2B-ADC02C547ED88AAB",
+    "IMG-V11-2B-BE34171D033BB875",
+    "IMG-V11-2B-C1BC182FD8E80824",
+    "IMG-V11-2B-C59B066C6037FEE5",
+    "IMG-V11-2B-CFBD6FF69645CF3F",
+    "IMG-V11-2B-D004AA4E54494A38",
+    "IMG-V11-2B-D3B7141F6BE01C58",
+    "IMG-V11-2B-D479ABE00CDCCB74",
+    "IMG-V11-2B-D74453328D45A91B",
+    "IMG-V11-2B-DD4F6C5D17D9EA26",
+    "IMG-V11-2B-E1AAAB4F605F42A1",
+    "IMG-V11-2B-E2302199CB7460B5",
+    "IMG-V11-2B-E38C0DE05DFDDD8F",
+    "IMG-V11-2B-FDB30064EAC5CF0E",
+    "IMG-Y1M02-Q001-FOUR",
+    "IMG-Y1M02-Q001-ONE",
+    "IMG-Y1M02-Q001-THREE",
+    "IMG-Y1M02-Q002-EIGHT",
+    "IMG-Y1M02-Q002-FIVE",
+    "IMG-Y1M02-Q002-SEVEN",
+    "IMG-Y1M02-Q002-SIX",
+    "IMG-Y1M03-Q001-BLACK",
+    "IMG-Y1M03-Q001-ORANGE",
+    "IMG-Y1M03-Q001-WHITE",
+    "IMG-Y1M03-Q006-BROWN",
+    "IMG-Y1M03-Q006-GRAY",
+    "IMG-Y1M03-Q006-PURPLE"
+  ],
+  "visualUsageCount": 82,
+  "occurrenceScopedBindingGroupCount": 74,
+  "questions": [
+    {
+      "questionId": "Y3M05-Q001",
+      "sequencePosition": 1,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Select the source-backed answer to the delivered English target.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "teaching: Understand simple arithmetic language and describe shapes. Focus: plus.",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "supportInstructionPt": "Ouça e acerte a opção correspondente.",
+      "answerKey": "Y3M05-Q001-O1",
+      "semanticTargets": [
+        "nine minus five equals four",
+        "six minus two equals four",
+        "three plus four equals seven",
+        "two plus three equals five"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q001",
+          "mediaId": "IMG-V11-2B-CFBD6FF69645CF3F",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "two plus three equals five",
+          "correct": true,
+          "optionOrCardId": "Y3M05-Q001-O1"
+        },
+        {
+          "questionId": "Y3M05-Q001",
+          "mediaId": "IMG-V11-2B-BE34171D033BB875",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "six minus two equals four",
+          "correct": false,
+          "optionOrCardId": "Y3M05-Q001-O2"
+        },
+        {
+          "questionId": "Y3M05-Q001",
+          "mediaId": "IMG-V11-2B-0C1635162CC65DF3",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "three plus four equals seven",
+          "correct": false,
+          "optionOrCardId": "Y3M05-Q001-O3"
+        },
+        {
+          "questionId": "Y3M05-Q001",
+          "mediaId": "IMG-V11-2B-3465A65536CB1E46",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "nine minus five equals four",
+          "correct": false,
+          "optionOrCardId": "Y3M05-Q001-O4"
+        }
+      ],
+      "sourceQuestionContractSha256": "4d7cb2082bb1724c46a6c41f35c2d8a9cdb6e6e404d5a6dcba2b769962c1fc1c"
+    },
+    {
+      "questionId": "Y3M05-Q002",
+      "sequencePosition": 2,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Drag each delivered stimulus to its one-to-one semantic visual.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "teaching: Understand simple arithmetic language and describe shapes. Focus: times.",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "supportInstructionPt": "Combine cada áudio com sua imagem.",
+      "answerKey": {
+        "Y3M05-Q002-I1": "Y3M05-Q002-T1",
+        "Y3M05-Q002-I2": "Y3M05-Q002-T2",
+        "Y3M05-Q002-I3": "Y3M05-Q002-T3",
+        "Y3M05-Q002-I4": "Y3M05-Q002-T4"
+      },
+      "semanticTargets": [
+        "divided by",
+        "rectangle",
+        "square",
+        "triangle"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q002",
+          "mediaId": "IMG-V11-2B-C59B066C6037FEE5",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "divided by",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q002-T1"
+        },
+        {
+          "questionId": "Y3M05-Q002",
+          "mediaId": "IMG-V11-2B-0042C60C0B4DAA2B",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "triangle",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q002-T2"
+        },
+        {
+          "questionId": "Y3M05-Q002",
+          "mediaId": "IMG-V11-2B-380271DED3F3D31E",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "square",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q002-T3"
+        },
+        {
+          "questionId": "Y3M05-Q002",
+          "mediaId": "IMG-V11-2B-E38C0DE05DFDDD8F",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "rectangle",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q002-T4"
+        }
+      ],
+      "sourceQuestionContractSha256": "b36e90cef4b0afd736a31c449cbf4b7c3fca752e7e7de5577c73baef6e34bc09"
+    },
+    {
+      "questionId": "Y3M05-Q003",
+      "sequencePosition": 3,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Connect related source-backed semantic items.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "guided practice: Understand simple arithmetic language and describe shapes. Focus: numbers.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "answerKey": {
+        "Y3M05-Q003-L1": "Y3M05-Q003-R1",
+        "Y3M05-Q003-L2": "Y3M05-Q003-R2",
+        "Y3M05-Q003-L3": "Y3M05-Q003-R3",
+        "Y3M05-Q003-L4": "Y3M05-Q003-R4",
+        "Y3M05-Q003-L5": "Y3M05-Q003-R5",
+        "Y3M05-Q003-L6": "Y3M05-Q003-R6"
+      },
+      "semanticTargets": [
+        "eight",
+        "five",
+        "four",
+        "seven",
+        "six",
+        "three"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q003",
+          "mediaId": "IMG-Y1M02-Q001-THREE",
+          "contractPath": "pairs[0].b",
+          "role": "CONTENT",
+          "semanticTarget": "three",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q003-R1"
+        },
+        {
+          "questionId": "Y3M05-Q003",
+          "mediaId": "IMG-Y1M02-Q001-FOUR",
+          "contractPath": "pairs[1].b",
+          "role": "CONTENT",
+          "semanticTarget": "four",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q003-R2"
+        },
+        {
+          "questionId": "Y3M05-Q003",
+          "mediaId": "IMG-Y1M02-Q002-FIVE",
+          "contractPath": "pairs[2].b",
+          "role": "CONTENT",
+          "semanticTarget": "five",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q003-R3"
+        },
+        {
+          "questionId": "Y3M05-Q003",
+          "mediaId": "IMG-Y1M02-Q002-SIX",
+          "contractPath": "pairs[3].b",
+          "role": "CONTENT",
+          "semanticTarget": "six",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q003-R4"
+        },
+        {
+          "questionId": "Y3M05-Q003",
+          "mediaId": "IMG-Y1M02-Q002-SEVEN",
+          "contractPath": "pairs[4].b",
+          "role": "CONTENT",
+          "semanticTarget": "seven",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q003-R5"
+        },
+        {
+          "questionId": "Y3M05-Q003",
+          "mediaId": "IMG-Y1M02-Q002-EIGHT",
+          "contractPath": "pairs[5].b",
+          "role": "CONTENT",
+          "semanticTarget": "eight",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q003-R6"
+        }
+      ],
+      "sourceQuestionContractSha256": "9d8d2a3e7868e6298d90e508a97aa9701bcec7ca30417f4b54c96336bb17ba09"
+    },
+    {
+      "questionId": "Y3M05-Q004",
+      "sequencePosition": 4,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Reveal two cards and pair by semantic identity in AUDIO_IMAGE.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "Pairs the source-named spoken operators with their visual equation symbols; language identification is scored separately from arithmetic computation. Curricular target: plus; minus; equals.",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_IMAGE",
+      "primaryInstructionEn": "Find the matching pairs.",
+      "supportInstructionPt": "Encontre os pares correspondentes.",
+      "answerKey": [
+        "Y3M05-Q004-P1",
+        "Y3M05-Q004-P2",
+        "Y3M05-Q004-P3"
+      ],
+      "semanticTargets": [
+        "equals",
+        "minus",
+        "plus"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q004",
+          "mediaId": "IMG-V11-2B-E2302199CB7460B5",
+          "contractPath": "pairs[0].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "plus",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y3M05-Q004",
+          "mediaId": "IMG-V11-2B-4E8B1F3C6B88B0EC",
+          "contractPath": "pairs[1].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "minus",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y3M05-Q004",
+          "mediaId": "IMG-V11-2B-091647FA0E3E3E68",
+          "contractPath": "pairs[2].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "equals",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "sourceQuestionContractSha256": "11462a6451e794f43bbe6dbc443b9a7fcaccfbce35024b3b13aff2ade5deef15"
+    },
+    {
+      "questionId": "Y3M05-Q005",
+      "sequencePosition": 5,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Select the source-backed answer to the delivered English target.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "guided practice: Understand simple arithmetic language and describe shapes. Focus: number plus/minus number equals result.",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "supportInstructionPt": "Ouça e acerte a opção correspondente.",
+      "answerKey": "Y3M05-Q005-O1",
+      "semanticTargets": [
+        "nine minus five equals four",
+        "six minus two equals four",
+        "three plus four equals seven",
+        "two plus three equals five"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q005",
+          "mediaId": "IMG-V11-2B-CFBD6FF69645CF3F",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "two plus three equals five",
+          "correct": true,
+          "optionOrCardId": "Y3M05-Q005-O1"
+        },
+        {
+          "questionId": "Y3M05-Q005",
+          "mediaId": "IMG-V11-2B-BE34171D033BB875",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "six minus two equals four",
+          "correct": false,
+          "optionOrCardId": "Y3M05-Q005-O2"
+        },
+        {
+          "questionId": "Y3M05-Q005",
+          "mediaId": "IMG-V11-2B-0C1635162CC65DF3",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "three plus four equals seven",
+          "correct": false,
+          "optionOrCardId": "Y3M05-Q005-O3"
+        },
+        {
+          "questionId": "Y3M05-Q005",
+          "mediaId": "IMG-V11-2B-3465A65536CB1E46",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "nine minus five equals four",
+          "correct": false,
+          "optionOrCardId": "Y3M05-Q005-O4"
+        }
+      ],
+      "sourceQuestionContractSha256": "41b92fb18dd516e35b1d95d5a91c0e7521181b8cb26e7008857c6e215c8d6cdc"
+    },
+    {
+      "questionId": "Y3M05-Q006",
+      "sequencePosition": 6,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Classify each source-backed item into a named semantic category.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "guided practice: Understand simple arithmetic language and describe shapes. Focus: state practiced result.",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "primaryInstructionEn": "Sort each item: plus or minus.",
+      "supportInstructionPt": "Separe cada item: plus ou minus.",
+      "answerKey": {
+        "Y3M05-Q006-I1": "addition",
+        "Y3M05-Q006-I2": "addition",
+        "Y3M05-Q006-I3": "subtraction",
+        "Y3M05-Q006-I4": "subtraction"
+      },
+      "semanticTargets": [
+        "four plus two",
+        "nine minus three",
+        "six minus one",
+        "two plus three"
+      ],
+      "visualUsages": [],
+      "sourceQuestionContractSha256": "abb510b3ee189ae5d36459d326fc4357f672d94b9f49b330ba0850b0055e4f65"
+    },
+    {
+      "questionId": "Y3M05-Q007",
+      "sequencePosition": 7,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Connect related source-backed semantic items.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "recognition: Understand simple arithmetic language and describe shapes. Focus: minus.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "answerKey": {
+        "Y3M05-Q007-L1": "Y3M05-Q007-R1",
+        "Y3M05-Q007-L2": "Y3M05-Q007-R2",
+        "Y3M05-Q007-L3": "Y3M05-Q007-R3",
+        "Y3M05-Q007-L4": "Y3M05-Q007-R4"
+      },
+      "semanticTargets": [
+        "nine minus five equals four",
+        "six minus two equals four",
+        "three plus four equals seven",
+        "two plus three equals five"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q007",
+          "mediaId": "IMG-V11-2B-2DF5CFF0C304AAF1",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "three plus four equals seven",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q007-R1"
+        },
+        {
+          "questionId": "Y3M05-Q007",
+          "mediaId": "IMG-V11-2B-7717FDD290CE55EF",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "nine minus five equals four",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q007-R2"
+        },
+        {
+          "questionId": "Y3M05-Q007",
+          "mediaId": "IMG-V11-2B-13DCE385AE7A4FDD",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "two plus three equals five",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q007-R3"
+        },
+        {
+          "questionId": "Y3M05-Q007",
+          "mediaId": "IMG-V11-2B-7C65FD581AACF741",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "six minus two equals four",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q007-R4"
+        }
+      ],
+      "sourceQuestionContractSha256": "3a375b59fb02c66dd332ddd5f6d6869dad799e83f42f9581c43d8a0f67aa1d90"
+    },
+    {
+      "questionId": "Y3M05-Q008",
+      "sequencePosition": 8,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Select the source-backed word/chunk completing the familiar structure.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "recognition: Understand simple arithmetic language and describe shapes. Focus: divided by.",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "primaryInstructionEn": "Look at the picture and complete the sentence.",
+      "supportInstructionPt": "De acordo com a imagem, complete a frase.",
+      "answerKey": "square",
+      "semanticTargets": [
+        "square"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q008",
+          "mediaId": "IMG-V11-2B-380271DED3F3D31E",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "square",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "sourceQuestionContractSha256": "9f707d3f7d36784619b90f19320e0029a3e918f7386657c02de448a0fbe95007"
+    },
+    {
+      "questionId": "Y3M05-Q009",
+      "sequencePosition": 9,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Select the source-backed answer to the delivered English target.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "recognition: Understand simple arithmetic language and describe shapes. Focus: shapes.",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "primaryInstructionEn": "Listen and shoot the matching choice.",
+      "supportInstructionPt": "Ouça e acerte a opção correspondente.",
+      "answerKey": "Y3M05-Q009-O1",
+      "semanticTargets": [
+        "rectangle",
+        "square",
+        "star",
+        "triangle"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q009",
+          "mediaId": "IMG-V11-2B-ADC02C547ED88AAB",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "star",
+          "correct": true,
+          "optionOrCardId": "Y3M05-Q009-O1"
+        },
+        {
+          "questionId": "Y3M05-Q009",
+          "mediaId": "IMG-V11-2B-DD4F6C5D17D9EA26",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "triangle",
+          "correct": false,
+          "optionOrCardId": "Y3M05-Q009-O2"
+        },
+        {
+          "questionId": "Y3M05-Q009",
+          "mediaId": "IMG-V11-2B-77460DE9537EEBF0",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "square",
+          "correct": false,
+          "optionOrCardId": "Y3M05-Q009-O3"
+        },
+        {
+          "questionId": "Y3M05-Q009",
+          "mediaId": "IMG-V11-2B-0B8FB65CFC9F4ED3",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "rectangle",
+          "correct": false,
+          "optionOrCardId": "Y3M05-Q009-O4"
+        }
+      ],
+      "sourceQuestionContractSha256": "e5403c98177e7199aa811c69b27eb74c9cc02c22852f58eaa1886c742cd7db2a"
+    },
+    {
+      "questionId": "Y3M05-Q010",
+      "sequencePosition": 10,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Connect related source-backed semantic items.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "comprehension: Understand simple arithmetic language and describe shapes. Focus: selected operation result.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "answerKey": {
+        "Y3M05-Q010-L1": "Y3M05-Q010-R1",
+        "Y3M05-Q010-L2": "Y3M05-Q010-R2",
+        "Y3M05-Q010-L3": "Y3M05-Q010-R3",
+        "Y3M05-Q010-L4": "Y3M05-Q010-R4"
+      },
+      "semanticTargets": [
+        "nine minus five equals four",
+        "six minus two equals four",
+        "three plus four equals seven",
+        "two plus three equals five"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q010",
+          "mediaId": "IMG-V11-2B-7C65FD581AACF741",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "six minus two equals four",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q010-R1"
+        },
+        {
+          "questionId": "Y3M05-Q010",
+          "mediaId": "IMG-V11-2B-2DF5CFF0C304AAF1",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "three plus four equals seven",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q010-R2"
+        },
+        {
+          "questionId": "Y3M05-Q010",
+          "mediaId": "IMG-V11-2B-7717FDD290CE55EF",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "nine minus five equals four",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q010-R3"
+        },
+        {
+          "questionId": "Y3M05-Q010",
+          "mediaId": "IMG-V11-2B-13DCE385AE7A4FDD",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "two plus three equals five",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q010-R4"
+        }
+      ],
+      "sourceQuestionContractSha256": "db0f1425f9e770f5be5739adb123941d817ec6964c1f3d405c76eac38e05337c"
+    },
+    {
+      "questionId": "Y3M05-Q011",
+      "sequencePosition": 11,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Select the source-backed answer to the delivered English target.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "comprehension: Understand simple arithmetic language and describe shapes. Focus: multiplication/division terms.",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "primaryInstructionEn": "Listen and pop the matching bubble.",
+      "supportInstructionPt": "Ouça e estoure a bolha correspondente.",
+      "answerKey": "Y3M05-Q011-O1",
+      "semanticTargets": [
+        "equals",
+        "minus",
+        "one",
+        "plus",
+        "six minus two equals four",
+        "two plus three equals five"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q011",
+          "mediaId": "IMG-Y1M02-Q001-ONE",
+          "contractPath": "options[0]",
+          "role": "CONTENT",
+          "semanticTarget": "one",
+          "correct": true,
+          "optionOrCardId": "Y3M05-Q011-O1"
+        },
+        {
+          "questionId": "Y3M05-Q011",
+          "mediaId": "IMG-V11-2B-8138254DEC43D7BC",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "plus",
+          "correct": false,
+          "optionOrCardId": "Y3M05-Q011-O2"
+        },
+        {
+          "questionId": "Y3M05-Q011",
+          "mediaId": "IMG-V11-2B-37302AEA2B306D70",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "minus",
+          "correct": false,
+          "optionOrCardId": "Y3M05-Q011-O3"
+        },
+        {
+          "questionId": "Y3M05-Q011",
+          "mediaId": "IMG-V11-2B-3C01681DAFE96F83",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "equals",
+          "correct": false,
+          "optionOrCardId": "Y3M05-Q011-O4"
+        },
+        {
+          "questionId": "Y3M05-Q011",
+          "mediaId": "IMG-Y1M02-Q001-ONE",
+          "contractPath": "targetsToFind[0]",
+          "role": "CONTENT",
+          "semanticTarget": "one",
+          "correct": true,
+          "optionOrCardId": "Y3M05-Q011-O1"
+        },
+        {
+          "questionId": "Y3M05-Q011",
+          "mediaId": "IMG-V11-2B-8138254DEC43D7BC",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "plus",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q011-D1"
+        },
+        {
+          "questionId": "Y3M05-Q011",
+          "mediaId": "IMG-V11-2B-37302AEA2B306D70",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "option",
+          "semanticTarget": "minus",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q011-D2"
+        },
+        {
+          "questionId": "Y3M05-Q011",
+          "mediaId": "IMG-V11-2B-3C01681DAFE96F83",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "option",
+          "semanticTarget": "equals",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q011-D3"
+        },
+        {
+          "questionId": "Y3M05-Q011",
+          "mediaId": "IMG-V11-2B-CFBD6FF69645CF3F",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "two plus three equals five",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q011-D4"
+        },
+        {
+          "questionId": "Y3M05-Q011",
+          "mediaId": "IMG-V11-2B-BE34171D033BB875",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "six minus two equals four",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q011-D5"
+        }
+      ],
+      "sourceQuestionContractSha256": "d109e0cb82f138b0ab5558667bfb107128fdcad96430b5fa8a9b140c3878d805"
+    },
+    {
+      "questionId": "Y3M05-Q012",
+      "sequencePosition": 12,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Drag each delivered stimulus to its one-to-one semantic visual.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "comprehension: Understand simple arithmetic language and describe shapes. Focus: describe shape.",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "supportInstructionPt": "Combine cada áudio com sua imagem.",
+      "answerKey": {
+        "Y3M05-Q012-I1": "Y3M05-Q012-T1",
+        "Y3M05-Q012-I2": "Y3M05-Q012-T2",
+        "Y3M05-Q012-I3": "Y3M05-Q012-T3",
+        "Y3M05-Q012-I4": "Y3M05-Q012-T4"
+      },
+      "semanticTargets": [
+        "circle",
+        "rectangle",
+        "square",
+        "star"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q012",
+          "mediaId": "IMG-V11-2B-380271DED3F3D31E",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "square",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q012-T1"
+        },
+        {
+          "questionId": "Y3M05-Q012",
+          "mediaId": "IMG-V11-2B-E38C0DE05DFDDD8F",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "rectangle",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q012-T2"
+        },
+        {
+          "questionId": "Y3M05-Q012",
+          "mediaId": "IMG-V11-2B-8C9B8850C95A943E",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "star",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q012-T3"
+        },
+        {
+          "questionId": "Y3M05-Q012",
+          "mediaId": "IMG-V11-2B-83F595D41CD1AEDF",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "circle",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q012-T4"
+        }
+      ],
+      "sourceQuestionContractSha256": "65ec1f547cfa331988fd9ff718d05e9d1de983ae99e5bdaf6a0c5f85a92957fa"
+    },
+    {
+      "questionId": "Y3M05-Q013",
+      "sequencePosition": 13,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Connect related source-backed semantic items.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "listening: Understand simple arithmetic language and describe shapes. Focus: equals.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "answerKey": {
+        "Y3M05-Q013-L1": "Y3M05-Q013-R1",
+        "Y3M05-Q013-L2": "Y3M05-Q013-R2",
+        "Y3M05-Q013-L3": "Y3M05-Q013-R3",
+        "Y3M05-Q013-L4": "Y3M05-Q013-R4"
+      },
+      "semanticTargets": [
+        "nine minus five equals four",
+        "six minus two equals four",
+        "three plus four equals seven",
+        "two plus three equals five"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q013",
+          "mediaId": "IMG-V11-2B-13DCE385AE7A4FDD",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "two plus three equals five",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q013-R1"
+        },
+        {
+          "questionId": "Y3M05-Q013",
+          "mediaId": "IMG-V11-2B-7C65FD581AACF741",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "six minus two equals four",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q013-R2"
+        },
+        {
+          "questionId": "Y3M05-Q013",
+          "mediaId": "IMG-V11-2B-2DF5CFF0C304AAF1",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "three plus four equals seven",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q013-R3"
+        },
+        {
+          "questionId": "Y3M05-Q013",
+          "mediaId": "IMG-V11-2B-7717FDD290CE55EF",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "nine minus five equals four",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q013-R4"
+        }
+      ],
+      "sourceQuestionContractSha256": "fbcd2bbc368ec9379f1147376a40ee64bcc5cc8dd79a8e50f1702fe03bda80c3"
+    },
+    {
+      "questionId": "Y3M05-Q014",
+      "sequencePosition": 14,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Reveal two cards and pair by semantic identity in TEXT_IMAGE.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "Orthographic recognition retrieves the finite shape set introduced in Y2M02 while the current module’s cognitive work remains the operation/result chunk. Curricular target: triangle; square; rectangle; star; circle.",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "TEXT_IMAGE",
+      "primaryInstructionEn": "Find the matching pairs.",
+      "supportInstructionPt": "Encontre os pares correspondentes.",
+      "answerKey": [
+        "Y3M05-Q014-P1",
+        "Y3M05-Q014-P2",
+        "Y3M05-Q014-P3",
+        "Y3M05-Q014-P4",
+        "Y3M05-Q014-P5"
+      ],
+      "semanticTargets": [
+        "circle",
+        "rectangle",
+        "square",
+        "star",
+        "triangle"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q014",
+          "mediaId": "IMG-V11-2B-D004AA4E54494A38",
+          "contractPath": "pairs[0].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "star",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y3M05-Q014",
+          "mediaId": "IMG-V11-2B-D3B7141F6BE01C58",
+          "contractPath": "pairs[1].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "circle",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y3M05-Q014",
+          "mediaId": "IMG-V11-2B-8124DC99DF0EDFC5",
+          "contractPath": "pairs[2].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "triangle",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y3M05-Q014",
+          "mediaId": "IMG-V11-2B-FDB30064EAC5CF0E",
+          "contractPath": "pairs[3].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "square",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y3M05-Q014",
+          "mediaId": "IMG-V11-2B-E1AAAB4F605F42A1",
+          "contractPath": "pairs[4].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "rectangle",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "sourceQuestionContractSha256": "2855d4a1848fb97b91408a6e0a8b0f00be043b10d609d036b54a088a56bf54a2"
+    },
+    {
+      "questionId": "Y3M05-Q015",
+      "sequencePosition": 15,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Connect related source-backed semantic items.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "retrieval: Understand simple arithmetic language and describe shapes. Focus: colors.",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "primaryInstructionEn": "Match each item to its pair.",
+      "supportInstructionPt": "Combine cada item com seu par.",
+      "answerKey": {
+        "Y3M05-Q015-L1": "Y3M05-Q015-R1",
+        "Y3M05-Q015-L2": "Y3M05-Q015-R2",
+        "Y3M05-Q015-L3": "Y3M05-Q015-R3",
+        "Y3M05-Q015-L4": "Y3M05-Q015-R4",
+        "Y3M05-Q015-L5": "Y3M05-Q015-R5",
+        "Y3M05-Q015-L6": "Y3M05-Q015-R6"
+      },
+      "semanticTargets": [
+        "black",
+        "brown",
+        "gray",
+        "orange",
+        "purple",
+        "white"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q015",
+          "mediaId": "IMG-Y1M03-Q001-BLACK",
+          "contractPath": "pairs[0].b",
+          "role": "CONTENT",
+          "semanticTarget": "black",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q015-R1"
+        },
+        {
+          "questionId": "Y3M05-Q015",
+          "mediaId": "IMG-Y1M03-Q001-WHITE",
+          "contractPath": "pairs[1].b",
+          "role": "CONTENT",
+          "semanticTarget": "white",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q015-R2"
+        },
+        {
+          "questionId": "Y3M05-Q015",
+          "mediaId": "IMG-Y1M03-Q001-ORANGE",
+          "contractPath": "pairs[2].b",
+          "role": "CONTENT",
+          "semanticTarget": "orange",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q015-R3"
+        },
+        {
+          "questionId": "Y3M05-Q015",
+          "mediaId": "IMG-Y1M03-Q006-PURPLE",
+          "contractPath": "pairs[3].b",
+          "role": "CONTENT",
+          "semanticTarget": "purple",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q015-R4"
+        },
+        {
+          "questionId": "Y3M05-Q015",
+          "mediaId": "IMG-Y1M03-Q006-GRAY",
+          "contractPath": "pairs[4].b",
+          "role": "CONTENT",
+          "semanticTarget": "gray",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q015-R5"
+        },
+        {
+          "questionId": "Y3M05-Q015",
+          "mediaId": "IMG-Y1M03-Q006-BROWN",
+          "contractPath": "pairs[5].b",
+          "role": "CONTENT",
+          "semanticTarget": "brown",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q015-R6"
+        }
+      ],
+      "sourceQuestionContractSha256": "76a6d334c2687534879dd200e1e2250c77cad065f6cab9f2cf759e523265674f"
+    },
+    {
+      "questionId": "Y3M05-Q016",
+      "sequencePosition": 16,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Drag each delivered stimulus to its one-to-one semantic visual.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "retrieval: Understand simple arithmetic language and describe shapes. Focus: selected operation result.",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "supportInstructionPt": "Combine cada áudio com sua imagem.",
+      "answerKey": {
+        "Y3M05-Q016-I1": "Y3M05-Q016-T1",
+        "Y3M05-Q016-I2": "Y3M05-Q016-T2",
+        "Y3M05-Q016-I3": "Y3M05-Q016-T3",
+        "Y3M05-Q016-I4": "Y3M05-Q016-T4"
+      },
+      "semanticTargets": [
+        "nine minus five equals four",
+        "six minus two equals four",
+        "three plus four equals seven",
+        "two plus three equals five"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q016",
+          "mediaId": "IMG-V11-2B-D74453328D45A91B",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "nine minus five equals four",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q016-T1"
+        },
+        {
+          "questionId": "Y3M05-Q016",
+          "mediaId": "IMG-V11-2B-D479ABE00CDCCB74",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "two plus three equals five",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q016-T2"
+        },
+        {
+          "questionId": "Y3M05-Q016",
+          "mediaId": "IMG-V11-2B-6FFE58151EAD0CA0",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "six minus two equals four",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q016-T3"
+        },
+        {
+          "questionId": "Y3M05-Q016",
+          "mediaId": "IMG-V11-2B-C1BC182FD8E80824",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "three plus four equals seven",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q016-T4"
+        }
+      ],
+      "sourceQuestionContractSha256": "ad1b730f9807c305ca3579c6451e6ec362c28892722ab80c8ae5abf477c31bd5"
+    },
+    {
+      "questionId": "Y3M05-Q017",
+      "sequencePosition": 17,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Select the source-backed answer to the delivered English target.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "review: Understand simple arithmetic language and describe shapes. Focus: shape/attribute descriptions.",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "primaryInstructionEn": "Listen and pop the matching bubble.",
+      "supportInstructionPt": "Ouça e estoure a bolha correspondente.",
+      "answerKey": "Y3M05-Q017-O1",
+      "semanticTargets": [
+        "rectangle",
+        "six minus two equals four",
+        "square",
+        "star",
+        "triangle",
+        "two plus three equals five"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q017",
+          "mediaId": "IMG-V11-2B-77460DE9537EEBF0",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "square",
+          "correct": true,
+          "optionOrCardId": "Y3M05-Q017-O1"
+        },
+        {
+          "questionId": "Y3M05-Q017",
+          "mediaId": "IMG-V11-2B-DD4F6C5D17D9EA26",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "triangle",
+          "correct": false,
+          "optionOrCardId": "Y3M05-Q017-O2"
+        },
+        {
+          "questionId": "Y3M05-Q017",
+          "mediaId": "IMG-V11-2B-0B8FB65CFC9F4ED3",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "rectangle",
+          "correct": false,
+          "optionOrCardId": "Y3M05-Q017-O3"
+        },
+        {
+          "questionId": "Y3M05-Q017",
+          "mediaId": "IMG-V11-2B-ADC02C547ED88AAB",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "star",
+          "correct": false,
+          "optionOrCardId": "Y3M05-Q017-O4"
+        },
+        {
+          "questionId": "Y3M05-Q017",
+          "mediaId": "IMG-V11-2B-77460DE9537EEBF0",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "square",
+          "correct": true,
+          "optionOrCardId": "Y3M05-Q017-O1"
+        },
+        {
+          "questionId": "Y3M05-Q017",
+          "mediaId": "IMG-V11-2B-DD4F6C5D17D9EA26",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "triangle",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q017-D1"
+        },
+        {
+          "questionId": "Y3M05-Q017",
+          "mediaId": "IMG-V11-2B-0B8FB65CFC9F4ED3",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "option",
+          "semanticTarget": "rectangle",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q017-D2"
+        },
+        {
+          "questionId": "Y3M05-Q017",
+          "mediaId": "IMG-V11-2B-ADC02C547ED88AAB",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "option",
+          "semanticTarget": "star",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q017-D3"
+        },
+        {
+          "questionId": "Y3M05-Q017",
+          "mediaId": "IMG-V11-2B-CFBD6FF69645CF3F",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "two plus three equals five",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q017-D4"
+        },
+        {
+          "questionId": "Y3M05-Q017",
+          "mediaId": "IMG-V11-2B-BE34171D033BB875",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "six minus two equals four",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q017-D5"
+        }
+      ],
+      "sourceQuestionContractSha256": "ac496fcc4538195ae191c9641e10d8f9d06dcae437b0a989986030c75b4f83a7"
+    },
+    {
+      "questionId": "Y3M05-Q018",
+      "sequencePosition": 18,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Select the source-backed word/chunk completing the familiar structure.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "review: Complete a practiced addition sentence with its result. Focus: two plus three equals five.",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "primaryInstructionEn": "Look at the picture and complete the sentence.",
+      "supportInstructionPt": "De acordo com a imagem, complete a frase.",
+      "answerKey": "five",
+      "semanticTargets": [
+        "five"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q018",
+          "mediaId": "IMG-Y1M02-Q002-FIVE",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "five",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ],
+      "sourceQuestionContractSha256": "49aaf2d344777440bbe948a33339cbff8390b02eada70d8cc25eac819e273be1"
+    },
+    {
+      "questionId": "Y3M05-Q019",
+      "sequencePosition": 19,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Classify each source-backed item into a named semantic category.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "consolidation: Understand simple arithmetic language and describe shapes. Focus: plus.",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "primaryInstructionEn": "Sort each item: plus or minus.",
+      "supportInstructionPt": "Separe cada item: plus ou minus.",
+      "answerKey": {
+        "Y3M05-Q019-I1": "addition",
+        "Y3M05-Q019-I2": "addition",
+        "Y3M05-Q019-I3": "subtraction",
+        "Y3M05-Q019-I4": "subtraction"
+      },
+      "semanticTargets": [
+        "four plus two",
+        "nine minus three",
+        "six minus one",
+        "two plus three"
+      ],
+      "visualUsages": [],
+      "sourceQuestionContractSha256": "df300fca5f5f006bbd22c05d5e9bb5a6913557ca464b4098ac4636c8300c5a8a"
+    },
+    {
+      "questionId": "Y3M05-Q020",
+      "sequencePosition": 20,
+      "topicEn": "Math and Shapes: Say a Simple Result",
+      "taskType": "Drag each delivered stimulus to its one-to-one semantic visual.",
+      "targetSkill": "Identify operation/result spoken.",
+      "learningTarget": "consolidation: Understand simple arithmetic language and describe shapes. Focus: divided by.",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "primaryInstructionEn": "Match each audio to its picture.",
+      "supportInstructionPt": "Combine cada áudio com sua imagem.",
+      "answerKey": {
+        "Y3M05-Q020-I1": "Y3M05-Q020-T1",
+        "Y3M05-Q020-I2": "Y3M05-Q020-T2",
+        "Y3M05-Q020-I3": "Y3M05-Q020-T3",
+        "Y3M05-Q020-I4": "Y3M05-Q020-T4"
+      },
+      "semanticTargets": [
+        "divided by",
+        "square",
+        "star",
+        "triangle"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y3M05-Q020",
+          "mediaId": "IMG-V11-2B-8C9B8850C95A943E",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "star",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q020-T1"
+        },
+        {
+          "questionId": "Y3M05-Q020",
+          "mediaId": "IMG-V11-2B-C59B066C6037FEE5",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "divided by",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q020-T2"
+        },
+        {
+          "questionId": "Y3M05-Q020",
+          "mediaId": "IMG-V11-2B-0042C60C0B4DAA2B",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "triangle",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q020-T3"
+        },
+        {
+          "questionId": "Y3M05-Q020",
+          "mediaId": "IMG-V11-2B-380271DED3F3D31E",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "square",
+          "correct": null,
+          "optionOrCardId": "Y3M05-Q020-T4"
+        }
+      ],
+      "sourceQuestionContractSha256": "35f650eaeaaff53ad6ecda749f5b8003a31d4d97923f9504d942248cb82bba6e"
+    }
+  ],
+  "questionContractsModified": false,
+  "answersModified": false
+}
