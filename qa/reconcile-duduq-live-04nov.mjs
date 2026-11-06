@@ -91,8 +91,9 @@ for(const p of pngs){
 let publishedManifestBytes=await getPublicFile(man,true);
 // Some Pages setups rewrite hidden-file URLs to index.html with HTTP 200.
 // Treat that as unavailable, not as a live manifest or successful byte proof.
-if(publishedManifestBytes&&!/^content\/|^\./.test(publishedManifestBytes.toString('utf8',0,90).trimStart())){
- publishedManifestBytes=null;
+if(publishedManifestBytes){
+ const first=publishedManifestBytes.toString('utf8',0,500).split(/\r?\n/,1)[0];
+ if(!/^.+ [0-9a-f]{64}$/.test(first))publishedManifestBytes=null;
 }
 let newManifestBytes,mode;
 if(publishedManifestBytes){
