@@ -2,7 +2,7 @@
 # DUDUQ official media release, exact match to verified 06-Nov staging build.
 # Images remain flagged PEDAGOGICAL_QA_PENDING; no answer-key/Gold Master edits.
 set -Eeuo pipefail
-if [[ "$CF_PAGES_BRANCH" != "release/duduq-phase2-orange-fruit-20261103" ]]; then
+if [[ "$CF_PAGES_BRANCH" != "staging/duduq-purple-color-official-20261106" ]]; then
  echo "DUDUQ_PRODUCTION_RELEASE_BRANCH_ONLY" >&2; exit 43
 fi
 export DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1
@@ -116,4 +116,6 @@ node --check qa/duduq-media-clarity-audit.mjs
 DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/duduq-media-clarity-audit.mjs
 cp -a "$ROOT"/. dist-pages/
 DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/duduq-media-clarity-audit.mjs --production-media-fit
-echo "DUDUQ_RELEASE_ARTIFACT_269_BINDINGS_97_PNGS_AND_PROPORTIONAL_MEDIA_FIT"
+node --check qa/phase2-purple-color-override.mjs
+DUDUQ_QA_ONLY=1 node qa/phase2-purple-color-override.mjs --preview
+echo "DUDUQ_PURPLE_11_ID_VISUAL_REVIEW_PUBLISHED"
