@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "DUDUQ_Y4M02_SOURCE_REGISTRY_REBASE_V1",
+  "createdAt": "2026-11-06",
+  "moduleId": "Y4M02",
+  "status": "PASS_EXACT_GENERATION_CONTEXT_TO_PRISTINE_V26",
+  "reason": "The generation lane reviewed the exact composed QA registry. Independent Y4M02 replay may start from pristine V26 only because both whole-registry contexts, compiler manifests, all 39 source-entry projections, all 94 logical visual usages, and the immutable Y4M02 question contract are pinned without rewriting the generation hashes.",
+  "generationSourceRegistryPin": "source-registry-pin.json",
+  "generationSourceRegistryPinSha256": "149490eb18e1cdd31b0f70d8792b76ede187d30675b69ef38d6d782f6bcbf093",
+  "generationRegistrySha256": "f11c12fe929379947e7d4f76736f8f73bc6320618bf01265bfb48a4e18ef5e30",
+  "generationRegistryEntries": 1225,
+  "generationCompiledManifestSha256": "c66f6db5dd24f322966ee6c9868449bac34fcf87b3e96ff1b766b4f9eeee71ab",
+  "cleanV26RegistrySha256": "aa615a3ed307b0e8cae6abf6901a1582c22ab59aa7f95c6339a635ca7d35fc89",
+  "cleanV26RegistryEntries": 1159,
+  "cleanV26CompiledManifestSha256": "5993aaceaff272626c863aef07e1b33a909ca7f9fcc41d2d40890baa6c08b822",
+  "sourceQuestionSha256": "ad303063d8044abdd86d9d71bef5b8a3bc93ad7a18eaa27a4d2dd56cbf7d3f77",
+  "sourceQuestionInvariantSha256": "1b1c30e8bffc479b7df4c101c0cf39fedf61e69d22de351033ce89881917edfa",
+  "sourceRegistryEntryProjectionSha256": "683eab3bcd217167dc7437bf82e3f8573868132de1e17b61276fdf3e76828858",
+  "logicalUsageProjectionSha256": "ad37c0f639474f79843bba7183297cd935c097f025d6702d3a92f925b5cc1c21",
+  "sourceRegistryEntryCount": 39,
+  "logicalVisualUsageRecords": 94,
+  "rawReferenceFields": 416,
+  "finalOccurrenceScopedIds": 78,
+  "acceptedRegistryContexts": [
+    "GENERATION_AUDITED_COMPOSED_QA_REGISTRY_EXACT_WHOLE_HASH",
+    "PRISTINE_V26_EXACT_WHOLE_REGISTRY_AND_MANIFEST_PIN"
+  ],
+  "sourceHashesRewritten": false,
+  "questionsModified": false,
+  "registryModified": false,
+  "goldMastersModified": false,
+  "productionApproved": false
+}

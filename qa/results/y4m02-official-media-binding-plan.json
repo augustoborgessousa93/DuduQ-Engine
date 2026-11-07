@@ -1,0 +1,1312 @@
+{
+  "schemaVersion": "DUDUQ_Y4M02_OFFICIAL_MEDIA_BINDING_PLAN_V1",
+  "createdAt": "2026-11-07T21:21:30.940Z",
+  "moduleId": "Y4M02",
+  "status": "PASS",
+  "sourceContext": "PRISTINE_V26_EXACT_WHOLE_REGISTRY_AND_MANIFEST_PIN",
+  "sourceQuestionSha256": "ad303063d8044abdd86d9d71bef5b8a3bc93ad7a18eaa27a4d2dd56cbf7d3f77",
+  "sourceQuestionInvariantSha256": "1b1c30e8bffc479b7df4c101c0cf39fedf61e69d22de351033ce89881917edfa",
+  "sourceRegistryRebaseSha256": "b7001bf4d01cd0af4640f790a7f11980e1e239f24ff602082f09ab380321830c",
+  "inputMediaIds": 39,
+  "outputMediaIds": 78,
+  "logicalUsageRecords": 94,
+  "rawReferenceFields": 416,
+  "reviewAssets": 22,
+  "uniquePngs": 22,
+  "occurrenceScopedSplits": [
+    {
+      "questionId": "Y4M02-Q001",
+      "from": "IMG-V11-2B-4B72C84EB092340A",
+      "to": "IMG-Y4M02-Q001-CTX-BC828774CBC5",
+      "semanticTarget": "geography",
+      "contractPaths": [
+        "targets[1]"
+      ],
+      "rawFields": [
+        "mediaBindings[1].assetId",
+        "mediaBindings[1].mediaId",
+        "targets[1].media.assetId",
+        "targets[1].media.mediaId",
+        "targets[1].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q001",
+      "from": "IMG-V11-2B-7CEF9891D59562FE",
+      "to": "IMG-Y4M02-Q001-CTX-36D07B3CBAEB",
+      "semanticTarget": "english",
+      "contractPaths": [
+        "targets[0]"
+      ],
+      "rawFields": [
+        "mediaBindings[0].assetId",
+        "mediaBindings[0].mediaId",
+        "targets[0].media.assetId",
+        "targets[0].media.mediaId",
+        "targets[0].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q001",
+      "from": "IMG-V11-2B-C8365730261BA43A",
+      "to": "IMG-Y4M02-Q001-CTX-F2952A5A30A3",
+      "semanticTarget": "mathematics",
+      "contractPaths": [
+        "targets[2]"
+      ],
+      "rawFields": [
+        "mediaBindings[2].assetId",
+        "mediaBindings[2].mediaId",
+        "targets[2].media.assetId",
+        "targets[2].media.mediaId",
+        "targets[2].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q001",
+      "from": "IMG-V11-2B-CC82E066C948B4A2",
+      "to": "IMG-Y4M02-Q001-CTX-39957E91CBB8",
+      "semanticTarget": "science",
+      "contractPaths": [
+        "targets[3]"
+      ],
+      "rawFields": [
+        "mediaBindings[3].assetId",
+        "mediaBindings[3].mediaId",
+        "targets[3].media.assetId",
+        "targets[3].media.mediaId",
+        "targets[3].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q002",
+      "from": "IMG-V11-2B-34691F7FF392D134",
+      "to": "IMG-Y4M02-Q002-CTX-34762CA5B2CC",
+      "semanticTarget": "a",
+      "contractPaths": [
+        "bubbleDistractorPool[0]",
+        "options[1]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[0].media.assetId",
+        "bubbleDistractorPool[0].media.mediaId",
+        "bubbleDistractorPool[0].mediaId",
+        "mediaBindings[1].assetId",
+        "mediaBindings[1].mediaId",
+        "options[1].media.assetId",
+        "options[1].media.mediaId",
+        "options[1].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q002",
+      "from": "IMG-V11-2B-4B72C84EB092340A",
+      "to": "IMG-Y4M02-Q002-CTX-14382908959B",
+      "semanticTarget": "geography",
+      "contractPaths": [
+        "bubbleDistractorPool[4]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[4].media.assetId",
+        "bubbleDistractorPool[4].media.mediaId",
+        "bubbleDistractorPool[4].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q002",
+      "from": "IMG-V11-2B-5A685792F5F3892E",
+      "to": "IMG-Y4M02-Q002-CTX-0225FC74ED3D",
+      "semanticTarget": "d",
+      "contractPaths": [
+        "bubbleDistractorPool[2]",
+        "options[3]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[2].media.assetId",
+        "bubbleDistractorPool[2].media.mediaId",
+        "bubbleDistractorPool[2].mediaId",
+        "mediaBindings[3].assetId",
+        "mediaBindings[3].mediaId",
+        "options[3].media.assetId",
+        "options[3].media.mediaId",
+        "options[3].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q002",
+      "from": "IMG-V11-2B-5FC56902AD57463A",
+      "to": "IMG-Y4M02-Q002-CTX-CB59121A5285",
+      "semanticTarget": "c",
+      "contractPaths": [
+        "bubbleDistractorPool[1]",
+        "options[2]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[1].media.assetId",
+        "bubbleDistractorPool[1].media.mediaId",
+        "bubbleDistractorPool[1].mediaId",
+        "mediaBindings[2].assetId",
+        "mediaBindings[2].mediaId",
+        "options[2].media.assetId",
+        "options[2].media.mediaId",
+        "options[2].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q002",
+      "from": "IMG-V11-2B-7CEF9891D59562FE",
+      "to": "IMG-Y4M02-Q002-CTX-DBFA1EBED192",
+      "semanticTarget": "english",
+      "contractPaths": [
+        "bubbleDistractorPool[3]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[3].media.assetId",
+        "bubbleDistractorPool[3].media.mediaId",
+        "bubbleDistractorPool[3].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q002",
+      "from": "IMG-V11-2B-B53AD4A3B76BCB34",
+      "to": "IMG-Y4M02-Q002-CTX-4CEB6AAE1A94",
+      "semanticTarget": "b",
+      "contractPaths": [
+        "options[0]",
+        "targetsToFind[0]"
+      ],
+      "rawFields": [
+        "mediaBindings[0].assetId",
+        "mediaBindings[0].mediaId",
+        "options[0].media.assetId",
+        "options[0].media.mediaId",
+        "options[0].mediaId",
+        "targetsToFind[0].media.assetId",
+        "targetsToFind[0].media.mediaId",
+        "targetsToFind[0].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q004",
+      "from": "IMG-V11-2B-2662DECD66839419",
+      "to": "IMG-Y4M02-Q004-CTX-87092103E8AC",
+      "semanticTarget": "science",
+      "contractPaths": [
+        "options[0]"
+      ],
+      "rawFields": [
+        "mediaBindings[0].assetId",
+        "mediaBindings[0].mediaId",
+        "options[0].media.assetId",
+        "options[0].media.mediaId",
+        "options[0].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q004",
+      "from": "IMG-V11-2B-925D0D65A4C27655",
+      "to": "IMG-Y4M02-Q004-CTX-E319F8EDB06F",
+      "semanticTarget": "english",
+      "contractPaths": [
+        "options[1]"
+      ],
+      "rawFields": [
+        "mediaBindings[1].assetId",
+        "mediaBindings[1].mediaId",
+        "options[1].media.assetId",
+        "options[1].media.mediaId",
+        "options[1].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q004",
+      "from": "IMG-V11-2B-9C61EBB04E4F0405",
+      "to": "IMG-Y4M02-Q004-CTX-940BCA8E1640",
+      "semanticTarget": "geography",
+      "contractPaths": [
+        "options[2]"
+      ],
+      "rawFields": [
+        "mediaBindings[2].assetId",
+        "mediaBindings[2].mediaId",
+        "options[2].media.assetId",
+        "options[2].media.mediaId",
+        "options[2].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q004",
+      "from": "IMG-V11-2B-F6B814EBB2AA67CB",
+      "to": "IMG-Y4M02-Q004-CTX-D90DFABE73A2",
+      "semanticTarget": "mathematics",
+      "contractPaths": [
+        "options[3]"
+      ],
+      "rawFields": [
+        "mediaBindings[3].assetId",
+        "mediaBindings[3].mediaId",
+        "options[3].media.assetId",
+        "options[3].media.mediaId",
+        "options[3].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q005",
+      "from": "IMG-V11-2B-1651BBDF0637DE4E",
+      "to": "IMG-Y4M02-Q005-CTX-6A0E5CC9C4E5",
+      "semanticTarget": "history",
+      "contractPaths": [
+        "pairs[0].cards[1]"
+      ],
+      "rawFields": [
+        "mediaBindings[0].assetId",
+        "mediaBindings[0].mediaId",
+        "pairs[0].cards[1].assetId",
+        "pairs[0].cards[1].media.assetId",
+        "pairs[0].cards[1].media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q005",
+      "from": "IMG-V11-2B-3679D098470A87AF",
+      "to": "IMG-Y4M02-Q005-CTX-C5D580121150",
+      "semanticTarget": "english",
+      "contractPaths": [
+        "pairs[2].cards[1]"
+      ],
+      "rawFields": [
+        "mediaBindings[2].assetId",
+        "mediaBindings[2].mediaId",
+        "pairs[2].cards[1].assetId",
+        "pairs[2].cards[1].media.assetId",
+        "pairs[2].cards[1].media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q005",
+      "from": "IMG-V11-2B-61A2BC233D5DC6FA",
+      "to": "IMG-Y4M02-Q005-CTX-3DD29944CDE6",
+      "semanticTarget": "science",
+      "contractPaths": [
+        "pairs[5].cards[1]"
+      ],
+      "rawFields": [
+        "mediaBindings[5].assetId",
+        "mediaBindings[5].mediaId",
+        "pairs[5].cards[1].assetId",
+        "pairs[5].cards[1].media.assetId",
+        "pairs[5].cards[1].media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q005",
+      "from": "IMG-V11-2B-BC972A558AE93D79",
+      "to": "IMG-Y4M02-Q005-CTX-3468804F81F6",
+      "semanticTarget": "mathematics",
+      "contractPaths": [
+        "pairs[4].cards[1]"
+      ],
+      "rawFields": [
+        "mediaBindings[4].assetId",
+        "mediaBindings[4].mediaId",
+        "pairs[4].cards[1].assetId",
+        "pairs[4].cards[1].media.assetId",
+        "pairs[4].cards[1].media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q005",
+      "from": "IMG-V11-2B-F30886117165DA8E",
+      "to": "IMG-Y4M02-Q005-CTX-C337785AE513",
+      "semanticTarget": "geography",
+      "contractPaths": [
+        "pairs[3].cards[1]"
+      ],
+      "rawFields": [
+        "mediaBindings[3].assetId",
+        "mediaBindings[3].mediaId",
+        "pairs[3].cards[1].assetId",
+        "pairs[3].cards[1].media.assetId",
+        "pairs[3].cards[1].media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q005",
+      "from": "Y1M01-EMOJI-ART-001",
+      "to": "IMG-Y4M02-Q005-CTX-59C1534D94C2",
+      "semanticTarget": "art",
+      "contractPaths": [
+        "pairs[1].cards[1]"
+      ],
+      "rawFields": [
+        "mediaBindings[1].assetId",
+        "mediaBindings[1].mediaId",
+        "pairs[1].cards[1].assetId",
+        "pairs[1].cards[1].media.assetId",
+        "pairs[1].cards[1].media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q006",
+      "from": "IMG-V11-2B-24AE191AA3634A76",
+      "to": "IMG-Y4M02-Q006-CTX-4BCCF86DE4E9",
+      "semanticTarget": "history",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "rawFields": [
+        "mediaBindings[3].assetId",
+        "mediaBindings[3].mediaId",
+        "pairs[3].b.assetId",
+        "pairs[3].b.media.assetId",
+        "pairs[3].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q006",
+      "from": "IMG-V11-2B-CF361B72DB38F24E",
+      "to": "IMG-Y4M02-Q006-CTX-03612EEC8066",
+      "semanticTarget": "mathematics",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "rawFields": [
+        "mediaBindings[1].assetId",
+        "mediaBindings[1].mediaId",
+        "pairs[1].b.assetId",
+        "pairs[1].b.media.assetId",
+        "pairs[1].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q006",
+      "from": "IMG-V11-2B-D12AE70F693DD028",
+      "to": "IMG-Y4M02-Q006-CTX-7D6B59FF5065",
+      "semanticTarget": "science",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "rawFields": [
+        "mediaBindings[2].assetId",
+        "mediaBindings[2].mediaId",
+        "pairs[2].b.assetId",
+        "pairs[2].b.media.assetId",
+        "pairs[2].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q006",
+      "from": "IMG-V11-2B-FA3CBDF0A99332B9",
+      "to": "IMG-Y4M02-Q006-CTX-1E0B60427643",
+      "semanticTarget": "geography",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "rawFields": [
+        "mediaBindings[0].assetId",
+        "mediaBindings[0].mediaId",
+        "pairs[0].b.assetId",
+        "pairs[0].b.media.assetId",
+        "pairs[0].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q006",
+      "from": "Y1M01-EMOJI-ART-001",
+      "to": "IMG-Y4M02-Q006-CTX-882D4F90B2CB",
+      "semanticTarget": "art",
+      "contractPaths": [
+        "pairs[4].b"
+      ],
+      "rawFields": [
+        "mediaBindings[4].assetId",
+        "mediaBindings[4].mediaId",
+        "pairs[4].b.assetId",
+        "pairs[4].b.media.assetId",
+        "pairs[4].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q007",
+      "from": "IMG-V11-2B-2662DECD66839419",
+      "to": "IMG-Y4M02-Q007-CTX-74E4920D9D39",
+      "semanticTarget": "science",
+      "contractPaths": [
+        "bubbleDistractorPool[2]",
+        "options[3]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[2].media.assetId",
+        "bubbleDistractorPool[2].media.mediaId",
+        "bubbleDistractorPool[2].mediaId",
+        "mediaBindings[3].assetId",
+        "mediaBindings[3].mediaId",
+        "options[3].media.assetId",
+        "options[3].media.mediaId",
+        "options[3].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q007",
+      "from": "IMG-V11-2B-34691F7FF392D134",
+      "to": "IMG-Y4M02-Q007-CTX-7FBB41C36E87",
+      "semanticTarget": "a",
+      "contractPaths": [
+        "bubbleDistractorPool[4]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[4].media.assetId",
+        "bubbleDistractorPool[4].media.mediaId",
+        "bubbleDistractorPool[4].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q007",
+      "from": "IMG-V11-2B-925D0D65A4C27655",
+      "to": "IMG-Y4M02-Q007-CTX-2B377E3AE2A2",
+      "semanticTarget": "english",
+      "contractPaths": [
+        "options[0]",
+        "targetsToFind[0]"
+      ],
+      "rawFields": [
+        "mediaBindings[0].assetId",
+        "mediaBindings[0].mediaId",
+        "options[0].media.assetId",
+        "options[0].media.mediaId",
+        "options[0].mediaId",
+        "targetsToFind[0].media.assetId",
+        "targetsToFind[0].media.mediaId",
+        "targetsToFind[0].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q007",
+      "from": "IMG-V11-2B-9C61EBB04E4F0405",
+      "to": "IMG-Y4M02-Q007-CTX-DC87E13F59D3",
+      "semanticTarget": "geography",
+      "contractPaths": [
+        "bubbleDistractorPool[0]",
+        "options[1]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[0].media.assetId",
+        "bubbleDistractorPool[0].media.mediaId",
+        "bubbleDistractorPool[0].mediaId",
+        "mediaBindings[1].assetId",
+        "mediaBindings[1].mediaId",
+        "options[1].media.assetId",
+        "options[1].media.mediaId",
+        "options[1].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q007",
+      "from": "IMG-V11-2B-B53AD4A3B76BCB34",
+      "to": "IMG-Y4M02-Q007-CTX-5D32F98F8251",
+      "semanticTarget": "b",
+      "contractPaths": [
+        "bubbleDistractorPool[3]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[3].media.assetId",
+        "bubbleDistractorPool[3].media.mediaId",
+        "bubbleDistractorPool[3].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q007",
+      "from": "IMG-V11-2B-F6B814EBB2AA67CB",
+      "to": "IMG-Y4M02-Q007-CTX-20B34B0152A3",
+      "semanticTarget": "mathematics",
+      "contractPaths": [
+        "bubbleDistractorPool[1]",
+        "options[2]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[1].media.assetId",
+        "bubbleDistractorPool[1].media.mediaId",
+        "bubbleDistractorPool[1].mediaId",
+        "mediaBindings[2].assetId",
+        "mediaBindings[2].mediaId",
+        "options[2].media.assetId",
+        "options[2].media.mediaId",
+        "options[2].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q008",
+      "from": "IMG-V11-2B-4B72C84EB092340A",
+      "to": "IMG-Y4M02-Q008-CTX-09FDA4735ABB",
+      "semanticTarget": "geography",
+      "contractPaths": [
+        "mediaBindings[0]"
+      ],
+      "rawFields": [
+        "mediaBindings[0].assetId",
+        "mediaBindings[0].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q009",
+      "from": "IMG-V11-2B-0B255AF22079ACF0",
+      "to": "IMG-Y4M02-Q009-CTX-950C28394534",
+      "semanticTarget": "english",
+      "contractPaths": [
+        "pairs[4].b"
+      ],
+      "rawFields": [
+        "mediaBindings[4].assetId",
+        "mediaBindings[4].mediaId",
+        "pairs[4].b.assetId",
+        "pairs[4].b.media.assetId",
+        "pairs[4].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q009",
+      "from": "IMG-V11-2B-24AE191AA3634A76",
+      "to": "IMG-Y4M02-Q009-CTX-7B3C2B0F7953",
+      "semanticTarget": "history",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "rawFields": [
+        "mediaBindings[2].assetId",
+        "mediaBindings[2].mediaId",
+        "pairs[2].b.assetId",
+        "pairs[2].b.media.assetId",
+        "pairs[2].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q009",
+      "from": "IMG-V11-2B-CF361B72DB38F24E",
+      "to": "IMG-Y4M02-Q009-CTX-9192B96C0B9D",
+      "semanticTarget": "mathematics",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "rawFields": [
+        "mediaBindings[0].assetId",
+        "mediaBindings[0].mediaId",
+        "pairs[0].b.assetId",
+        "pairs[0].b.media.assetId",
+        "pairs[0].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q009",
+      "from": "IMG-V11-2B-D12AE70F693DD028",
+      "to": "IMG-Y4M02-Q009-CTX-CFA9DBDF655D",
+      "semanticTarget": "science",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "rawFields": [
+        "mediaBindings[1].assetId",
+        "mediaBindings[1].mediaId",
+        "pairs[1].b.assetId",
+        "pairs[1].b.media.assetId",
+        "pairs[1].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q009",
+      "from": "IMG-V11-2B-FA3CBDF0A99332B9",
+      "to": "IMG-Y4M02-Q009-CTX-FCA699A68215",
+      "semanticTarget": "geography",
+      "contractPaths": [
+        "pairs[5].b"
+      ],
+      "rawFields": [
+        "mediaBindings[5].assetId",
+        "mediaBindings[5].mediaId",
+        "pairs[5].b.assetId",
+        "pairs[5].b.media.assetId",
+        "pairs[5].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q009",
+      "from": "Y1M01-EMOJI-ART-001",
+      "to": "IMG-Y4M02-Q009-CTX-C7697E150A5C",
+      "semanticTarget": "art",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "rawFields": [
+        "mediaBindings[3].assetId",
+        "mediaBindings[3].mediaId",
+        "pairs[3].b.assetId",
+        "pairs[3].b.media.assetId",
+        "pairs[3].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q010",
+      "from": "IMG-V11-2B-20C32A7B846CD05A",
+      "to": "IMG-Y4M02-Q010-CTX-F1D581D66F38",
+      "semanticTarget": "i do not like carrots",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "rawFields": [
+        "mediaBindings[1].assetId",
+        "mediaBindings[1].mediaId",
+        "pairs[1].b.assetId",
+        "pairs[1].b.media.assetId",
+        "pairs[1].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q010",
+      "from": "IMG-V11-2B-8050E659DDF0AE39",
+      "to": "IMG-Y4M02-Q010-CTX-A2E58D9E292B",
+      "semanticTarget": "i like papaya",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "rawFields": [
+        "mediaBindings[2].assetId",
+        "mediaBindings[2].mediaId",
+        "pairs[2].b.assetId",
+        "pairs[2].b.media.assetId",
+        "pairs[2].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q010",
+      "from": "IMG-V11-2B-9308452ECEE535F7",
+      "to": "IMG-Y4M02-Q010-CTX-8A4E2AFF0872",
+      "semanticTarget": "i like apples",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "rawFields": [
+        "mediaBindings[3].assetId",
+        "mediaBindings[3].mediaId",
+        "pairs[3].b.assetId",
+        "pairs[3].b.media.assetId",
+        "pairs[3].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q010",
+      "from": "IMG-V11-2B-F2B1512D42DAD7B2",
+      "to": "IMG-Y4M02-Q010-CTX-7418DAD98042",
+      "semanticTarget": "i prefer grapes",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "rawFields": [
+        "mediaBindings[0].assetId",
+        "mediaBindings[0].mediaId",
+        "pairs[0].b.assetId",
+        "pairs[0].b.media.assetId",
+        "pairs[0].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q011",
+      "from": "IMG-V11-2B-6FFE58151EAD0CA0",
+      "to": "IMG-Y4M02-Q011-CTX-BE68C1FCFC73",
+      "semanticTarget": "six minus two equals four",
+      "contractPaths": [
+        "targets[3]"
+      ],
+      "rawFields": [
+        "mediaBindings[3].assetId",
+        "mediaBindings[3].mediaId",
+        "targets[3].media.assetId",
+        "targets[3].media.mediaId",
+        "targets[3].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q011",
+      "from": "IMG-V11-2B-C1BC182FD8E80824",
+      "to": "IMG-Y4M02-Q011-CTX-7AC2289E0F53",
+      "semanticTarget": "three plus four equals seven",
+      "contractPaths": [
+        "targets[0]"
+      ],
+      "rawFields": [
+        "mediaBindings[0].assetId",
+        "mediaBindings[0].mediaId",
+        "targets[0].media.assetId",
+        "targets[0].media.mediaId",
+        "targets[0].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q011",
+      "from": "IMG-V11-2B-D479ABE00CDCCB74",
+      "to": "IMG-Y4M02-Q011-CTX-8C6C13AF4B84",
+      "semanticTarget": "two plus three equals five",
+      "contractPaths": [
+        "targets[2]"
+      ],
+      "rawFields": [
+        "mediaBindings[2].assetId",
+        "mediaBindings[2].mediaId",
+        "targets[2].media.assetId",
+        "targets[2].media.mediaId",
+        "targets[2].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q011",
+      "from": "IMG-V11-2B-D74453328D45A91B",
+      "to": "IMG-Y4M02-Q011-CTX-EE7CD051ACF0",
+      "semanticTarget": "nine minus five equals four",
+      "contractPaths": [
+        "targets[1]"
+      ],
+      "rawFields": [
+        "mediaBindings[1].assetId",
+        "mediaBindings[1].mediaId",
+        "targets[1].media.assetId",
+        "targets[1].media.mediaId",
+        "targets[1].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q012",
+      "from": "IMG-V11-2B-925D0D65A4C27655",
+      "to": "IMG-Y4M02-Q012-CTX-5438BB0B6415",
+      "semanticTarget": "english",
+      "contractPaths": [
+        "options[1]"
+      ],
+      "rawFields": [
+        "mediaBindings[1].assetId",
+        "mediaBindings[1].mediaId",
+        "options[1].media.assetId",
+        "options[1].media.mediaId",
+        "options[1].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q012",
+      "from": "IMG-V11-2B-9C61EBB04E4F0405",
+      "to": "IMG-Y4M02-Q012-CTX-190543054705",
+      "semanticTarget": "geography",
+      "contractPaths": [
+        "options[2]"
+      ],
+      "rawFields": [
+        "mediaBindings[2].assetId",
+        "mediaBindings[2].mediaId",
+        "options[2].media.assetId",
+        "options[2].media.mediaId",
+        "options[2].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q012",
+      "from": "IMG-V11-2B-F6B814EBB2AA67CB",
+      "to": "IMG-Y4M02-Q012-CTX-378615B0745F",
+      "semanticTarget": "mathematics",
+      "contractPaths": [
+        "options[3]"
+      ],
+      "rawFields": [
+        "mediaBindings[3].assetId",
+        "mediaBindings[3].mediaId",
+        "options[3].media.assetId",
+        "options[3].media.mediaId",
+        "options[3].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q012",
+      "from": "Y1M01-EMOJI-ART-001",
+      "to": "IMG-Y4M02-Q012-CTX-E0BA9B5C9996",
+      "semanticTarget": "art",
+      "contractPaths": [
+        "options[0]"
+      ],
+      "rawFields": [
+        "mediaBindings[0].assetId",
+        "mediaBindings[0].mediaId",
+        "options[0].media.assetId",
+        "options[0].media.mediaId",
+        "options[0].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q013",
+      "from": "IMG-V11-2B-0B255AF22079ACF0",
+      "to": "IMG-Y4M02-Q013-CTX-B9DD312F73A9",
+      "semanticTarget": "english",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "rawFields": [
+        "mediaBindings[0].assetId",
+        "mediaBindings[0].mediaId",
+        "pairs[0].b.assetId",
+        "pairs[0].b.media.assetId",
+        "pairs[0].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q013",
+      "from": "IMG-V11-2B-24AE191AA3634A76",
+      "to": "IMG-Y4M02-Q013-CTX-15BF69829694",
+      "semanticTarget": "history",
+      "contractPaths": [
+        "pairs[4].b"
+      ],
+      "rawFields": [
+        "mediaBindings[4].assetId",
+        "mediaBindings[4].mediaId",
+        "pairs[4].b.assetId",
+        "pairs[4].b.media.assetId",
+        "pairs[4].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q013",
+      "from": "IMG-V11-2B-CF361B72DB38F24E",
+      "to": "IMG-Y4M02-Q013-CTX-9994FA69E167",
+      "semanticTarget": "mathematics",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "rawFields": [
+        "mediaBindings[2].assetId",
+        "mediaBindings[2].mediaId",
+        "pairs[2].b.assetId",
+        "pairs[2].b.media.assetId",
+        "pairs[2].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q013",
+      "from": "IMG-V11-2B-D12AE70F693DD028",
+      "to": "IMG-Y4M02-Q013-CTX-FB8E6A7BE39F",
+      "semanticTarget": "science",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "rawFields": [
+        "mediaBindings[3].assetId",
+        "mediaBindings[3].mediaId",
+        "pairs[3].b.assetId",
+        "pairs[3].b.media.assetId",
+        "pairs[3].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q013",
+      "from": "IMG-V11-2B-FA3CBDF0A99332B9",
+      "to": "IMG-Y4M02-Q013-CTX-DC765C676AAC",
+      "semanticTarget": "geography",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "rawFields": [
+        "mediaBindings[1].assetId",
+        "mediaBindings[1].mediaId",
+        "pairs[1].b.assetId",
+        "pairs[1].b.media.assetId",
+        "pairs[1].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q013",
+      "from": "Y1M01-EMOJI-ART-001",
+      "to": "IMG-Y4M02-Q013-CTX-0BC28DD9EF4B",
+      "semanticTarget": "art",
+      "contractPaths": [
+        "pairs[5].b"
+      ],
+      "rawFields": [
+        "mediaBindings[5].assetId",
+        "mediaBindings[5].mediaId",
+        "pairs[5].b.assetId",
+        "pairs[5].b.media.assetId",
+        "pairs[5].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q014",
+      "from": "IMG-V11-2B-4B72C84EB092340A",
+      "to": "IMG-Y4M02-Q014-CTX-A3AABDAC8A5A",
+      "semanticTarget": "geography",
+      "contractPaths": [
+        "bubbleDistractorPool[4]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[4].media.assetId",
+        "bubbleDistractorPool[4].media.mediaId",
+        "bubbleDistractorPool[4].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q014",
+      "from": "IMG-V11-2B-504674DEDCB9FDCE",
+      "to": "IMG-Y4M02-Q014-CTX-8EB08DF3ADEB",
+      "semanticTarget": "red triangle",
+      "contractPaths": [
+        "bubbleDistractorPool[0]",
+        "options[1]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[0].media.assetId",
+        "bubbleDistractorPool[0].media.mediaId",
+        "bubbleDistractorPool[0].mediaId",
+        "mediaBindings[1].assetId",
+        "mediaBindings[1].mediaId",
+        "options[1].media.assetId",
+        "options[1].media.mediaId",
+        "options[1].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q014",
+      "from": "IMG-V11-2B-6067E6DE84C0E5C7",
+      "to": "IMG-Y4M02-Q014-CTX-B52D363814FA",
+      "semanticTarget": "green circle",
+      "contractPaths": [
+        "bubbleDistractorPool[2]",
+        "options[3]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[2].media.assetId",
+        "bubbleDistractorPool[2].media.mediaId",
+        "bubbleDistractorPool[2].mediaId",
+        "mediaBindings[3].assetId",
+        "mediaBindings[3].mediaId",
+        "options[3].media.assetId",
+        "options[3].media.mediaId",
+        "options[3].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q014",
+      "from": "IMG-V11-2B-7CEF9891D59562FE",
+      "to": "IMG-Y4M02-Q014-CTX-7AE2818E5C21",
+      "semanticTarget": "english",
+      "contractPaths": [
+        "bubbleDistractorPool[3]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[3].media.assetId",
+        "bubbleDistractorPool[3].media.mediaId",
+        "bubbleDistractorPool[3].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q014",
+      "from": "IMG-V11-2B-8A1539773070D30D",
+      "to": "IMG-Y4M02-Q014-CTX-3E249D10F79C",
+      "semanticTarget": "blue square",
+      "contractPaths": [
+        "options[0]",
+        "targetsToFind[0]"
+      ],
+      "rawFields": [
+        "mediaBindings[0].assetId",
+        "mediaBindings[0].mediaId",
+        "options[0].media.assetId",
+        "options[0].media.mediaId",
+        "options[0].mediaId",
+        "targetsToFind[0].media.assetId",
+        "targetsToFind[0].media.mediaId",
+        "targetsToFind[0].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q014",
+      "from": "IMG-V11-2B-C71E27A94D5A8AF0",
+      "to": "IMG-Y4M02-Q014-CTX-F1A96F2F315A",
+      "semanticTarget": "yellow rectangle",
+      "contractPaths": [
+        "bubbleDistractorPool[1]",
+        "options[2]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[1].media.assetId",
+        "bubbleDistractorPool[1].media.mediaId",
+        "bubbleDistractorPool[1].mediaId",
+        "mediaBindings[2].assetId",
+        "mediaBindings[2].mediaId",
+        "options[2].media.assetId",
+        "options[2].media.mediaId",
+        "options[2].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q016",
+      "from": "IMG-V11-2B-0B255AF22079ACF0",
+      "to": "IMG-Y4M02-Q016-CTX-5C3E2061333F",
+      "semanticTarget": "english",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "rawFields": [
+        "mediaBindings[3].assetId",
+        "mediaBindings[3].mediaId",
+        "pairs[3].b.assetId",
+        "pairs[3].b.media.assetId",
+        "pairs[3].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q016",
+      "from": "IMG-V11-2B-24AE191AA3634A76",
+      "to": "IMG-Y4M02-Q016-CTX-9D353DAACFF8",
+      "semanticTarget": "history",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "rawFields": [
+        "mediaBindings[1].assetId",
+        "mediaBindings[1].mediaId",
+        "pairs[1].b.assetId",
+        "pairs[1].b.media.assetId",
+        "pairs[1].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q016",
+      "from": "IMG-V11-2B-D12AE70F693DD028",
+      "to": "IMG-Y4M02-Q016-CTX-E432C50D8B58",
+      "semanticTarget": "science",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "rawFields": [
+        "mediaBindings[0].assetId",
+        "mediaBindings[0].mediaId",
+        "pairs[0].b.assetId",
+        "pairs[0].b.media.assetId",
+        "pairs[0].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q016",
+      "from": "IMG-V11-2B-FA3CBDF0A99332B9",
+      "to": "IMG-Y4M02-Q016-CTX-0C1B87ACC69E",
+      "semanticTarget": "geography",
+      "contractPaths": [
+        "pairs[4].b"
+      ],
+      "rawFields": [
+        "mediaBindings[4].assetId",
+        "mediaBindings[4].mediaId",
+        "pairs[4].b.assetId",
+        "pairs[4].b.media.assetId",
+        "pairs[4].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q016",
+      "from": "Y1M01-EMOJI-ART-001",
+      "to": "IMG-Y4M02-Q016-CTX-E8A7C217128F",
+      "semanticTarget": "art",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "rawFields": [
+        "mediaBindings[2].assetId",
+        "mediaBindings[2].mediaId",
+        "pairs[2].b.assetId",
+        "pairs[2].b.media.assetId",
+        "pairs[2].b.media.mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q017",
+      "from": "IMG-V11-2B-34691F7FF392D134",
+      "to": "IMG-Y4M02-Q017-CTX-AF6CEF7CCAD9",
+      "semanticTarget": "a",
+      "contractPaths": [
+        "options[0]"
+      ],
+      "rawFields": [
+        "mediaBindings[0].assetId",
+        "mediaBindings[0].mediaId",
+        "options[0].media.assetId",
+        "options[0].media.mediaId",
+        "options[0].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q017",
+      "from": "IMG-V11-2B-5A685792F5F3892E",
+      "to": "IMG-Y4M02-Q017-CTX-F43658329499",
+      "semanticTarget": "d",
+      "contractPaths": [
+        "options[3]"
+      ],
+      "rawFields": [
+        "mediaBindings[3].assetId",
+        "mediaBindings[3].mediaId",
+        "options[3].media.assetId",
+        "options[3].media.mediaId",
+        "options[3].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q017",
+      "from": "IMG-V11-2B-5FC56902AD57463A",
+      "to": "IMG-Y4M02-Q017-CTX-9FE74BB9194D",
+      "semanticTarget": "c",
+      "contractPaths": [
+        "options[2]"
+      ],
+      "rawFields": [
+        "mediaBindings[2].assetId",
+        "mediaBindings[2].mediaId",
+        "options[2].media.assetId",
+        "options[2].media.mediaId",
+        "options[2].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q017",
+      "from": "IMG-V11-2B-B53AD4A3B76BCB34",
+      "to": "IMG-Y4M02-Q017-CTX-C3B16A2FCC7F",
+      "semanticTarget": "b",
+      "contractPaths": [
+        "options[1]"
+      ],
+      "rawFields": [
+        "mediaBindings[1].assetId",
+        "mediaBindings[1].mediaId",
+        "options[1].media.assetId",
+        "options[1].media.mediaId",
+        "options[1].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q018",
+      "from": "Y1M01-EMOJI-ART-001",
+      "to": "IMG-Y4M02-Q018-CTX-252A04625C1A",
+      "semanticTarget": "art",
+      "contractPaths": [
+        "mediaBindings[0]"
+      ],
+      "rawFields": [
+        "mediaBindings[0].assetId",
+        "mediaBindings[0].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q020",
+      "from": "IMG-V11-2B-48CA6C8720A28B20",
+      "to": "IMG-Y4M02-Q020-CTX-C8C804D7EBEF",
+      "semanticTarget": "i do not like carrots",
+      "contractPaths": [
+        "bubbleDistractorPool[2]",
+        "options[3]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[2].media.assetId",
+        "bubbleDistractorPool[2].media.mediaId",
+        "bubbleDistractorPool[2].mediaId",
+        "mediaBindings[3].assetId",
+        "mediaBindings[3].mediaId",
+        "options[3].media.assetId",
+        "options[3].media.mediaId",
+        "options[3].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q020",
+      "from": "IMG-V11-2B-4B72C84EB092340A",
+      "to": "IMG-Y4M02-Q020-CTX-61C76B76FB1E",
+      "semanticTarget": "geography",
+      "contractPaths": [
+        "bubbleDistractorPool[4]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[4].media.assetId",
+        "bubbleDistractorPool[4].media.mediaId",
+        "bubbleDistractorPool[4].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q020",
+      "from": "IMG-V11-2B-5D2F313F53720CE9",
+      "to": "IMG-Y4M02-Q020-CTX-206D6E2C3D3B",
+      "semanticTarget": "i prefer grapes",
+      "contractPaths": [
+        "bubbleDistractorPool[1]",
+        "options[2]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[1].media.assetId",
+        "bubbleDistractorPool[1].media.mediaId",
+        "bubbleDistractorPool[1].mediaId",
+        "mediaBindings[2].assetId",
+        "mediaBindings[2].mediaId",
+        "options[2].media.assetId",
+        "options[2].media.mediaId",
+        "options[2].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q020",
+      "from": "IMG-V11-2B-7CEF9891D59562FE",
+      "to": "IMG-Y4M02-Q020-CTX-7C1C6D7320DE",
+      "semanticTarget": "english",
+      "contractPaths": [
+        "bubbleDistractorPool[3]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[3].media.assetId",
+        "bubbleDistractorPool[3].media.mediaId",
+        "bubbleDistractorPool[3].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q020",
+      "from": "IMG-V11-2B-8402FF71A9476919",
+      "to": "IMG-Y4M02-Q020-CTX-13878EDD9FDF",
+      "semanticTarget": "i like papaya",
+      "contractPaths": [
+        "options[0]",
+        "targetsToFind[0]"
+      ],
+      "rawFields": [
+        "mediaBindings[0].assetId",
+        "mediaBindings[0].mediaId",
+        "options[0].media.assetId",
+        "options[0].media.mediaId",
+        "options[0].mediaId",
+        "targetsToFind[0].media.assetId",
+        "targetsToFind[0].media.mediaId",
+        "targetsToFind[0].mediaId"
+      ]
+    },
+    {
+      "questionId": "Y4M02-Q020",
+      "from": "IMG-V11-2B-97050C4338A5B73F",
+      "to": "IMG-Y4M02-Q020-CTX-E53F2E34B48F",
+      "semanticTarget": "i like apples",
+      "contractPaths": [
+        "bubbleDistractorPool[0]",
+        "options[1]"
+      ],
+      "rawFields": [
+        "bubbleDistractorPool[0].media.assetId",
+        "bubbleDistractorPool[0].media.mediaId",
+        "bubbleDistractorPool[0].mediaId",
+        "mediaBindings[1].assetId",
+        "mediaBindings[1].mediaId",
+        "options[1].media.assetId",
+        "options[1].media.mediaId",
+        "options[1].mediaId"
+      ]
+    }
+  ],
+  "answerKeysModified": false,
+  "mechanicsModified": false,
+  "goldMastersModified": false,
+  "productionApproved": false
+}

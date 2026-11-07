@@ -21,7 +21,10 @@ const configurations={
     incorrectAlt:'father',correctAlt:'brother',screenshots:['Y2M03-Q003','Y2M03-Q010','Y2M03-Q018']},
   Y3M03:{modulePath:'year-3/module-03',bundle:'y3m03-official-20261104',slug:'y3m03',schemaVersion:'DUDUQ_Y3M03_OFFICIAL_MEDIA_BROWSER_QA_V1',
     sourcePendingIds:29,postSplitIds:66,usageRecords:74,uniquePngs:16,runtimePaths:16,requireEveryQuestionMedia:false,gameplayQuestionId:'Y3M03-Q003',
-    incorrectAlt:'father',correctAlt:'brother',screenshots:['Y3M03-Q003','Y3M03-Q012','Y3M03-Q018']}
+    incorrectAlt:'father',correctAlt:'brother',screenshots:['Y3M03-Q003','Y3M03-Q012','Y3M03-Q018']},
+  Y4M02:{modulePath:'year-4/module-02',bundle:'y4m02-official-20261106',slug:'y4m02',schemaVersion:'DUDUQ_Y4M02_OFFICIAL_MEDIA_BROWSER_QA_V1',
+    sourcePendingIds:39,postSplitIds:78,usageRecords:94,uniquePngs:22,runtimePaths:22,requireEveryQuestionMedia:false,gameplayQuestionId:'Y4M02-Q004',
+    incorrectAlt:'english',correctAlt:'science',screenshots:['Y4M02-Q004','Y4M02-Q012','Y4M02-Q017'],desktopViewport:{width:1440,height:900}}
 };
 const qa=configuration(moduleId);
 function configuration(id){const value=configurations[id];if(!value)throw Error('UNSUPPORTED_MEDIA_BROWSER_QA_MODULE:'+id);return value;}
@@ -48,7 +51,7 @@ if(qa.requireEveryQuestionMedia&&[...expectedPathsByQuestion.values()].some(path
   throw Error('QUESTION_WITHOUT_EXPECTED_OFFICIAL_MEDIA');
 
 await mkdir(out,{recursive:true});
-const views={desktop:{width:1366,height:768},tablet:{width:768,height:1024},mobile:{width:390,height:844}};
+const views={desktop:qa.desktopViewport||{width:1366,height:768},tablet:{width:768,height:1024},mobile:{width:390,height:844}};
 const routeFor=(q,seed='20261030')=>'/play/'+(q.mechanicId.startsWith('smart-sentence-')?'smart-sentence':q.mechanicId)+`/?duduqModule=${moduleId}&duduqItem=${q.item_id}&qaSeed=${seed}`;
 const report={schemaVersion:qa.schemaVersion,createdAt:new Date().toISOString(),
   status:'RUNNING',base,moduleId,actualBrowser:'PLAYWRIGHT_CHROMIUM',nativePointerInput:true,nativeTouchInput:true,
@@ -131,7 +134,15 @@ async function unlockBubble(page,events,expectedQuestionPaths){
   await pointerClick(page,audio,'instruction-audio-recovery',events);await page.waitForTimeout(700);
   await pointerClick(page,audio,'instruction-audio-play',events);
   await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY'&&
-    document.querySelector('.bubble-pop-playable img[src*="/chatgpt/"]'),null,{timeout:25000});
+    document.querySelector('.bubble-pop-playable img[src*="/chatgpt/"]'),null,{timeout:25000}).catch(async error=>{
+      const state=await page.evaluate(()=>({interactionState:document.querySelector('#game')?.dataset.duduqInteractionState||null,
+        panelDataset:{...(document.querySelector('.duduq-canonical-question-hud')?.dataset||{})},
+        audioButtons:[...document.querySelectorAll('.audio-button')].map(button=>({text:button.textContent.replace(/\s+/g,' ').trim(),
+          disabled:button.disabled,hidden:button.hidden,ariaDisabled:button.getAttribute('aria-disabled')})),
+        playableImages:[...document.querySelectorAll('.bubble-pop-playable img')].map(image=>({alt:image.alt,src:image.src,
+          complete:image.complete,naturalWidth:image.naturalWidth})),bodyText:document.body.textContent.replace(/\s+/g,' ').trim().slice(0,600)}));
+      throw Error('BUBBLE_UNLOCK_TIMEOUT:'+JSON.stringify(state)+':'+error.message);
+    });
   await page.waitForFunction(()=>window.__duduqQaSampleBubbleCoverage?.(),null,{timeout:50000,polling:100}).catch(()=>null);
   return page.evaluate(()=>{
     window.__duduqQaSampleBubbleCoverage?.();
@@ -317,7 +328,7 @@ try{
     scope:'Companion clean-context pointer trace through visible incorrect state',pointerEvents:traceEvents};
 
   const screenshotCases=[
-    {name:'desktop-1366x768',viewport:views.desktop,questionId:qa.screenshots[0],unlock:true},
+    {name:`desktop-${views.desktop.width}x${views.desktop.height}`,viewport:views.desktop,questionId:qa.screenshots[0],unlock:true},
     {name:'tablet-768x1024',viewport:views.tablet,questionId:qa.screenshots[1]},
     {name:'mobile-390x844',viewport:views.mobile,questionId:qa.screenshots[2]}
   ];
