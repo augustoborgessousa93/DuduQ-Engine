@@ -2,7 +2,7 @@
 # DUDUQ official media release, exact match to verified 06-Nov staging build.
 # Images remain flagged PEDAGOGICAL_QA_PENDING; no answer-key/Gold Master edits.
 set -Eeuo pipefail
-if [[ "$CF_PAGES_BRANCH" != "release/duduq-phase2-orange-fruit-20261103" ]]; then
+if [[ "$CF_PAGES_BRANCH" != "staging/duduq-phase2-exact-clusters-20261107" ]]; then
  echo "DUDUQ_PRODUCTION_RELEASE_BRANCH_ONLY" >&2; exit 43
 fi
 export DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1
@@ -166,4 +166,7 @@ assert.equal(grayIDs.length,9,'GRAY_ID_COUNT_CHANGED');
 assert(grayIDs.every(e=>e.provenance?.sourcePath==='Imagens Ilustrativa/Color_Cinza_Grey.png'));
 console.log('DUDUQ_GRAY_MEMORY_RELEASE_PINNED_QA_PASS=9_GRAY_AND_FAST_ACTION_BUTTONS');
 NODE
+node --check qa/phase2-exact-five-clusters.mjs
+DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/phase2-exact-five-clusters.mjs --preview
 echo "DUDUQ_RELEASE_ARTIFACT_269_BINDINGS_97_PNGS_AND_PROPORTIONAL_MEDIA_FIT"
+echo "DUDUQ_EXACT_CLUSTER_PREVIEW_ONLY"
