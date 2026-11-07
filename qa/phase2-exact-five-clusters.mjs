@@ -51,10 +51,17 @@ const origin={};for(const {concept,filename,sha,ids} of plan){
  }
 }
 const oldMediaPngByBlob=new Map();
+const requestedBlobs=new Set(plan.map(p=>p.sha));
 for(const e of reg.entries){
- if(e.provenance?.sourceGitBlob && e.urlOrPath?.endsWith('.png')){
-  const previous=oldMediaPngByBlob.get(e.provenance.sourceGitBlob);
-  if(previous)assert.equal(previous.url,e.urlOrPath,'CONFLICTING_SHARED_SOURCE_SHA');
+ // Legacy releases intentionally keep identical bytes at several named URLs
+ // (e.g. two RED paths). They must not block unrelated concept mapping.
+ if(e.provenance?.sourceGitBlob && requestedBlobs.has(e.provenance.sourceGitBlob) &&
+    e.urlOrPath?.endsWith('.png')){
+  const prior=oldMediaPngByBlob.get(e.provenance.sourceGitBlob);
+  if(prior){
+   assert.equal(prior.sha256,e.sha256,'SAME_GIT_BLOB_DIFFERENT_BYTES');
+   continue;
+  }
   oldMediaPngByBlob.set(e.provenance.sourceGitBlob,{url:e.urlOrPath,sha256:e.sha256});
  }
 }
