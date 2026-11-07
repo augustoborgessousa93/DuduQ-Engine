@@ -65,7 +65,12 @@ jobs:
         run: bash qa/build-v26-topic-first-paint-qa.sh
 
       - name: Rebase without rewriting source hashes and verify semantic guards
+        shell: bash
         run: |
+          set -Eeuo pipefail
+          log=qa/results/y4m02-linux-semantic-gates.log
+          trap 'status=$?; if (( status != 0 )); then message=$(tail -n 40 "$log" | tr "\n" " " | cut -c1-6000); echo "::error file=qa/results/y4m02-linux-semantic-gates.log::$message"; fi' EXIT
+          exec > >(tee "$log") 2>&1
           node qa/prepare-y4m02-official-media-integration.mjs
           node qa/verify-y4m02-source-registry-rebase.mjs
           node --test qa/tests/verify-y4m02-source-registry-rebase.test.mjs
@@ -98,7 +103,13 @@ jobs:
           echo "NO_SOURCE_QUESTION_NO_PRODUCTION_NO_GOLD_MASTER_CHANGE"
 
       - name: Exercise all routes plus desktop mouse and tablet/mobile touch feedback
-        run: node qa/y4m02-official-media-browser-qa.mjs
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          log=qa/results/y4m02-linux-browser.log
+          trap 'status=$?; if (( status != 0 )); then message=$(tail -n 40 "$log" | tr "\n" " " | cut -c1-6000); echo "::error file=qa/results/y4m02-linux-browser.log::$message"; fi' EXIT
+          exec > >(tee "$log") 2>&1
+          node qa/y4m02-official-media-browser-qa.mjs
 
       - name: Audit the isolated overlay without promoting candidate metadata
         run: |
@@ -128,6 +139,8 @@ jobs:
             qa/results/y4m02-review-build.json
             qa/results/y4m02-review-media-closure-inventory.json
             qa/results/y4m02-review-module-closure.json
+            qa/results/y4m02-linux-semantic-gates.log
+            qa/results/y4m02-linux-browser.log
             qa/results/y4m02-official-media-browser/**
             qa/media-candidates/y4m02-official-20261106/integration-semantic-evidence.json
             qa/media-candidates/y4m02-official-20261106/source-registry-rebase.json
