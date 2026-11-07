@@ -166,4 +166,68 @@ assert.equal(grayIDs.length,9,'GRAY_ID_COUNT_CHANGED');
 assert(grayIDs.every(e=>e.provenance?.sourcePath==='Imagens Ilustrativa/Color_Cinza_Grey.png'));
 console.log('DUDUQ_GRAY_MEMORY_RELEASE_PINNED_QA_PASS=9_GRAY_AND_FAST_ACTION_BUTTONS');
 NODE
+# Authorized exact source-image release based on preview 071d149d.
+node --check qa/phase2-exact-five-clusters.mjs
+DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/phase2-exact-five-clusters.mjs --release
+node --input-type=module <<'NODE'
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {readFileSync,existsSync} from 'node:fs';
+const root='dist-pages/';
+const hash=b=>createHash('sha256').update(b).digest('hex');
+const expected='f7c8db9bae95722fa8255a1df5f1b55f4033ae93010ebfa2caef7c41591327f9';
+const registry='content/english/media/media-registry.json';
+const bytes=readFileSync(root+registry);
+assert.equal(hash(bytes),expected,'QA_071D149D_REGISTRY_SHA_MISMATCH');
+const r=JSON.parse(bytes),byId=new Map(r.entries.map(e=>[e.mediaId,e]));
+assert.equal(byId.size,r.entries.length,'REGISTRY_DUPLICATE_ID');
+assert.equal(r.entries.length,1166,'REGISTRY_ENTRY_COUNT_CHANGED');
+const report=JSON.parse(readFileSync('qa/results/exact-five-clusters.json'));
+assert.equal(report.newRegistrySha,expected,'CANDIDATE_NOT_IDENTICAL_TO_QA');
+assert.equal(report.previousRegistrySha,
+ '9d2aa04d5230c1b6419284a4e222cca7abf43bde2d72b971eaa0ce0a713c93fa',
+ 'PREVIOUS_LIVE_REGISTRY_NOT_PRESERVED');
+assert.equal(report.mediaIdsUpdated,10,'NOT_TEN_NEW_MEDIA_LINKS');
+assert.equal(report.affectedQuestionCount,15,'DIFFERENT_QUESTION_CONSUMERS');
+assert.equal(report.contracts,600,'CONTRACT_COUNT_CHANGED');
+assert.equal(report.images.length,5,'WRONG_IMAGE_SET');
+assert.equal(report.images.filter(x=>!x.reused).length,3,'WRONG_NEW_PNG_COUNT');
+assert.equal(report.images.filter(x=>x.reused).length,2,'WRONG_PNG_REUSE_COUNT');
+assert.deepEqual(report.concepts.slice().sort(),
+ ['blue square','brazil','headache','in the kitchen','rainy'].sort(),
+ 'UNEXPECTED_SOURCE_CONCEPTS');
+const manifest=new Map();
+for(const line of readFileSync(root+'.duduq-pages-manifest','utf8').trimEnd().split(/\r?\n/)){
+ const i=line.lastIndexOf(' ');assert(i>0);
+ const name=line.slice(0,i),digest=line.slice(i+1);
+ assert(!manifest.has(name),'DUPLICATE_MANIFEST_FILE:'+name);
+ manifest.set(name,digest);
+}
+assert.equal(manifest.get(registry),expected,'REGISTRY_MANIFEST_HASH_WRONG');
+for(const img of report.images){
+ assert.equal(img.sha256,manifest.get(img.url),'SOURCE_PNG_HASH_WRONG:'+img.filename);
+ assert.equal(hash(readFileSync(root+img.url)),img.sha256,'SOURCE_PNG_BYTES_WRONG:'+img.filename);
+ assert(img.width>=512&&img.height>=512,'SOURCE_PNG_RESOLUTION_WRONG');
+ for(const id of img.ids){
+  const e=byId.get(id);
+  assert(e,'TARGET_MEDIA_MISSING:'+id);
+  assert.equal(e.semantic,img.concept,'TARGET_CONCEPT_WRONG:'+id);
+  assert.equal(e.urlOrPath,img.url,'TARGET_PNG_WRONG:'+id);
+  assert.equal(e.sha256,img.sha256,'TARGET_BYTES_WRONG:'+id);
+ }
+}
+let count=0;
+for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
+ const q='content/english/year-'+y+'/module-'+String(m).padStart(2,'0')+'/questions.json';
+ const d=JSON.parse(readFileSync(root+q,'utf8'));
+ assert.equal(d.items.length,20,'QUESTION_CONTRACT_DIFFERENCE:'+q);
+ count+=d.items.length;
+}
+assert.equal(count,600);
+assert(!existsSync(root+'media-review/five-concepts.html'),'QA_GALLERY_LEAK_TO_PRODUCTION');
+assert(!existsSync(root+'media-review/five-concepts.json'),'QA_DATA_LEAK_TO_PRODUCTION');
+// Critical Memory Quest, gray, purple media and old production runtime are
+// already verified earlier in this build and must remain untouched.
+console.log('DUDUQ_FIVE_CONCEPT_RELEASE_SHA_MATCH_QA_071D149D=PASS');
+NODE
 echo "DUDUQ_RELEASE_ARTIFACT_269_BINDINGS_97_PNGS_AND_PROPORTIONAL_MEDIA_FIT"
