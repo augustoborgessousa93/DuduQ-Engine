@@ -418,8 +418,12 @@ const verification={
     nonVisualContractsPreserved1:true,productionApprovedFalse:true,integratedFalse:true},
   globalPendingMediaIds:1055,projectStatus:'INCOMPLETE',productionApproved:false,integrated:false,deployed:false
 };
+const checkpointPath=path.join(batchDir,'checkpoint.json');
+const priorCheckpoint=await exists(checkpointPath)?await readJson(checkpointPath):null;
+if(priorCheckpoint&&priorCheckpoint.moduleId!==moduleId)throw Error('Y4M05_CHECKPOINT_MODULE_DRIFT');
 const checkpoint={
-  schemaVersion:'DUDUQ_TWO_LANE_GENERATION_CHECKPOINT_V1',createdAt:plan.createdAt,updatedAt:completedAt,
+  schemaVersion:'DUDUQ_TWO_LANE_GENERATION_CHECKPOINT_V1',createdAt:plan.createdAt,
+  updatedAt:priorCheckpoint?.candidateBundleCommit?priorCheckpoint.updatedAt:completedAt,
   status:'Y4M05_GENERATION_CANDIDATES_COMPLETE',projectStatus:'INCOMPLETE',lane:'generation',moduleId,
   sourceAudit:{questions:20,pendingMediaIds:54,visualUsages:94,semanticConcepts:28,
     nonDuplicateCandidateAssets:26,nonVisualQuestionContracts:nonVisualQuestionContracts.map(item=>item.questionId),
@@ -432,9 +436,16 @@ const checkpoint={
   writeBoundary:batchRel,questionsModified:false,registryModified:false,runtimeModified:false,
   goldMastersModified:false,approvalFlagsModified:false,productionModified:false,mediaOverlaysApplied:false,
   existingReferencedAssetsRemoved:false,humanApprovalClaimed:false,productionApproved:false,
-  integrated:false,deployed:false,candidateBundleCommit:null,candidateReviewPushBranch:null,
-  candidateCheckpointCommit:null,remotePushStatus:'PENDING_SAFE_CANDIDATE_COMMIT',remotePushBlocker:null,
-  reviewBranch:null,nextAction:'COMMIT_AND_PUSH_SAFE_CANDIDATE_FILES_THEN_SCHEDULER_SELECT_OTHER_LANE',
+  integrated:false,deployed:false,
+  candidateBundleCommit:priorCheckpoint?.candidateBundleCommit??null,
+  candidateReviewPushBranch:priorCheckpoint?.candidateReviewPushBranch??null,
+  candidateCheckpointCommit:priorCheckpoint?.candidateCheckpointCommit??null,
+  remotePushStatus:priorCheckpoint?.remotePushStatus??'PENDING_SAFE_CANDIDATE_COMMIT',
+  remotePushBlocker:priorCheckpoint?.remotePushBlocker??null,
+  reviewBranch:priorCheckpoint?.reviewBranch??null,
+  remotePushVerifiedThroughCommit:priorCheckpoint?.remotePushVerifiedThroughCommit??null,
+  remotePushVerifiedAt:priorCheckpoint?.remotePushVerifiedAt??null,
+  nextAction:priorCheckpoint?.nextAction??'COMMIT_AND_PUSH_SAFE_CANDIDATE_FILES_THEN_SCHEDULER_SELECT_OTHER_LANE',
   completionClaim:'MODULE_CANDIDATE_SCOPE_ONLY_PROJECT_REMAINS_INCOMPLETE'
 };
 
