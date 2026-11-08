@@ -1,7 +1,7 @@
 {
   "schemaVersion": "DUDUQ_TWO_LANE_GENERATION_CHECKPOINT_V1",
   "createdAt": "2026-11-08T19:24:27.8647413Z",
-  "updatedAt": "2026-11-08T19:48:22.4428511Z",
+  "updatedAt": "2026-11-08T19:50:38.3625589Z",
   "status": "Y4M05_GENERATION_CANDIDATES_COMPLETE",
   "projectStatus": "INCOMPLETE",
   "lane": "generation",
@@ -52,12 +52,12 @@
   "deployed": false,
   "candidateBundleCommit": "6005500c25b5a855979acd3284f4d5d08250ab23",
   "candidateReviewPushBranch": "automation/duduq-y4m05-generation-20261108",
-  "candidateCheckpointCommit": null,
-  "remotePushStatus": "PENDING_PUSH",
+  "candidateCheckpointCommit": "cfb9358840ec1490e582b17dff89b20a0cbe0331",
+  "remotePushStatus": "PUSHED_AND_VERIFIED",
   "remotePushBlocker": null,
   "reviewBranch": "automation/duduq-y4m05-generation-20261108",
-  "remotePushVerifiedThroughCommit": null,
-  "remotePushVerifiedAt": null,
-  "nextAction": "PUSH_SAFE_CANDIDATE_BRANCH_THEN_SCHEDULER_SELECT_OTHER_LANE",
+  "remotePushVerifiedThroughCommit": "cfb9358840ec1490e582b17dff89b20a0cbe0331",
+  "remotePushVerifiedAt": "2026-11-08T19:50:38.3625589Z",
+  "nextAction": "SCHEDULER_SELECT_OTHER_LANE",
   "completionClaim": "MODULE_CANDIDATE_SCOPE_ONLY_PROJECT_REMAINS_INCOMPLETE"
 }

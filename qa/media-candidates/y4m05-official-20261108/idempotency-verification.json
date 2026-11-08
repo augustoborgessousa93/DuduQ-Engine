@@ -1,6 +1,6 @@
 {
   "schemaVersion": "DUDUQ_Y4M05_IDEMPOTENCY_VERIFICATION_V1",
-  "verifiedAt": "2026-11-08T19:39:20.7749891Z",
+  "verifiedAt": "2026-11-08T19:50:38.3625589Z",
   "moduleId": "Y4M05",
   "lane": "generation",
   "status": "IDEMPOTENT_PASS",
@@ -10,8 +10,8 @@
   "artifactCountAfter": 78,
   "changedArtifactCount": 0,
   "removedArtifactCount": 0,
-  "checkpointSha256Before": "18dc18aae9a7deb37c48b12a228a374d73b9714f427fa57d3bb7252f54cce7ad",
-  "checkpointSha256After": "18dc18aae9a7deb37c48b12a228a374d73b9714f427fa57d3bb7252f54cce7ad",
+  "checkpointSha256Before": "9408a95bad550a66f7207c967cac48d6c2ba5ece5739ab748cc4ea4bb54bc617",
+  "checkpointSha256After": "9408a95bad550a66f7207c967cac48d6c2ba5ece5739ab748cc4ea4bb54bc617",
   "batchManifestSha256Before": "420be3b152eb0de9b7cd4bc9c8e1650c8a41ef84ee4221dbd9d3349fa2eec1b1",
   "batchManifestSha256After": "420be3b152eb0de9b7cd4bc9c8e1650c8a41ef84ee4221dbd9d3349fa2eec1b1",
   "preparationScriptSha256": "79f1183b97d5a718e0aaf48ef8ebc6faae914d46836a50c167c487f5bdc48fa1",
