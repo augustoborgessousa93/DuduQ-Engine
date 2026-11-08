@@ -353,4 +353,63 @@ assert(!existsSync(root+'media-review/safe17-final90-20261107.html'),'QA_PREVIEW
 assert(!existsSync(root+'media-review/safe17-final90-20261107.json'),'QA_PREVIEW_DATA_NOT_ALLOWED_IN_PROD');
 console.log('DUDUQ_SAFE17_RELEASE_QA_EXACT_SHA_VERIFIED=PASS');
 NODE
+# Exact 4 school media links from QA preview 2349beb3.
+node --check qa/phase2-school-wardrobe-review.mjs
+DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/phase2-school-wardrobe-review.mjs --release
+node --input-type=module <<'NODE'
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {readFileSync,existsSync} from 'node:fs';
+const root='dist-pages/',sha=b=>createHash('sha256').update(b).digest('hex');
+const regRel='content/english/media/media-registry.json';
+const expected='ae9e3142fdf7330534abb063f57bf7ed69f33b8e41ac13a2cc87d5e5889c692a';
+const before='eea1cd3f6cff1cda4a18c3fa541786446a16b98524c35e27ced2c0db9b2aff21';
+const regBytes=readFileSync(root+regRel);
+assert.equal(sha(regBytes),expected,'REGISTRY_DIFFERENT_FROM_SCHOOL_PREVIEW');
+const reg=JSON.parse(regBytes);
+const byId=new Map(reg.entries.map(e=>[e.mediaId,e]));
+assert.equal(reg.entries.length,1166,'ENTRY_COUNT_CHANGED');
+assert.equal(byId.size,1166,'DUPLICATE_REGISTRY_IDS');
+const report=JSON.parse(readFileSync('qa/results/school-only-review-20261107.json'));
+assert.equal(report.previousRegistrySha,before,'PUBLISHED_BASE_REGISTRY_CHANGED');
+assert.equal(report.newRegistrySha,expected,'QA_PUBLISHED_REGISTRY_MISMATCH');
+assert.deepEqual(report.concepts,['school'],'UNAPPROVED_CONCEPT');
+assert.equal(report.mediaIdsUpdated,4);
+assert.equal(report.activeMediaIds,4);
+assert.equal(report.unusedTargetIds.length,0);
+assert.equal(report.affectedQuestionCount,12);
+assert.equal(report.images.length,1);
+assert.equal(report.contracts,600);
+assert.equal(report.images[0].filename,'Two schools — Duas escolas.png');
+assert.equal(report.images[0].sha,'702e16240ccdfd138d545e6725487b0cc3bc2848');
+const manifest=new Map();
+for(const line of readFileSync(root+'.duduq-pages-manifest','utf8').trimEnd().split(/\r?\n/)){
+ const index=line.lastIndexOf(' ');assert(index>0);
+ const k=line.slice(0,index),v=line.slice(index+1);
+ assert(!manifest.has(k),'DUPLICATED_MANIFEST_ENTRY:'+k);manifest.set(k,v);
+}
+assert.equal(manifest.get(regRel),expected,'REGISTRY_SHA_NOT_MANIFESTED');
+for(const img of report.images){
+ assert(img.width>=512&&img.height>=512);
+ assert.equal(sha(readFileSync(root+img.url)),img.sha256);
+ assert.equal(manifest.get(img.url),img.sha256);
+ for(const id of img.ids){
+  const m=byId.get(id);assert(m,'TARGET_MISSING:'+id);
+  assert.equal(m.semantic,'school','WRONG_CONCEPT:'+id);
+  assert.equal(m.urlOrPath,img.url,'WRONG_SOURCE:'+id);
+  assert.equal(m.sha256,img.sha256,'WRONG_BYTES:'+id);
+ }
+}
+let n=0;
+for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
+ const p='content/english/year-'+y+'/module-'+String(m).padStart(2,'0')+'/questions.json';
+ const d=JSON.parse(readFileSync(root+p));
+ assert.equal(d.items.length,20,'QUESTION_CHANGED:'+p);
+ n+=d.items.length;
+}
+assert.equal(n,600);
+assert(!existsSync(root+'media-review/school-only-review-20261107.html'),'QA_GALLERY_IN_PROD');
+assert(!existsSync(root+'media-review/school-only-review-20261107.json'),'QA_REPORT_IN_PROD');
+console.log('DUDUQ_SCHOOL_RELEASE_IDENTICAL_TO_PREVIEW_2349BEB3=PASS');
+NODE
 echo "DUDUQ_RELEASE_ARTIFACT_269_BINDINGS_97_PNGS_AND_PROPORTIONAL_MEDIA_FIT"
