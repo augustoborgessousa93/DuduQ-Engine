@@ -1,0 +1,1818 @@
+{
+  "schemaVersion": "DUDUQ_PNG_ALPHA_COMPONENT_AUDIT_V1",
+  "mode": "READ_ONLY_NO_IMAGE_MUTATION",
+  "createdAt": "2026-11-08T01:36:13.0061667Z",
+  "candidateDir": "qa/media-candidates/y4m04-official-20261107",
+  "alphaThreshold": 64,
+  "assetCount": 14,
+  "assetsWithMicroOpaqueIslands": 0,
+  "assets": [
+    {
+      "concept": "basketball",
+      "file": "images/DUDUQ-Y4M04-BASKETBALL.png",
+      "sha256": "4ac75f8603fd07e2c3bb632b875eeaceb50b0cb97d3808ae85a53eed08eea213",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 488350,
+      "componentCount": 1,
+      "largestComponentPixels": 488350,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 48,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 488350,
+          "maxAlpha": 255,
+          "meanAlpha": 250.8,
+          "bbox": {
+            "x": 100,
+            "y": 17,
+            "width": 1021,
+            "height": 1206
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 485250,
+          "maxAlpha": 255,
+          "meanAlpha": 251.79,
+          "bbox": {
+            "x": 101,
+            "y": 17,
+            "width": 1020,
+            "height": 1206
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 100,
+        "y": 17,
+        "width": 1021,
+        "height": 1206
+      },
+      "safeMargins": {
+        "left": 100,
+        "top": 17,
+        "right": 133,
+        "bottom": 31
+      }
+    },
+    {
+      "concept": "eight",
+      "file": "images/DUDUQ-Y4M04-EIGHT.png",
+      "sha256": "1c65961edc0e78151cf197f94de1b93c5c8705a4c7d0c83c251c48bbac1627ba",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 569360,
+      "componentCount": 8,
+      "largestComponentPixels": 71791,
+      "largestComponentCoverage": 0.1260907,
+      "secondaryComponentCount": 7,
+      "microOpaqueIslandPixelLimit": 56,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 71791,
+          "maxAlpha": 255,
+          "meanAlpha": 250.47,
+          "bbox": {
+            "x": 938,
+            "y": 643,
+            "width": 290,
+            "height": 345
+          }
+        },
+        {
+          "pixels": 71743,
+          "maxAlpha": 255,
+          "meanAlpha": 250.49,
+          "bbox": {
+            "x": 938,
+            "y": 258,
+            "width": 290,
+            "height": 344
+          }
+        },
+        {
+          "pixels": 71542,
+          "maxAlpha": 255,
+          "meanAlpha": 250.44,
+          "bbox": {
+            "x": 24,
+            "y": 257,
+            "width": 290,
+            "height": 345
+          }
+        },
+        {
+          "pixels": 71345,
+          "maxAlpha": 255,
+          "meanAlpha": 250.47,
+          "bbox": {
+            "x": 24,
+            "y": 643,
+            "width": 289,
+            "height": 345
+          }
+        },
+        {
+          "pixels": 70884,
+          "maxAlpha": 255,
+          "meanAlpha": 250.35,
+          "bbox": {
+            "x": 632,
+            "y": 258,
+            "width": 287,
+            "height": 344
+          }
+        },
+        {
+          "pixels": 70878,
+          "maxAlpha": 255,
+          "meanAlpha": 250.44,
+          "bbox": {
+            "x": 632,
+            "y": 643,
+            "width": 287,
+            "height": 345
+          }
+        },
+        {
+          "pixels": 70683,
+          "maxAlpha": 255,
+          "meanAlpha": 250.52,
+          "bbox": {
+            "x": 329,
+            "y": 643,
+            "width": 287,
+            "height": 345
+          }
+        },
+        {
+          "pixels": 70494,
+          "maxAlpha": 255,
+          "meanAlpha": 250.52,
+          "bbox": {
+            "x": 330,
+            "y": 258,
+            "width": 286,
+            "height": 344
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 8,
+      "coreComponents": [
+        {
+          "pixels": 71319,
+          "maxAlpha": 255,
+          "meanAlpha": 251.5,
+          "bbox": {
+            "x": 938,
+            "y": 643,
+            "width": 290,
+            "height": 345
+          }
+        },
+        {
+          "pixels": 71263,
+          "maxAlpha": 255,
+          "meanAlpha": 251.54,
+          "bbox": {
+            "x": 938,
+            "y": 258,
+            "width": 290,
+            "height": 344
+          }
+        },
+        {
+          "pixels": 71068,
+          "maxAlpha": 255,
+          "meanAlpha": 251.47,
+          "bbox": {
+            "x": 25,
+            "y": 258,
+            "width": 288,
+            "height": 344
+          }
+        },
+        {
+          "pixels": 70877,
+          "maxAlpha": 255,
+          "meanAlpha": 251.5,
+          "bbox": {
+            "x": 24,
+            "y": 643,
+            "width": 289,
+            "height": 344
+          }
+        },
+        {
+          "pixels": 70415,
+          "maxAlpha": 255,
+          "meanAlpha": 251.39,
+          "bbox": {
+            "x": 632,
+            "y": 258,
+            "width": 287,
+            "height": 343
+          }
+        },
+        {
+          "pixels": 70399,
+          "maxAlpha": 255,
+          "meanAlpha": 251.5,
+          "bbox": {
+            "x": 632,
+            "y": 643,
+            "width": 287,
+            "height": 344
+          }
+        },
+        {
+          "pixels": 70185,
+          "maxAlpha": 255,
+          "meanAlpha": 251.64,
+          "bbox": {
+            "x": 330,
+            "y": 644,
+            "width": 285,
+            "height": 343
+          }
+        },
+        {
+          "pixels": 70008,
+          "maxAlpha": 255,
+          "meanAlpha": 251.6,
+          "bbox": {
+            "x": 330,
+            "y": 258,
+            "width": 285,
+            "height": 343
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 24,
+        "y": 257,
+        "width": 1204,
+        "height": 731
+      },
+      "safeMargins": {
+        "left": 24,
+        "top": 257,
+        "right": 26,
+        "bottom": 266
+      }
+    },
+    {
+      "concept": "five",
+      "file": "images/DUDUQ-Y4M04-FIVE.png",
+      "sha256": "b12f817867e3fa002e1468cadbfdda80932b8965ae74e1255db41016f9b57eee",
+      "width": 1536,
+      "height": 1536,
+      "alphaThreshold": 64,
+      "visiblePixels": 744862,
+      "componentCount": 5,
+      "largestComponentPixels": 151792,
+      "largestComponentCoverage": 0.2037854,
+      "secondaryComponentCount": 4,
+      "microOpaqueIslandPixelLimit": 74,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 151792,
+          "maxAlpha": 254,
+          "meanAlpha": 251.79,
+          "bbox": {
+            "x": 804,
+            "y": 784,
+            "width": 449,
+            "height": 446
+          }
+        },
+        {
+          "pixels": 149499,
+          "maxAlpha": 254,
+          "meanAlpha": 251.73,
+          "bbox": {
+            "x": 274,
+            "y": 784,
+            "width": 446,
+            "height": 447
+          }
+        },
+        {
+          "pixels": 148253,
+          "maxAlpha": 254,
+          "meanAlpha": 251.82,
+          "bbox": {
+            "x": 544,
+            "y": 308,
+            "width": 444,
+            "height": 451
+          }
+        },
+        {
+          "pixels": 147924,
+          "maxAlpha": 254,
+          "meanAlpha": 251.74,
+          "bbox": {
+            "x": 1051,
+            "y": 309,
+            "width": 443,
+            "height": 449
+          }
+        },
+        {
+          "pixels": 147394,
+          "maxAlpha": 254,
+          "meanAlpha": 251.77,
+          "bbox": {
+            "x": 36,
+            "y": 308,
+            "width": 441,
+            "height": 451
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 5,
+      "coreComponents": [
+        {
+          "pixels": 151307,
+          "maxAlpha": 254,
+          "meanAlpha": 252.29,
+          "bbox": {
+            "x": 804,
+            "y": 784,
+            "width": 448,
+            "height": 446
+          }
+        },
+        {
+          "pixels": 148930,
+          "maxAlpha": 254,
+          "meanAlpha": 252.34,
+          "bbox": {
+            "x": 275,
+            "y": 784,
+            "width": 445,
+            "height": 447
+          }
+        },
+        {
+          "pixels": 147739,
+          "maxAlpha": 254,
+          "meanAlpha": 252.38,
+          "bbox": {
+            "x": 544,
+            "y": 308,
+            "width": 443,
+            "height": 451
+          }
+        },
+        {
+          "pixels": 147380,
+          "maxAlpha": 254,
+          "meanAlpha": 252.32,
+          "bbox": {
+            "x": 1051,
+            "y": 309,
+            "width": 443,
+            "height": 449
+          }
+        },
+        {
+          "pixels": 146855,
+          "maxAlpha": 254,
+          "meanAlpha": 252.35,
+          "bbox": {
+            "x": 37,
+            "y": 309,
+            "width": 440,
+            "height": 450
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 36,
+        "y": 308,
+        "width": 1458,
+        "height": 923
+      },
+      "safeMargins": {
+        "left": 36,
+        "top": 308,
+        "right": 42,
+        "bottom": 305
+      }
+    },
+    {
+      "concept": "four",
+      "file": "images/DUDUQ-Y4M04-FOUR.png",
+      "sha256": "d7e0f1fd9f5b565a62b75b0dcf8f07fb257096a33947c6ec6ee1fadd87c61505",
+      "width": 1536,
+      "height": 1536,
+      "alphaThreshold": 64,
+      "visiblePixels": 807591,
+      "componentCount": 4,
+      "largestComponentPixels": 203428,
+      "largestComponentCoverage": 0.25189483,
+      "secondaryComponentCount": 3,
+      "microOpaqueIslandPixelLimit": 80,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 203428,
+          "maxAlpha": 255,
+          "meanAlpha": 251.49,
+          "bbox": {
+            "x": 829,
+            "y": 212,
+            "width": 527,
+            "height": 534
+          }
+        },
+        {
+          "pixels": 201909,
+          "maxAlpha": 255,
+          "meanAlpha": 251.5,
+          "bbox": {
+            "x": 208,
+            "y": 786,
+            "width": 525,
+            "height": 528
+          }
+        },
+        {
+          "pixels": 201537,
+          "maxAlpha": 255,
+          "meanAlpha": 251.44,
+          "bbox": {
+            "x": 834,
+            "y": 784,
+            "width": 521,
+            "height": 531
+          }
+        },
+        {
+          "pixels": 200717,
+          "maxAlpha": 255,
+          "meanAlpha": 251.49,
+          "bbox": {
+            "x": 217,
+            "y": 211,
+            "width": 513,
+            "height": 536
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 4,
+      "coreComponents": [
+        {
+          "pixels": 202664,
+          "maxAlpha": 255,
+          "meanAlpha": 252.07,
+          "bbox": {
+            "x": 830,
+            "y": 212,
+            "width": 525,
+            "height": 534
+          }
+        },
+        {
+          "pixels": 201140,
+          "maxAlpha": 255,
+          "meanAlpha": 252.1,
+          "bbox": {
+            "x": 208,
+            "y": 787,
+            "width": 524,
+            "height": 527
+          }
+        },
+        {
+          "pixels": 200755,
+          "maxAlpha": 255,
+          "meanAlpha": 252.05,
+          "bbox": {
+            "x": 834,
+            "y": 784,
+            "width": 520,
+            "height": 531
+          }
+        },
+        {
+          "pixels": 199938,
+          "maxAlpha": 255,
+          "meanAlpha": 252.1,
+          "bbox": {
+            "x": 217,
+            "y": 212,
+            "width": 513,
+            "height": 534
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 208,
+        "y": 211,
+        "width": 1148,
+        "height": 1104
+      },
+      "safeMargins": {
+        "left": 208,
+        "top": 211,
+        "right": 180,
+        "bottom": 221
+      }
+    },
+    {
+      "concept": "nine",
+      "file": "images/DUDUQ-Y4M04-NINE.png",
+      "sha256": "a49f122a9e0967699c4602ce5cd294ad228dff16bd644e9d906b26e9d87eae5c",
+      "width": 1536,
+      "height": 1536,
+      "alphaThreshold": 64,
+      "visiblePixels": 881347,
+      "componentCount": 9,
+      "largestComponentPixels": 99131,
+      "largestComponentCoverage": 0.1124767,
+      "secondaryComponentCount": 8,
+      "microOpaqueIslandPixelLimit": 88,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 99131,
+          "maxAlpha": 255,
+          "meanAlpha": 251.43,
+          "bbox": {
+            "x": 204,
+            "y": 235,
+            "width": 370,
+            "height": 357
+          }
+        },
+        {
+          "pixels": 98641,
+          "maxAlpha": 255,
+          "meanAlpha": 251.49,
+          "bbox": {
+            "x": 972,
+            "y": 236,
+            "width": 364,
+            "height": 357
+          }
+        },
+        {
+          "pixels": 98545,
+          "maxAlpha": 255,
+          "meanAlpha": 251.41,
+          "bbox": {
+            "x": 202,
+            "y": 605,
+            "width": 370,
+            "height": 352
+          }
+        },
+        {
+          "pixels": 98539,
+          "maxAlpha": 255,
+          "meanAlpha": 251.4,
+          "bbox": {
+            "x": 970,
+            "y": 605,
+            "width": 369,
+            "height": 352
+          }
+        },
+        {
+          "pixels": 98015,
+          "maxAlpha": 255,
+          "meanAlpha": 251.48,
+          "bbox": {
+            "x": 587,
+            "y": 237,
+            "width": 363,
+            "height": 355
+          }
+        },
+        {
+          "pixels": 97959,
+          "maxAlpha": 255,
+          "meanAlpha": 251.4,
+          "bbox": {
+            "x": 585,
+            "y": 968,
+            "width": 365,
+            "height": 352
+          }
+        },
+        {
+          "pixels": 97223,
+          "maxAlpha": 255,
+          "meanAlpha": 251.27,
+          "bbox": {
+            "x": 204,
+            "y": 970,
+            "width": 368,
+            "height": 350
+          }
+        },
+        {
+          "pixels": 96848,
+          "maxAlpha": 255,
+          "meanAlpha": 251.49,
+          "bbox": {
+            "x": 587,
+            "y": 605,
+            "width": 362,
+            "height": 352
+          }
+        },
+        {
+          "pixels": 96446,
+          "maxAlpha": 255,
+          "meanAlpha": 251.38,
+          "bbox": {
+            "x": 972,
+            "y": 969,
+            "width": 362,
+            "height": 350
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 9,
+      "coreComponents": [
+        {
+          "pixels": 98690,
+          "maxAlpha": 255,
+          "meanAlpha": 252.13,
+          "bbox": {
+            "x": 204,
+            "y": 235,
+            "width": 369,
+            "height": 356
+          }
+        },
+        {
+          "pixels": 98224,
+          "maxAlpha": 255,
+          "meanAlpha": 252.16,
+          "bbox": {
+            "x": 973,
+            "y": 237,
+            "width": 363,
+            "height": 356
+          }
+        },
+        {
+          "pixels": 98103,
+          "maxAlpha": 255,
+          "meanAlpha": 252.1,
+          "bbox": {
+            "x": 971,
+            "y": 606,
+            "width": 367,
+            "height": 351
+          }
+        },
+        {
+          "pixels": 98096,
+          "maxAlpha": 255,
+          "meanAlpha": 252.12,
+          "bbox": {
+            "x": 203,
+            "y": 605,
+            "width": 369,
+            "height": 352
+          }
+        },
+        {
+          "pixels": 97583,
+          "maxAlpha": 255,
+          "meanAlpha": 252.18,
+          "bbox": {
+            "x": 587,
+            "y": 237,
+            "width": 362,
+            "height": 355
+          }
+        },
+        {
+          "pixels": 97519,
+          "maxAlpha": 255,
+          "meanAlpha": 252.11,
+          "bbox": {
+            "x": 586,
+            "y": 968,
+            "width": 364,
+            "height": 352
+          }
+        },
+        {
+          "pixels": 96736,
+          "maxAlpha": 255,
+          "meanAlpha": 252.06,
+          "bbox": {
+            "x": 205,
+            "y": 970,
+            "width": 367,
+            "height": 349
+          }
+        },
+        {
+          "pixels": 96444,
+          "maxAlpha": 255,
+          "meanAlpha": 252.14,
+          "bbox": {
+            "x": 587,
+            "y": 606,
+            "width": 362,
+            "height": 351
+          }
+        },
+        {
+          "pixels": 96000,
+          "maxAlpha": 255,
+          "meanAlpha": 252.11,
+          "bbox": {
+            "x": 973,
+            "y": 970,
+            "width": 360,
+            "height": 349
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 202,
+        "y": 235,
+        "width": 1137,
+        "height": 1085
+      },
+      "safeMargins": {
+        "left": 202,
+        "top": 235,
+        "right": 197,
+        "bottom": 216
+      }
+    },
+    {
+      "concept": "one",
+      "file": "images/DUDUQ-Y4M04-ONE.png",
+      "sha256": "e65ad687b4d68c317b065a9fce4a7d3dfbd7cffbe45835899dd9826ccaf4d8f5",
+      "width": 1536,
+      "height": 1536,
+      "alphaThreshold": 64,
+      "visiblePixels": 781884,
+      "componentCount": 1,
+      "largestComponentPixels": 781884,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 78,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 781884,
+          "maxAlpha": 255,
+          "meanAlpha": 252.24,
+          "bbox": {
+            "x": 274,
+            "y": 219,
+            "width": 988,
+            "height": 1086
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 780390,
+          "maxAlpha": 255,
+          "meanAlpha": 252.54,
+          "bbox": {
+            "x": 275,
+            "y": 220,
+            "width": 987,
+            "height": 1085
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 274,
+        "y": 219,
+        "width": 988,
+        "height": 1086
+      },
+      "safeMargins": {
+        "left": 274,
+        "top": 219,
+        "right": 274,
+        "bottom": 231
+      }
+    },
+    {
+      "concept": "seven",
+      "file": "images/DUDUQ-Y4M04-SEVEN.png",
+      "sha256": "b675fb761c6054b737cf35ba6b9d36e9fe50ed7a317ae07e4a3dc30000272667",
+      "width": 1536,
+      "height": 1536,
+      "alphaThreshold": 64,
+      "visiblePixels": 846081,
+      "componentCount": 6,
+      "largestComponentPixels": 230812,
+      "largestComponentCoverage": 0.2728013,
+      "secondaryComponentCount": 5,
+      "microOpaqueIslandPixelLimit": 84,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 230812,
+          "maxAlpha": 255,
+          "meanAlpha": 251.42,
+          "bbox": {
+            "x": 809,
+            "y": 604,
+            "width": 577,
+            "height": 753
+          }
+        },
+        {
+          "pixels": 134956,
+          "maxAlpha": 255,
+          "meanAlpha": 251.5,
+          "bbox": {
+            "x": 792,
+            "y": 182,
+            "width": 433,
+            "height": 422
+          }
+        },
+        {
+          "pixels": 134166,
+          "maxAlpha": 255,
+          "meanAlpha": 251.51,
+          "bbox": {
+            "x": 308,
+            "y": 183,
+            "width": 429,
+            "height": 421
+          }
+        },
+        {
+          "pixels": 116640,
+          "maxAlpha": 255,
+          "meanAlpha": 251.41,
+          "bbox": {
+            "x": 567,
+            "y": 606,
+            "width": 400,
+            "height": 386
+          }
+        },
+        {
+          "pixels": 115636,
+          "maxAlpha": 255,
+          "meanAlpha": 251.4,
+          "bbox": {
+            "x": 142,
+            "y": 608,
+            "width": 397,
+            "height": 384
+          }
+        },
+        {
+          "pixels": 113871,
+          "maxAlpha": 255,
+          "meanAlpha": 251.53,
+          "bbox": {
+            "x": 339,
+            "y": 987,
+            "width": 406,
+            "height": 371
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 7,
+      "coreComponents": [
+        {
+          "pixels": 134378,
+          "maxAlpha": 255,
+          "meanAlpha": 252.17,
+          "bbox": {
+            "x": 792,
+            "y": 182,
+            "width": 432,
+            "height": 421
+          }
+        },
+        {
+          "pixels": 133609,
+          "maxAlpha": 255,
+          "meanAlpha": 252.16,
+          "bbox": {
+            "x": 308,
+            "y": 183,
+            "width": 429,
+            "height": 420
+          }
+        },
+        {
+          "pixels": 116848,
+          "maxAlpha": 255,
+          "meanAlpha": 252.09,
+          "bbox": {
+            "x": 991,
+            "y": 604,
+            "width": 395,
+            "height": 388
+          }
+        },
+        {
+          "pixels": 116120,
+          "maxAlpha": 255,
+          "meanAlpha": 252.11,
+          "bbox": {
+            "x": 567,
+            "y": 607,
+            "width": 400,
+            "height": 384
+          }
+        },
+        {
+          "pixels": 115117,
+          "maxAlpha": 255,
+          "meanAlpha": 252.11,
+          "bbox": {
+            "x": 143,
+            "y": 608,
+            "width": 396,
+            "height": 384
+          }
+        },
+        {
+          "pixels": 113417,
+          "maxAlpha": 255,
+          "meanAlpha": 252.16,
+          "bbox": {
+            "x": 339,
+            "y": 987,
+            "width": 406,
+            "height": 371
+          }
+        },
+        {
+          "pixels": 112938,
+          "maxAlpha": 255,
+          "meanAlpha": 252.16,
+          "bbox": {
+            "x": 810,
+            "y": 988,
+            "width": 397,
+            "height": 369
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 142,
+        "y": 182,
+        "width": 1244,
+        "height": 1176
+      },
+      "safeMargins": {
+        "left": 142,
+        "top": 182,
+        "right": 150,
+        "bottom": 178
+      }
+    },
+    {
+      "concept": "six",
+      "file": "images/DUDUQ-Y4M04-SIX.png",
+      "sha256": "d6482204a9c9caf61913193ac2369abd3e3681226568a0b4262fed3460faef66",
+      "width": 1536,
+      "height": 1536,
+      "alphaThreshold": 64,
+      "visiblePixels": 926730,
+      "componentCount": 6,
+      "largestComponentPixels": 158599,
+      "largestComponentCoverage": 0.1711383,
+      "secondaryComponentCount": 5,
+      "microOpaqueIslandPixelLimit": 92,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 158599,
+          "maxAlpha": 254,
+          "meanAlpha": 251.54,
+          "bbox": {
+            "x": 1032,
+            "y": 783,
+            "width": 464,
+            "height": 452
+          }
+        },
+        {
+          "pixels": 155480,
+          "maxAlpha": 254,
+          "meanAlpha": 251.51,
+          "bbox": {
+            "x": 39,
+            "y": 782,
+            "width": 458,
+            "height": 453
+          }
+        },
+        {
+          "pixels": 154322,
+          "maxAlpha": 254,
+          "meanAlpha": 251.49,
+          "bbox": {
+            "x": 533,
+            "y": 785,
+            "width": 457,
+            "height": 450
+          }
+        },
+        {
+          "pixels": 153884,
+          "maxAlpha": 254,
+          "meanAlpha": 251.47,
+          "bbox": {
+            "x": 532,
+            "y": 292,
+            "width": 449,
+            "height": 457
+          }
+        },
+        {
+          "pixels": 153625,
+          "maxAlpha": 254,
+          "meanAlpha": 251.45,
+          "bbox": {
+            "x": 1033,
+            "y": 294,
+            "width": 445,
+            "height": 456
+          }
+        },
+        {
+          "pixels": 150820,
+          "maxAlpha": 254,
+          "meanAlpha": 251.47,
+          "bbox": {
+            "x": 45,
+            "y": 294,
+            "width": 442,
+            "height": 455
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 6,
+      "coreComponents": [
+        {
+          "pixels": 158034,
+          "maxAlpha": 254,
+          "meanAlpha": 252.1,
+          "bbox": {
+            "x": 1032,
+            "y": 783,
+            "width": 463,
+            "height": 451
+          }
+        },
+        {
+          "pixels": 154867,
+          "maxAlpha": 254,
+          "meanAlpha": 252.13,
+          "bbox": {
+            "x": 40,
+            "y": 783,
+            "width": 457,
+            "height": 451
+          }
+        },
+        {
+          "pixels": 153729,
+          "maxAlpha": 254,
+          "meanAlpha": 252.1,
+          "bbox": {
+            "x": 534,
+            "y": 785,
+            "width": 456,
+            "height": 449
+          }
+        },
+        {
+          "pixels": 153311,
+          "maxAlpha": 254,
+          "meanAlpha": 252.06,
+          "bbox": {
+            "x": 532,
+            "y": 293,
+            "width": 449,
+            "height": 456
+          }
+        },
+        {
+          "pixels": 153058,
+          "maxAlpha": 254,
+          "meanAlpha": 252.03,
+          "bbox": {
+            "x": 1033,
+            "y": 294,
+            "width": 444,
+            "height": 455
+          }
+        },
+        {
+          "pixels": 150251,
+          "maxAlpha": 254,
+          "meanAlpha": 252.06,
+          "bbox": {
+            "x": 45,
+            "y": 294,
+            "width": 442,
+            "height": 454
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 39,
+        "y": 292,
+        "width": 1457,
+        "height": 943
+      },
+      "safeMargins": {
+        "left": 39,
+        "top": 292,
+        "right": 40,
+        "bottom": 301
+      }
+    },
+    {
+      "concept": "soccer",
+      "file": "images/DUDUQ-Y4M04-SOCCER.png",
+      "sha256": "918d0df2f2d23f483584eae790ec7473e2ea94314520fcb46e1a0f66799ff656",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 441572,
+      "componentCount": 1,
+      "largestComponentPixels": 441572,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 44,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 441572,
+          "maxAlpha": 255,
+          "meanAlpha": 250.97,
+          "bbox": {
+            "x": 30,
+            "y": 25,
+            "width": 1198,
+            "height": 1212
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 438956,
+          "maxAlpha": 255,
+          "meanAlpha": 251.9,
+          "bbox": {
+            "x": 30,
+            "y": 25,
+            "width": 1198,
+            "height": 1211
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 30,
+        "y": 25,
+        "width": 1198,
+        "height": 1212
+      },
+      "safeMargins": {
+        "left": 30,
+        "top": 25,
+        "right": 26,
+        "bottom": 17
+      }
+    },
+    {
+      "concept": "ten",
+      "file": "images/DUDUQ-Y4M04-TEN.png",
+      "sha256": "3c2743e855fa04bb953e098f769de12a0f8305cf6e425ae41690ae9e5ab74f65",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 477693,
+      "componentCount": 10,
+      "largestComponentPixels": 48130,
+      "largestComponentCoverage": 0.10075509,
+      "secondaryComponentCount": 9,
+      "microOpaqueIslandPixelLimit": 47,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 48130,
+          "maxAlpha": 255,
+          "meanAlpha": 249.79,
+          "bbox": {
+            "x": 507,
+            "y": 667,
+            "width": 235,
+            "height": 290
+          }
+        },
+        {
+          "pixels": 47947,
+          "maxAlpha": 255,
+          "meanAlpha": 249.91,
+          "bbox": {
+            "x": 752,
+            "y": 667,
+            "width": 236,
+            "height": 290
+          }
+        },
+        {
+          "pixels": 47884,
+          "maxAlpha": 255,
+          "meanAlpha": 249.86,
+          "bbox": {
+            "x": 996,
+            "y": 306,
+            "width": 236,
+            "height": 285
+          }
+        },
+        {
+          "pixels": 47878,
+          "maxAlpha": 255,
+          "meanAlpha": 250.12,
+          "bbox": {
+            "x": 20,
+            "y": 305,
+            "width": 236,
+            "height": 286
+          }
+        },
+        {
+          "pixels": 47840,
+          "maxAlpha": 255,
+          "meanAlpha": 249.91,
+          "bbox": {
+            "x": 996,
+            "y": 667,
+            "width": 236,
+            "height": 290
+          }
+        },
+        {
+          "pixels": 47768,
+          "maxAlpha": 255,
+          "meanAlpha": 249.89,
+          "bbox": {
+            "x": 20,
+            "y": 666,
+            "width": 235,
+            "height": 291
+          }
+        },
+        {
+          "pixels": 47708,
+          "maxAlpha": 255,
+          "meanAlpha": 249.91,
+          "bbox": {
+            "x": 264,
+            "y": 668,
+            "width": 235,
+            "height": 289
+          }
+        },
+        {
+          "pixels": 47599,
+          "maxAlpha": 255,
+          "meanAlpha": 249.94,
+          "bbox": {
+            "x": 752,
+            "y": 306,
+            "width": 235,
+            "height": 285
+          }
+        },
+        {
+          "pixels": 47581,
+          "maxAlpha": 255,
+          "meanAlpha": 249.89,
+          "bbox": {
+            "x": 507,
+            "y": 305,
+            "width": 235,
+            "height": 286
+          }
+        },
+        {
+          "pixels": 47358,
+          "maxAlpha": 255,
+          "meanAlpha": 249.88,
+          "bbox": {
+            "x": 264,
+            "y": 305,
+            "width": 234,
+            "height": 286
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 10,
+      "coreComponents": [
+        {
+          "pixels": 47699,
+          "maxAlpha": 255,
+          "meanAlpha": 251.18,
+          "bbox": {
+            "x": 508,
+            "y": 667,
+            "width": 234,
+            "height": 289
+          }
+        },
+        {
+          "pixels": 47541,
+          "maxAlpha": 255,
+          "meanAlpha": 251.22,
+          "bbox": {
+            "x": 752,
+            "y": 668,
+            "width": 235,
+            "height": 288
+          }
+        },
+        {
+          "pixels": 47520,
+          "maxAlpha": 255,
+          "meanAlpha": 251.29,
+          "bbox": {
+            "x": 20,
+            "y": 305,
+            "width": 235,
+            "height": 286
+          }
+        },
+        {
+          "pixels": 47505,
+          "maxAlpha": 255,
+          "meanAlpha": 251.11,
+          "bbox": {
+            "x": 996,
+            "y": 307,
+            "width": 236,
+            "height": 284
+          }
+        },
+        {
+          "pixels": 47401,
+          "maxAlpha": 255,
+          "meanAlpha": 251.33,
+          "bbox": {
+            "x": 997,
+            "y": 667,
+            "width": 235,
+            "height": 289
+          }
+        },
+        {
+          "pixels": 47363,
+          "maxAlpha": 255,
+          "meanAlpha": 251.2,
+          "bbox": {
+            "x": 20,
+            "y": 666,
+            "width": 235,
+            "height": 290
+          }
+        },
+        {
+          "pixels": 47282,
+          "maxAlpha": 255,
+          "meanAlpha": 251.31,
+          "bbox": {
+            "x": 264,
+            "y": 668,
+            "width": 234,
+            "height": 288
+          }
+        },
+        {
+          "pixels": 47200,
+          "maxAlpha": 255,
+          "meanAlpha": 251.25,
+          "bbox": {
+            "x": 752,
+            "y": 306,
+            "width": 235,
+            "height": 284
+          }
+        },
+        {
+          "pixels": 47183,
+          "maxAlpha": 255,
+          "meanAlpha": 251.19,
+          "bbox": {
+            "x": 508,
+            "y": 306,
+            "width": 234,
+            "height": 285
+          }
+        },
+        {
+          "pixels": 46967,
+          "maxAlpha": 255,
+          "meanAlpha": 251.17,
+          "bbox": {
+            "x": 264,
+            "y": 305,
+            "width": 234,
+            "height": 285
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 20,
+        "y": 305,
+        "width": 1212,
+        "height": 652
+      },
+      "safeMargins": {
+        "left": 20,
+        "top": 305,
+        "right": 22,
+        "bottom": 297
+      }
+    },
+    {
+      "concept": "tennis",
+      "file": "images/DUDUQ-Y4M04-TENNIS.png",
+      "sha256": "f85ff7a4ab4302d675604cdf915a879dc291891bcda8fb45eb22ead56d18f6e3",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 433336,
+      "componentCount": 2,
+      "largestComponentPixels": 425068,
+      "largestComponentCoverage": 0.98092012,
+      "secondaryComponentCount": 1,
+      "microOpaqueIslandPixelLimit": 43,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 425068,
+          "maxAlpha": 255,
+          "meanAlpha": 240.16,
+          "bbox": {
+            "x": 90,
+            "y": 17,
+            "width": 1021,
+            "height": 1223
+          }
+        },
+        {
+          "pixels": 8268,
+          "maxAlpha": 255,
+          "meanAlpha": 245.83,
+          "bbox": {
+            "x": 1098,
+            "y": 327,
+            "width": 103,
+            "height": 103
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 2,
+      "coreComponents": [
+        {
+          "pixels": 402202,
+          "maxAlpha": 255,
+          "meanAlpha": 248.85,
+          "bbox": {
+            "x": 90,
+            "y": 18,
+            "width": 1021,
+            "height": 1221
+          }
+        },
+        {
+          "pixels": 8105,
+          "maxAlpha": 255,
+          "meanAlpha": 248.86,
+          "bbox": {
+            "x": 1099,
+            "y": 327,
+            "width": 102,
+            "height": 103
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 90,
+        "y": 17,
+        "width": 1111,
+        "height": 1223
+      },
+      "safeMargins": {
+        "left": 90,
+        "top": 17,
+        "right": 53,
+        "bottom": 14
+      }
+    },
+    {
+      "concept": "three",
+      "file": "images/DUDUQ-Y4M04-THREE.png",
+      "sha256": "c700379616905946680b7c0877ae60d296bc8d08b6e14312b55b18740b6dd478",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 677179,
+      "componentCount": 3,
+      "largestComponentPixels": 226318,
+      "largestComponentCoverage": 0.33420706,
+      "secondaryComponentCount": 2,
+      "microOpaqueIslandPixelLimit": 67,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 226318,
+          "maxAlpha": 255,
+          "meanAlpha": 251.42,
+          "bbox": {
+            "x": 42,
+            "y": 631,
+            "width": 524,
+            "height": 591
+          }
+        },
+        {
+          "pixels": 226295,
+          "maxAlpha": 255,
+          "meanAlpha": 251.43,
+          "bbox": {
+            "x": 665,
+            "y": 631,
+            "width": 523,
+            "height": 591
+          }
+        },
+        {
+          "pixels": 224566,
+          "maxAlpha": 255,
+          "meanAlpha": 251.3,
+          "bbox": {
+            "x": 354,
+            "y": 27,
+            "width": 520,
+            "height": 594
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 3,
+      "coreComponents": [
+        {
+          "pixels": 225418,
+          "maxAlpha": 255,
+          "meanAlpha": 252.04,
+          "bbox": {
+            "x": 43,
+            "y": 631,
+            "width": 522,
+            "height": 591
+          }
+        },
+        {
+          "pixels": 225399,
+          "maxAlpha": 255,
+          "meanAlpha": 252.04,
+          "bbox": {
+            "x": 665,
+            "y": 631,
+            "width": 523,
+            "height": 591
+          }
+        },
+        {
+          "pixels": 223689,
+          "maxAlpha": 255,
+          "meanAlpha": 251.91,
+          "bbox": {
+            "x": 354,
+            "y": 27,
+            "width": 519,
+            "height": 594
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 42,
+        "y": 27,
+        "width": 1146,
+        "height": 1195
+      },
+      "safeMargins": {
+        "left": 42,
+        "top": 27,
+        "right": 66,
+        "bottom": 32
+      }
+    },
+    {
+      "concept": "two",
+      "file": "images/DUDUQ-Y4M04-TWO.png",
+      "sha256": "6d4bda5ddad895c59b488a2aca3afba4d4bd35e3c0e06e39dbab4bb1925f49a7",
+      "width": 1261,
+      "height": 1247,
+      "alphaThreshold": 64,
+      "visiblePixels": 531940,
+      "componentCount": 2,
+      "largestComponentPixels": 266125,
+      "largestComponentCoverage": 0.50029139,
+      "secondaryComponentCount": 1,
+      "microOpaqueIslandPixelLimit": 53,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 266125,
+          "maxAlpha": 255,
+          "meanAlpha": 251.77,
+          "bbox": {
+            "x": 51,
+            "y": 291,
+            "width": 555,
+            "height": 676
+          }
+        },
+        {
+          "pixels": 265815,
+          "maxAlpha": 255,
+          "meanAlpha": 251.77,
+          "bbox": {
+            "x": 654,
+            "y": 291,
+            "width": 554,
+            "height": 676
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 2,
+      "coreComponents": [
+        {
+          "pixels": 265157,
+          "maxAlpha": 255,
+          "meanAlpha": 252.35,
+          "bbox": {
+            "x": 52,
+            "y": 291,
+            "width": 553,
+            "height": 676
+          }
+        },
+        {
+          "pixels": 264897,
+          "maxAlpha": 255,
+          "meanAlpha": 252.31,
+          "bbox": {
+            "x": 655,
+            "y": 291,
+            "width": 553,
+            "height": 676
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 51,
+        "y": 291,
+        "width": 1157,
+        "height": 676
+      },
+      "safeMargins": {
+        "left": 51,
+        "top": 291,
+        "right": 53,
+        "bottom": 280
+      }
+    },
+    {
+      "concept": "volleyball",
+      "file": "images/DUDUQ-Y4M04-VOLLEYBALL.png",
+      "sha256": "ac17c6f5e095890377c4998aefa8ac2c3bb15faa58877866c4fd2b370f72cc42",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 426351,
+      "componentCount": 2,
+      "largestComponentPixels": 373324,
+      "largestComponentCoverage": 0.87562595,
+      "secondaryComponentCount": 1,
+      "microOpaqueIslandPixelLimit": 42,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 373324,
+          "maxAlpha": 255,
+          "meanAlpha": 251.02,
+          "bbox": {
+            "x": 143,
+            "y": 11,
+            "width": 863,
+            "height": 1230
+          }
+        },
+        {
+          "pixels": 53027,
+          "maxAlpha": 255,
+          "meanAlpha": 250.91,
+          "bbox": {
+            "x": 726,
+            "y": 265,
+            "width": 257,
+            "height": 262
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 2,
+      "coreComponents": [
+        {
+          "pixels": 371189,
+          "maxAlpha": 255,
+          "meanAlpha": 251.92,
+          "bbox": {
+            "x": 144,
+            "y": 11,
+            "width": 862,
+            "height": 1230
+          }
+        },
+        {
+          "pixels": 52703,
+          "maxAlpha": 255,
+          "meanAlpha": 251.86,
+          "bbox": {
+            "x": 727,
+            "y": 265,
+            "width": 256,
+            "height": 262
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 143,
+        "y": 11,
+        "width": 863,
+        "height": 1230
+      },
+      "safeMargins": {
+        "left": 143,
+        "top": 11,
+        "right": 248,
+        "bottom": 13
+      }
+    }
+  ]
+}

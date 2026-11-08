@@ -1,0 +1,848 @@
+{
+  "schemaVersion": "DUDUQ_Y4M04_GENERATED_ASSET_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-11-08T01:36:13.0061667Z",
+  "moduleId": "Y4M04",
+  "sourceQuestionSha256": "af3f6312a8c20357a590d3a468da88943c5ce759ce58875898ee4143278f0569",
+  "questionContractsReviewed": 20,
+  "assets": [
+    {
+      "concept": "basketball",
+      "file": "images/DUDUQ-Y4M04-BASKETBALL.png",
+      "sha256": "4ac75f8603fd07e2c3bb632b875eeaceb50b0cb97d3808ae85a53eed08eea213",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "One boy is visibly dribbling exactly one orange basketball; no competing sport equipment is present.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M04-Q001",
+          "sourceSha256": "9c76f46e283081e6e55149f4b9b9f44cfb498db4be243db498e1b1f6d25cca61",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "soccer, basketball, volleyball, tennis",
+          "instructionEn": "Sort each item: ball sports or racket sport.",
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M04-Q003",
+          "sourceSha256": "a5d22290e4bdc566080a0be1a1df0bd400700f55a9e828c54ea7d9a096601f35",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "tennis, volleyball, soccer, basketball",
+          "instructionEn": "Match each audio to its picture.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q004",
+          "sourceSha256": "1a6db19ae1f5f0975613b45d5d70dd8d3940212bf6ebbc9e59cb8004770f7a21",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "volleyball, soccer, basketball, tennis",
+          "instructionEn": "Match each item to its pair.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q005",
+          "sourceSha256": "d82fef10e8e264a46c148ac1caa5064ccacd305653cdc157ecf2dd1b6508abca",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "soccer",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q006",
+          "sourceSha256": "a3f429b4b4a3b1d5578509f789a1d9450bbd83f8747f9fb1ce4c7556557a638d",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "AUDIO_IMAGE",
+          "titleEn": "basketball, tennis, volleyball, soccer",
+          "instructionEn": "Find the matching pairs.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q007",
+          "sourceSha256": "87a6d4f712943f2ea1af89a3aaf9fb18f4980fbb5470375639a757144b2600dc",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "soccer, basketball, volleyball, tennis",
+          "instructionEn": "Sort each item: ball sports or racket sport.",
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M04-Q010",
+          "sourceSha256": "4f403c26fbb1ff67a20983c57dc1de4b2031bc015ba4851398a6b9da643f76a5",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "six",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q011",
+          "sourceSha256": "d63aeb338f851225deaa228ad45aee501d18b042bfd466f007b91faa253b93b6",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "tennis, volleyball, soccer, basketball",
+          "instructionEn": "Match each item to its pair.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q013",
+          "sourceSha256": "7db3a70cab1613a722f1f14790948f7509ef773991e7a9027cc8692a1d14890e",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "soccer, basketball, tennis, volleyball",
+          "instructionEn": "Match each audio to its picture.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q014",
+          "sourceSha256": "47df0d178fc8945e7d6fbae8a308fb88f8ee35353e7be48f52b3767d51f52db5",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "basketball, tennis, volleyball, soccer",
+          "instructionEn": "Match each item to its pair.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q015",
+          "sourceSha256": "8a1d463f5d68e452453fb969d41528c34e6b6e8c5901826d79b2b3c5c74ffc2d",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "soccer",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q016",
+          "sourceSha256": "9d516fb164524f39619c75dba4a920c6a8b375528025b4c0c1044b69d71edede",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "AUDIO_TEXT",
+          "titleEn": "volleyball, soccer, basketball, tennis",
+          "instructionEn": "Find the matching pairs.",
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M04-Q019",
+          "sourceSha256": "8f8a97639dd23f429868b2f96edc1f44ae5c8a003f3fe6901ef490b37c10211e",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "soccer, basketball, volleyball, tennis",
+          "instructionEn": "Sort each item: ball sports or racket sport.",
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M04-Q020",
+          "sourceSha256": "dc29113956b85f6b91b0cdef7afeb07d090be1baabb66f9c4a0434c15933f736",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "volleyball",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "eight",
+      "file": "images/DUDUQ-Y4M04-EIGHT.png",
+      "sha256": "1c65961edc0e78151cf197f94de1b93c5c8705a4c7d0c83c251c48bbac1627ba",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "The candidate visibly contains exactly 8 separate glossy red apples and no other countable object.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M04-Q009",
+          "sourceSha256": "2ebb90541070b97a2409aa55556ce25ea818dcf5fcd3940b274630e479cde08f",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "five, six, seven, eight",
+          "instructionEn": "Match each audio to its picture.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q017",
+          "sourceSha256": "e95e19cac793aa23c7c0cf6f445abd98cade4d878df5c126557967cc77701321",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "seven, eight, nine, ten",
+          "instructionEn": "Match each audio to its picture.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "soccer",
+      "file": "images/DUDUQ-Y4M04-SOCCER.png",
+      "sha256": "918d0df2f2d23f483584eae790ec7473e2ea94314520fcb46e1a0f66799ff656",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "One boy is visibly kicking exactly one black-and-white soccer ball; no competing sport equipment is present.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M04-Q001",
+          "sourceSha256": "9c76f46e283081e6e55149f4b9b9f44cfb498db4be243db498e1b1f6d25cca61",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "soccer, basketball, volleyball, tennis",
+          "instructionEn": "Sort each item: ball sports or racket sport.",
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M04-Q003",
+          "sourceSha256": "a5d22290e4bdc566080a0be1a1df0bd400700f55a9e828c54ea7d9a096601f35",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "tennis, volleyball, soccer, basketball",
+          "instructionEn": "Match each audio to its picture.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q004",
+          "sourceSha256": "1a6db19ae1f5f0975613b45d5d70dd8d3940212bf6ebbc9e59cb8004770f7a21",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "volleyball, soccer, basketball, tennis",
+          "instructionEn": "Match each item to its pair.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q005",
+          "sourceSha256": "d82fef10e8e264a46c148ac1caa5064ccacd305653cdc157ecf2dd1b6508abca",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "soccer",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q006",
+          "sourceSha256": "a3f429b4b4a3b1d5578509f789a1d9450bbd83f8747f9fb1ce4c7556557a638d",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "AUDIO_IMAGE",
+          "titleEn": "basketball, tennis, volleyball, soccer",
+          "instructionEn": "Find the matching pairs.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q007",
+          "sourceSha256": "87a6d4f712943f2ea1af89a3aaf9fb18f4980fbb5470375639a757144b2600dc",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "soccer, basketball, volleyball, tennis",
+          "instructionEn": "Sort each item: ball sports or racket sport.",
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M04-Q010",
+          "sourceSha256": "4f403c26fbb1ff67a20983c57dc1de4b2031bc015ba4851398a6b9da643f76a5",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "six",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q011",
+          "sourceSha256": "d63aeb338f851225deaa228ad45aee501d18b042bfd466f007b91faa253b93b6",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "tennis, volleyball, soccer, basketball",
+          "instructionEn": "Match each item to its pair.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q013",
+          "sourceSha256": "7db3a70cab1613a722f1f14790948f7509ef773991e7a9027cc8692a1d14890e",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "soccer, basketball, tennis, volleyball",
+          "instructionEn": "Match each audio to its picture.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q014",
+          "sourceSha256": "47df0d178fc8945e7d6fbae8a308fb88f8ee35353e7be48f52b3767d51f52db5",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "basketball, tennis, volleyball, soccer",
+          "instructionEn": "Match each item to its pair.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q015",
+          "sourceSha256": "8a1d463f5d68e452453fb969d41528c34e6b6e8c5901826d79b2b3c5c74ffc2d",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "soccer",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q016",
+          "sourceSha256": "9d516fb164524f39619c75dba4a920c6a8b375528025b4c0c1044b69d71edede",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "AUDIO_TEXT",
+          "titleEn": "volleyball, soccer, basketball, tennis",
+          "instructionEn": "Find the matching pairs.",
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M04-Q019",
+          "sourceSha256": "8f8a97639dd23f429868b2f96edc1f44ae5c8a003f3fe6901ef490b37c10211e",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "soccer, basketball, volleyball, tennis",
+          "instructionEn": "Sort each item: ball sports or racket sport.",
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M04-Q020",
+          "sourceSha256": "dc29113956b85f6b91b0cdef7afeb07d090be1baabb66f9c4a0434c15933f736",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "volleyball",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "ten",
+      "file": "images/DUDUQ-Y4M04-TEN.png",
+      "sha256": "3c2743e855fa04bb953e098f769de12a0f8305cf6e425ae41690ae9e5ab74f65",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "The candidate visibly contains exactly 10 separate glossy red apples and no other countable object.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M04-Q017",
+          "sourceSha256": "e95e19cac793aa23c7c0cf6f445abd98cade4d878df5c126557967cc77701321",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "seven, eight, nine, ten",
+          "instructionEn": "Match each audio to its picture.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "tennis",
+      "file": "images/DUDUQ-Y4M04-TENNIS.png",
+      "sha256": "f85ff7a4ab4302d675604cdf915a879dc291891bcda8fb45eb22ead56d18f6e3",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "One boy is visibly swinging exactly one tennis racket toward exactly one yellow-green tennis ball; no competing sport equipment is present.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M04-Q001",
+          "sourceSha256": "9c76f46e283081e6e55149f4b9b9f44cfb498db4be243db498e1b1f6d25cca61",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "soccer, basketball, volleyball, tennis",
+          "instructionEn": "Sort each item: ball sports or racket sport.",
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M04-Q003",
+          "sourceSha256": "a5d22290e4bdc566080a0be1a1df0bd400700f55a9e828c54ea7d9a096601f35",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "tennis, volleyball, soccer, basketball",
+          "instructionEn": "Match each audio to its picture.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q004",
+          "sourceSha256": "1a6db19ae1f5f0975613b45d5d70dd8d3940212bf6ebbc9e59cb8004770f7a21",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "volleyball, soccer, basketball, tennis",
+          "instructionEn": "Match each item to its pair.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q005",
+          "sourceSha256": "d82fef10e8e264a46c148ac1caa5064ccacd305653cdc157ecf2dd1b6508abca",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "soccer",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q006",
+          "sourceSha256": "a3f429b4b4a3b1d5578509f789a1d9450bbd83f8747f9fb1ce4c7556557a638d",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "AUDIO_IMAGE",
+          "titleEn": "basketball, tennis, volleyball, soccer",
+          "instructionEn": "Find the matching pairs.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q007",
+          "sourceSha256": "87a6d4f712943f2ea1af89a3aaf9fb18f4980fbb5470375639a757144b2600dc",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "soccer, basketball, volleyball, tennis",
+          "instructionEn": "Sort each item: ball sports or racket sport.",
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M04-Q010",
+          "sourceSha256": "4f403c26fbb1ff67a20983c57dc1de4b2031bc015ba4851398a6b9da643f76a5",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "six",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q011",
+          "sourceSha256": "d63aeb338f851225deaa228ad45aee501d18b042bfd466f007b91faa253b93b6",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "tennis, volleyball, soccer, basketball",
+          "instructionEn": "Match each item to its pair.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q012",
+          "sourceSha256": "ab4f878761601348cc4f28df61201336ba0947ab6d7c3883920f511b9852d4e5",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "two",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q013",
+          "sourceSha256": "7db3a70cab1613a722f1f14790948f7509ef773991e7a9027cc8692a1d14890e",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "soccer, basketball, tennis, volleyball",
+          "instructionEn": "Match each audio to its picture.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q014",
+          "sourceSha256": "47df0d178fc8945e7d6fbae8a308fb88f8ee35353e7be48f52b3767d51f52db5",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "basketball, tennis, volleyball, soccer",
+          "instructionEn": "Match each item to its pair.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q015",
+          "sourceSha256": "8a1d463f5d68e452453fb969d41528c34e6b6e8c5901826d79b2b3c5c74ffc2d",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "soccer",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q016",
+          "sourceSha256": "9d516fb164524f39619c75dba4a920c6a8b375528025b4c0c1044b69d71edede",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "AUDIO_TEXT",
+          "titleEn": "volleyball, soccer, basketball, tennis",
+          "instructionEn": "Find the matching pairs.",
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M04-Q019",
+          "sourceSha256": "8f8a97639dd23f429868b2f96edc1f44ae5c8a003f3fe6901ef490b37c10211e",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "soccer, basketball, volleyball, tennis",
+          "instructionEn": "Sort each item: ball sports or racket sport.",
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M04-Q020",
+          "sourceSha256": "dc29113956b85f6b91b0cdef7afeb07d090be1baabb66f9c4a0434c15933f736",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "volleyball",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "three",
+      "file": "images/DUDUQ-Y4M04-THREE.png",
+      "sha256": "c700379616905946680b7c0877ae60d296bc8d08b6e14312b55b18740b6dd478",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "The candidate visibly contains exactly 3 separate glossy red apples and no other countable object.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M04-Q002",
+          "sourceSha256": "03a968ce996f6a6ec36679cd3c247cc78b1d3693f310969e8ddcb807abd17d07",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "two",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q012",
+          "sourceSha256": "ab4f878761601348cc4f28df61201336ba0947ab6d7c3883920f511b9852d4e5",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "two",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "two",
+      "file": "images/DUDUQ-Y4M04-TWO.png",
+      "sha256": "6d4bda5ddad895c59b488a2aca3afba4d4bd35e3c0e06e39dbab4bb1925f49a7",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "The candidate visibly contains exactly 2 separate glossy red apples and no other countable object.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M04-Q002",
+          "sourceSha256": "03a968ce996f6a6ec36679cd3c247cc78b1d3693f310969e8ddcb807abd17d07",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "two",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q005",
+          "sourceSha256": "d82fef10e8e264a46c148ac1caa5064ccacd305653cdc157ecf2dd1b6508abca",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "soccer",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q012",
+          "sourceSha256": "ab4f878761601348cc4f28df61201336ba0947ab6d7c3883920f511b9852d4e5",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "two",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "volleyball",
+      "file": "images/DUDUQ-Y4M04-VOLLEYBALL.png",
+      "sha256": "ac17c6f5e095890377c4998aefa8ac2c3bb15faa58877866c4fd2b370f72cc42",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "One boy is visibly bumping exactly one blue-and-yellow volleyball with joined forearms, directly supporting 'He is playing volleyball.'; no competing sport equipment is present.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M04-Q001",
+          "sourceSha256": "9c76f46e283081e6e55149f4b9b9f44cfb498db4be243db498e1b1f6d25cca61",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "soccer, basketball, volleyball, tennis",
+          "instructionEn": "Sort each item: ball sports or racket sport.",
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M04-Q003",
+          "sourceSha256": "a5d22290e4bdc566080a0be1a1df0bd400700f55a9e828c54ea7d9a096601f35",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "tennis, volleyball, soccer, basketball",
+          "instructionEn": "Match each audio to its picture.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q004",
+          "sourceSha256": "1a6db19ae1f5f0975613b45d5d70dd8d3940212bf6ebbc9e59cb8004770f7a21",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "volleyball, soccer, basketball, tennis",
+          "instructionEn": "Match each item to its pair.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q005",
+          "sourceSha256": "d82fef10e8e264a46c148ac1caa5064ccacd305653cdc157ecf2dd1b6508abca",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "soccer",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q006",
+          "sourceSha256": "a3f429b4b4a3b1d5578509f789a1d9450bbd83f8747f9fb1ce4c7556557a638d",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "AUDIO_IMAGE",
+          "titleEn": "basketball, tennis, volleyball, soccer",
+          "instructionEn": "Find the matching pairs.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q007",
+          "sourceSha256": "87a6d4f712943f2ea1af89a3aaf9fb18f4980fbb5470375639a757144b2600dc",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "soccer, basketball, volleyball, tennis",
+          "instructionEn": "Sort each item: ball sports or racket sport.",
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M04-Q008",
+          "sourceSha256": "179585a0ddec7a9ad52f094959ff774bff10260865f6fc3c2402045a9487eaf2",
+          "mechanicId": "smart-sentence-complete",
+          "mechanicMode": "complete",
+          "titleEn": "I play volleyball.",
+          "instructionEn": "Look at the picture and complete the sentence.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q011",
+          "sourceSha256": "d63aeb338f851225deaa228ad45aee501d18b042bfd466f007b91faa253b93b6",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "tennis, volleyball, soccer, basketball",
+          "instructionEn": "Match each item to its pair.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q012",
+          "sourceSha256": "ab4f878761601348cc4f28df61201336ba0947ab6d7c3883920f511b9852d4e5",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "two",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q013",
+          "sourceSha256": "7db3a70cab1613a722f1f14790948f7509ef773991e7a9027cc8692a1d14890e",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "soccer, basketball, tennis, volleyball",
+          "instructionEn": "Match each audio to its picture.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q014",
+          "sourceSha256": "47df0d178fc8945e7d6fbae8a308fb88f8ee35353e7be48f52b3767d51f52db5",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "basketball, tennis, volleyball, soccer",
+          "instructionEn": "Match each item to its pair.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q015",
+          "sourceSha256": "8a1d463f5d68e452453fb969d41528c34e6b6e8c5901826d79b2b3c5c74ffc2d",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "soccer",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q016",
+          "sourceSha256": "9d516fb164524f39619c75dba4a920c6a8b375528025b4c0c1044b69d71edede",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "AUDIO_TEXT",
+          "titleEn": "volleyball, soccer, basketball, tennis",
+          "instructionEn": "Find the matching pairs.",
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M04-Q018",
+          "sourceSha256": "32c82778504c0e970e88bcf6aaa447e448e6931c89aee00fc9fb02224a6ad940",
+          "mechanicId": "smart-sentence-complete",
+          "mechanicMode": "complete",
+          "titleEn": "He is playing volleyball.",
+          "instructionEn": "Look at the picture and complete the sentence.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M04-Q019",
+          "sourceSha256": "8f8a97639dd23f429868b2f96edc1f44ae5c8a003f3fe6901ef490b37c10211e",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "soccer, basketball, volleyball, tennis",
+          "instructionEn": "Sort each item: ball sports or racket sport.",
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M04-Q020",
+          "sourceSha256": "dc29113956b85f6b91b0cdef7afeb07d090be1baabb66f9c4a0434c15933f736",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "volleyball",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    }
+  ],
+  "nonVisualQuestionContracts": [
+    {
+      "questionId": "Y4M04-Q001",
+      "sourceSha256": "9c76f46e283081e6e55149f4b9b9f44cfb498db4be243db498e1b1f6d25cca61",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "titleEn": "soccer, basketball, volleyball, tennis",
+      "semanticTargets": [
+        "basketball",
+        "soccer",
+        "tennis",
+        "volleyball"
+      ],
+      "action": "NO_MEDIA_BINDING_IN_SOURCE_CONTRACT_DO_NOT_INVENT_ONE"
+    },
+    {
+      "questionId": "Y4M04-Q007",
+      "sourceSha256": "87a6d4f712943f2ea1af89a3aaf9fb18f4980fbb5470375639a757144b2600dc",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "titleEn": "soccer, basketball, volleyball, tennis",
+      "semanticTargets": [
+        "basketball",
+        "soccer",
+        "tennis",
+        "volleyball"
+      ],
+      "action": "NO_MEDIA_BINDING_IN_SOURCE_CONTRACT_DO_NOT_INVENT_ONE"
+    },
+    {
+      "questionId": "Y4M04-Q016",
+      "sourceSha256": "9d516fb164524f39619c75dba4a920c6a8b375528025b4c0c1044b69d71edede",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_TEXT",
+      "titleEn": "volleyball, soccer, basketball, tennis",
+      "semanticTargets": [
+        "basketball",
+        "soccer",
+        "tennis",
+        "volleyball"
+      ],
+      "action": "NO_MEDIA_BINDING_IN_SOURCE_CONTRACT_DO_NOT_INVENT_ONE"
+    },
+    {
+      "questionId": "Y4M04-Q019",
+      "sourceSha256": "8f8a97639dd23f429868b2f96edc1f44ae5c8a003f3fe6901ef490b37c10211e",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "titleEn": "soccer, basketball, volleyball, tennis",
+      "semanticTargets": [
+        "basketball",
+        "soccer",
+        "tennis",
+        "volleyball"
+      ],
+      "action": "NO_MEDIA_BINDING_IN_SOURCE_CONTRACT_DO_NOT_INVENT_ONE"
+    }
+  ],
+  "summary": {
+    "generatedConceptsReviewed": 8,
+    "wrongDistractorFindings": 0,
+    "humanHomologationPending": 8
+  },
+  "productionApproved": false,
+  "integrated": false
+}

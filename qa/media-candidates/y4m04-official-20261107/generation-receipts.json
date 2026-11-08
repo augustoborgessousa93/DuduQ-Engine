@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "DUDUQ_Y4M04_NATIVE_GENERATION_RECEIPTS_V1",
+  "createdAt": "2026-11-08T01:36:13.0061667Z",
+  "moduleId": "Y4M04",
+  "provider": "Codex built-in image_gen",
+  "tool": "image_gen.imagegen",
+  "receiptCount": 8,
+  "receipts": [
+    {
+      "concept": "basketball",
+      "slug": "BASKETBALL",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generatorCallId": "exec-708dc5f7-544d-4f73-b3dc-b82add14dd7d",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b8be-65cc-7d52-929d-2889ab431726/exec-708dc5f7-544d-4f73-b3dc-b82add14dd7d.png",
+      "originalSha256": "773e7befdd3a0d7401e186cd94817710c6d86a1089af0d57589bd77db3b50641",
+      "completedObservedInCurrentSession": true,
+      "transparentBackgroundRequested": true,
+      "status": "COMPLETED_AND_LOCAL_ORIGINAL_HASH_VERIFIED"
+    },
+    {
+      "concept": "eight",
+      "slug": "EIGHT",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generatorCallId": "exec-80231788-8726-47fc-9003-3e14f39b76af",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b8be-65cc-7d52-929d-2889ab431726/exec-80231788-8726-47fc-9003-3e14f39b76af.png",
+      "originalSha256": "9b2acbe384e899e7124cfe34991b9792c3513ed0537be9d8623d87740bdfb27e",
+      "completedObservedInCurrentSession": true,
+      "transparentBackgroundRequested": true,
+      "status": "COMPLETED_AND_LOCAL_ORIGINAL_HASH_VERIFIED"
+    },
+    {
+      "concept": "soccer",
+      "slug": "SOCCER",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generatorCallId": "exec-de042ddc-bc03-42ad-899e-81edf1f28423",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b8be-65cc-7d52-929d-2889ab431726/exec-de042ddc-bc03-42ad-899e-81edf1f28423.png",
+      "originalSha256": "cd8b6924bf384732f3b71f463a0b03e0075a03cab42bab33b1de467a96cab977",
+      "completedObservedInCurrentSession": true,
+      "transparentBackgroundRequested": true,
+      "status": "COMPLETED_AND_LOCAL_ORIGINAL_HASH_VERIFIED"
+    },
+    {
+      "concept": "ten",
+      "slug": "TEN",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generatorCallId": "exec-8f8ef440-4925-4e97-9b87-36020563afde",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b8be-65cc-7d52-929d-2889ab431726/exec-8f8ef440-4925-4e97-9b87-36020563afde.png",
+      "originalSha256": "c6dd0d053b737bd77981b7e10d5eefbcdc34585095bf8859c270766734c11c35",
+      "completedObservedInCurrentSession": true,
+      "transparentBackgroundRequested": true,
+      "status": "COMPLETED_AND_LOCAL_ORIGINAL_HASH_VERIFIED"
+    },
+    {
+      "concept": "tennis",
+      "slug": "TENNIS",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generatorCallId": "exec-4550b5d6-e287-414b-b585-70b335abba36",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b8be-65cc-7d52-929d-2889ab431726/exec-4550b5d6-e287-414b-b585-70b335abba36.png",
+      "originalSha256": "e1b189585bef695d4bebb114b7e9041a86a854c8f75e9567ff9a0ae158a80bf4",
+      "completedObservedInCurrentSession": true,
+      "transparentBackgroundRequested": true,
+      "status": "COMPLETED_AND_LOCAL_ORIGINAL_HASH_VERIFIED"
+    },
+    {
+      "concept": "three",
+      "slug": "THREE",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generatorCallId": "exec-168d7a9f-ed28-4a7f-9700-ef0fc9581e7e",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b8be-65cc-7d52-929d-2889ab431726/exec-168d7a9f-ed28-4a7f-9700-ef0fc9581e7e.png",
+      "originalSha256": "ebb98115ab88032aaea4996ebce2de340dc2f37d7d6c2308196085e0e3145d4f",
+      "completedObservedInCurrentSession": true,
+      "transparentBackgroundRequested": true,
+      "status": "COMPLETED_AND_LOCAL_ORIGINAL_HASH_VERIFIED"
+    },
+    {
+      "concept": "two",
+      "slug": "TWO",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generatorCallId": "exec-d8fdc5f1-1a94-4b08-854c-78b2e4f388a6",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b8be-65cc-7d52-929d-2889ab431726/exec-d8fdc5f1-1a94-4b08-854c-78b2e4f388a6.png",
+      "originalSha256": "99a00c8fdec5eadb48337017099fbd321797fe4d46f875e9ed797d841afb8cff",
+      "completedObservedInCurrentSession": true,
+      "transparentBackgroundRequested": true,
+      "status": "COMPLETED_AND_LOCAL_ORIGINAL_HASH_VERIFIED"
+    },
+    {
+      "concept": "volleyball",
+      "slug": "VOLLEYBALL",
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generatorCallId": "exec-10078ee0-7970-4e9b-8431-0b412e03ec6a",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1b8be-65cc-7d52-929d-2889ab431726/exec-10078ee0-7970-4e9b-8431-0b412e03ec6a.png",
+      "originalSha256": "8f2afb83faeafccc210e4e7c9928352af8e1c3cebd84cee6df47fb9efa53f26f",
+      "completedObservedInCurrentSession": true,
+      "transparentBackgroundRequested": true,
+      "status": "COMPLETED_AND_LOCAL_ORIGINAL_HASH_VERIFIED"
+    }
+  ],
+  "apiPurchaseOrExternalCredentialUsed": false,
+  "generatorLimitReached": false,
+  "blockedGenerator": false
+}

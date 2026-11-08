@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "DUDUQ_TWO_LANE_GENERATION_CHECKPOINT_V1",
+  "createdAt": "2026-11-08T01:23:53.6845146Z",
+  "updatedAt": "2026-11-08T01:36:13.0061667Z",
+  "status": "Y4M04_GENERATION_CANDIDATES_COMPLETE",
+  "projectStatus": "INCOMPLETE",
+  "lane": "generation",
+  "moduleId": "Y4M04",
+  "sourceAudit": {
+    "questions": 20,
+    "pendingMediaIds": 26,
+    "visualUsages": 70,
+    "semanticConcepts": 14,
+    "allSemanticTargets": 14,
+    "nonVisualQuestionContracts": [
+      "Y4M04-Q001",
+      "Y4M04-Q007",
+      "Y4M04-Q016",
+      "Y4M04-Q019"
+    ],
+    "globalPendingMediaIds": 1055,
+    "questionSourceSha256": "af3f6312a8c20357a590d3a468da88943c5ce759ce58875898ee4143278f0569",
+    "registrySha256": "f11c12fe929379947e7d4f76736f8f73bc6320618bf01265bfb48a4e18ef5e30"
+  },
+  "candidateAssets": 14,
+  "newlyGeneratedAssets": 8,
+  "reusedVerifiedNativeOriginalAssets": 6,
+  "generatorAttempts": {
+    "attempted": 8,
+    "accepted": 8,
+    "semanticOrAlphaRejected": 0,
+    "quotaOrLimitBlock": false,
+    "blockedGenerator": false
+  },
+  "coverage": {
+    "sourcePendingMediaIds": 26,
+    "coveredSourceMediaIds": 26,
+    "visualUsages": 70,
+    "occurrenceScopedBindingPlans": 62,
+    "missingConcepts": []
+  },
+  "writeBoundary": "qa/media-candidates/y4m04-official-20261107",
+  "questionsModified": false,
+  "registryModified": false,
+  "runtimeModified": false,
+  "goldMastersModified": false,
+  "approvalFlagsModified": false,
+  "productionModified": false,
+  "mediaOverlaysApplied": false,
+  "existingReferencedAssetsRemoved": false,
+  "humanApprovalClaimed": false,
+  "productionApproved": false,
+  "integrated": false,
+  "deployed": false,
+  "candidateBundleCommit": null,
+  "candidateReviewPushBranch": null,
+  "candidateCheckpointCommit": null,
+  "remotePushStatus": "PENDING_SAFE_CANDIDATE_COMMIT",
+  "remotePushBlocker": null,
+  "reviewBranch": null,
+  "nextAction": "COMMIT_AND_PUSH_SAFE_CANDIDATE_FILES_THEN_SCHEDULER_SELECT_OTHER_LANE",
+  "completionClaim": "MODULE_CANDIDATE_SCOPE_ONLY_PROJECT_REMAINS_INCOMPLETE"
+}

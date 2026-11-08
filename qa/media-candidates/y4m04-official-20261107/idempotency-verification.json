@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "DUDUQ_Y4M04_GENERATION_IDEMPOTENCY_V1",
+  "verifiedAt": "2026-11-08T01:41:33.0823735Z",
+  "moduleId": "Y4M04",
+  "lane": "generation",
+  "builder": "qa/media-candidates/y4m04-official-20261107/prepare-generation-bundle.mjs",
+  "consecutiveBuilderRunsCompared": 2,
+  "fingerprintedFileCount": 46,
+  "fingerprintScope": "all module-batch files present before this self-describing verification file was added",
+  "bundleFingerprintSha256": "682e8451fe78c82b9db856e11b32166d355d7cd50cb50409e526c6c70115d95e",
+  "changedFiles": [],
+  "removedFiles": [],
+  "idempotent": true,
+  "productionApproved": false,
+  "integrated": false
+}

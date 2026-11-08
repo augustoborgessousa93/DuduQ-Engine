@@ -1,0 +1,390 @@
+{
+  "schemaVersion": "DUDUQ_Y4M04_PNG_VALIDATION_V1",
+  "createdAt": "2026-11-08T01:36:13.0061667Z",
+  "moduleId": "Y4M04",
+  "validator": "qa/validate-duduq-png.mjs",
+  "assetCount": 14,
+  "passed": 14,
+  "failed": 0,
+  "assets": [
+    {
+      "concept": "basketball",
+      "file": "images/DUDUQ-Y4M04-BASKETBALL.png",
+      "sha256": "4ac75f8603fd07e2c3bb632b875eeaceb50b0cb97d3808ae85a53eed08eea213",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1067430,
+      "opaquePixels": 477314,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 100,
+        "y": 17,
+        "width": 1021,
+        "height": 1206
+      },
+      "safeMargins": {
+        "left": 100,
+        "top": 17,
+        "right": 133,
+        "bottom": 31
+      },
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "eight",
+      "file": "images/DUDUQ-Y4M04-EIGHT.png",
+      "sha256": "1c65961edc0e78151cf197f94de1b93c5c8705a4c7d0c83c251c48bbac1627ba",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 979590,
+      "opaquePixels": 556431,
+      "valid": true,
+      "expectedCoreComponents": 8,
+      "alphaComponentCountAt64": 8,
+      "meaningfulCoreComponentCountAt128": 8,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 24,
+        "y": 257,
+        "width": 1204,
+        "height": 731
+      },
+      "safeMargins": {
+        "left": 24,
+        "top": 257,
+        "right": 26,
+        "bottom": 266
+      },
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "five",
+      "file": "images/DUDUQ-Y4M04-FIVE.png",
+      "sha256": "b12f817867e3fa002e1468cadbfdda80932b8965ae74e1255db41016f9b57eee",
+      "width": 1536,
+      "height": 1536,
+      "transparentPixels": 1594400,
+      "opaquePixels": 735818,
+      "valid": true,
+      "expectedCoreComponents": 5,
+      "alphaComponentCountAt64": 5,
+      "meaningfulCoreComponentCountAt128": 5,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 36,
+        "y": 308,
+        "width": 1458,
+        "height": 923
+      },
+      "safeMargins": {
+        "left": 36,
+        "top": 308,
+        "right": 42,
+        "bottom": 305
+      },
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "four",
+      "file": "images/DUDUQ-Y4M04-FOUR.png",
+      "sha256": "d7e0f1fd9f5b565a62b75b0dcf8f07fb257096a33947c6ec6ee1fadd87c61505",
+      "width": 1536,
+      "height": 1536,
+      "transparentPixels": 1533449,
+      "opaquePixels": 797370,
+      "valid": true,
+      "expectedCoreComponents": 4,
+      "alphaComponentCountAt64": 4,
+      "meaningfulCoreComponentCountAt128": 4,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 208,
+        "y": 211,
+        "width": 1148,
+        "height": 1104
+      },
+      "safeMargins": {
+        "left": 208,
+        "top": 211,
+        "right": 180,
+        "bottom": 221
+      },
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "nine",
+      "file": "images/DUDUQ-Y4M04-NINE.png",
+      "sha256": "a49f122a9e0967699c4602ce5cd294ad228dff16bd644e9d906b26e9d87eae5c",
+      "width": 1536,
+      "height": 1536,
+      "transparentPixels": 1452180,
+      "opaquePixels": 867775,
+      "valid": true,
+      "expectedCoreComponents": 9,
+      "alphaComponentCountAt64": 9,
+      "meaningfulCoreComponentCountAt128": 9,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 202,
+        "y": 235,
+        "width": 1137,
+        "height": 1085
+      },
+      "safeMargins": {
+        "left": 202,
+        "top": 235,
+        "right": 197,
+        "bottom": 216
+      },
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "one",
+      "file": "images/DUDUQ-Y4M04-ONE.png",
+      "sha256": "e65ad687b4d68c317b065a9fce4a7d3dfbd7cffbe45835899dd9826ccaf4d8f5",
+      "width": 1536,
+      "height": 1536,
+      "transparentPixels": 1567932,
+      "opaquePixels": 777087,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 274,
+        "y": 219,
+        "width": 988,
+        "height": 1086
+      },
+      "safeMargins": {
+        "left": 274,
+        "top": 219,
+        "right": 274,
+        "bottom": 231
+      },
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "seven",
+      "file": "images/DUDUQ-Y4M04-SEVEN.png",
+      "sha256": "b675fb761c6054b737cf35ba6b9d36e9fe50ed7a317ae07e4a3dc30000272667",
+      "width": 1536,
+      "height": 1536,
+      "transparentPixels": 1489321,
+      "opaquePixels": 833500,
+      "valid": true,
+      "expectedCoreComponents": 7,
+      "alphaComponentCountAt64": 6,
+      "meaningfulCoreComponentCountAt128": 7,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 142,
+        "y": 182,
+        "width": 1244,
+        "height": 1176
+      },
+      "safeMargins": {
+        "left": 142,
+        "top": 182,
+        "right": 150,
+        "bottom": 178
+      },
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "six",
+      "file": "images/DUDUQ-Y4M04-SIX.png",
+      "sha256": "d6482204a9c9caf61913193ac2369abd3e3681226568a0b4262fed3460faef66",
+      "width": 1536,
+      "height": 1536,
+      "transparentPixels": 1405322,
+      "opaquePixels": 913960,
+      "valid": true,
+      "expectedCoreComponents": 6,
+      "alphaComponentCountAt64": 6,
+      "meaningfulCoreComponentCountAt128": 6,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 39,
+        "y": 292,
+        "width": 1457,
+        "height": 943
+      },
+      "safeMargins": {
+        "left": 39,
+        "top": 292,
+        "right": 40,
+        "bottom": 301
+      },
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "soccer",
+      "file": "images/DUDUQ-Y4M04-SOCCER.png",
+      "sha256": "918d0df2f2d23f483584eae790ec7473e2ea94314520fcb46e1a0f66799ff656",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1114927,
+      "opaquePixels": 432850,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 30,
+        "y": 25,
+        "width": 1198,
+        "height": 1212
+      },
+      "safeMargins": {
+        "left": 30,
+        "top": 25,
+        "right": 26,
+        "bottom": 17
+      },
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "ten",
+      "file": "images/DUDUQ-Y4M04-TEN.png",
+      "sha256": "3c2743e855fa04bb953e098f769de12a0f8305cf6e425ae41690ae9e5ab74f65",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1072095,
+      "opaquePixels": 464661,
+      "valid": true,
+      "expectedCoreComponents": 10,
+      "alphaComponentCountAt64": 10,
+      "meaningfulCoreComponentCountAt128": 10,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 20,
+        "y": 305,
+        "width": 1212,
+        "height": 652
+      },
+      "safeMargins": {
+        "left": 20,
+        "top": 305,
+        "right": 22,
+        "bottom": 297
+      },
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "tennis",
+      "file": "images/DUDUQ-Y4M04-TENNIS.png",
+      "sha256": "f85ff7a4ab4302d675604cdf915a879dc291891bcda8fb45eb22ead56d18f6e3",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1109936,
+      "opaquePixels": 385036,
+      "valid": true,
+      "expectedCoreComponents": 2,
+      "alphaComponentCountAt64": 2,
+      "meaningfulCoreComponentCountAt128": 2,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 90,
+        "y": 17,
+        "width": 1111,
+        "height": 1223
+      },
+      "safeMargins": {
+        "left": 90,
+        "top": 17,
+        "right": 53,
+        "bottom": 14
+      },
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "three",
+      "file": "images/DUDUQ-Y4M04-THREE.png",
+      "sha256": "c700379616905946680b7c0877ae60d296bc8d08b6e14312b55b18740b6dd478",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 879856,
+      "opaquePixels": 668376,
+      "valid": true,
+      "expectedCoreComponents": 3,
+      "alphaComponentCountAt64": 3,
+      "meaningfulCoreComponentCountAt128": 3,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 42,
+        "y": 27,
+        "width": 1146,
+        "height": 1195
+      },
+      "safeMargins": {
+        "left": 42,
+        "top": 27,
+        "right": 66,
+        "bottom": 32
+      },
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "two",
+      "file": "images/DUDUQ-Y4M04-TWO.png",
+      "sha256": "6d4bda5ddad895c59b488a2aca3afba4d4bd35e3c0e06e39dbab4bb1925f49a7",
+      "width": 1261,
+      "height": 1247,
+      "transparentPixels": 1030201,
+      "opaquePixels": 525861,
+      "valid": true,
+      "expectedCoreComponents": 2,
+      "alphaComponentCountAt64": 2,
+      "meaningfulCoreComponentCountAt128": 2,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 51,
+        "y": 291,
+        "width": 1157,
+        "height": 676
+      },
+      "safeMargins": {
+        "left": 51,
+        "top": 291,
+        "right": 53,
+        "bottom": 280
+      },
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "volleyball",
+      "file": "images/DUDUQ-Y4M04-VOLLEYBALL.png",
+      "sha256": "ac17c6f5e095890377c4998aefa8ac2c3bb15faa58877866c4fd2b370f72cc42",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1132602,
+      "opaquePixels": 417988,
+      "valid": true,
+      "expectedCoreComponents": 2,
+      "alphaComponentCountAt64": 2,
+      "meaningfulCoreComponentCountAt128": 2,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 143,
+        "y": 11,
+        "width": 863,
+        "height": 1230
+      },
+      "safeMargins": {
+        "left": 143,
+        "top": 11,
+        "right": 248,
+        "bottom": 13
+      },
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    }
+  ],
+  "productionApproved": false
+}

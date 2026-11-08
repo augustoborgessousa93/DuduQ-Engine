@@ -1,0 +1,1185 @@
+{
+  "schemaVersion": "DUDUQ_Y4M04_OCCURRENCE_SCOPED_BINDING_PLAN_V1",
+  "createdAt": "2026-11-08T01:36:13.0061667Z",
+  "moduleId": "Y4M04",
+  "sourceQuestionSha256": "af3f6312a8c20357a590d3a468da88943c5ce759ce58875898ee4143278f0569",
+  "sourceRegistrySha256": "f11c12fe929379947e7d4f76736f8f73bc6320618bf01265bfb48a4e18ef5e30",
+  "sourceMediaIdCount": 26,
+  "occurrenceScopedBindingPlanCount": 62,
+  "visualUsageCount": 70,
+  "bindings": [
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-FOUR",
+      "candidateFile": "images/DUDUQ-Y4M04-FOUR.png",
+      "semanticTarget": "four",
+      "questionId": "Y4M04-Q002",
+      "sourceMediaId": "IMG-Y1M02-Q001-FOUR",
+      "plannedMediaId": "IMG-Y4M04-Q002-CTX-024955AA37F2",
+      "contractPaths": [
+        "options[3]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q002-O4"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-ONE",
+      "candidateFile": "images/DUDUQ-Y4M04-ONE.png",
+      "semanticTarget": "one",
+      "questionId": "Y4M04-Q002",
+      "sourceMediaId": "IMG-Y1M02-Q001-ONE",
+      "plannedMediaId": "IMG-Y4M04-Q002-CTX-951E198A378D",
+      "contractPaths": [
+        "options[1]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q002-O2"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-THREE",
+      "candidateFile": "images/DUDUQ-Y4M04-THREE.png",
+      "semanticTarget": "three",
+      "questionId": "Y4M04-Q002",
+      "sourceMediaId": "IMG-Y1M02-Q001-THREE",
+      "plannedMediaId": "IMG-Y4M04-Q002-CTX-5B2D77644E5C",
+      "contractPaths": [
+        "options[2]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q002-O3"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-TWO",
+      "candidateFile": "images/DUDUQ-Y4M04-TWO.png",
+      "semanticTarget": "two",
+      "questionId": "Y4M04-Q002",
+      "sourceMediaId": "IMG-Y1M02-Q001-TWO",
+      "plannedMediaId": "IMG-Y4M04-Q002-CTX-3B81ADD47BC5",
+      "contractPaths": [
+        "options[0]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q002-O1"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-BASKETBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-BASKETBALL.png",
+      "semanticTarget": "basketball",
+      "questionId": "Y4M04-Q003",
+      "sourceMediaId": "IMG-V11-2B-1F29337461D6E938",
+      "plannedMediaId": "IMG-Y4M04-Q003-CTX-B20BD23A6AAA",
+      "contractPaths": [
+        "targets[3]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q003-T4"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-SOCCER",
+      "candidateFile": "images/DUDUQ-Y4M04-SOCCER.png",
+      "semanticTarget": "soccer",
+      "questionId": "Y4M04-Q003",
+      "sourceMediaId": "IMG-V11-2B-A4950F377F6EB0EF",
+      "plannedMediaId": "IMG-Y4M04-Q003-CTX-8DB01CE356A6",
+      "contractPaths": [
+        "targets[2]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q003-T3"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-TENNIS",
+      "candidateFile": "images/DUDUQ-Y4M04-TENNIS.png",
+      "semanticTarget": "tennis",
+      "questionId": "Y4M04-Q003",
+      "sourceMediaId": "IMG-V11-2B-B5B5B86FFF24AE41",
+      "plannedMediaId": "IMG-Y4M04-Q003-CTX-EC0D06DB20DC",
+      "contractPaths": [
+        "targets[0]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q003-T1"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-VOLLEYBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-VOLLEYBALL.png",
+      "semanticTarget": "volleyball",
+      "questionId": "Y4M04-Q003",
+      "sourceMediaId": "IMG-V11-2B-F8DAA4BC7576FC31",
+      "plannedMediaId": "IMG-Y4M04-Q003-CTX-49DC246CE665",
+      "contractPaths": [
+        "targets[1]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q003-T2"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-SOCCER",
+      "candidateFile": "images/DUDUQ-Y4M04-SOCCER.png",
+      "semanticTarget": "soccer",
+      "questionId": "Y4M04-Q004",
+      "sourceMediaId": "IMG-V11-2B-8314D81C3B45C08B",
+      "plannedMediaId": "IMG-Y4M04-Q004-CTX-9870433AD8CB",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q004-R2"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-TENNIS",
+      "candidateFile": "images/DUDUQ-Y4M04-TENNIS.png",
+      "semanticTarget": "tennis",
+      "questionId": "Y4M04-Q004",
+      "sourceMediaId": "IMG-V11-2B-8C5CBA1D3FC99D6F",
+      "plannedMediaId": "IMG-Y4M04-Q004-CTX-80810224CDC8",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q004-R4"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-VOLLEYBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-VOLLEYBALL.png",
+      "semanticTarget": "volleyball",
+      "questionId": "Y4M04-Q004",
+      "sourceMediaId": "IMG-V11-2B-B6BCF0D776C5D057",
+      "plannedMediaId": "IMG-Y4M04-Q004-CTX-B439782B1D56",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q004-R1"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-BASKETBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-BASKETBALL.png",
+      "semanticTarget": "basketball",
+      "questionId": "Y4M04-Q004",
+      "sourceMediaId": "IMG-V11-2B-C777400BB6A2B48F",
+      "plannedMediaId": "IMG-Y4M04-Q004-CTX-81BBED9BDC58",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q004-R3"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-BASKETBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-BASKETBALL.png",
+      "semanticTarget": "basketball",
+      "questionId": "Y4M04-Q005",
+      "sourceMediaId": "IMG-V11-2B-31918A7FAD7D9DFC",
+      "plannedMediaId": "IMG-Y4M04-Q005-CTX-F33E29BAA036",
+      "contractPaths": [
+        "bubbleDistractorPool[0]",
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q005-D1",
+        "Y4M04-Q005-O2"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-VOLLEYBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-VOLLEYBALL.png",
+      "semanticTarget": "volleyball",
+      "questionId": "Y4M04-Q005",
+      "sourceMediaId": "IMG-V11-2B-45B3D0ADBD8A9EF6",
+      "plannedMediaId": "IMG-Y4M04-Q005-CTX-0A00F23C6F34",
+      "contractPaths": [
+        "bubbleDistractorPool[2]",
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q005-D3",
+        "Y4M04-Q005-O4"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-TENNIS",
+      "candidateFile": "images/DUDUQ-Y4M04-TENNIS.png",
+      "semanticTarget": "tennis",
+      "questionId": "Y4M04-Q005",
+      "sourceMediaId": "IMG-V11-2B-53343A61B2F8DA93",
+      "plannedMediaId": "IMG-Y4M04-Q005-CTX-C04DB5B96958",
+      "contractPaths": [
+        "bubbleDistractorPool[1]",
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q005-D2",
+        "Y4M04-Q005-O3"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-SOCCER",
+      "candidateFile": "images/DUDUQ-Y4M04-SOCCER.png",
+      "semanticTarget": "soccer",
+      "questionId": "Y4M04-Q005",
+      "sourceMediaId": "IMG-V11-2B-6E901FE0C9B85D8B",
+      "plannedMediaId": "IMG-Y4M04-Q005-CTX-CF6521ED55FD",
+      "contractPaths": [
+        "options[0]",
+        "targetsToFind[0]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q005-O1"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-ONE",
+      "candidateFile": "images/DUDUQ-Y4M04-ONE.png",
+      "semanticTarget": "one",
+      "questionId": "Y4M04-Q005",
+      "sourceMediaId": "IMG-Y1M02-Q001-ONE",
+      "plannedMediaId": "IMG-Y4M04-Q005-CTX-8A0E1DFDA9E0",
+      "contractPaths": [
+        "bubbleDistractorPool[4]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M04-Q005-D5"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-TWO",
+      "candidateFile": "images/DUDUQ-Y4M04-TWO.png",
+      "semanticTarget": "two",
+      "questionId": "Y4M04-Q005",
+      "sourceMediaId": "IMG-Y1M02-Q001-TWO",
+      "plannedMediaId": "IMG-Y4M04-Q005-CTX-E547081913D9",
+      "contractPaths": [
+        "bubbleDistractorPool[3]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M04-Q005-D4"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-TENNIS",
+      "candidateFile": "images/DUDUQ-Y4M04-TENNIS.png",
+      "semanticTarget": "tennis",
+      "questionId": "Y4M04-Q006",
+      "sourceMediaId": "IMG-V11-2B-2101259510314CD2",
+      "plannedMediaId": "IMG-Y4M04-Q006-CTX-1C5FBBE10B93",
+      "contractPaths": [
+        "pairs[1].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": [],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-SOCCER",
+      "candidateFile": "images/DUDUQ-Y4M04-SOCCER.png",
+      "semanticTarget": "soccer",
+      "questionId": "Y4M04-Q006",
+      "sourceMediaId": "IMG-V11-2B-35918BE0AABA2E5B",
+      "plannedMediaId": "IMG-Y4M04-Q006-CTX-120FA8AF14A4",
+      "contractPaths": [
+        "pairs[3].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": [],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-BASKETBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-BASKETBALL.png",
+      "semanticTarget": "basketball",
+      "questionId": "Y4M04-Q006",
+      "sourceMediaId": "IMG-V11-2B-7EEB7D68D93F7088",
+      "plannedMediaId": "IMG-Y4M04-Q006-CTX-70A7C30C9C14",
+      "contractPaths": [
+        "pairs[0].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": [],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-VOLLEYBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-VOLLEYBALL.png",
+      "semanticTarget": "volleyball",
+      "questionId": "Y4M04-Q006",
+      "sourceMediaId": "IMG-V11-2B-AAA3714A83AE3CAD",
+      "plannedMediaId": "IMG-Y4M04-Q006-CTX-DDE1FE507D45",
+      "contractPaths": [
+        "pairs[2].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": [],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-VOLLEYBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-VOLLEYBALL.png",
+      "semanticTarget": "volleyball",
+      "questionId": "Y4M04-Q008",
+      "sourceMediaId": "IMG-V11-2B-F8DAA4BC7576FC31",
+      "plannedMediaId": "IMG-Y4M04-Q008-CTX-A7312F09807A",
+      "contractPaths": [
+        "mediaBindings[0]"
+      ],
+      "roles": [
+        "SUPPORTING_IMAGE"
+      ],
+      "optionOrCardIds": [],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-EIGHT",
+      "candidateFile": "images/DUDUQ-Y4M04-EIGHT.png",
+      "semanticTarget": "eight",
+      "questionId": "Y4M04-Q009",
+      "sourceMediaId": "IMG-Y1M02-Q002-EIGHT",
+      "plannedMediaId": "IMG-Y4M04-Q009-CTX-A19F951E8807",
+      "contractPaths": [
+        "targets[3]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q009-T4"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-FIVE",
+      "candidateFile": "images/DUDUQ-Y4M04-FIVE.png",
+      "semanticTarget": "five",
+      "questionId": "Y4M04-Q009",
+      "sourceMediaId": "IMG-Y1M02-Q002-FIVE",
+      "plannedMediaId": "IMG-Y4M04-Q009-CTX-0791BF174FE1",
+      "contractPaths": [
+        "targets[0]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q009-T1"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-SEVEN",
+      "candidateFile": "images/DUDUQ-Y4M04-SEVEN.png",
+      "semanticTarget": "seven",
+      "questionId": "Y4M04-Q009",
+      "sourceMediaId": "IMG-Y1M02-Q002-SEVEN",
+      "plannedMediaId": "IMG-Y4M04-Q009-CTX-76FF6DD378D5",
+      "contractPaths": [
+        "targets[2]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q009-T3"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-SIX",
+      "candidateFile": "images/DUDUQ-Y4M04-SIX.png",
+      "semanticTarget": "six",
+      "questionId": "Y4M04-Q009",
+      "sourceMediaId": "IMG-Y1M02-Q002-SIX",
+      "plannedMediaId": "IMG-Y4M04-Q009-CTX-EF6AC4345691",
+      "contractPaths": [
+        "targets[1]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q009-T2"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-BASKETBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-BASKETBALL.png",
+      "semanticTarget": "basketball",
+      "questionId": "Y4M04-Q010",
+      "sourceMediaId": "IMG-V11-2B-31918A7FAD7D9DFC",
+      "plannedMediaId": "IMG-Y4M04-Q010-CTX-57074A862F0C",
+      "contractPaths": [
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q010-O3"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-TENNIS",
+      "candidateFile": "images/DUDUQ-Y4M04-TENNIS.png",
+      "semanticTarget": "tennis",
+      "questionId": "Y4M04-Q010",
+      "sourceMediaId": "IMG-V11-2B-53343A61B2F8DA93",
+      "plannedMediaId": "IMG-Y4M04-Q010-CTX-DEB76C58E08C",
+      "contractPaths": [
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q010-O4"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-SOCCER",
+      "candidateFile": "images/DUDUQ-Y4M04-SOCCER.png",
+      "semanticTarget": "soccer",
+      "questionId": "Y4M04-Q010",
+      "sourceMediaId": "IMG-V11-2B-6E901FE0C9B85D8B",
+      "plannedMediaId": "IMG-Y4M04-Q010-CTX-3E2DEF925ACF",
+      "contractPaths": [
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q010-O2"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-SIX",
+      "candidateFile": "images/DUDUQ-Y4M04-SIX.png",
+      "semanticTarget": "six",
+      "questionId": "Y4M04-Q010",
+      "sourceMediaId": "IMG-Y1M02-Q002-SIX",
+      "plannedMediaId": "IMG-Y4M04-Q010-CTX-C4BE49734EC4",
+      "contractPaths": [
+        "options[0]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q010-O1"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-SOCCER",
+      "candidateFile": "images/DUDUQ-Y4M04-SOCCER.png",
+      "semanticTarget": "soccer",
+      "questionId": "Y4M04-Q011",
+      "sourceMediaId": "IMG-V11-2B-8314D81C3B45C08B",
+      "plannedMediaId": "IMG-Y4M04-Q011-CTX-FA1C60AE5719",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q011-R3"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-TENNIS",
+      "candidateFile": "images/DUDUQ-Y4M04-TENNIS.png",
+      "semanticTarget": "tennis",
+      "questionId": "Y4M04-Q011",
+      "sourceMediaId": "IMG-V11-2B-8C5CBA1D3FC99D6F",
+      "plannedMediaId": "IMG-Y4M04-Q011-CTX-EBE3F44AD78C",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q011-R1"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-VOLLEYBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-VOLLEYBALL.png",
+      "semanticTarget": "volleyball",
+      "questionId": "Y4M04-Q011",
+      "sourceMediaId": "IMG-V11-2B-B6BCF0D776C5D057",
+      "plannedMediaId": "IMG-Y4M04-Q011-CTX-EEA7A927B965",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q011-R2"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-BASKETBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-BASKETBALL.png",
+      "semanticTarget": "basketball",
+      "questionId": "Y4M04-Q011",
+      "sourceMediaId": "IMG-V11-2B-C777400BB6A2B48F",
+      "plannedMediaId": "IMG-Y4M04-Q011-CTX-1ED14C32339E",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q011-R4"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-TENNIS",
+      "candidateFile": "images/DUDUQ-Y4M04-TENNIS.png",
+      "semanticTarget": "tennis",
+      "questionId": "Y4M04-Q012",
+      "sourceMediaId": "IMG-V11-2B-B5B5B86FFF24AE41",
+      "plannedMediaId": "IMG-Y4M04-Q012-CTX-A69289CD85A9",
+      "contractPaths": [
+        "bubbleDistractorPool[3]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M04-Q012-D4"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-VOLLEYBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-VOLLEYBALL.png",
+      "semanticTarget": "volleyball",
+      "questionId": "Y4M04-Q012",
+      "sourceMediaId": "IMG-V11-2B-F8DAA4BC7576FC31",
+      "plannedMediaId": "IMG-Y4M04-Q012-CTX-7E8115C596BF",
+      "contractPaths": [
+        "bubbleDistractorPool[4]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M04-Q012-D5"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-FOUR",
+      "candidateFile": "images/DUDUQ-Y4M04-FOUR.png",
+      "semanticTarget": "four",
+      "questionId": "Y4M04-Q012",
+      "sourceMediaId": "IMG-Y1M02-Q001-FOUR",
+      "plannedMediaId": "IMG-Y4M04-Q012-CTX-527B7294541C",
+      "contractPaths": [
+        "bubbleDistractorPool[2]",
+        "options[3]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q012-D3",
+        "Y4M04-Q012-O4"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-ONE",
+      "candidateFile": "images/DUDUQ-Y4M04-ONE.png",
+      "semanticTarget": "one",
+      "questionId": "Y4M04-Q012",
+      "sourceMediaId": "IMG-Y1M02-Q001-ONE",
+      "plannedMediaId": "IMG-Y4M04-Q012-CTX-62ACC666FD92",
+      "contractPaths": [
+        "bubbleDistractorPool[0]",
+        "options[1]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q012-D1",
+        "Y4M04-Q012-O2"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-THREE",
+      "candidateFile": "images/DUDUQ-Y4M04-THREE.png",
+      "semanticTarget": "three",
+      "questionId": "Y4M04-Q012",
+      "sourceMediaId": "IMG-Y1M02-Q001-THREE",
+      "plannedMediaId": "IMG-Y4M04-Q012-CTX-A2EA12EC1E04",
+      "contractPaths": [
+        "bubbleDistractorPool[1]",
+        "options[2]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q012-D2",
+        "Y4M04-Q012-O3"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-TWO",
+      "candidateFile": "images/DUDUQ-Y4M04-TWO.png",
+      "semanticTarget": "two",
+      "questionId": "Y4M04-Q012",
+      "sourceMediaId": "IMG-Y1M02-Q001-TWO",
+      "plannedMediaId": "IMG-Y4M04-Q012-CTX-AF446AC2146A",
+      "contractPaths": [
+        "options[0]",
+        "targetsToFind[0]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q012-O1"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-BASKETBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-BASKETBALL.png",
+      "semanticTarget": "basketball",
+      "questionId": "Y4M04-Q013",
+      "sourceMediaId": "IMG-V11-2B-1F29337461D6E938",
+      "plannedMediaId": "IMG-Y4M04-Q013-CTX-A76535F1EEC5",
+      "contractPaths": [
+        "targets[1]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q013-T2"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-SOCCER",
+      "candidateFile": "images/DUDUQ-Y4M04-SOCCER.png",
+      "semanticTarget": "soccer",
+      "questionId": "Y4M04-Q013",
+      "sourceMediaId": "IMG-V11-2B-A4950F377F6EB0EF",
+      "plannedMediaId": "IMG-Y4M04-Q013-CTX-D8593C028858",
+      "contractPaths": [
+        "targets[0]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q013-T1"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-TENNIS",
+      "candidateFile": "images/DUDUQ-Y4M04-TENNIS.png",
+      "semanticTarget": "tennis",
+      "questionId": "Y4M04-Q013",
+      "sourceMediaId": "IMG-V11-2B-B5B5B86FFF24AE41",
+      "plannedMediaId": "IMG-Y4M04-Q013-CTX-01FFB82DBB93",
+      "contractPaths": [
+        "targets[2]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q013-T3"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-VOLLEYBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-VOLLEYBALL.png",
+      "semanticTarget": "volleyball",
+      "questionId": "Y4M04-Q013",
+      "sourceMediaId": "IMG-V11-2B-F8DAA4BC7576FC31",
+      "plannedMediaId": "IMG-Y4M04-Q013-CTX-3391737D79FD",
+      "contractPaths": [
+        "targets[3]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q013-T4"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-SOCCER",
+      "candidateFile": "images/DUDUQ-Y4M04-SOCCER.png",
+      "semanticTarget": "soccer",
+      "questionId": "Y4M04-Q014",
+      "sourceMediaId": "IMG-V11-2B-8314D81C3B45C08B",
+      "plannedMediaId": "IMG-Y4M04-Q014-CTX-1E607DB73764",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q014-R4"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-TENNIS",
+      "candidateFile": "images/DUDUQ-Y4M04-TENNIS.png",
+      "semanticTarget": "tennis",
+      "questionId": "Y4M04-Q014",
+      "sourceMediaId": "IMG-V11-2B-8C5CBA1D3FC99D6F",
+      "plannedMediaId": "IMG-Y4M04-Q014-CTX-C67C8CFB4617",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q014-R2"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-VOLLEYBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-VOLLEYBALL.png",
+      "semanticTarget": "volleyball",
+      "questionId": "Y4M04-Q014",
+      "sourceMediaId": "IMG-V11-2B-B6BCF0D776C5D057",
+      "plannedMediaId": "IMG-Y4M04-Q014-CTX-D456678C1C83",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q014-R3"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-BASKETBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-BASKETBALL.png",
+      "semanticTarget": "basketball",
+      "questionId": "Y4M04-Q014",
+      "sourceMediaId": "IMG-V11-2B-C777400BB6A2B48F",
+      "plannedMediaId": "IMG-Y4M04-Q014-CTX-66C6125DC197",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q014-R1"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-BASKETBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-BASKETBALL.png",
+      "semanticTarget": "basketball",
+      "questionId": "Y4M04-Q015",
+      "sourceMediaId": "IMG-V11-2B-31918A7FAD7D9DFC",
+      "plannedMediaId": "IMG-Y4M04-Q015-CTX-95E3FCB746DE",
+      "contractPaths": [
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q015-O2"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-VOLLEYBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-VOLLEYBALL.png",
+      "semanticTarget": "volleyball",
+      "questionId": "Y4M04-Q015",
+      "sourceMediaId": "IMG-V11-2B-45B3D0ADBD8A9EF6",
+      "plannedMediaId": "IMG-Y4M04-Q015-CTX-0030D248CB8D",
+      "contractPaths": [
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q015-O4"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-TENNIS",
+      "candidateFile": "images/DUDUQ-Y4M04-TENNIS.png",
+      "semanticTarget": "tennis",
+      "questionId": "Y4M04-Q015",
+      "sourceMediaId": "IMG-V11-2B-53343A61B2F8DA93",
+      "plannedMediaId": "IMG-Y4M04-Q015-CTX-F060B53F7854",
+      "contractPaths": [
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q015-O3"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-SOCCER",
+      "candidateFile": "images/DUDUQ-Y4M04-SOCCER.png",
+      "semanticTarget": "soccer",
+      "questionId": "Y4M04-Q015",
+      "sourceMediaId": "IMG-V11-2B-6E901FE0C9B85D8B",
+      "plannedMediaId": "IMG-Y4M04-Q015-CTX-6200276213E8",
+      "contractPaths": [
+        "options[0]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q015-O1"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-EIGHT",
+      "candidateFile": "images/DUDUQ-Y4M04-EIGHT.png",
+      "semanticTarget": "eight",
+      "questionId": "Y4M04-Q017",
+      "sourceMediaId": "IMG-Y1M02-Q002-EIGHT",
+      "plannedMediaId": "IMG-Y4M04-Q017-CTX-FEAE57158D40",
+      "contractPaths": [
+        "targets[1]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q017-T2"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-SEVEN",
+      "candidateFile": "images/DUDUQ-Y4M04-SEVEN.png",
+      "semanticTarget": "seven",
+      "questionId": "Y4M04-Q017",
+      "sourceMediaId": "IMG-Y1M02-Q002-SEVEN",
+      "plannedMediaId": "IMG-Y4M04-Q017-CTX-F0378F442077",
+      "contractPaths": [
+        "targets[0]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q017-T1"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-NINE",
+      "candidateFile": "images/DUDUQ-Y4M04-NINE.png",
+      "semanticTarget": "nine",
+      "questionId": "Y4M04-Q017",
+      "sourceMediaId": "IMG-Y1M02-Q007-NINE",
+      "plannedMediaId": "IMG-Y4M04-Q017-CTX-9504C8BAA2AD",
+      "contractPaths": [
+        "targets[2]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q017-T3"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-TEN",
+      "candidateFile": "images/DUDUQ-Y4M04-TEN.png",
+      "semanticTarget": "ten",
+      "questionId": "Y4M04-Q017",
+      "sourceMediaId": "IMG-Y1M02-Q007-TEN",
+      "plannedMediaId": "IMG-Y4M04-Q017-CTX-0EDB6F35EE5A",
+      "contractPaths": [
+        "targets[3]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q017-T4"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-VOLLEYBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-VOLLEYBALL.png",
+      "semanticTarget": "volleyball",
+      "questionId": "Y4M04-Q018",
+      "sourceMediaId": "IMG-V11-2B-F8DAA4BC7576FC31",
+      "plannedMediaId": "IMG-Y4M04-Q018-CTX-B329A1B5EF45",
+      "contractPaths": [
+        "mediaBindings[0]"
+      ],
+      "roles": [
+        "SUPPORTING_IMAGE"
+      ],
+      "optionOrCardIds": [],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-BASKETBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-BASKETBALL.png",
+      "semanticTarget": "basketball",
+      "questionId": "Y4M04-Q020",
+      "sourceMediaId": "IMG-V11-2B-31918A7FAD7D9DFC",
+      "plannedMediaId": "IMG-Y4M04-Q020-CTX-04819012E9B6",
+      "contractPaths": [
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q020-O3"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-VOLLEYBALL",
+      "candidateFile": "images/DUDUQ-Y4M04-VOLLEYBALL.png",
+      "semanticTarget": "volleyball",
+      "questionId": "Y4M04-Q020",
+      "sourceMediaId": "IMG-V11-2B-45B3D0ADBD8A9EF6",
+      "plannedMediaId": "IMG-Y4M04-Q020-CTX-CA1E37F14B70",
+      "contractPaths": [
+        "options[0]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q020-O1"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-TENNIS",
+      "candidateFile": "images/DUDUQ-Y4M04-TENNIS.png",
+      "semanticTarget": "tennis",
+      "questionId": "Y4M04-Q020",
+      "sourceMediaId": "IMG-V11-2B-53343A61B2F8DA93",
+      "plannedMediaId": "IMG-Y4M04-Q020-CTX-D959220515AE",
+      "contractPaths": [
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q020-O4"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    },
+    {
+      "candidateAssetKey": "Y4M04-CANDIDATE-SOCCER",
+      "candidateFile": "images/DUDUQ-Y4M04-SOCCER.png",
+      "semanticTarget": "soccer",
+      "questionId": "Y4M04-Q020",
+      "sourceMediaId": "IMG-V11-2B-6E901FE0C9B85D8B",
+      "plannedMediaId": "IMG-Y4M04-Q020-CTX-6D446251C734",
+      "contractPaths": [
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M04-Q020-O2"
+      ],
+      "action": "INTEGRATION_LANE_MAY_APPLY_ONLY_AFTER_INDEPENDENT_QA"
+    }
+  ],
+  "nonVisualQuestionContracts": [
+    {
+      "questionId": "Y4M04-Q001",
+      "sourceSha256": "9c76f46e283081e6e55149f4b9b9f44cfb498db4be243db498e1b1f6d25cca61",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "titleEn": "soccer, basketball, volleyball, tennis",
+      "semanticTargets": [
+        "basketball",
+        "soccer",
+        "tennis",
+        "volleyball"
+      ],
+      "action": "NO_MEDIA_BINDING_IN_SOURCE_CONTRACT_DO_NOT_INVENT_ONE"
+    },
+    {
+      "questionId": "Y4M04-Q007",
+      "sourceSha256": "87a6d4f712943f2ea1af89a3aaf9fb18f4980fbb5470375639a757144b2600dc",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "titleEn": "soccer, basketball, volleyball, tennis",
+      "semanticTargets": [
+        "basketball",
+        "soccer",
+        "tennis",
+        "volleyball"
+      ],
+      "action": "NO_MEDIA_BINDING_IN_SOURCE_CONTRACT_DO_NOT_INVENT_ONE"
+    },
+    {
+      "questionId": "Y4M04-Q016",
+      "sourceSha256": "9d516fb164524f39619c75dba4a920c6a8b375528025b4c0c1044b69d71edede",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_TEXT",
+      "titleEn": "volleyball, soccer, basketball, tennis",
+      "semanticTargets": [
+        "basketball",
+        "soccer",
+        "tennis",
+        "volleyball"
+      ],
+      "action": "NO_MEDIA_BINDING_IN_SOURCE_CONTRACT_DO_NOT_INVENT_ONE"
+    },
+    {
+      "questionId": "Y4M04-Q019",
+      "sourceSha256": "8f8a97639dd23f429868b2f96edc1f44ae5c8a003f3fe6901ef490b37c10211e",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "titleEn": "soccer, basketball, volleyball, tennis",
+      "semanticTargets": [
+        "basketball",
+        "soccer",
+        "tennis",
+        "volleyball"
+      ],
+      "action": "NO_MEDIA_BINDING_IN_SOURCE_CONTRACT_DO_NOT_INVENT_ONE"
+    }
+  ],
+  "applyPerformed": false,
+  "questionMutation": false,
+  "registryMutation": false,
+  "overlayApplied": false,
+  "productionApproved": false
+}

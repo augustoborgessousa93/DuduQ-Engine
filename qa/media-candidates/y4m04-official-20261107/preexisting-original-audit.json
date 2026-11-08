@@ -1,0 +1,330 @@
+{
+  "schemaVersion": "DUDUQ_Y4M04_PREEXISTING_ORIGINAL_AUDIT_V1",
+  "auditedAt": "2026-11-07T23:24:03.412Z",
+  "moduleId": "Y4M04",
+  "sourceQuestionSha256": "af3f6312a8c20357a590d3a468da88943c5ce759ce58875898ee4143278f0569",
+  "canonicalNumberBatch": "y1m02-official-20261030",
+  "conceptCount": 14,
+  "reusableCount": 6,
+  "missingCount": 8,
+  "reusable": [
+    {
+      "concept": "five",
+      "usageCount": 1,
+      "decision": "REUSE_VERIFIED_PREEXISTING_NATIVE_ORIGINAL",
+      "sourceBatch": "y1m02-official-20261030",
+      "sourceManifest": "qa/media-candidates/y1m02-official-20261030/batch-manifest.json",
+      "sourceManifestSha256": "f0392f0895579c33acba100258a3369eebf52664cfd6a1a84c5de17cc710e8f1",
+      "sourceAssetKey": "Y1M02-OFFICIAL-FIVE",
+      "sourceCandidateFile": "qa/media-candidates/y1m02-official-20261030/images/DUDUQ-Y1M02-FIVE.png",
+      "sourceCandidateSha256": "b12f817867e3fa002e1468cadbfdda80932b8965ae74e1255db41016f9b57eee",
+      "sourceOriginalFile": "qa/media-candidates/y1m02-official-20261030/provenance/originals/FIVE-ORIGINAL.png",
+      "sourceOriginalSha256": "3f7bfb852d53dd43ed1aa0e9051ff4f9f6cd36971da3470467d61b525b3eb4a5",
+      "sourceGenerationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "provider": "Codex built-in image_gen",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card image for children ages 6-11\nPrimary request: exactly 5 matching glossy red apples, complete and individually countable, teaching the English quantity five\nComposition: three apples above two, clear separation, every apple fully inside the canvas, generous transparent safe margin\nStyle: premium polished rounded 3D children's animation render, realistic glossy red apples with small green leaves, crisp silhouette\nLighting: soft bright studio lighting\nConstraints: one transparent PNG; no other countable objects; no cutoff; no overlap that obscures counting; no floor, cast shadow, glow, halo, vignette, backdrop, text, numeral, letters, symbols, logo, watermark, collage, grid or frame",
+      "originalPromptRecordStatus": "EXACT_SESSION_PROMPT_RECORDED",
+      "nativeSourceExactHashMatch": true,
+      "originalPng": {
+        "width": 1536,
+        "height": 1024,
+        "transparentPixels": 800787,
+        "opaquePixels": 735818,
+        "valid": true
+      },
+      "candidatePng": {
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1594400,
+        "opaquePixels": 735818,
+        "valid": true
+      },
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 5,
+        "operation": "retain opaque subject plus antialias edge, remove detached or diffuse low-alpha pixels, and add transparent safe-margin padding"
+      }
+    },
+    {
+      "concept": "four",
+      "usageCount": 3,
+      "decision": "REUSE_VERIFIED_PREEXISTING_NATIVE_ORIGINAL",
+      "sourceBatch": "y1m02-official-20261030",
+      "sourceManifest": "qa/media-candidates/y1m02-official-20261030/batch-manifest.json",
+      "sourceManifestSha256": "f0392f0895579c33acba100258a3369eebf52664cfd6a1a84c5de17cc710e8f1",
+      "sourceAssetKey": "Y1M02-OFFICIAL-FOUR",
+      "sourceCandidateFile": "qa/media-candidates/y1m02-official-20261030/images/DUDUQ-Y1M02-FOUR.png",
+      "sourceCandidateSha256": "d7e0f1fd9f5b565a62b75b0dcf8f07fb257096a33947c6ec6ee1fadd87c61505",
+      "sourceOriginalFile": "qa/media-candidates/y1m02-official-20261030/provenance/originals/FOUR-ORIGINAL.png",
+      "sourceOriginalSha256": "eb9a66a2a51d34c01bb660918d1a30a43e80b92f539bb06bed8b8976ea4b148a",
+      "sourceGenerationClass": "REUSED_NATIVE_20261030_PROVEN_BY_CODEX_HOME_EXACT_HASH",
+      "provider": "Codex built-in image_gen",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card image for children ages 6-11\nPrimary request: exactly 4 matching glossy red apples, complete and individually countable, teaching the English quantity four\nComposition: two rows of two, clear separation, every apple fully inside the canvas, generous transparent safe margin\nStyle: premium polished rounded 3D children's animation render, realistic glossy red apples with small green leaves, crisp silhouette\nLighting: soft bright studio lighting\nConstraints: one transparent PNG; no other countable objects; no cutoff; no overlap that obscures counting; no floor, cast shadow, glow, halo, vignette, backdrop, text, numeral, letters, symbols, logo, watermark, collage, grid or frame",
+      "originalPromptRecordStatus": "ORIGINAL_PROMPT_NOT_PERSISTED_CANONICAL_SPEC_RECONSTRUCTED",
+      "nativeSourceExactHashMatch": true,
+      "originalPng": {
+        "width": 1305,
+        "height": 1206,
+        "transparentPixels": 732489,
+        "opaquePixels": 797370,
+        "valid": true
+      },
+      "candidatePng": {
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1533449,
+        "opaquePixels": 797370,
+        "valid": true
+      },
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 4,
+        "operation": "retain opaque subject plus antialias edge, remove detached or diffuse low-alpha pixels, and add transparent safe-margin padding"
+      }
+    },
+    {
+      "concept": "nine",
+      "usageCount": 1,
+      "decision": "REUSE_VERIFIED_PREEXISTING_NATIVE_ORIGINAL",
+      "sourceBatch": "y1m02-official-20261030",
+      "sourceManifest": "qa/media-candidates/y1m02-official-20261030/batch-manifest.json",
+      "sourceManifestSha256": "f0392f0895579c33acba100258a3369eebf52664cfd6a1a84c5de17cc710e8f1",
+      "sourceAssetKey": "Y1M02-OFFICIAL-NINE",
+      "sourceCandidateFile": "qa/media-candidates/y1m02-official-20261030/images/DUDUQ-Y1M02-NINE.png",
+      "sourceCandidateSha256": "a49f122a9e0967699c4602ce5cd294ad228dff16bd644e9d906b26e9d87eae5c",
+      "sourceOriginalFile": "qa/media-candidates/y1m02-official-20261030/provenance/originals/NINE-ORIGINAL.png",
+      "sourceOriginalSha256": "d606b31ad47da7e85f5294252146a6d682429f45f2db551f6b588bd4147ca23a",
+      "sourceGenerationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "provider": "Codex built-in image_gen",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card image for children ages 6-11\nPrimary request: exactly 9 matching glossy red apples, complete and individually countable, teaching the English quantity nine\nComposition: three rows of three, clear separation, every apple fully inside the canvas, generous transparent safe margin\nStyle: premium polished rounded 3D children's animation render, realistic glossy red apples with small green leaves, crisp silhouette\nLighting: soft bright studio lighting\nConstraints: one transparent PNG; no other countable objects; no cutoff; no overlap that obscures counting; no floor, cast shadow, glow, halo, vignette, backdrop, text, numeral, letters, symbols, logo, watermark, collage, grid or frame",
+      "originalPromptRecordStatus": "EXACT_SESSION_PROMPT_RECORDED",
+      "nativeSourceExactHashMatch": true,
+      "originalPng": {
+        "width": 1254,
+        "height": 1254,
+        "transparentPixels": 647667,
+        "opaquePixels": 867775,
+        "valid": true
+      },
+      "candidatePng": {
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1452180,
+        "opaquePixels": 867775,
+        "valid": true
+      },
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 9,
+        "operation": "retain opaque subject plus antialias edge, remove detached or diffuse low-alpha pixels, and add transparent safe-margin padding"
+      }
+    },
+    {
+      "concept": "one",
+      "usageCount": 4,
+      "decision": "REUSE_VERIFIED_PREEXISTING_NATIVE_ORIGINAL",
+      "sourceBatch": "y1m02-official-20261030",
+      "sourceManifest": "qa/media-candidates/y1m02-official-20261030/batch-manifest.json",
+      "sourceManifestSha256": "f0392f0895579c33acba100258a3369eebf52664cfd6a1a84c5de17cc710e8f1",
+      "sourceAssetKey": "Y1M02-OFFICIAL-ONE",
+      "sourceCandidateFile": "qa/media-candidates/y1m02-official-20261030/images/DUDUQ-Y1M02-ONE.png",
+      "sourceCandidateSha256": "e65ad687b4d68c317b065a9fce4a7d3dfbd7cffbe45835899dd9826ccaf4d8f5",
+      "sourceOriginalFile": "qa/media-candidates/y1m02-official-20261030/provenance/originals/ONE-ORIGINAL.png",
+      "sourceOriginalSha256": "db5c25dc3d048532af972dba45f58faf2158093beae6f3fb48ae3041f5900eec",
+      "sourceGenerationClass": "REUSED_NATIVE_20261030_PROVEN_BY_CODEX_HOME_EXACT_HASH",
+      "provider": "Codex built-in image_gen",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card image for children ages 6-11\nPrimary request: exactly 1 matching glossy red apple, complete and individually countable, teaching the English quantity one\nComposition: one centered apple, clear separation, every apple fully inside the canvas, generous transparent safe margin\nStyle: premium polished rounded 3D children's animation render, realistic glossy red apples with small green leaves, crisp silhouette\nLighting: soft bright studio lighting\nConstraints: one transparent PNG; no other countable objects; no cutoff; no overlap that obscures counting; no floor, cast shadow, glow, halo, vignette, backdrop, text, numeral, letters, symbols, logo, watermark, collage, grid or frame",
+      "originalPromptRecordStatus": "ORIGINAL_PROMPT_NOT_PERSISTED_CANONICAL_SPEC_RECONSTRUCTED",
+      "nativeSourceExactHashMatch": true,
+      "originalPng": {
+        "width": 1312,
+        "height": 1199,
+        "transparentPixels": 777056,
+        "opaquePixels": 777087,
+        "valid": true
+      },
+      "candidatePng": {
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1567932,
+        "opaquePixels": 777087,
+        "valid": true
+      },
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 1,
+        "operation": "retain opaque subject plus antialias edge, remove detached or diffuse low-alpha pixels, and add transparent safe-margin padding"
+      }
+    },
+    {
+      "concept": "seven",
+      "usageCount": 2,
+      "decision": "REUSE_VERIFIED_PREEXISTING_NATIVE_ORIGINAL",
+      "sourceBatch": "y1m02-official-20261030",
+      "sourceManifest": "qa/media-candidates/y1m02-official-20261030/batch-manifest.json",
+      "sourceManifestSha256": "f0392f0895579c33acba100258a3369eebf52664cfd6a1a84c5de17cc710e8f1",
+      "sourceAssetKey": "Y1M02-OFFICIAL-SEVEN",
+      "sourceCandidateFile": "qa/media-candidates/y1m02-official-20261030/images/DUDUQ-Y1M02-SEVEN.png",
+      "sourceCandidateSha256": "b675fb761c6054b737cf35ba6b9d36e9fe50ed7a317ae07e4a3dc30000272667",
+      "sourceOriginalFile": "qa/media-candidates/y1m02-official-20261030/provenance/originals/SEVEN-ORIGINAL.png",
+      "sourceOriginalSha256": "cf8eaa0b36b46893e4b8ef2962f2ac42c5e806ef81d4426f907484fc0c3270cb",
+      "sourceGenerationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "provider": "Codex built-in image_gen",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card image for children ages 6-11\nPrimary request: exactly 7 matching glossy red apples, complete and individually countable, teaching the English quantity seven\nComposition: two above three above two, clear separation, every apple fully inside the canvas, generous transparent safe margin\nStyle: premium polished rounded 3D children's animation render, realistic glossy red apples with small green leaves, crisp silhouette\nLighting: soft bright studio lighting\nConstraints: one transparent PNG; no other countable objects; no cutoff; no overlap that obscures counting; no floor, cast shadow, glow, halo, vignette, backdrop, text, numeral, letters, symbols, logo, watermark, collage, grid or frame",
+      "originalPromptRecordStatus": "EXACT_SESSION_PROMPT_RECORDED",
+      "nativeSourceExactHashMatch": true,
+      "originalPng": {
+        "width": 1295,
+        "height": 1215,
+        "transparentPixels": 678314,
+        "opaquePixels": 833500,
+        "valid": true
+      },
+      "candidatePng": {
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1489321,
+        "opaquePixels": 833500,
+        "valid": true
+      },
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 7,
+        "operation": "retain opaque subject plus antialias edge, remove detached or diffuse low-alpha pixels, and add transparent safe-margin padding"
+      }
+    },
+    {
+      "concept": "six",
+      "usageCount": 2,
+      "decision": "REUSE_VERIFIED_PREEXISTING_NATIVE_ORIGINAL",
+      "sourceBatch": "y1m02-official-20261030",
+      "sourceManifest": "qa/media-candidates/y1m02-official-20261030/batch-manifest.json",
+      "sourceManifestSha256": "f0392f0895579c33acba100258a3369eebf52664cfd6a1a84c5de17cc710e8f1",
+      "sourceAssetKey": "Y1M02-OFFICIAL-SIX",
+      "sourceCandidateFile": "qa/media-candidates/y1m02-official-20261030/images/DUDUQ-Y1M02-SIX.png",
+      "sourceCandidateSha256": "d6482204a9c9caf61913193ac2369abd3e3681226568a0b4262fed3460faef66",
+      "sourceOriginalFile": "qa/media-candidates/y1m02-official-20261030/provenance/originals/SIX-ORIGINAL.png",
+      "sourceOriginalSha256": "2a4e1df89aac1d90b8652fc98047f3b900213da886355e57ca2ea630c3f3ac90",
+      "sourceGenerationClass": "NATIVE_IMAGEGEN_THIS_SESSION",
+      "provider": "Codex built-in image_gen",
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card image for children ages 6-11\nPrimary request: exactly 6 matching glossy red apples, complete and individually countable, teaching the English quantity six\nComposition: two rows of three, clear separation, every apple fully inside the canvas, generous transparent safe margin\nStyle: premium polished rounded 3D children's animation render, realistic glossy red apples with small green leaves, crisp silhouette\nLighting: soft bright studio lighting\nConstraints: one transparent PNG; no other countable objects; no cutoff; no overlap that obscures counting; no floor, cast shadow, glow, halo, vignette, backdrop, text, numeral, letters, symbols, logo, watermark, collage, grid or frame",
+      "originalPromptRecordStatus": "EXACT_SESSION_PROMPT_RECORDED",
+      "nativeSourceExactHashMatch": true,
+      "originalPng": {
+        "width": 1536,
+        "height": 1024,
+        "transparentPixels": 598292,
+        "opaquePixels": 913960,
+        "valid": true
+      },
+      "candidatePng": {
+        "width": 1536,
+        "height": 1536,
+        "transparentPixels": 1405322,
+        "opaquePixels": 913960,
+        "valid": true
+      },
+      "alphaNormalization": {
+        "script": "qa/normalize-transparent-png-alpha.mjs",
+        "semanticPixelsChanged": false,
+        "expectedCoreComponents": 6,
+        "operation": "retain opaque subject plus antialias edge, remove detached or diffuse low-alpha pixels, and add transparent safe-margin padding"
+      }
+    }
+  ],
+  "missing": [
+    {
+      "concept": "basketball",
+      "usageCount": 11,
+      "decision": "NEED_NATIVE_GENERATION",
+      "preexistingExactMatches": 0
+    },
+    {
+      "concept": "eight",
+      "usageCount": 2,
+      "decision": "NEED_NATIVE_GENERATION_AFTER_REUSE_REJECTION",
+      "preexistingExactMatches": 1
+    },
+    {
+      "concept": "soccer",
+      "usageCount": 11,
+      "decision": "NEED_NATIVE_GENERATION",
+      "preexistingExactMatches": 0
+    },
+    {
+      "concept": "ten",
+      "usageCount": 1,
+      "decision": "NEED_NATIVE_GENERATION_AFTER_REUSE_REJECTION",
+      "preexistingExactMatches": 1
+    },
+    {
+      "concept": "tennis",
+      "usageCount": 12,
+      "decision": "NEED_NATIVE_GENERATION",
+      "preexistingExactMatches": 0
+    },
+    {
+      "concept": "three",
+      "usageCount": 3,
+      "decision": "NEED_NATIVE_GENERATION_AFTER_REUSE_REJECTION",
+      "preexistingExactMatches": 1
+    },
+    {
+      "concept": "two",
+      "usageCount": 4,
+      "decision": "NEED_NATIVE_GENERATION_AFTER_REUSE_REJECTION",
+      "preexistingExactMatches": 1
+    },
+    {
+      "concept": "volleyball",
+      "usageCount": 13,
+      "decision": "NEED_NATIVE_GENERATION",
+      "preexistingExactMatches": 0
+    }
+  ],
+  "rejected": [
+    {
+      "concept": "eight",
+      "sourceBatch": "y1m02-official-20261030",
+      "assetKey": "Y1M02-OFFICIAL-EIGHT",
+      "failures": [
+        "ORIGINAL_RESOLUTION_BELOW_MINIMUM"
+      ]
+    },
+    {
+      "concept": "ten",
+      "sourceBatch": "y1m02-official-20261030",
+      "assetKey": "Y1M02-OFFICIAL-TEN",
+      "failures": [
+        "ORIGINAL_RESOLUTION_BELOW_MINIMUM"
+      ]
+    },
+    {
+      "concept": "three",
+      "sourceBatch": "y1m02-official-20261030",
+      "assetKey": "Y1M02-OFFICIAL-THREE",
+      "failures": [
+        "ORIGINAL_RESOLUTION_BELOW_MINIMUM"
+      ]
+    },
+    {
+      "concept": "two",
+      "sourceBatch": "y1m02-official-20261030",
+      "assetKey": "Y1M02-OFFICIAL-TWO",
+      "failures": [
+        "ORIGINAL_RESOLUTION_BELOW_MINIMUM"
+      ]
+    }
+  ],
+  "safety": {
+    "candidateEvidenceOnly": true,
+    "productionApproved": false,
+    "integrated": false,
+    "sourceFilesModified": false
+  }
+}

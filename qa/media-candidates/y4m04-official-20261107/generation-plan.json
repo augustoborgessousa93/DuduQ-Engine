@@ -1,0 +1,108 @@
+{
+  "schemaVersion": "DUDUQ_Y4M04_GENERATION_PLAN_V1",
+  "createdAt": "2026-11-08T01:23:53.6845146Z",
+  "moduleId": "Y4M04",
+  "lane": "generation",
+  "candidateOnly": true,
+  "sourceQuestionSha256": "af3f6312a8c20357a590d3a468da88943c5ce759ce58875898ee4143278f0569",
+  "sourceRegistrySha256": "f11c12fe929379947e7d4f76736f8f73bc6320618bf01265bfb48a4e18ef5e30",
+  "questionCount": 20,
+  "visualUsageCount": 70,
+  "sourcePendingMediaIds": 26,
+  "globalPendingMediaIds": 1055,
+  "semanticConcepts": [
+    "basketball",
+    "eight",
+    "five",
+    "four",
+    "nine",
+    "one",
+    "seven",
+    "six",
+    "soccer",
+    "ten",
+    "tennis",
+    "three",
+    "two",
+    "volleyball"
+  ],
+  "reusedVerifiedOriginals": [
+    "five",
+    "four",
+    "nine",
+    "one",
+    "seven",
+    "six"
+  ],
+  "generationQueue": [
+    {
+      "concept": "basketball",
+      "slug": "BASKETBALL",
+      "expectedCoreComponents": 1,
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational sport concept PNG for Year 4 children\nPrimary request: one cheerful school-age boy clearly playing basketball, actively dribbling exactly one orange basketball\nSubject: a single child athlete in simple unbranded sportswear, full body and the complete basketball visible; the pose and ball must make basketball unmistakable\nStyle/medium: premium polished rounded 3D children's animation render, clean materials, expressive but natural proportions\nComposition/framing: centered compact cutout, slight three-quarter view, subject and ball together fill about 84% of a square canvas, every edge fully visible with a safe transparent margin\nLighting/mood: soft bright studio lighting, friendly and energetic, highlights contained within the subject\nConstraints: genuinely transparent alpha background; exactly one child and one basketball; no hoop, net, court, floor, cast shadow, scenery, text, letters, numbers, logo, watermark, border, frame, collage, duplicate person, extra ball, soccer ball, volleyball, tennis ball, racket, or wrong sports equipment; no cutoff",
+      "status": "GENERATED_ACCEPTED_CANDIDATE_ONLY"
+    },
+    {
+      "concept": "eight",
+      "slug": "EIGHT",
+      "expectedCoreComponents": 8,
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card PNG for Year 4 children\nPrimary request: exactly 8 matching glossy red apples, complete and individually countable, teaching the English quantity eight\nSubject: eight identical realistic red apples, each with one small attached green leaf\nStyle/medium: premium polished rounded 3D children's animation render, crisp silhouettes and clean materials\nComposition/framing: two straight rows of four apples, clear transparent separation between every apple, the group fills about 84% of a square canvas, every apple fully visible with a safe transparent margin\nLighting/mood: soft bright studio lighting with highlights contained on the apples\nConstraints: genuinely transparent alpha background; exactly eight apples and no other countable object; no overlap that obscures counting; no basket, plate, floor, cast shadow, glow, halo, backdrop, text, numeral, letters, symbols, logo, watermark, border, frame, collage, grid lines, duplicate fragment, or cutoff",
+      "status": "GENERATED_ACCEPTED_CANDIDATE_ONLY"
+    },
+    {
+      "concept": "soccer",
+      "slug": "SOCCER",
+      "expectedCoreComponents": 1,
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational sport concept PNG for Year 4 children\nPrimary request: one cheerful school-age boy clearly playing soccer, actively kicking exactly one classic black-and-white soccer ball\nSubject: a single child athlete in simple unbranded sportswear, full body and the complete soccer ball visible; the kicking pose and ball must make soccer unmistakable\nStyle/medium: premium polished rounded 3D children's animation render, clean materials, expressive but natural proportions\nComposition/framing: centered compact cutout, slight three-quarter view, subject and ball together fill about 84% of a square canvas, every edge fully visible with a safe transparent margin\nLighting/mood: soft bright studio lighting, friendly and energetic, highlights contained within the subject\nConstraints: genuinely transparent alpha background; exactly one child and one soccer ball; no goal, net, field, floor, cast shadow, scenery, text, letters, numbers, logo, watermark, border, frame, collage, duplicate person, extra ball, basketball, volleyball, tennis ball, racket, or wrong sports equipment; no cutoff",
+      "status": "GENERATED_ACCEPTED_CANDIDATE_ONLY"
+    },
+    {
+      "concept": "ten",
+      "slug": "TEN",
+      "expectedCoreComponents": 10,
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card PNG for Year 4 children\nPrimary request: exactly 10 matching glossy red apples, complete and individually countable, teaching the English quantity ten\nSubject: ten identical realistic red apples, each with one small attached green leaf\nStyle/medium: premium polished rounded 3D children's animation render, crisp silhouettes and clean materials\nComposition/framing: two straight rows of five apples, clear transparent separation between every apple, the group fills about 84% of a square canvas, every apple fully visible with a safe transparent margin\nLighting/mood: soft bright studio lighting with highlights contained on the apples\nConstraints: genuinely transparent alpha background; exactly ten apples and no other countable object; no overlap that obscures counting; no basket, plate, floor, cast shadow, glow, halo, backdrop, text, numeral, letters, symbols, logo, watermark, border, frame, collage, grid lines, duplicate fragment, or cutoff",
+      "status": "GENERATED_ACCEPTED_CANDIDATE_ONLY"
+    },
+    {
+      "concept": "tennis",
+      "slug": "TENNIS",
+      "expectedCoreComponents": 2,
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational sport concept PNG for Year 4 children\nPrimary request: one cheerful school-age boy clearly playing tennis, swinging exactly one tennis racket toward exactly one bright yellow-green tennis ball\nSubject: a single child athlete in simple unbranded sportswear, full body, complete racket, and complete tennis ball visible; the action must make tennis unmistakable\nStyle/medium: premium polished rounded 3D children's animation render, clean materials, expressive but natural proportions\nComposition/framing: centered compact cutout, slight three-quarter view, player, racket, and ball together fill about 84% of a square canvas, every edge fully visible with a safe transparent margin\nLighting/mood: soft bright studio lighting, friendly and energetic, highlights contained within the subject\nConstraints: genuinely transparent alpha background; exactly one child, one tennis racket, and one tennis ball; no net, court, floor, cast shadow, scenery, text, letters, numbers, logo, watermark, border, frame, collage, duplicate person, extra racket, extra ball, soccer ball, basketball, volleyball, or wrong sports equipment; no cutoff",
+      "status": "GENERATED_ACCEPTED_CANDIDATE_ONLY"
+    },
+    {
+      "concept": "three",
+      "slug": "THREE",
+      "expectedCoreComponents": 3,
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card PNG for Year 4 children\nPrimary request: exactly 3 matching glossy red apples, complete and individually countable, teaching the English quantity three\nSubject: three identical realistic red apples, each with one small attached green leaf\nStyle/medium: premium polished rounded 3D children's animation render, crisp silhouettes and clean materials\nComposition/framing: one apple centered above two apples, clear transparent separation between every apple, the group fills about 84% of a square canvas, every apple fully visible with a safe transparent margin\nLighting/mood: soft bright studio lighting with highlights contained on the apples\nConstraints: genuinely transparent alpha background; exactly three apples and no other countable object; no overlap that obscures counting; no basket, plate, floor, cast shadow, glow, halo, backdrop, text, numeral, letters, symbols, logo, watermark, border, frame, collage, grid lines, duplicate fragment, or cutoff",
+      "status": "GENERATED_ACCEPTED_CANDIDATE_ONLY"
+    },
+    {
+      "concept": "two",
+      "slug": "TWO",
+      "expectedCoreComponents": 2,
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational quantity-card PNG for Year 4 children\nPrimary request: exactly 2 matching glossy red apples, complete and individually countable, teaching the English quantity two\nSubject: two identical realistic red apples, each with one small attached green leaf\nStyle/medium: premium polished rounded 3D children's animation render, crisp silhouettes and clean materials\nComposition/framing: one horizontal row of two apples, clear transparent separation between them, the pair fills about 84% of a square canvas, both apples fully visible with a safe transparent margin\nLighting/mood: soft bright studio lighting with highlights contained on the apples\nConstraints: genuinely transparent alpha background; exactly two apples and no other countable object; no overlap that obscures counting; no basket, plate, floor, cast shadow, glow, halo, backdrop, text, numeral, letters, symbols, logo, watermark, border, frame, collage, grid lines, duplicate fragment, or cutoff",
+      "status": "GENERATED_ACCEPTED_CANDIDATE_ONLY"
+    },
+    {
+      "concept": "volleyball",
+      "slug": "VOLLEYBALL",
+      "expectedCoreComponents": 2,
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational sport concept PNG for Year 4 children\nPrimary request: one cheerful school-age boy clearly playing volleyball, using his joined forearms to bump exactly one blue-and-yellow volleyball\nSubject: a single child athlete in simple unbranded sportswear, full body and the complete volleyball visible; the forearm pass pose and ball must make volleyball unmistakable and support the sentence 'He is playing volleyball.'\nStyle/medium: premium polished rounded 3D children's animation render, clean materials, expressive but natural proportions\nComposition/framing: centered compact cutout, slight three-quarter view, subject and ball together fill about 84% of a square canvas, every edge fully visible with a safe transparent margin\nLighting/mood: soft bright studio lighting, friendly and energetic, highlights contained within the subject\nConstraints: genuinely transparent alpha background; exactly one boy and one volleyball; no net, court, floor, cast shadow, scenery, text, letters, numbers, logo, watermark, border, frame, collage, duplicate person, extra ball, soccer ball, basketball, tennis ball, racket, or wrong sports equipment; no cutoff",
+      "status": "GENERATED_ACCEPTED_CANDIDATE_ONLY"
+    }
+  ],
+  "safety": {
+    "writeBoundary": "qa/media-candidates/y4m04-official-20261107",
+    "productionApproved": false,
+    "humanApprovalClaimed": false,
+    "integrated": false,
+    "deployed": false,
+    "questionsModified": false,
+    "registryModified": false,
+    "runtimeModified": false,
+    "goldMastersModified": false,
+    "mediaOverlaysApplied": false,
+    "existingReferencedAssetsRemoved": false
+  }
+}
