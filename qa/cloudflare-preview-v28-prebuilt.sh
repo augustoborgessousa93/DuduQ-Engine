@@ -290,4 +290,67 @@ assert(!existsSync(root+'media-review/new-37-exact-20261107.html'),'QA_GALLERY_S
 assert(!existsSync(root+'media-review/new-37-exact-20261107.json'),'QA_REPORT_SHOULD_NOT_BE_PRODUCTION');
 console.log('DUDUQ_NEW_37_EXACT_MEDIA_RELEASE_QA_IDENTICAL=PASS');
 NODE
+# Release pinned to successful QA preview e936935a: exact registry
+# and images, no authored-content or Gold Master changes.
+node --check qa/phase2-last90-safe17.mjs
+DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/phase2-last90-safe17.mjs --release
+node --input-type=module <<'NODE'
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {readFileSync,existsSync} from 'node:fs';
+const root='dist-pages/';
+const digest=b=>createHash('sha256').update(b).digest('hex');
+const regPath='content/english/media/media-registry.json';
+const prev='116136a437e561f4d99f3509c68dfe0a86bfbb6e7472cd723bb1323dd2f41882';
+const expect='eea1cd3f6cff1cda4a18c3fa541786446a16b98524c35e27ced2c0db9b2aff21';
+const regBytes=readFileSync(root+regPath);
+assert.equal(digest(regBytes),expect,'PRODUCTION_REGISTRY_MUST_EQUAL_QA_PREVIEW');
+const reg=JSON.parse(regBytes),ids=new Map(reg.entries.map(e=>[e.mediaId,e]));
+assert.equal(ids.size,1166,'REGISTRY_SCOPE_CHANGED');
+const report=JSON.parse(readFileSync('qa/results/safe17-final90-20261107.json'));
+assert.equal(report.previousRegistrySha,prev,'PUBLISHED_MEDIA_REGRESSION');
+assert.equal(report.newRegistrySha,expect,'REPORT_NOT_SAME_AS_QA');
+assert.equal(report.mediaIdsUpdated,24,'EXPECTED_24_MEDIA_ID_UPDATES');
+assert.equal(report.activeMediaIds,19,'ACTUAL_USED_MEDIA_COUNT_CHANGED');
+assert.equal(report.unusedTargetIds.length,5,'UNUSED_REGISTRY_ID_COUNT_CHANGED');
+assert.deepEqual(report.unusedTargetIds.slice().sort(),[
+ 'IMG-Q008-EIGHT','IMG-Q018-EIGHT','IMG-Q008-ERASER',
+ 'Y1M01-EMOJI-BACKPACK-001','IMG-Q018-CRAYON'
+].sort(),'HISTORICAL_IDS_CHANGED');
+assert.equal(report.concepts.length,17,'17_CONCEPTS_NOT_PRESENT');
+assert.equal(report.images.length,17,'17_OFFICIAL_PNG_SOURCES_NOT_PRESENT');
+assert.equal(report.images.filter(x=>!x.reused).length,8,'NEW_PNG_COUNT_CHANGED');
+assert.equal(report.images.filter(x=>x.reused).length,9,'REUSED_PNG_COUNT_CHANGED');
+assert.equal(report.affectedQuestionCount,15,'ACTIVE_QUESTION_SCOPE_CHANGED');
+assert.equal(report.contracts,600);
+const manifest=new Map();
+for(const line of readFileSync(root+'.duduq-pages-manifest','utf8').trimEnd().split(/\r?\n/)){
+ const at=line.lastIndexOf(' ');assert(at>0,'BAD_MANIFEST_LINE');
+ const p=line.slice(0,at),h=line.slice(at+1);
+ assert(!manifest.has(p),'DUPLICATE_MANIFEST_ENTRY:'+p);
+ manifest.set(p,h);
+}
+assert.equal(manifest.get(regPath),expect,'MEDIA_REGISTRY_MANIFEST_CHANGED');
+for(const asset of report.images){
+ assert(asset.width>=512&&asset.height>=512,'ORIGINAL_IMAGE_DIMENSIONS_WRONG');
+ assert.equal(manifest.get(asset.url),asset.sha256,'ORIGINAL_IMAGE_HASH_MISSING:'+asset.filename);
+ assert.equal(digest(readFileSync(root+asset.url)),asset.sha256,'ORIGINAL_IMAGE_BYTES_CHANGED:'+asset.filename);
+ for(const id of asset.ids){
+  const e=ids.get(id);assert(e,'MEDIA_LINK_MISSING:'+id);
+  assert.equal(e.semantic,asset.concept,'WRONG_SEMANTIC_MATCH:'+id);
+  assert.equal(e.urlOrPath,asset.url,'WRONG_PNG_MATCH:'+id);
+  assert.equal(e.sha256,asset.sha256,'WRONG_SOURCE_BYTES:'+id);
+ }
+}
+let total=0;
+for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
+ const path='content/english/year-'+y+'/module-'+String(m).padStart(2,'0')+'/questions.json';
+ const d=JSON.parse(readFileSync(root+path));assert.equal(d.items.length,20);
+ total+=d.items.length;
+}
+assert.equal(total,600,'600_QUESTION_CONTENT_NOT_PRESERVED');
+assert(!existsSync(root+'media-review/safe17-final90-20261107.html'),'QA_PREVIEW_PAGE_NOT_ALLOWED_IN_PROD');
+assert(!existsSync(root+'media-review/safe17-final90-20261107.json'),'QA_PREVIEW_DATA_NOT_ALLOWED_IN_PROD');
+console.log('DUDUQ_SAFE17_RELEASE_QA_EXACT_SHA_VERIFIED=PASS');
+NODE
 echo "DUDUQ_RELEASE_ARTIFACT_269_BINDINGS_97_PNGS_AND_PROPORTIONAL_MEDIA_FIT"
