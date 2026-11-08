@@ -2,7 +2,7 @@
 # DUDUQ official media release, exact match to verified 06-Nov staging build.
 # Images remain flagged PEDAGOGICAL_QA_PENDING; no answer-key/Gold Master edits.
 set -Eeuo pipefail
-if [[ "$CF_PAGES_BRANCH" != "release/duduq-phase2-orange-fruit-20261103" ]]; then
+if [[ "$CF_PAGES_BRANCH" != "staging/duduq-37-new-exact-media-20261107" ]]; then
  echo "DUDUQ_PRODUCTION_RELEASE_BRANCH_ONLY" >&2; exit 43
 fi
 export DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1
@@ -230,4 +230,7 @@ assert(!existsSync(root+'media-review/five-concepts.json'),'QA_DATA_LEAK_TO_PROD
 // already verified earlier in this build and must remain untouched.
 console.log('DUDUQ_FIVE_CONCEPT_RELEASE_SHA_MATCH_QA_071D149D=PASS');
 NODE
+node --check qa/phase2-new-37-exact-media.mjs
+DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/phase2-new-37-exact-media.mjs --preview
 echo "DUDUQ_RELEASE_ARTIFACT_269_BINDINGS_97_PNGS_AND_PROPORTIONAL_MEDIA_FIT"
+echo "DUDUQ_37_NEW_PNG_CONCEPTS_PREVIEW_ONLY"
