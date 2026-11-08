@@ -2,7 +2,7 @@
 # DUDUQ official media release, exact match to verified 06-Nov staging build.
 # Images remain flagged PEDAGOGICAL_QA_PENDING; no answer-key/Gold Master edits.
 set -Eeuo pipefail
-if [[ "$CF_PAGES_BRANCH" != "release/duduq-phase2-orange-fruit-20261103" ]]; then
+if [[ "$CF_PAGES_BRANCH" != "staging/duduq-ben-nationality-review-20261108" ]]; then
  echo "DUDUQ_PRODUCTION_RELEASE_BRANCH_ONLY" >&2; exit 43
 fi
 export DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1
@@ -412,4 +412,7 @@ assert(!existsSync(root+'media-review/school-only-review-20261107.html'),'QA_GAL
 assert(!existsSync(root+'media-review/school-only-review-20261107.json'),'QA_REPORT_IN_PROD');
 console.log('DUDUQ_SCHOOL_RELEASE_IDENTICAL_TO_PREVIEW_2349BEB3=PASS');
 NODE
+node --check qa/phase2-ben-nationality-review.mjs
+DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/phase2-ben-nationality-review.mjs --preview
 echo "DUDUQ_RELEASE_ARTIFACT_269_BINDINGS_97_PNGS_AND_PROPORTIONAL_MEDIA_FIT"
+echo "DUDUQ_BEN_NATIONALITY_PREVIEW_ONLY"
