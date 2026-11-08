@@ -145,17 +145,17 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
   }
   collectIds(item);
   // Keep answers distinct when Ben or nationality appears against other options.
-  const choices=[];
+  const candidateOptions=[];
   function scanChoices(v){
    if(!v||typeof v!=='object')return;
    if(Array.isArray(v)){for(const c of v)scanChoices(c);return}
    if(typeof v.mediaId==='string'&&byId.has(v.mediaId)&&
-      ('correct' in v||'isCorrect' in v))choices.push(v);
+      ('correct' in v||'isCorrect' in v))candidateOptions.push(v);
    for(const child of Object.values(v))if(child&&typeof child==='object')scanChoices(child);
   }
   scanChoices(item);
-  for(let i=0;i<choices.length;i++)for(let j=i+1;j<choices.length;j++){
-   const a=choices[i],b=choices[j],ea=byId.get(a.mediaId),eb=byId.get(b.mediaId);
+  for(let i=0;i<candidateOptions.length;i++)for(let j=i+1;j<candidateOptions.length;j++){
+   const a=candidateOptions[i],b=candidateOptions[j],ea=byId.get(a.mediaId),eb=byId.get(b.mediaId);
    if(a.mediaId!==b.mediaId&&
       (targets.includes(a.mediaId)||targets.includes(b.mediaId))&&
       ea?.sha256&&ea.sha256===eb?.sha256&&
