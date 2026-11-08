@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "DUDUQ_Y4M05_NATIVE_GENERATION_RECEIPTS_V1",
+  "createdAt": "2026-11-08T19:39:20.7749891Z",
+  "moduleId": "Y4M05",
+  "provider": "Codex built-in image_gen",
+  "tool": "image_gen.imagegen",
+  "receiptCount": 7,
+  "receipts": [
+    {
+      "concept": "dress",
+      "slug": "DRESS",
+      "coversSemanticTargets": [
+        "dress"
+      ],
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generatorCallId": "exec-289ddb09-89c8-48f7-b352-df301010d796",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1bc98-eae5-73f1-bf60-00542d03fddb/exec-289ddb09-89c8-48f7-b352-df301010d796.png",
+      "originalSha256": "161a74ce04a7c68c5a15bc3a0c0c12e626bc2fffbb793072acfbd677cf191fba",
+      "completedObservedInCurrentSession": true,
+      "transparentBackgroundRequested": true,
+      "status": "COMPLETED_AND_LOCAL_ORIGINAL_HASH_VERIFIED"
+    },
+    {
+      "concept": "jacket",
+      "slug": "JACKET",
+      "coversSemanticTargets": [
+        "jacket"
+      ],
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generatorCallId": "exec-7687ef58-e269-4932-8426-c76574cd0eb9",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1bc98-eae5-73f1-bf60-00542d03fddb/exec-7687ef58-e269-4932-8426-c76574cd0eb9.png",
+      "originalSha256": "53e654cc0052faf5a6c86c8155300b4e264e6cbba322b02de9b0a60566c63deb",
+      "completedObservedInCurrentSession": true,
+      "transparentBackgroundRequested": true,
+      "status": "COMPLETED_AND_LOCAL_ORIGINAL_HASH_VERIFIED"
+    },
+    {
+      "concept": "medium",
+      "slug": "MEDIUM",
+      "coversSemanticTargets": [
+        "medium"
+      ],
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generatorCallId": "exec-429589b9-1ea6-4e3f-b571-83fba1d781e1",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1bc98-eae5-73f1-bf60-00542d03fddb/exec-429589b9-1ea6-4e3f-b571-83fba1d781e1.png",
+      "originalSha256": "9b9c3a5cc0fa0ca0ff9be98abe547f637edc1be685cf73a1086cfcb5b2d89d2f",
+      "completedObservedInCurrentSession": true,
+      "transparentBackgroundRequested": true,
+      "status": "COMPLETED_AND_LOCAL_ORIGINAL_HASH_VERIFIED"
+    },
+    {
+      "concept": "trousers",
+      "slug": "TROUSERS",
+      "coversSemanticTargets": [
+        "pants",
+        "pants/trousers",
+        "trousers"
+      ],
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generatorCallId": "exec-229c5533-1233-4ccf-a34e-ebf708e4ff98",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1bc98-eae5-73f1-bf60-00542d03fddb/exec-229c5533-1233-4ccf-a34e-ebf708e4ff98.png",
+      "originalSha256": "20ff2110ac49a7cd5c9989ca95fc4e83e4b20f101cd23c611d907a38814724c2",
+      "completedObservedInCurrentSession": true,
+      "transparentBackgroundRequested": true,
+      "status": "COMPLETED_AND_LOCAL_ORIGINAL_HASH_VERIFIED"
+    },
+    {
+      "concept": "shirt",
+      "slug": "SHIRT",
+      "coversSemanticTargets": [
+        "shirt"
+      ],
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generatorCallId": "exec-6eedc77f-a9ce-4365-8636-5e06cc9db602",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1bc98-eae5-73f1-bf60-00542d03fddb/exec-6eedc77f-a9ce-4365-8636-5e06cc9db602.png",
+      "originalSha256": "6f81579962aed5b0c520f32542d80652999b93342f68f5940a6e396d33b26017",
+      "completedObservedInCurrentSession": true,
+      "transparentBackgroundRequested": true,
+      "status": "COMPLETED_AND_LOCAL_ORIGINAL_HASH_VERIFIED"
+    },
+    {
+      "concept": "shoes",
+      "slug": "SHOES",
+      "coversSemanticTargets": [
+        "shoes"
+      ],
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generatorCallId": "exec-84b460ec-2765-4e3d-b003-72211be02a21",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1bc98-eae5-73f1-bf60-00542d03fddb/exec-84b460ec-2765-4e3d-b003-72211be02a21.png",
+      "originalSha256": "76d4b7a2f536cbe818572d558475e2ee6de62e9eea7598362397249daa451c94",
+      "completedObservedInCurrentSession": true,
+      "transparentBackgroundRequested": true,
+      "status": "COMPLETED_AND_LOCAL_ORIGINAL_HASH_VERIFIED"
+    },
+    {
+      "concept": "t-shirt",
+      "slug": "T-SHIRT",
+      "coversSemanticTargets": [
+        "t-shirt"
+      ],
+      "provider": "Codex built-in image_gen",
+      "tool": "image_gen.imagegen",
+      "generatorCallId": "exec-c4e0259d-eac1-4870-bbd0-7a76eb6710f7",
+      "generatorOutputOriginalPath": "C:/Users/augus/.codex/generated_images/01a1bc98-eae5-73f1-bf60-00542d03fddb/exec-c4e0259d-eac1-4870-bbd0-7a76eb6710f7.png",
+      "originalSha256": "a580d7035f8917f7f9105791267c7053fc2a9f7477e2bacf84b2dca1a81f9ad1",
+      "completedObservedInCurrentSession": true,
+      "transparentBackgroundRequested": true,
+      "status": "COMPLETED_AND_LOCAL_ORIGINAL_HASH_VERIFIED"
+    }
+  ],
+  "apiPurchaseOrExternalCredentialUsed": false,
+  "generatorLimitReached": false,
+  "blockedGenerator": false
+}

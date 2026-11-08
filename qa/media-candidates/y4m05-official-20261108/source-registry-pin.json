@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "DUDUQ_Y4M05_SOURCE_PIN_V1",
+  "createdAt": "2026-11-08T19:39:20.7749891Z",
+  "moduleId": "Y4M05",
+  "questionFile": "dist-pages/content/english/year-4/module-05/questions.json",
+  "questionSha256": "608389293ff083675048bac23c45b10bed017853fba40c31fdd6d0a8e806f6a8",
+  "registryFile": "dist-pages/content/english/media/media-registry.json",
+  "registrySha256": "f11c12fe929379947e7d4f76736f8f73bc6320618bf01265bfb48a4e18ef5e30",
+  "ledgerFile": "qa/results/media-module-closure.json",
+  "ledgerSha256": "3c3d6a19632b488651d20d373ffd0a70819896a6d1b8246bb2adb7a3f9a5b837",
+  "questionCount": 20,
+  "globalPendingMediaIds": 1055,
+  "modulePendingMediaIds": 54,
+  "sourceQuestionMutation": false,
+  "sourceRegistryMutation": false
+}

@@ -1,0 +1,1588 @@
+{
+  "schemaVersion": "DUDUQ_Y4M05_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-11-08T19:39:20.7749891Z",
+  "moduleId": "Y4M05",
+  "sourceQuestionSha256": "608389293ff083675048bac23c45b10bed017853fba40c31fdd6d0a8e806f6a8",
+  "questionContractsReviewed": 20,
+  "assets": [
+    {
+      "concept": "apple",
+      "coversSemanticTargets": [
+        "apple"
+      ],
+      "file": "images/DUDUQ-Y4M05-APPLE.png",
+      "sha256": "979dccae9a68c40ae43693c8d99dbe3362c02827b518a820cf704270b2389805",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "Exactly one whole red apple is visible, with a stem and leaf and no competing food.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q006",
+          "sourceSha256": "bd7a02905e2bafc4c84a7c5854e90ff02b3bdcfe8d52a44179886b8c7d035d66",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "apple"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q014",
+          "sourceSha256": "0023f376c33e853abd5f96bfdcf15c64ccfd418575c883dc51ed91428fc8e84a",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "AUDIO_TEXT",
+          "titleEn": "banana, pear, orange, apple",
+          "instructionEn": "Find the matching pairs.",
+          "coveredSemanticTargets": [
+            "apple"
+          ],
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M05-Q019",
+          "sourceSha256": "cd6663c9b33b5cf627f2a0b46f79169409a83fd70bf2ceaed5ee6a0ab644bed1",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "apple"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "banana",
+      "coversSemanticTargets": [
+        "banana"
+      ],
+      "file": "images/DUDUQ-Y4M05-BANANA.png",
+      "sha256": "184fbc78aa409e71a4d6f0242082c84c9c6c573ca900037670489e84814c010e",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "Exactly one whole curved yellow banana is visible, with no competing food.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q006",
+          "sourceSha256": "bd7a02905e2bafc4c84a7c5854e90ff02b3bdcfe8d52a44179886b8c7d035d66",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "banana"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q014",
+          "sourceSha256": "0023f376c33e853abd5f96bfdcf15c64ccfd418575c883dc51ed91428fc8e84a",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "AUDIO_TEXT",
+          "titleEn": "banana, pear, orange, apple",
+          "instructionEn": "Find the matching pairs.",
+          "coveredSemanticTargets": [
+            "banana"
+          ],
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        },
+        {
+          "questionId": "Y4M05-Q019",
+          "sourceSha256": "cd6663c9b33b5cf627f2a0b46f79169409a83fd70bf2ceaed5ee6a0ab644bed1",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "banana"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "black",
+      "coversSemanticTargets": [
+        "black"
+      ],
+      "file": "images/DUDUQ-Y4M05-BLACK.png",
+      "sha256": "26f14f9c23067dd533ecf1cdb10d0626c3a2f42d82e3d7c281611104c23dc3ed",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "One plain rounded black color token is visible with no object or text cue.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q005",
+          "sourceSha256": "8e85826b78d3ed0fc5c8f527db8511eedbf97625f23a95b11f8cc1831dcd8726",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "black",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "coveredSemanticTargets": [
+            "black"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "blue",
+      "coversSemanticTargets": [
+        "blue"
+      ],
+      "file": "images/DUDUQ-Y4M05-BLUE.png",
+      "sha256": "af47ea2a8ce91f4544b3626157f7e64bb64498b981014a42383ff2798029a584",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "One plain rounded blue color token is visible with no object or text cue.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q002",
+          "sourceSha256": "cb3263db3bf59ddad3d19b8ca7344050373a92cecc727373f1312021d40612e8",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "medium, large, red, blue",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "blue"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q005",
+          "sourceSha256": "8e85826b78d3ed0fc5c8f527db8511eedbf97625f23a95b11f8cc1831dcd8726",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "black",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "coveredSemanticTargets": [
+            "blue"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q009",
+          "sourceSha256": "56585f42b100ce85975359cffc6052845d8b6514a105d7cbeb3d0f66e0913ca4",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "gray",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "coveredSemanticTargets": [
+            "blue"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q020",
+          "sourceSha256": "80260d587a7bdcb7ad2872fc9a5bd80749d9f224c592af21baf1e1082e5039fe",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "blue, small, medium, large",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "blue"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "carrot",
+      "coversSemanticTargets": [
+        "carrot"
+      ],
+      "file": "images/DUDUQ-Y4M05-CARROT.png",
+      "sha256": "1522fa92079f8412040ba7a206533bb4bd4cd6bf5ed0f62cdd449e2e254bc0a5",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "Exactly one whole orange carrot with green leaves is visible, with no competing food.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q003",
+          "sourceSha256": "366add9363840e0250a1458634ec6dde2f302c15a7c2c6d2a857ded464029774",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "pear, orange, grape, papaya, melon, carrot",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "carrot"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "dress",
+      "coversSemanticTargets": [
+        "dress"
+      ],
+      "file": "images/DUDUQ-Y4M05-DRESS.png",
+      "sha256": "d0ac6cf96eafd6eb956d7582ecba8c6b56b16bd2540beff4540a5f2b69e7b240",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "Exactly one complete yellow child-size dress is visible; no other garment is present.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q001",
+          "sourceSha256": "0ca61fab4b18f97e93054c5fe451e98195753b207316f4ef9f0f96d5905da0d8",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "jacket",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "coveredSemanticTargets": [
+            "dress"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q004",
+          "sourceSha256": "4c0654a643c1b7cc4dfdfe96b71ddb001d70ea54301d1ae7211fef3bb96bad35",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "TEXT_IMAGE",
+          "titleEn": "T-shirt, pants/trousers, shoes, jacket, dress, shirt",
+          "instructionEn": "Find the matching pairs.",
+          "coveredSemanticTargets": [
+            "dress"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q006",
+          "sourceSha256": "bd7a02905e2bafc4c84a7c5854e90ff02b3bdcfe8d52a44179886b8c7d035d66",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "dress"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q007",
+          "sourceSha256": "b648ab7bbf8d5484df8069f998ef181641ad6076d66fade6cbbef1b9c709d7fb",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, dress",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "dress"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "sourceSha256": "c65c826521ce210bf62d1c749591b8701d85e77b8b5771f995870111d8d04327",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "medium",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "dress"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q016",
+          "sourceSha256": "ac6290bd55904fa9314c49b133a3e44ae84129917e5e4ba7924a39d97c566c17",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "dress, shirt, T-shirt, pants",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "dress"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "sourceSha256": "8e65f0f4594596b8a9248789dd6838cdf6f360aa5209f4c34af2611932609fe8",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "I like apples",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "dress"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q019",
+          "sourceSha256": "cd6663c9b33b5cf627f2a0b46f79169409a83fd70bf2ceaed5ee6a0ab644bed1",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "dress"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "grape",
+      "coversSemanticTargets": [
+        "grape"
+      ],
+      "file": "images/DUDUQ-Y4M05-GRAPE.png",
+      "sha256": "535d16680693e2ff3c8e20ce085b6e6976382f62fb795e28fc9c30eedc5789f6",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "Exactly one bunch of purple grapes is visible, with no competing food.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q003",
+          "sourceSha256": "366add9363840e0250a1458634ec6dde2f302c15a7c2c6d2a857ded464029774",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "pear, orange, grape, papaya, melon, carrot",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "grape"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q006",
+          "sourceSha256": "bd7a02905e2bafc4c84a7c5854e90ff02b3bdcfe8d52a44179886b8c7d035d66",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "grape"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q019",
+          "sourceSha256": "cd6663c9b33b5cf627f2a0b46f79169409a83fd70bf2ceaed5ee6a0ab644bed1",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "grape"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "gray",
+      "coversSemanticTargets": [
+        "gray"
+      ],
+      "file": "images/DUDUQ-Y4M05-GRAY.png",
+      "sha256": "a495b16ffedf658cee6e8e4c9c48f2ba051d6d5d664317c9a7545b1956c8e904",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "One plain rounded neutral-gray color token is visible with no object or text cue.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q009",
+          "sourceSha256": "56585f42b100ce85975359cffc6052845d8b6514a105d7cbeb3d0f66e0913ca4",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "gray",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "coveredSemanticTargets": [
+            "gray"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "i do not like carrots",
+      "coversSemanticTargets": [
+        "i do not like carrots"
+      ],
+      "file": "images/DUDUQ-Y4M05-I-DO-NOT-LIKE-CARROTS.png",
+      "sha256": "78e59be1986c13e2b05ed24395c0b1d64b0d3b8534480ecc8fa59f30d4fe369b",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "A child visibly rejects a carrot with a clear gentle dislike gesture; no competing preference scene is present.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q012",
+          "sourceSha256": "33227e10604feeda94ece0bf96b05c6ff5cf8b37fb0ccef3b135553ecadd3a41",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "I like papaya, I like apples, I prefer grapes, I do not like carrots",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "i do not like carrots"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q015",
+          "sourceSha256": "ffb7f5aa3048846080e48d44a38cbf27434669b39e7c894fe05a646e8f242025",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "I do not like carrots, I like papaya, I like apples, I prefer grapes",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "i do not like carrots"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "sourceSha256": "8e65f0f4594596b8a9248789dd6838cdf6f360aa5209f4c34af2611932609fe8",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "I like apples",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "i do not like carrots"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "i like apples",
+      "coversSemanticTargets": [
+        "i like apples"
+      ],
+      "file": "images/DUDUQ-Y4M05-I-LIKE-APPLES.png",
+      "sha256": "b378dc8a885e07048273a3393518f5a33fd2e4e9051ae359527e9ca34347a8b6",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "A child visibly likes apples with an affirmative happy gesture; no competing fruit preference is present.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q012",
+          "sourceSha256": "33227e10604feeda94ece0bf96b05c6ff5cf8b37fb0ccef3b135553ecadd3a41",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "I like papaya, I like apples, I prefer grapes, I do not like carrots",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "i like apples"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q015",
+          "sourceSha256": "ffb7f5aa3048846080e48d44a38cbf27434669b39e7c894fe05a646e8f242025",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "I do not like carrots, I like papaya, I like apples, I prefer grapes",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "i like apples"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "sourceSha256": "8e65f0f4594596b8a9248789dd6838cdf6f360aa5209f4c34af2611932609fe8",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "I like apples",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "i like apples"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "i like papaya",
+      "coversSemanticTargets": [
+        "i like papaya"
+      ],
+      "file": "images/DUDUQ-Y4M05-I-LIKE-PAPAYA.png",
+      "sha256": "e26d040391bd80af05431960976ae994d8828bb7b33d74663f81a248f50cb4cc",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "A child visibly likes papaya with an affirmative happy gesture; no competing fruit preference is present.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q012",
+          "sourceSha256": "33227e10604feeda94ece0bf96b05c6ff5cf8b37fb0ccef3b135553ecadd3a41",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "I like papaya, I like apples, I prefer grapes, I do not like carrots",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "i like papaya"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q015",
+          "sourceSha256": "ffb7f5aa3048846080e48d44a38cbf27434669b39e7c894fe05a646e8f242025",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "I do not like carrots, I like papaya, I like apples, I prefer grapes",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "i like papaya"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "sourceSha256": "8e65f0f4594596b8a9248789dd6838cdf6f360aa5209f4c34af2611932609fe8",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "I like apples",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "i like papaya"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "i prefer grapes",
+      "coversSemanticTargets": [
+        "i prefer grapes"
+      ],
+      "file": "images/DUDUQ-Y4M05-I-PREFER-GRAPES.png",
+      "sha256": "0f16d25eccf0648830dd8b5de9bd02f3d7fb78abdff205bd8e3fc9a1cd285ca5",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "A child visibly chooses grapes over another option; no competing preference meaning is present.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q012",
+          "sourceSha256": "33227e10604feeda94ece0bf96b05c6ff5cf8b37fb0ccef3b135553ecadd3a41",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "I like papaya, I like apples, I prefer grapes, I do not like carrots",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "i prefer grapes"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q015",
+          "sourceSha256": "ffb7f5aa3048846080e48d44a38cbf27434669b39e7c894fe05a646e8f242025",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "I do not like carrots, I like papaya, I like apples, I prefer grapes",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "i prefer grapes"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "sourceSha256": "8e65f0f4594596b8a9248789dd6838cdf6f360aa5209f4c34af2611932609fe8",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "I like apples",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "i prefer grapes"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "jacket",
+      "coversSemanticTargets": [
+        "jacket"
+      ],
+      "file": "images/DUDUQ-Y4M05-JACKET.png",
+      "sha256": "9b3385c6969b225c4b013649bdd93394e92b461c8f43ef78e8c10659b13a8551",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "Exactly one complete blue zip-front jacket is visible; no shirt, dress or other garment is present.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q001",
+          "sourceSha256": "0ca61fab4b18f97e93054c5fe451e98195753b207316f4ef9f0f96d5905da0d8",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "jacket",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "coveredSemanticTargets": [
+            "jacket"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q004",
+          "sourceSha256": "4c0654a643c1b7cc4dfdfe96b71ddb001d70ea54301d1ae7211fef3bb96bad35",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "TEXT_IMAGE",
+          "titleEn": "T-shirt, pants/trousers, shoes, jacket, dress, shirt",
+          "instructionEn": "Find the matching pairs.",
+          "coveredSemanticTargets": [
+            "jacket"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q006",
+          "sourceSha256": "bd7a02905e2bafc4c84a7c5854e90ff02b3bdcfe8d52a44179886b8c7d035d66",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "jacket"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q010",
+          "sourceSha256": "1beffe711cf17e3cef676ea1bfd0c8971b1ab6a67f0f9c7460cc73664033d826",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, shoes, jacket",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "jacket"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "sourceSha256": "c65c826521ce210bf62d1c749591b8701d85e77b8b5771f995870111d8d04327",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "medium",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "jacket"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "sourceSha256": "8e65f0f4594596b8a9248789dd6838cdf6f360aa5209f4c34af2611932609fe8",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "I like apples",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "jacket"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q019",
+          "sourceSha256": "cd6663c9b33b5cf627f2a0b46f79169409a83fd70bf2ceaed5ee6a0ab644bed1",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "jacket"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "large",
+      "coversSemanticTargets": [
+        "large"
+      ],
+      "file": "images/DUDUQ-Y4M05-LARGE.png",
+      "sha256": "71ef4290fd60783cc62684b21d498c6ecd41b6cbc35ce08eccf2e9d4fd159291",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "Exactly one neutral gray rounded cube is shown at the verified large/big scale; no color or object cue competes with size.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q002",
+          "sourceSha256": "cb3263db3bf59ddad3d19b8ca7344050373a92cecc727373f1312021d40612e8",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "medium, large, red, blue",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "large"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "sourceSha256": "c65c826521ce210bf62d1c749591b8701d85e77b8b5771f995870111d8d04327",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "medium",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "large"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q020",
+          "sourceSha256": "80260d587a7bdcb7ad2872fc9a5bd80749d9f224c592af21baf1e1082e5039fe",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "blue, small, medium, large",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "large"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "medium",
+      "coversSemanticTargets": [
+        "medium"
+      ],
+      "file": "images/DUDUQ-Y4M05-MEDIUM.png",
+      "sha256": "168e4bb854961334af9e3a360905591f9029b5465397c476aeedd0a4f53b8c27",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "Exactly one neutral gray rounded cube is shown midway between the verified small and large endpoints; no competing cue is present.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q002",
+          "sourceSha256": "cb3263db3bf59ddad3d19b8ca7344050373a92cecc727373f1312021d40612e8",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "medium, large, red, blue",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "medium"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "sourceSha256": "c65c826521ce210bf62d1c749591b8701d85e77b8b5771f995870111d8d04327",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "medium",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "medium"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q020",
+          "sourceSha256": "80260d587a7bdcb7ad2872fc9a5bd80749d9f224c592af21baf1e1082e5039fe",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "blue, small, medium, large",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "medium"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "melon",
+      "coversSemanticTargets": [
+        "melon"
+      ],
+      "file": "images/DUDUQ-Y4M05-MELON.png",
+      "sha256": "0388cc1982c09a48f96152330b2ced86d41a0b0c6b6dadc4b21ca4a589278d4c",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "Exactly one whole melon is visible, with no competing food.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q003",
+          "sourceSha256": "366add9363840e0250a1458634ec6dde2f302c15a7c2c6d2a857ded464029774",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "pear, orange, grape, papaya, melon, carrot",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "melon"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "orange",
+      "coversSemanticTargets": [
+        "orange"
+      ],
+      "file": "images/DUDUQ-Y4M05-ORANGE.png",
+      "sha256": "e3e755f38c2efb6c8637bc9f9def0bd706e0f5cf6821b3efdab454666ecaee77",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "Exactly one whole orange fruit is visible; it is not an abstract orange color token and no competing food is present.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q003",
+          "sourceSha256": "366add9363840e0250a1458634ec6dde2f302c15a7c2c6d2a857ded464029774",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "pear, orange, grape, papaya, melon, carrot",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "orange"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q014",
+          "sourceSha256": "0023f376c33e853abd5f96bfdcf15c64ccfd418575c883dc51ed91428fc8e84a",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "AUDIO_TEXT",
+          "titleEn": "banana, pear, orange, apple",
+          "instructionEn": "Find the matching pairs.",
+          "coveredSemanticTargets": [
+            "orange"
+          ],
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "trousers",
+      "coversSemanticTargets": [
+        "pants",
+        "pants/trousers",
+        "trousers"
+      ],
+      "file": "images/DUDUQ-Y4M05-TROUSERS.png",
+      "sha256": "6673e77ea679348e41bed4ebcb0fea69922f56b17d3e7a301caddafa27d6978f",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "Exactly one complete pair of full-length trousers is visible, correctly covering the exact source synonyms pants and trousers.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q004",
+          "sourceSha256": "4c0654a643c1b7cc4dfdfe96b71ddb001d70ea54301d1ae7211fef3bb96bad35",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "TEXT_IMAGE",
+          "titleEn": "T-shirt, pants/trousers, shoes, jacket, dress, shirt",
+          "instructionEn": "Find the matching pairs.",
+          "coveredSemanticTargets": [
+            "pants/trousers"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q007",
+          "sourceSha256": "b648ab7bbf8d5484df8069f998ef181641ad6076d66fade6cbbef1b9c709d7fb",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, dress",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "pants",
+            "trousers"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q010",
+          "sourceSha256": "1beffe711cf17e3cef676ea1bfd0c8971b1ab6a67f0f9c7460cc73664033d826",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, shoes, jacket",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "pants",
+            "trousers"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q013",
+          "sourceSha256": "5e87a53a34b140617d0a08aebc0374517e9a888a1a09ccdc77f4e5d69790184c",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "pants, trousers, shoes, shirt, T-shirt",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "pants",
+            "trousers"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q016",
+          "sourceSha256": "ac6290bd55904fa9314c49b133a3e44ae84129917e5e4ba7924a39d97c566c17",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "dress, shirt, T-shirt, pants",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "pants"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "papaya",
+      "coversSemanticTargets": [
+        "papaya"
+      ],
+      "file": "images/DUDUQ-Y4M05-PAPAYA.png",
+      "sha256": "5908f5addad74506639b2d9211ee30852ea3dba7934d109b1edae4a90f26e748",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "Exactly one papaya fruit is visible, with no competing food.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q003",
+          "sourceSha256": "366add9363840e0250a1458634ec6dde2f302c15a7c2c6d2a857ded464029774",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "pear, orange, grape, papaya, melon, carrot",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "papaya"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "pear",
+      "coversSemanticTargets": [
+        "pear"
+      ],
+      "file": "images/DUDUQ-Y4M05-PEAR.png",
+      "sha256": "9ba03aac4d3d8383a8bb2fe038f23668f02cc4b68aeb99d0148915485087fd3b",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "Exactly one whole pear is visible, with no competing food.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q003",
+          "sourceSha256": "366add9363840e0250a1458634ec6dde2f302c15a7c2c6d2a857ded464029774",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "pear, orange, grape, papaya, melon, carrot",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "pear"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q014",
+          "sourceSha256": "0023f376c33e853abd5f96bfdcf15c64ccfd418575c883dc51ed91428fc8e84a",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "AUDIO_TEXT",
+          "titleEn": "banana, pear, orange, apple",
+          "instructionEn": "Find the matching pairs.",
+          "coveredSemanticTargets": [
+            "pear"
+          ],
+          "visualBindingCount": 0,
+          "sourceHasNoVisualBinding": true
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "red",
+      "coversSemanticTargets": [
+        "red"
+      ],
+      "file": "images/DUDUQ-Y4M05-RED.png",
+      "sha256": "484622d91bc0cba9e422a3fcfe990e5ea3c97297b0a97f3e084cb5a92022c3eb",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "One plain rounded red color token is visible with no object or text cue.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q002",
+          "sourceSha256": "cb3263db3bf59ddad3d19b8ca7344050373a92cecc727373f1312021d40612e8",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "medium, large, red, blue",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "red"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q005",
+          "sourceSha256": "8e85826b78d3ed0fc5c8f527db8511eedbf97625f23a95b11f8cc1831dcd8726",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "black",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "coveredSemanticTargets": [
+            "red"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q008",
+          "sourceSha256": "129c464f5be4babc10ab119694e855100826ef1c9a3f666fd792679f11ac6dc1",
+          "mechanicId": "smart-sentence-complete",
+          "mechanicMode": "complete",
+          "titleEn": "What color is it? It is red.",
+          "instructionEn": "Look at the picture and complete the sentence.",
+          "coveredSemanticTargets": [
+            "red"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q009",
+          "sourceSha256": "56585f42b100ce85975359cffc6052845d8b6514a105d7cbeb3d0f66e0913ca4",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "gray",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "coveredSemanticTargets": [
+            "red"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "shirt",
+      "coversSemanticTargets": [
+        "shirt"
+      ],
+      "file": "images/DUDUQ-Y4M05-SHIRT.png",
+      "sha256": "04a90d89d8c48a032fced9ee2e0ce748b8b1edea115a36aadb514b5128066268",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "Exactly one long-sleeved collared button-up shirt is visible, clearly distinct from a T-shirt.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q001",
+          "sourceSha256": "0ca61fab4b18f97e93054c5fe451e98195753b207316f4ef9f0f96d5905da0d8",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "jacket",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "coveredSemanticTargets": [
+            "shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q004",
+          "sourceSha256": "4c0654a643c1b7cc4dfdfe96b71ddb001d70ea54301d1ae7211fef3bb96bad35",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "TEXT_IMAGE",
+          "titleEn": "T-shirt, pants/trousers, shoes, jacket, dress, shirt",
+          "instructionEn": "Find the matching pairs.",
+          "coveredSemanticTargets": [
+            "shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q007",
+          "sourceSha256": "b648ab7bbf8d5484df8069f998ef181641ad6076d66fade6cbbef1b9c709d7fb",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, dress",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q010",
+          "sourceSha256": "1beffe711cf17e3cef676ea1bfd0c8971b1ab6a67f0f9c7460cc73664033d826",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, shoes, jacket",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "sourceSha256": "c65c826521ce210bf62d1c749591b8701d85e77b8b5771f995870111d8d04327",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "medium",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "shirt"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q013",
+          "sourceSha256": "5e87a53a34b140617d0a08aebc0374517e9a888a1a09ccdc77f4e5d69790184c",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "pants, trousers, shoes, shirt, T-shirt",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q016",
+          "sourceSha256": "ac6290bd55904fa9314c49b133a3e44ae84129917e5e4ba7924a39d97c566c17",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "dress, shirt, T-shirt, pants",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "shoes",
+      "coversSemanticTargets": [
+        "shoes"
+      ],
+      "file": "images/DUDUQ-Y4M05-SHOES.png",
+      "sha256": "47cc3d8a9c063d1ce433aad06754590a36bf1518a22e136a23ed6639415fe801",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "Exactly one matching pair of two red-and-white shoes is visible; no foot, leg or extra shoe is present.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q004",
+          "sourceSha256": "4c0654a643c1b7cc4dfdfe96b71ddb001d70ea54301d1ae7211fef3bb96bad35",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "TEXT_IMAGE",
+          "titleEn": "T-shirt, pants/trousers, shoes, jacket, dress, shirt",
+          "instructionEn": "Find the matching pairs.",
+          "coveredSemanticTargets": [
+            "shoes"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q010",
+          "sourceSha256": "1beffe711cf17e3cef676ea1bfd0c8971b1ab6a67f0f9c7460cc73664033d826",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, shoes, jacket",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "shoes"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q013",
+          "sourceSha256": "5e87a53a34b140617d0a08aebc0374517e9a888a1a09ccdc77f4e5d69790184c",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "pants, trousers, shoes, shirt, T-shirt",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "shoes"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "small",
+      "coversSemanticTargets": [
+        "small"
+      ],
+      "file": "images/DUDUQ-Y4M05-SMALL.png",
+      "sha256": "1fc7d977aa858df0350df3394bc145f3669f830fd827efb6c1ab6f9ba2b1b7f6",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "Exactly one neutral gray rounded cube is shown at the verified small scale; no color or object cue competes with size.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q020",
+          "sourceSha256": "80260d587a7bdcb7ad2872fc9a5bd80749d9f224c592af21baf1e1082e5039fe",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "blue, small, medium, large",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "small"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "t-shirt",
+      "coversSemanticTargets": [
+        "t-shirt"
+      ],
+      "file": "images/DUDUQ-Y4M05-T-SHIRT.png",
+      "sha256": "cee9b8a5bfd7b14f016fb17d86ae1042f8996e0005b65bcdda6dde2a7f29be1a",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "Exactly one short-sleeved crew-neck T-shirt is visible, with no collar or buttons and no other garment.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q001",
+          "sourceSha256": "0ca61fab4b18f97e93054c5fe451e98195753b207316f4ef9f0f96d5905da0d8",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "jacket",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q004",
+          "sourceSha256": "4c0654a643c1b7cc4dfdfe96b71ddb001d70ea54301d1ae7211fef3bb96bad35",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "TEXT_IMAGE",
+          "titleEn": "T-shirt, pants/trousers, shoes, jacket, dress, shirt",
+          "instructionEn": "Find the matching pairs.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q006",
+          "sourceSha256": "bd7a02905e2bafc4c84a7c5854e90ff02b3bdcfe8d52a44179886b8c7d035d66",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q007",
+          "sourceSha256": "b648ab7bbf8d5484df8069f998ef181641ad6076d66fade6cbbef1b9c709d7fb",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, dress",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q010",
+          "sourceSha256": "1beffe711cf17e3cef676ea1bfd0c8971b1ab6a67f0f9c7460cc73664033d826",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, shoes, jacket",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "sourceSha256": "c65c826521ce210bf62d1c749591b8701d85e77b8b5771f995870111d8d04327",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "medium",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q013",
+          "sourceSha256": "5e87a53a34b140617d0a08aebc0374517e9a888a1a09ccdc77f4e5d69790184c",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "pants, trousers, shoes, shirt, T-shirt",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q016",
+          "sourceSha256": "ac6290bd55904fa9314c49b133a3e44ae84129917e5e4ba7924a39d97c566c17",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "dress, shirt, T-shirt, pants",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q018",
+          "sourceSha256": "671cac8dd4218b6468e73132ced3f0ff28ce0e97b6f9657093f2eeb724e92e74",
+          "mechanicId": "smart-sentence-complete",
+          "mechanicMode": "complete",
+          "titleEn": "I like the T-shirt.",
+          "instructionEn": "Look at the picture and complete the sentence.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q019",
+          "sourceSha256": "cd6663c9b33b5cf627f2a0b46f79169409a83fd70bf2ceaed5ee6a0ab644bed1",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "yellow",
+      "coversSemanticTargets": [
+        "yellow"
+      ],
+      "file": "images/DUDUQ-Y4M05-YELLOW.png",
+      "sha256": "5951ca4746171d3ec5c8a96588a3b288eb6ea075f9ea5977fb5bc91c45e31803",
+      "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+      "statement": "One plain rounded yellow color token is visible with no object or text cue.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q005",
+          "sourceSha256": "8e85826b78d3ed0fc5c8f527db8511eedbf97625f23a95b11f8cc1831dcd8726",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "black",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "coveredSemanticTargets": [
+            "yellow"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q009",
+          "sourceSha256": "56585f42b100ce85975359cffc6052845d8b6514a105d7cbeb3d0f66e0913ca4",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "gray",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "coveredSemanticTargets": [
+            "yellow"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    }
+  ],
+  "nonVisualQuestionContracts": [
+    {
+      "questionId": "Y4M05-Q014",
+      "sourceSha256": "0023f376c33e853abd5f96bfdcf15c64ccfd418575c883dc51ed91428fc8e84a",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_TEXT",
+      "titleEn": "banana, pear, orange, apple",
+      "semanticTargets": [
+        "apple",
+        "banana",
+        "orange",
+        "pear"
+      ],
+      "action": "NO_MEDIA_BINDING_IN_SOURCE_CONTRACT_DO_NOT_INVENT_ONE"
+    }
+  ],
+  "summary": {
+    "candidateAssetsReviewed": 26,
+    "semanticTargetsCovered": 28,
+    "visualUsagesCovered": 94,
+    "occurrenceScopedBindingsCovered": 86,
+    "sourceMediaIdsCovered": 54,
+    "wrongDistractorFindings": 0,
+    "humanHomologationPending": 26
+  },
+  "productionApproved": false,
+  "integrated": false
+}

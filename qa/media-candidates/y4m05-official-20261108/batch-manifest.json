@@ -1,0 +1,1967 @@
+{
+  "schemaVersion": "DUDUQ_Y4M05_GENERATION_CANDIDATE_BATCH_V1",
+  "createdAt": "2026-11-08T19:39:20.7749891Z",
+  "moduleId": "Y4M05",
+  "lane": "generation",
+  "candidateOnly": true,
+  "questionContractsReviewed": 20,
+  "visualUsageCount": 94,
+  "sourceMediaIdCount": 54,
+  "semanticConceptCount": 28,
+  "nonDuplicateCandidateAssetCount": 26,
+  "occurrenceScopedBindingPlanCount": 86,
+  "sourceQuestionSha256": "608389293ff083675048bac23c45b10bed017853fba40c31fdd6d0a8e806f6a8",
+  "sourceRegistrySha256": "f11c12fe929379947e7d4f76736f8f73bc6320618bf01265bfb48a4e18ef5e30",
+  "sourceLedgerSha256": "3c3d6a19632b488651d20d373ffd0a70819896a6d1b8246bb2adb7a3f9a5b837",
+  "assets": [
+    {
+      "assetKey": "Y4M05-CANDIDATE-APPLE",
+      "file": "images/DUDUQ-Y4M05-APPLE.png",
+      "semanticTarget": "apple",
+      "semanticTargets": [
+        "apple"
+      ],
+      "sha256": "979dccae9a68c40ae43693c8d99dbe3362c02827b518a820cf704270b2389805",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q006-CTX-5D61B6E5D62E",
+          "questionId": "Y4M05-Q006",
+          "splitFromMediaId": "IMG-V11-2B-4E8C7B72B1EE887C",
+          "semanticTarget": "apple",
+          "contractPaths": [
+            "items[3]"
+          ],
+          "roles": [
+            "grouping_card"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q006-I4"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q019-CTX-DEF46DD2B1E7",
+          "questionId": "Y4M05-Q019",
+          "splitFromMediaId": "IMG-V11-2B-4E8C7B72B1EE887C",
+          "semanticTarget": "apple",
+          "contractPaths": [
+            "items[3]"
+          ],
+          "roles": [
+            "grouping_card"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q019-I4"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-APPLE-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": false
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-4E8C7B72B1EE887C"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-BANANA",
+      "file": "images/DUDUQ-Y4M05-BANANA.png",
+      "semanticTarget": "banana",
+      "semanticTargets": [
+        "banana"
+      ],
+      "sha256": "184fbc78aa409e71a4d6f0242082c84c9c6c573ca900037670489e84814c010e",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q006-CTX-880FF9AF6B5B",
+          "questionId": "Y4M05-Q006",
+          "splitFromMediaId": "IMG-V11-2B-5596327D2C423D85",
+          "semanticTarget": "banana",
+          "contractPaths": [
+            "items[4]"
+          ],
+          "roles": [
+            "grouping_card"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q006-I5"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q019-CTX-226FE4683633",
+          "questionId": "Y4M05-Q019",
+          "splitFromMediaId": "IMG-V11-2B-5596327D2C423D85",
+          "semanticTarget": "banana",
+          "contractPaths": [
+            "items[4]"
+          ],
+          "roles": [
+            "grouping_card"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q019-I5"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-BANANA-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": false
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-5596327D2C423D85"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-BLACK",
+      "file": "images/DUDUQ-Y4M05-BLACK.png",
+      "semanticTarget": "black",
+      "semanticTargets": [
+        "black"
+      ],
+      "sha256": "26f14f9c23067dd533ecf1cdb10d0626c3a2f42d82e3d7c281611104c23dc3ed",
+      "pixelWidth": 1287,
+      "pixelHeight": 1222,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q005-CTX-4A0B71CA3DC3",
+          "questionId": "Y4M05-Q005",
+          "splitFromMediaId": "IMG-Y1M03-Q001-BLACK",
+          "semanticTarget": "black",
+          "contractPaths": [
+            "options[0]"
+          ],
+          "roles": [
+            "CONTENT"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q005-O1"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-BLACK-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": true
+      },
+      "sourceMediaIds": [
+        "IMG-Y1M03-Q001-BLACK"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-BLUE",
+      "file": "images/DUDUQ-Y4M05-BLUE.png",
+      "semanticTarget": "blue",
+      "semanticTargets": [
+        "blue"
+      ],
+      "sha256": "af47ea2a8ce91f4544b3626157f7e64bb64498b981014a42383ff2798029a584",
+      "pixelWidth": 1287,
+      "pixelHeight": 1222,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q002-CTX-661AA85EDA63",
+          "questionId": "Y4M05-Q002",
+          "splitFromMediaId": "IMG-Y1M03-Q001-BLUE",
+          "semanticTarget": "blue",
+          "contractPaths": [
+            "targets[3]"
+          ],
+          "roles": [
+            "CONTENT"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q002-T4"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q005-CTX-00608F024D42",
+          "questionId": "Y4M05-Q005",
+          "splitFromMediaId": "IMG-Y1M03-Q001-BLUE",
+          "semanticTarget": "blue",
+          "contractPaths": [
+            "options[2]"
+          ],
+          "roles": [
+            "CONTENT"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q005-O3"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q009-CTX-B00B80778923",
+          "questionId": "Y4M05-Q009",
+          "splitFromMediaId": "IMG-Y1M03-Q001-BLUE",
+          "semanticTarget": "blue",
+          "contractPaths": [
+            "options[2]"
+          ],
+          "roles": [
+            "CONTENT"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q009-O3"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q020-CTX-6FC2BECE5C43",
+          "questionId": "Y4M05-Q020",
+          "splitFromMediaId": "IMG-Y1M03-Q001-BLUE",
+          "semanticTarget": "blue",
+          "contractPaths": [
+            "targets[0]"
+          ],
+          "roles": [
+            "CONTENT"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q020-T1"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-BLUE-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": true
+      },
+      "sourceMediaIds": [
+        "IMG-Y1M03-Q001-BLUE"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-CARROT",
+      "file": "images/DUDUQ-Y4M05-CARROT.png",
+      "semanticTarget": "carrot",
+      "semanticTargets": [
+        "carrot"
+      ],
+      "sha256": "1522fa92079f8412040ba7a206533bb4bd4cd6bf5ed0f62cdd449e2e254bc0a5",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q003-CTX-8C8912830E30",
+          "questionId": "Y4M05-Q003",
+          "splitFromMediaId": "IMG-V11-2B-0C2E37014FB8B5AF",
+          "semanticTarget": "carrot",
+          "contractPaths": [
+            "pairs[5].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q003-R6"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-CARROT-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": false
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-0C2E37014FB8B5AF"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-DRESS",
+      "file": "images/DUDUQ-Y4M05-DRESS.png",
+      "semanticTarget": "dress",
+      "semanticTargets": [
+        "dress"
+      ],
+      "sha256": "d0ac6cf96eafd6eb956d7582ecba8c6b56b16bd2540beff4540a5f2b69e7b240",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q001-CTX-253C283A51E6",
+          "questionId": "Y4M05-Q001",
+          "splitFromMediaId": "IMG-V11-2B-3DA65911425B1F0A",
+          "semanticTarget": "dress",
+          "contractPaths": [
+            "options[1]"
+          ],
+          "roles": [
+            "option"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q001-O2"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q004-CTX-20B78963EBA3",
+          "questionId": "Y4M05-Q004",
+          "splitFromMediaId": "IMG-V11-2B-E5DAEC3F8D2DDA4B",
+          "semanticTarget": "dress",
+          "contractPaths": [
+            "pairs[4].cards[1]"
+          ],
+          "roles": [
+            "memory_pair"
+          ],
+          "optionOrCardIds": []
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q006-CTX-5600456513EB",
+          "questionId": "Y4M05-Q006",
+          "splitFromMediaId": "IMG-V11-2B-7A8EE9CA12A18B37",
+          "semanticTarget": "dress",
+          "contractPaths": [
+            "items[1]"
+          ],
+          "roles": [
+            "grouping_card"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q006-I2"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q007-CTX-331C227A5A17",
+          "questionId": "Y4M05-Q007",
+          "splitFromMediaId": "IMG-V11-2B-FA05AA0B6003C6A5",
+          "semanticTarget": "dress",
+          "contractPaths": [
+            "pairs[4].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q007-R5"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q011-CTX-7122115F54F9",
+          "questionId": "Y4M05-Q011",
+          "splitFromMediaId": "IMG-V11-2B-3DA65911425B1F0A",
+          "semanticTarget": "dress",
+          "contractPaths": [
+            "bubbleDistractorPool[1]",
+            "options[2]"
+          ],
+          "roles": [
+            "option"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q011-D2",
+            "Y4M05-Q011-O3"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q016-CTX-19039DA119EA",
+          "questionId": "Y4M05-Q016",
+          "splitFromMediaId": "IMG-V11-2B-6ECEED6F29B3CD6A",
+          "semanticTarget": "dress",
+          "contractPaths": [
+            "targets[0]"
+          ],
+          "roles": [
+            "ddm_destination"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q016-T1"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q017-CTX-53C7DB065A07",
+          "questionId": "Y4M05-Q017",
+          "splitFromMediaId": "IMG-V11-2B-3DA65911425B1F0A",
+          "semanticTarget": "dress",
+          "contractPaths": [
+            "bubbleDistractorPool[4]"
+          ],
+          "roles": [],
+          "optionOrCardIds": [
+            "Y4M05-Q017-D5"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q019-CTX-9A01A394A108",
+          "questionId": "Y4M05-Q019",
+          "splitFromMediaId": "IMG-V11-2B-7A8EE9CA12A18B37",
+          "semanticTarget": "dress",
+          "contractPaths": [
+            "items[1]"
+          ],
+          "roles": [
+            "grouping_card"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q019-I2"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/originals/DUDUQ-Y4M05-DRESS-ORIGINAL.png",
+        "alphaNormalizationApplied": true
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-3DA65911425B1F0A",
+        "IMG-V11-2B-6ECEED6F29B3CD6A",
+        "IMG-V11-2B-7A8EE9CA12A18B37",
+        "IMG-V11-2B-E5DAEC3F8D2DDA4B",
+        "IMG-V11-2B-FA05AA0B6003C6A5"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-GRAPE",
+      "file": "images/DUDUQ-Y4M05-GRAPE.png",
+      "semanticTarget": "grape",
+      "semanticTargets": [
+        "grape"
+      ],
+      "sha256": "535d16680693e2ff3c8e20ce085b6e6976382f62fb795e28fc9c30eedc5789f6",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q003-CTX-B63D8BC67600",
+          "questionId": "Y4M05-Q003",
+          "splitFromMediaId": "IMG-V11-2B-BC3B9081178AE7A4",
+          "semanticTarget": "grape",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q003-R3"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q006-CTX-D6839DB27EA8",
+          "questionId": "Y4M05-Q006",
+          "splitFromMediaId": "IMG-V11-2B-26D44842889AB747",
+          "semanticTarget": "grape",
+          "contractPaths": [
+            "items[5]"
+          ],
+          "roles": [
+            "grouping_card"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q006-I6"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q019-CTX-11838AF962EB",
+          "questionId": "Y4M05-Q019",
+          "splitFromMediaId": "IMG-V11-2B-26D44842889AB747",
+          "semanticTarget": "grape",
+          "contractPaths": [
+            "items[5]"
+          ],
+          "roles": [
+            "grouping_card"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q019-I6"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-GRAPE-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": false
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-26D44842889AB747",
+        "IMG-V11-2B-BC3B9081178AE7A4"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-GRAY",
+      "file": "images/DUDUQ-Y4M05-GRAY.png",
+      "semanticTarget": "gray",
+      "semanticTargets": [
+        "gray"
+      ],
+      "sha256": "a495b16ffedf658cee6e8e4c9c48f2ba051d6d5d664317c9a7545b1956c8e904",
+      "pixelWidth": 1287,
+      "pixelHeight": 1222,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q009-CTX-08039FB1D04B",
+          "questionId": "Y4M05-Q009",
+          "splitFromMediaId": "IMG-Y1M03-Q006-GRAY",
+          "semanticTarget": "gray",
+          "contractPaths": [
+            "options[0]"
+          ],
+          "roles": [
+            "CONTENT"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q009-O1"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-GRAY-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": false
+      },
+      "sourceMediaIds": [
+        "IMG-Y1M03-Q006-GRAY"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-I-DO-NOT-LIKE-CARROTS",
+      "file": "images/DUDUQ-Y4M05-I-DO-NOT-LIKE-CARROTS.png",
+      "semanticTarget": "i do not like carrots",
+      "semanticTargets": [
+        "i do not like carrots"
+      ],
+      "sha256": "78e59be1986c13e2b05ed24395c0b1d64b0d3b8534480ecc8fa59f30d4fe369b",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q012-CTX-D17F0715E056",
+          "questionId": "Y4M05-Q012",
+          "splitFromMediaId": "IMG-V11-2B-95FE0C0B6DED7EFB",
+          "semanticTarget": "i do not like carrots",
+          "contractPaths": [
+            "targets[3]"
+          ],
+          "roles": [
+            "ddm_destination"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q012-T4"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q015-CTX-08ADC467A0A1",
+          "questionId": "Y4M05-Q015",
+          "splitFromMediaId": "IMG-V11-2B-20C32A7B846CD05A",
+          "semanticTarget": "i do not like carrots",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q015-R1"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q017-CTX-63A55ADB7ED6",
+          "questionId": "Y4M05-Q017",
+          "splitFromMediaId": "IMG-V11-2B-48CA6C8720A28B20",
+          "semanticTarget": "i do not like carrots",
+          "contractPaths": [
+            "bubbleDistractorPool[1]",
+            "options[2]"
+          ],
+          "roles": [
+            "option"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q017-D2",
+            "Y4M05-Q017-O3"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-I-DO-NOT-LIKE-CARROTS-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": true
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-20C32A7B846CD05A",
+        "IMG-V11-2B-48CA6C8720A28B20",
+        "IMG-V11-2B-95FE0C0B6DED7EFB"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-I-LIKE-APPLES",
+      "file": "images/DUDUQ-Y4M05-I-LIKE-APPLES.png",
+      "semanticTarget": "i like apples",
+      "semanticTargets": [
+        "i like apples"
+      ],
+      "sha256": "b378dc8a885e07048273a3393518f5a33fd2e4e9051ae359527e9ca34347a8b6",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q012-CTX-D3D95BD9B726",
+          "questionId": "Y4M05-Q012",
+          "splitFromMediaId": "IMG-V11-2B-3272A25234DFCFBA",
+          "semanticTarget": "i like apples",
+          "contractPaths": [
+            "targets[1]"
+          ],
+          "roles": [
+            "ddm_destination"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q012-T2"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q015-CTX-36125F553B39",
+          "questionId": "Y4M05-Q015",
+          "splitFromMediaId": "IMG-V11-2B-9308452ECEE535F7",
+          "semanticTarget": "i like apples",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q015-R3"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q017-CTX-A543DD40F3D1",
+          "questionId": "Y4M05-Q017",
+          "splitFromMediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "semanticTarget": "i like apples",
+          "contractPaths": [
+            "options[0]",
+            "targetsToFind[0]"
+          ],
+          "roles": [
+            "option"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q017-O1"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-I-LIKE-APPLES-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": true
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-3272A25234DFCFBA",
+        "IMG-V11-2B-9308452ECEE535F7",
+        "IMG-V11-2B-97050C4338A5B73F"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-I-LIKE-PAPAYA",
+      "file": "images/DUDUQ-Y4M05-I-LIKE-PAPAYA.png",
+      "semanticTarget": "i like papaya",
+      "semanticTargets": [
+        "i like papaya"
+      ],
+      "sha256": "e26d040391bd80af05431960976ae994d8828bb7b33d74663f81a248f50cb4cc",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q012-CTX-BF61EBDA6C44",
+          "questionId": "Y4M05-Q012",
+          "splitFromMediaId": "IMG-V11-2B-719454C9113F5766",
+          "semanticTarget": "i like papaya",
+          "contractPaths": [
+            "targets[0]"
+          ],
+          "roles": [
+            "ddm_destination"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q012-T1"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q015-CTX-0DC33F808659",
+          "questionId": "Y4M05-Q015",
+          "splitFromMediaId": "IMG-V11-2B-8050E659DDF0AE39",
+          "semanticTarget": "i like papaya",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q015-R2"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q017-CTX-3484EAA34AFC",
+          "questionId": "Y4M05-Q017",
+          "splitFromMediaId": "IMG-V11-2B-8402FF71A9476919",
+          "semanticTarget": "i like papaya",
+          "contractPaths": [
+            "bubbleDistractorPool[2]",
+            "options[3]"
+          ],
+          "roles": [
+            "option"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q017-D3",
+            "Y4M05-Q017-O4"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-I-LIKE-PAPAYA-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": true
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-719454C9113F5766",
+        "IMG-V11-2B-8050E659DDF0AE39",
+        "IMG-V11-2B-8402FF71A9476919"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-I-PREFER-GRAPES",
+      "file": "images/DUDUQ-Y4M05-I-PREFER-GRAPES.png",
+      "semanticTarget": "i prefer grapes",
+      "semanticTargets": [
+        "i prefer grapes"
+      ],
+      "sha256": "0f16d25eccf0648830dd8b5de9bd02f3d7fb78abdff205bd8e3fc9a1cd285ca5",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q012-CTX-52C89FE2A066",
+          "questionId": "Y4M05-Q012",
+          "splitFromMediaId": "IMG-V11-2B-D44395DF6FD6A093",
+          "semanticTarget": "i prefer grapes",
+          "contractPaths": [
+            "targets[2]"
+          ],
+          "roles": [
+            "ddm_destination"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q012-T3"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q015-CTX-040F6A706AA6",
+          "questionId": "Y4M05-Q015",
+          "splitFromMediaId": "IMG-V11-2B-F2B1512D42DAD7B2",
+          "semanticTarget": "i prefer grapes",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q015-R4"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q017-CTX-515C782BFAF3",
+          "questionId": "Y4M05-Q017",
+          "splitFromMediaId": "IMG-V11-2B-5D2F313F53720CE9",
+          "semanticTarget": "i prefer grapes",
+          "contractPaths": [
+            "bubbleDistractorPool[0]",
+            "options[1]"
+          ],
+          "roles": [
+            "option"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q017-D1",
+            "Y4M05-Q017-O2"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-I-PREFER-GRAPES-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": true
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-5D2F313F53720CE9",
+        "IMG-V11-2B-D44395DF6FD6A093",
+        "IMG-V11-2B-F2B1512D42DAD7B2"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-JACKET",
+      "file": "images/DUDUQ-Y4M05-JACKET.png",
+      "semanticTarget": "jacket",
+      "semanticTargets": [
+        "jacket"
+      ],
+      "sha256": "9b3385c6969b225c4b013649bdd93394e92b461c8f43ef78e8c10659b13a8551",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q001-CTX-FE2B66BD6F16",
+          "questionId": "Y4M05-Q001",
+          "splitFromMediaId": "IMG-V11-2B-6E361BB260D62CB6",
+          "semanticTarget": "jacket",
+          "contractPaths": [
+            "options[0]"
+          ],
+          "roles": [
+            "option"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q001-O1"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q004-CTX-473235693A75",
+          "questionId": "Y4M05-Q004",
+          "splitFromMediaId": "IMG-V11-2B-BB75FBB04D7641DD",
+          "semanticTarget": "jacket",
+          "contractPaths": [
+            "pairs[3].cards[1]"
+          ],
+          "roles": [
+            "memory_pair"
+          ],
+          "optionOrCardIds": []
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q006-CTX-49BB9C7BBD12",
+          "questionId": "Y4M05-Q006",
+          "splitFromMediaId": "IMG-V11-2B-4A0D07AA7BBF6562",
+          "semanticTarget": "jacket",
+          "contractPaths": [
+            "items[0]"
+          ],
+          "roles": [
+            "grouping_card"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q006-I1"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q010-CTX-77B1EF4B46FE",
+          "questionId": "Y4M05-Q010",
+          "splitFromMediaId": "IMG-V11-2B-E2B7CEC954F9AAA9",
+          "semanticTarget": "jacket",
+          "contractPaths": [
+            "pairs[5].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q010-R6"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q011-CTX-373A3104A7E3",
+          "questionId": "Y4M05-Q011",
+          "splitFromMediaId": "IMG-V11-2B-6E361BB260D62CB6",
+          "semanticTarget": "jacket",
+          "contractPaths": [
+            "bubbleDistractorPool[0]",
+            "options[1]"
+          ],
+          "roles": [
+            "option"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q011-D1",
+            "Y4M05-Q011-O2"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q017-CTX-8C5C3D687675",
+          "questionId": "Y4M05-Q017",
+          "splitFromMediaId": "IMG-V11-2B-6E361BB260D62CB6",
+          "semanticTarget": "jacket",
+          "contractPaths": [
+            "bubbleDistractorPool[3]"
+          ],
+          "roles": [],
+          "optionOrCardIds": [
+            "Y4M05-Q017-D4"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q019-CTX-AE5754B2C14F",
+          "questionId": "Y4M05-Q019",
+          "splitFromMediaId": "IMG-V11-2B-4A0D07AA7BBF6562",
+          "semanticTarget": "jacket",
+          "contractPaths": [
+            "items[0]"
+          ],
+          "roles": [
+            "grouping_card"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q019-I1"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/originals/DUDUQ-Y4M05-JACKET-ORIGINAL.png",
+        "alphaNormalizationApplied": true
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-4A0D07AA7BBF6562",
+        "IMG-V11-2B-6E361BB260D62CB6",
+        "IMG-V11-2B-BB75FBB04D7641DD",
+        "IMG-V11-2B-E2B7CEC954F9AAA9"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-LARGE",
+      "file": "images/DUDUQ-Y4M05-LARGE.png",
+      "semanticTarget": "large",
+      "semanticTargets": [
+        "large"
+      ],
+      "sha256": "71ef4290fd60783cc62684b21d498c6ecd41b6cbc35ce08eccf2e9d4fd159291",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q002-CTX-8A5374F71791",
+          "questionId": "Y4M05-Q002",
+          "splitFromMediaId": "IMG-V11-2B-C84E311AA3E3AF40",
+          "semanticTarget": "large",
+          "contractPaths": [
+            "targets[1]"
+          ],
+          "roles": [
+            "ddm_destination"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q002-T2"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q011-CTX-AEE8A6AD0EBF",
+          "questionId": "Y4M05-Q011",
+          "splitFromMediaId": "IMG-V11-2B-C84E311AA3E3AF40",
+          "semanticTarget": "large",
+          "contractPaths": [
+            "bubbleDistractorPool[4]"
+          ],
+          "roles": [],
+          "optionOrCardIds": [
+            "Y4M05-Q011-D5"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q020-CTX-EAB33AF11DA5",
+          "questionId": "Y4M05-Q020",
+          "splitFromMediaId": "IMG-V11-2B-C84E311AA3E3AF40",
+          "semanticTarget": "large",
+          "contractPaths": [
+            "targets[3]"
+          ],
+          "roles": [
+            "ddm_destination"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q020-T4"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-LARGE-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": true
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-C84E311AA3E3AF40"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-MEDIUM",
+      "file": "images/DUDUQ-Y4M05-MEDIUM.png",
+      "semanticTarget": "medium",
+      "semanticTargets": [
+        "medium"
+      ],
+      "sha256": "168e4bb854961334af9e3a360905591f9029b5465397c476aeedd0a4f53b8c27",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q002-CTX-402EF35334EF",
+          "questionId": "Y4M05-Q002",
+          "splitFromMediaId": "IMG-V11-2B-8FA451D965C6EB75",
+          "semanticTarget": "medium",
+          "contractPaths": [
+            "targets[0]"
+          ],
+          "roles": [
+            "ddm_destination"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q002-T1"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q011-CTX-C274609902CF",
+          "questionId": "Y4M05-Q011",
+          "splitFromMediaId": "IMG-V11-2B-B251C4169436B57F",
+          "semanticTarget": "medium",
+          "contractPaths": [
+            "options[0]",
+            "targetsToFind[0]"
+          ],
+          "roles": [
+            "option"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q011-O1"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q020-CTX-98F892A80292",
+          "questionId": "Y4M05-Q020",
+          "splitFromMediaId": "IMG-V11-2B-8FA451D965C6EB75",
+          "semanticTarget": "medium",
+          "contractPaths": [
+            "targets[2]"
+          ],
+          "roles": [
+            "ddm_destination"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q020-T3"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/originals/DUDUQ-Y4M05-MEDIUM-ORIGINAL.png",
+        "alphaNormalizationApplied": true
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-8FA451D965C6EB75",
+        "IMG-V11-2B-B251C4169436B57F"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-MELON",
+      "file": "images/DUDUQ-Y4M05-MELON.png",
+      "semanticTarget": "melon",
+      "semanticTargets": [
+        "melon"
+      ],
+      "sha256": "0388cc1982c09a48f96152330b2ced86d41a0b0c6b6dadc4b21ca4a589278d4c",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q003-CTX-A71995E59835",
+          "questionId": "Y4M05-Q003",
+          "splitFromMediaId": "IMG-V11-2B-1EABF9E8AAAB576B",
+          "semanticTarget": "melon",
+          "contractPaths": [
+            "pairs[4].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q003-R5"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-MELON-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": false
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-1EABF9E8AAAB576B"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-ORANGE",
+      "file": "images/DUDUQ-Y4M05-ORANGE.png",
+      "semanticTarget": "orange",
+      "semanticTargets": [
+        "orange"
+      ],
+      "sha256": "e3e755f38c2efb6c8637bc9f9def0bd706e0f5cf6821b3efdab454666ecaee77",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q003-CTX-99E781E86AA8",
+          "questionId": "Y4M05-Q003",
+          "splitFromMediaId": "IMG-Y1M03-Q001-ORANGE",
+          "semanticTarget": "orange",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "roles": [
+            "CONTENT"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q003-R2"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-ORANGE-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": false
+      },
+      "sourceMediaIds": [
+        "IMG-Y1M03-Q001-ORANGE"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-TROUSERS",
+      "file": "images/DUDUQ-Y4M05-TROUSERS.png",
+      "semanticTarget": "trousers",
+      "semanticTargets": [
+        "pants",
+        "pants/trousers",
+        "trousers"
+      ],
+      "sha256": "6673e77ea679348e41bed4ebcb0fea69922f56b17d3e7a301caddafa27d6978f",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q004-CTX-6F87FA44D9CF",
+          "questionId": "Y4M05-Q004",
+          "splitFromMediaId": "IMG-V11-2B-500B7CA70EE94EA9",
+          "semanticTarget": "pants/trousers",
+          "contractPaths": [
+            "pairs[1].cards[1]"
+          ],
+          "roles": [
+            "memory_pair"
+          ],
+          "optionOrCardIds": []
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q007-CTX-2B31B23E31DB",
+          "questionId": "Y4M05-Q007",
+          "splitFromMediaId": "IMG-V11-2B-37D4A49BBE547EF2",
+          "semanticTarget": "trousers",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q007-R4"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q007-CTX-61643AEEAA44",
+          "questionId": "Y4M05-Q007",
+          "splitFromMediaId": "IMG-V11-2B-F2722554CD82ACE3",
+          "semanticTarget": "pants",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q007-R3"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q010-CTX-4F1A7775F6ED",
+          "questionId": "Y4M05-Q010",
+          "splitFromMediaId": "IMG-V11-2B-37D4A49BBE547EF2",
+          "semanticTarget": "trousers",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q010-R4"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q010-CTX-8E7BD0239CDD",
+          "questionId": "Y4M05-Q010",
+          "splitFromMediaId": "IMG-V11-2B-F2722554CD82ACE3",
+          "semanticTarget": "pants",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q010-R3"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q013-CTX-6E41A93FFEE2",
+          "questionId": "Y4M05-Q013",
+          "splitFromMediaId": "IMG-V11-2B-37D4A49BBE547EF2",
+          "semanticTarget": "trousers",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q013-R2"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q013-CTX-C0D5CA89C3DA",
+          "questionId": "Y4M05-Q013",
+          "splitFromMediaId": "IMG-V11-2B-F2722554CD82ACE3",
+          "semanticTarget": "pants",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q013-R1"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q016-CTX-775079AFB167",
+          "questionId": "Y4M05-Q016",
+          "splitFromMediaId": "IMG-V11-2B-1DB896CF7FCECC4A",
+          "semanticTarget": "pants",
+          "contractPaths": [
+            "targets[3]"
+          ],
+          "roles": [
+            "ddm_destination"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q016-T4"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/originals/DUDUQ-Y4M05-TROUSERS-ORIGINAL.png",
+        "alphaNormalizationApplied": true
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-1DB896CF7FCECC4A",
+        "IMG-V11-2B-37D4A49BBE547EF2",
+        "IMG-V11-2B-500B7CA70EE94EA9",
+        "IMG-V11-2B-F2722554CD82ACE3"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-PAPAYA",
+      "file": "images/DUDUQ-Y4M05-PAPAYA.png",
+      "semanticTarget": "papaya",
+      "semanticTargets": [
+        "papaya"
+      ],
+      "sha256": "5908f5addad74506639b2d9211ee30852ea3dba7934d109b1edae4a90f26e748",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q003-CTX-F1C539B2A000",
+          "questionId": "Y4M05-Q003",
+          "splitFromMediaId": "IMG-V11-2B-D1344634366B33A5",
+          "semanticTarget": "papaya",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q003-R4"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-PAPAYA-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": false
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-D1344634366B33A5"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-PEAR",
+      "file": "images/DUDUQ-Y4M05-PEAR.png",
+      "semanticTarget": "pear",
+      "semanticTargets": [
+        "pear"
+      ],
+      "sha256": "9ba03aac4d3d8383a8bb2fe038f23668f02cc4b68aeb99d0148915485087fd3b",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q003-CTX-72A28770CB98",
+          "questionId": "Y4M05-Q003",
+          "splitFromMediaId": "IMG-V11-2B-3E8B870AE9E69B6A",
+          "semanticTarget": "pear",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q003-R1"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-PEAR-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": false
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-3E8B870AE9E69B6A"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-RED",
+      "file": "images/DUDUQ-Y4M05-RED.png",
+      "semanticTarget": "red",
+      "semanticTargets": [
+        "red"
+      ],
+      "sha256": "484622d91bc0cba9e422a3fcfe990e5ea3c97297b0a97f3e084cb5a92022c3eb",
+      "pixelWidth": 1265,
+      "pixelHeight": 1243,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q002-CTX-CB77650DF243",
+          "questionId": "Y4M05-Q002",
+          "splitFromMediaId": "IMG-Y1M03-Q001-RED",
+          "semanticTarget": "red",
+          "contractPaths": [
+            "targets[2]"
+          ],
+          "roles": [
+            "CONTENT"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q002-T3"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q005-CTX-AE4A01B1B348",
+          "questionId": "Y4M05-Q005",
+          "splitFromMediaId": "IMG-Y1M03-Q001-RED",
+          "semanticTarget": "red",
+          "contractPaths": [
+            "options[1]"
+          ],
+          "roles": [
+            "CONTENT"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q005-O2"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q008-CTX-4C98AA0AAE5A",
+          "questionId": "Y4M05-Q008",
+          "splitFromMediaId": "IMG-Y1M03-Q001-RED",
+          "semanticTarget": "red",
+          "contractPaths": [
+            "mediaBindings[0]"
+          ],
+          "roles": [
+            "SUPPORTING_IMAGE"
+          ],
+          "optionOrCardIds": []
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q009-CTX-0209691AF1E7",
+          "questionId": "Y4M05-Q009",
+          "splitFromMediaId": "IMG-Y1M03-Q001-RED",
+          "semanticTarget": "red",
+          "contractPaths": [
+            "options[1]"
+          ],
+          "roles": [
+            "CONTENT"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q009-O2"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-RED-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": true
+      },
+      "sourceMediaIds": [
+        "IMG-Y1M03-Q001-RED"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-SHIRT",
+      "file": "images/DUDUQ-Y4M05-SHIRT.png",
+      "semanticTarget": "shirt",
+      "semanticTargets": [
+        "shirt"
+      ],
+      "sha256": "04a90d89d8c48a032fced9ee2e0ce748b8b1edea115a36aadb514b5128066268",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q001-CTX-99C54E831308",
+          "questionId": "Y4M05-Q001",
+          "splitFromMediaId": "IMG-V11-2B-946C6EFC936156EA",
+          "semanticTarget": "shirt",
+          "contractPaths": [
+            "options[2]"
+          ],
+          "roles": [
+            "option"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q001-O3"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q004-CTX-448DDAFE377F",
+          "questionId": "Y4M05-Q004",
+          "splitFromMediaId": "IMG-V11-2B-BD7447F51CDEA5B8",
+          "semanticTarget": "shirt",
+          "contractPaths": [
+            "pairs[5].cards[1]"
+          ],
+          "roles": [
+            "memory_pair"
+          ],
+          "optionOrCardIds": []
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q007-CTX-10A411E597B3",
+          "questionId": "Y4M05-Q007",
+          "splitFromMediaId": "IMG-V11-2B-F586E01965033EE8",
+          "semanticTarget": "shirt",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q007-R1"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q010-CTX-9D426869E410",
+          "questionId": "Y4M05-Q010",
+          "splitFromMediaId": "IMG-V11-2B-F586E01965033EE8",
+          "semanticTarget": "shirt",
+          "contractPaths": [
+            "pairs[0].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q010-R1"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q011-CTX-E3C30AA31532",
+          "questionId": "Y4M05-Q011",
+          "splitFromMediaId": "IMG-V11-2B-946C6EFC936156EA",
+          "semanticTarget": "shirt",
+          "contractPaths": [
+            "bubbleDistractorPool[2]",
+            "options[3]"
+          ],
+          "roles": [
+            "option"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q011-D3",
+            "Y4M05-Q011-O4"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q013-CTX-4F48D6B3F947",
+          "questionId": "Y4M05-Q013",
+          "splitFromMediaId": "IMG-V11-2B-F586E01965033EE8",
+          "semanticTarget": "shirt",
+          "contractPaths": [
+            "pairs[3].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q013-R4"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q016-CTX-F817973A9148",
+          "questionId": "Y4M05-Q016",
+          "splitFromMediaId": "IMG-V11-2B-5BBD35AAD770FC3F",
+          "semanticTarget": "shirt",
+          "contractPaths": [
+            "targets[1]"
+          ],
+          "roles": [
+            "ddm_destination"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q016-T2"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/originals/DUDUQ-Y4M05-SHIRT-ORIGINAL.png",
+        "alphaNormalizationApplied": true
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-5BBD35AAD770FC3F",
+        "IMG-V11-2B-946C6EFC936156EA",
+        "IMG-V11-2B-BD7447F51CDEA5B8",
+        "IMG-V11-2B-F586E01965033EE8"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-SHOES",
+      "file": "images/DUDUQ-Y4M05-SHOES.png",
+      "semanticTarget": "shoes",
+      "semanticTargets": [
+        "shoes"
+      ],
+      "sha256": "47cc3d8a9c063d1ce433aad06754590a36bf1518a22e136a23ed6639415fe801",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q004-CTX-A4196544323D",
+          "questionId": "Y4M05-Q004",
+          "splitFromMediaId": "IMG-V11-2B-B932F9C5DA901E52",
+          "semanticTarget": "shoes",
+          "contractPaths": [
+            "pairs[2].cards[1]"
+          ],
+          "roles": [
+            "memory_pair"
+          ],
+          "optionOrCardIds": []
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q010-CTX-21587C213E4F",
+          "questionId": "Y4M05-Q010",
+          "splitFromMediaId": "IMG-V11-2B-9F1B693E24177567",
+          "semanticTarget": "shoes",
+          "contractPaths": [
+            "pairs[4].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q010-R5"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q013-CTX-80F257B561A6",
+          "questionId": "Y4M05-Q013",
+          "splitFromMediaId": "IMG-V11-2B-9F1B693E24177567",
+          "semanticTarget": "shoes",
+          "contractPaths": [
+            "pairs[2].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q013-R3"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/originals/DUDUQ-Y4M05-SHOES-ORIGINAL.png",
+        "alphaNormalizationApplied": true
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-9F1B693E24177567",
+        "IMG-V11-2B-B932F9C5DA901E52"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-SMALL",
+      "file": "images/DUDUQ-Y4M05-SMALL.png",
+      "semanticTarget": "small",
+      "semanticTargets": [
+        "small"
+      ],
+      "sha256": "1fc7d977aa858df0350df3394bc145f3669f830fd827efb6c1ab6f9ba2b1b7f6",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q020-CTX-AC14DD30DD87",
+          "questionId": "Y4M05-Q020",
+          "splitFromMediaId": "IMG-Y1M06-Q014-SMALL",
+          "semanticTarget": "small",
+          "contractPaths": [
+            "targets[1]"
+          ],
+          "roles": [
+            "CONTENT"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q020-T2"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-SMALL-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": true
+      },
+      "sourceMediaIds": [
+        "IMG-Y1M06-Q014-SMALL"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-T-SHIRT",
+      "file": "images/DUDUQ-Y4M05-T-SHIRT.png",
+      "semanticTarget": "t-shirt",
+      "semanticTargets": [
+        "t-shirt"
+      ],
+      "sha256": "cee9b8a5bfd7b14f016fb17d86ae1042f8996e0005b65bcdda6dde2a7f29be1a",
+      "pixelWidth": 1254,
+      "pixelHeight": 1254,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q001-CTX-499D1DAB7403",
+          "questionId": "Y4M05-Q001",
+          "splitFromMediaId": "IMG-V11-2B-9FC2369A0CEEEEB0",
+          "semanticTarget": "t-shirt",
+          "contractPaths": [
+            "options[3]"
+          ],
+          "roles": [
+            "option"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q001-O4"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q004-CTX-24651A3FCA64",
+          "questionId": "Y4M05-Q004",
+          "splitFromMediaId": "IMG-V11-2B-BCD95D77D8D2E855",
+          "semanticTarget": "t-shirt",
+          "contractPaths": [
+            "pairs[0].cards[1]"
+          ],
+          "roles": [
+            "memory_pair"
+          ],
+          "optionOrCardIds": []
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q006-CTX-C5BBC0418DA1",
+          "questionId": "Y4M05-Q006",
+          "splitFromMediaId": "IMG-V11-2B-54F22DA60F173DD1",
+          "semanticTarget": "t-shirt",
+          "contractPaths": [
+            "items[2]"
+          ],
+          "roles": [
+            "grouping_card"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q006-I3"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q007-CTX-4B6FF5D8BA35",
+          "questionId": "Y4M05-Q007",
+          "splitFromMediaId": "IMG-V11-2B-55B8783BBC22D23D",
+          "semanticTarget": "t-shirt",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q007-R2"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q010-CTX-C310057AB127",
+          "questionId": "Y4M05-Q010",
+          "splitFromMediaId": "IMG-V11-2B-55B8783BBC22D23D",
+          "semanticTarget": "t-shirt",
+          "contractPaths": [
+            "pairs[1].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q010-R2"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q011-CTX-6165F3B35D20",
+          "questionId": "Y4M05-Q011",
+          "splitFromMediaId": "IMG-V11-2B-9FC2369A0CEEEEB0",
+          "semanticTarget": "t-shirt",
+          "contractPaths": [
+            "bubbleDistractorPool[3]"
+          ],
+          "roles": [],
+          "optionOrCardIds": [
+            "Y4M05-Q011-D4"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q013-CTX-07895C0D601B",
+          "questionId": "Y4M05-Q013",
+          "splitFromMediaId": "IMG-V11-2B-55B8783BBC22D23D",
+          "semanticTarget": "t-shirt",
+          "contractPaths": [
+            "pairs[4].b"
+          ],
+          "roles": [
+            "matching_pair"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q013-R5"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q016-CTX-84D93CA94138",
+          "questionId": "Y4M05-Q016",
+          "splitFromMediaId": "IMG-V11-2B-B397BAF495CC8462",
+          "semanticTarget": "t-shirt",
+          "contractPaths": [
+            "targets[2]"
+          ],
+          "roles": [
+            "ddm_destination"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q016-T3"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q018-CTX-345C39B3D072",
+          "questionId": "Y4M05-Q018",
+          "splitFromMediaId": "IMG-V11-2B-9FC2369A0CEEEEB0",
+          "semanticTarget": "t-shirt",
+          "contractPaths": [
+            "mediaBindings[0]"
+          ],
+          "roles": [
+            "SUPPORTING_IMAGE"
+          ],
+          "optionOrCardIds": []
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q019-CTX-B50A3C08E11B",
+          "questionId": "Y4M05-Q019",
+          "splitFromMediaId": "IMG-V11-2B-54F22DA60F173DD1",
+          "semanticTarget": "t-shirt",
+          "contractPaths": [
+            "items[2]"
+          ],
+          "roles": [
+            "grouping_card"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q019-I3"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/originals/DUDUQ-Y4M05-T-SHIRT-ORIGINAL.png",
+        "alphaNormalizationApplied": true
+      },
+      "sourceMediaIds": [
+        "IMG-V11-2B-54F22DA60F173DD1",
+        "IMG-V11-2B-55B8783BBC22D23D",
+        "IMG-V11-2B-9FC2369A0CEEEEB0",
+        "IMG-V11-2B-B397BAF495CC8462",
+        "IMG-V11-2B-BCD95D77D8D2E855"
+      ]
+    },
+    {
+      "assetKey": "Y4M05-CANDIDATE-YELLOW",
+      "file": "images/DUDUQ-Y4M05-YELLOW.png",
+      "semanticTarget": "yellow",
+      "semanticTargets": [
+        "yellow"
+      ],
+      "sha256": "5951ca4746171d3ec5c8a96588a3b288eb6ea075f9ea5977fb5bc91c45e31803",
+      "pixelWidth": 1330,
+      "pixelHeight": 1183,
+      "review": "MODEL_SEMANTIC_PRECHECK_PASSED_HUMAN_HOMOLOGATION_PENDING",
+      "reviewEvidence": "qa/media-candidates/y4m05-official-20261108/semantic-evidence.json",
+      "bindings": [
+        {
+          "mediaId": "IMG-Y4M05-Q005-CTX-C572BD6CE598",
+          "questionId": "Y4M05-Q005",
+          "splitFromMediaId": "IMG-Y1M03-Q001-YELLOW",
+          "semanticTarget": "yellow",
+          "contractPaths": [
+            "options[3]"
+          ],
+          "roles": [
+            "CONTENT"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q005-O4"
+          ]
+        },
+        {
+          "mediaId": "IMG-Y4M05-Q009-CTX-890DBDB61F3E",
+          "questionId": "Y4M05-Q009",
+          "splitFromMediaId": "IMG-Y1M03-Q001-YELLOW",
+          "semanticTarget": "yellow",
+          "contractPaths": [
+            "options[3]"
+          ],
+          "roles": [
+            "CONTENT"
+          ],
+          "optionOrCardIds": [
+            "Y4M05-Q009-O4"
+          ]
+        }
+      ],
+      "provenance": {
+        "generationClass": "VERIFIED_PREEXISTING_NATIVE_ORIGINAL_REUSE",
+        "evidenceFile": "generation-provenance.json",
+        "preservedOriginal": "provenance/reused-originals/DUDUQ-Y4M05-YELLOW-SOURCE-ORIGINAL.png",
+        "alphaNormalizationApplied": true
+      },
+      "sourceMediaIds": [
+        "IMG-Y1M03-Q001-YELLOW"
+      ]
+    }
+  ],
+  "candidateAssets": 26,
+  "newlyGenerated": 7,
+  "reusedVerifiedOriginals": 19,
+  "integrated": 0,
+  "verifiedForProduction": 0,
+  "blocked": 0,
+  "productionApproved": false,
+  "humanApprovalClaimed": false,
+  "mediaOverlaysApplied": false,
+  "questionContractsModified": false,
+  "registryModified": false,
+  "runtimeModified": false,
+  "goldMastersModified": false,
+  "existingReferencedAssetsRemoved": false,
+  "deployed": false
+}

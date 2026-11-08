@@ -1,0 +1,1826 @@
+{
+  "schemaVersion": "DUDUQ_PNG_ALPHA_COMPONENT_AUDIT_V1",
+  "mode": "READ_ONLY_NO_IMAGE_MUTATION",
+  "createdAt": "2026-11-08T19:39:20.7749891Z",
+  "candidateDir": "qa/media-candidates/y4m05-official-20261108",
+  "alphaThreshold": 64,
+  "assetCount": 26,
+  "assetsWithMicroOpaqueIslands": 0,
+  "assets": [
+    {
+      "concept": "apple",
+      "coversSemanticTargets": [
+        "apple"
+      ],
+      "file": "images/DUDUQ-Y4M05-APPLE.png",
+      "sha256": "979dccae9a68c40ae43693c8d99dbe3362c02827b518a820cf704270b2389805",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 949618,
+      "componentCount": 1,
+      "largestComponentPixels": 949618,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 94,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 949618,
+          "maxAlpha": 255,
+          "meanAlpha": 252.02,
+          "bbox": {
+            "x": 98,
+            "y": 30,
+            "width": 1121,
+            "height": 1193
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 947769,
+          "maxAlpha": 255,
+          "meanAlpha": 252.33,
+          "bbox": {
+            "x": 98,
+            "y": 30,
+            "width": 1120,
+            "height": 1193
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 98,
+        "y": 30,
+        "width": 1121,
+        "height": 1193
+      },
+      "safeMargins": {
+        "left": 98,
+        "top": 30,
+        "right": 35,
+        "bottom": 31
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "banana",
+      "coversSemanticTargets": [
+        "banana"
+      ],
+      "file": "images/DUDUQ-Y4M05-BANANA.png",
+      "sha256": "184fbc78aa409e71a4d6f0242082c84c9c6c573ca900037670489e84814c010e",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 511356,
+      "componentCount": 1,
+      "largestComponentPixels": 511356,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 51,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 511356,
+          "maxAlpha": 255,
+          "meanAlpha": 252.1,
+          "bbox": {
+            "x": 27,
+            "y": 54,
+            "width": 1205,
+            "height": 1123
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 510011,
+          "maxAlpha": 255,
+          "meanAlpha": 252.51,
+          "bbox": {
+            "x": 27,
+            "y": 54,
+            "width": 1205,
+            "height": 1123
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 27,
+        "y": 54,
+        "width": 1205,
+        "height": 1123
+      },
+      "safeMargins": {
+        "left": 27,
+        "top": 54,
+        "right": 22,
+        "bottom": 77
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "black",
+      "coversSemanticTargets": [
+        "black"
+      ],
+      "file": "images/DUDUQ-Y4M05-BLACK.png",
+      "sha256": "26f14f9c23067dd533ecf1cdb10d0626c3a2f42d82e3d7c281611104c23dc3ed",
+      "width": 1287,
+      "height": 1222,
+      "alphaThreshold": 64,
+      "visiblePixels": 743807,
+      "componentCount": 1,
+      "largestComponentPixels": 743807,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 74,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 743807,
+          "maxAlpha": 255,
+          "meanAlpha": 252.38,
+          "bbox": {
+            "x": 154,
+            "y": 137,
+            "width": 977,
+            "height": 955
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 742774,
+          "maxAlpha": 255,
+          "meanAlpha": 252.6,
+          "bbox": {
+            "x": 154,
+            "y": 138,
+            "width": 976,
+            "height": 954
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 154,
+        "y": 137,
+        "width": 977,
+        "height": 955
+      },
+      "safeMargins": {
+        "left": 154,
+        "top": 137,
+        "right": 156,
+        "bottom": 130
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "blue",
+      "coversSemanticTargets": [
+        "blue"
+      ],
+      "file": "images/DUDUQ-Y4M05-BLUE.png",
+      "sha256": "af47ea2a8ce91f4544b3626157f7e64bb64498b981014a42383ff2798029a584",
+      "width": 1287,
+      "height": 1222,
+      "alphaThreshold": 64,
+      "visiblePixels": 916143,
+      "componentCount": 1,
+      "largestComponentPixels": 916143,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 91,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 916143,
+          "maxAlpha": 255,
+          "meanAlpha": 252.28,
+          "bbox": {
+            "x": 103,
+            "y": 94,
+            "width": 1086,
+            "height": 1056
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 914893,
+          "maxAlpha": 255,
+          "meanAlpha": 252.49,
+          "bbox": {
+            "x": 104,
+            "y": 94,
+            "width": 1085,
+            "height": 1055
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 103,
+        "y": 94,
+        "width": 1086,
+        "height": 1056
+      },
+      "safeMargins": {
+        "left": 103,
+        "top": 94,
+        "right": 98,
+        "bottom": 72
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "carrot",
+      "coversSemanticTargets": [
+        "carrot"
+      ],
+      "file": "images/DUDUQ-Y4M05-CARROT.png",
+      "sha256": "1522fa92079f8412040ba7a206533bb4bd4cd6bf5ed0f62cdd449e2e254bc0a5",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 397491,
+      "componentCount": 1,
+      "largestComponentPixels": 397491,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 39,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 397491,
+          "maxAlpha": 255,
+          "meanAlpha": 248.66,
+          "bbox": {
+            "x": 48,
+            "y": 11,
+            "width": 1171,
+            "height": 1208
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 393159,
+          "maxAlpha": 255,
+          "meanAlpha": 250.36,
+          "bbox": {
+            "x": 49,
+            "y": 12,
+            "width": 1169,
+            "height": 1206
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 48,
+        "y": 11,
+        "width": 1171,
+        "height": 1208
+      },
+      "safeMargins": {
+        "left": 48,
+        "top": 11,
+        "right": 35,
+        "bottom": 35
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "dress",
+      "coversSemanticTargets": [
+        "dress"
+      ],
+      "file": "images/DUDUQ-Y4M05-DRESS.png",
+      "sha256": "d0ac6cf96eafd6eb956d7582ecba8c6b56b16bd2540beff4540a5f2b69e7b240",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 739298,
+      "componentCount": 1,
+      "largestComponentPixels": 739298,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 73,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 739298,
+          "maxAlpha": 255,
+          "meanAlpha": 252.44,
+          "bbox": {
+            "x": 149,
+            "y": 24,
+            "width": 946,
+            "height": 1208
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 737868,
+          "maxAlpha": 255,
+          "meanAlpha": 252.74,
+          "bbox": {
+            "x": 150,
+            "y": 24,
+            "width": 945,
+            "height": 1208
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 149,
+        "y": 24,
+        "width": 946,
+        "height": 1208
+      },
+      "safeMargins": {
+        "left": 149,
+        "top": 24,
+        "right": 159,
+        "bottom": 22
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "grape",
+      "coversSemanticTargets": [
+        "grape"
+      ],
+      "file": "images/DUDUQ-Y4M05-GRAPE.png",
+      "sha256": "535d16680693e2ff3c8e20ce085b6e6976382f62fb795e28fc9c30eedc5789f6",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 749751,
+      "componentCount": 1,
+      "largestComponentPixels": 749751,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 74,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 749751,
+          "maxAlpha": 255,
+          "meanAlpha": 251.82,
+          "bbox": {
+            "x": 137,
+            "y": 18,
+            "width": 1046,
+            "height": 1211
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 747855,
+          "maxAlpha": 255,
+          "meanAlpha": 252.22,
+          "bbox": {
+            "x": 137,
+            "y": 19,
+            "width": 1046,
+            "height": 1210
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 137,
+        "y": 18,
+        "width": 1046,
+        "height": 1211
+      },
+      "safeMargins": {
+        "left": 137,
+        "top": 18,
+        "right": 71,
+        "bottom": 25
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "gray",
+      "coversSemanticTargets": [
+        "gray"
+      ],
+      "file": "images/DUDUQ-Y4M05-GRAY.png",
+      "sha256": "a495b16ffedf658cee6e8e4c9c48f2ba051d6d5d664317c9a7545b1956c8e904",
+      "width": 1287,
+      "height": 1222,
+      "alphaThreshold": 64,
+      "visiblePixels": 921329,
+      "componentCount": 1,
+      "largestComponentPixels": 921329,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 92,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 921329,
+          "maxAlpha": 255,
+          "meanAlpha": 252.55,
+          "bbox": {
+            "x": 102,
+            "y": 94,
+            "width": 1088,
+            "height": 1058
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 920123,
+          "maxAlpha": 255,
+          "meanAlpha": 252.75,
+          "bbox": {
+            "x": 102,
+            "y": 94,
+            "width": 1087,
+            "height": 1058
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 102,
+        "y": 94,
+        "width": 1088,
+        "height": 1058
+      },
+      "safeMargins": {
+        "left": 102,
+        "top": 94,
+        "right": 97,
+        "bottom": 70
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "i do not like carrots",
+      "coversSemanticTargets": [
+        "i do not like carrots"
+      ],
+      "file": "images/DUDUQ-Y4M05-I-DO-NOT-LIKE-CARROTS.png",
+      "sha256": "78e59be1986c13e2b05ed24395c0b1d64b0d3b8534480ecc8fa59f30d4fe369b",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 820451,
+      "componentCount": 19,
+      "largestComponentPixels": 820415,
+      "largestComponentCoverage": 0.99995612,
+      "secondaryComponentCount": 18,
+      "microOpaqueIslandPixelLimit": 82,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 820415,
+          "maxAlpha": 255,
+          "meanAlpha": 250.14,
+          "bbox": {
+            "x": 63,
+            "y": 15,
+            "width": 1188,
+            "height": 1239
+          }
+        },
+        {
+          "pixels": 4,
+          "maxAlpha": 73,
+          "meanAlpha": 68.5,
+          "bbox": {
+            "x": 775,
+            "y": 144,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "pixels": 4,
+          "maxAlpha": 97,
+          "meanAlpha": 89,
+          "bbox": {
+            "x": 162,
+            "y": 156,
+            "width": 4,
+            "height": 4
+          }
+        },
+        {
+          "pixels": 4,
+          "maxAlpha": 80,
+          "meanAlpha": 69.25,
+          "bbox": {
+            "x": 156,
+            "y": 166,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "pixels": 3,
+          "maxAlpha": 68,
+          "meanAlpha": 66.33,
+          "bbox": {
+            "x": 783,
+            "y": 158,
+            "width": 2,
+            "height": 3
+          }
+        },
+        {
+          "pixels": 3,
+          "maxAlpha": 66,
+          "meanAlpha": 65.33,
+          "bbox": {
+            "x": 808,
+            "y": 299,
+            "width": 1,
+            "height": 3
+          }
+        },
+        {
+          "pixels": 2,
+          "maxAlpha": 89,
+          "meanAlpha": 79.5,
+          "bbox": {
+            "x": 151,
+            "y": 172,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "pixels": 2,
+          "maxAlpha": 86,
+          "meanAlpha": 78.5,
+          "bbox": {
+            "x": 149,
+            "y": 175,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "pixels": 2,
+          "maxAlpha": 78,
+          "meanAlpha": 71,
+          "bbox": {
+            "x": 147,
+            "y": 178,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "pixels": 2,
+          "maxAlpha": 103,
+          "meanAlpha": 91,
+          "bbox": {
+            "x": 90,
+            "y": 282,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "pixels": 2,
+          "maxAlpha": 85,
+          "meanAlpha": 75.5,
+          "bbox": {
+            "x": 89,
+            "y": 286,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "pixels": 1,
+          "maxAlpha": 66,
+          "meanAlpha": 66,
+          "bbox": {
+            "x": 767,
+            "y": 132,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "pixels": 1,
+          "maxAlpha": 89,
+          "meanAlpha": 89,
+          "bbox": {
+            "x": 179,
+            "y": 143,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "pixels": 1,
+          "maxAlpha": 64,
+          "meanAlpha": 64,
+          "bbox": {
+            "x": 785,
+            "y": 163,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "pixels": 1,
+          "maxAlpha": 66,
+          "meanAlpha": 66,
+          "bbox": {
+            "x": 800,
+            "y": 204,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "pixels": 1,
+          "maxAlpha": 66,
+          "meanAlpha": 66,
+          "bbox": {
+            "x": 808,
+            "y": 251,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "pixels": 1,
+          "maxAlpha": 64,
+          "meanAlpha": 64,
+          "bbox": {
+            "x": 757,
+            "y": 443,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "pixels": 1,
+          "maxAlpha": 82,
+          "meanAlpha": 82,
+          "bbox": {
+            "x": 756,
+            "y": 445,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "pixels": 1,
+          "maxAlpha": 64,
+          "meanAlpha": 64,
+          "bbox": {
+            "x": 799,
+            "y": 590,
+            "width": 1,
+            "height": 1
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 813188,
+          "maxAlpha": 255,
+          "meanAlpha": 251.52,
+          "bbox": {
+            "x": 64,
+            "y": 15,
+            "width": 1187,
+            "height": 1239
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 63,
+        "y": 15,
+        "width": 1188,
+        "height": 1239
+      },
+      "safeMargins": {
+        "left": 63,
+        "top": 15,
+        "right": 3,
+        "bottom": 0
+      },
+      "safeMarginDisposition": "PREEXISTING_VERIFIED_SOURCE_GEOMETRY_PRESERVED_HUMAN_QA_PENDING"
+    },
+    {
+      "concept": "i like apples",
+      "coversSemanticTargets": [
+        "i like apples"
+      ],
+      "file": "images/DUDUQ-Y4M05-I-LIKE-APPLES.png",
+      "sha256": "b378dc8a885e07048273a3393518f5a33fd2e4e9051ae359527e9ca34347a8b6",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 766183,
+      "componentCount": 1,
+      "largestComponentPixels": 766183,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 76,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 766183,
+          "maxAlpha": 255,
+          "meanAlpha": 252.06,
+          "bbox": {
+            "x": 96,
+            "y": 4,
+            "width": 1057,
+            "height": 1250
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 764154,
+          "maxAlpha": 255,
+          "meanAlpha": 252.47,
+          "bbox": {
+            "x": 97,
+            "y": 5,
+            "width": 1055,
+            "height": 1249
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 96,
+        "y": 4,
+        "width": 1057,
+        "height": 1250
+      },
+      "safeMargins": {
+        "left": 96,
+        "top": 4,
+        "right": 101,
+        "bottom": 0
+      },
+      "safeMarginDisposition": "PREEXISTING_VERIFIED_SOURCE_GEOMETRY_PRESERVED_HUMAN_QA_PENDING"
+    },
+    {
+      "concept": "i like papaya",
+      "coversSemanticTargets": [
+        "i like papaya"
+      ],
+      "file": "images/DUDUQ-Y4M05-I-LIKE-PAPAYA.png",
+      "sha256": "e26d040391bd80af05431960976ae994d8828bb7b33d74663f81a248f50cb4cc",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 877674,
+      "componentCount": 2,
+      "largestComponentPixels": 877672,
+      "largestComponentCoverage": 0.99999772,
+      "secondaryComponentCount": 1,
+      "microOpaqueIslandPixelLimit": 87,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 877672,
+          "maxAlpha": 255,
+          "meanAlpha": 251.81,
+          "bbox": {
+            "x": 76,
+            "y": 3,
+            "width": 1087,
+            "height": 1251
+          }
+        },
+        {
+          "pixels": 2,
+          "maxAlpha": 75,
+          "meanAlpha": 73,
+          "bbox": {
+            "x": 662,
+            "y": 64,
+            "width": 2,
+            "height": 1
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 874621,
+          "maxAlpha": 255,
+          "meanAlpha": 252.35,
+          "bbox": {
+            "x": 76,
+            "y": 4,
+            "width": 1087,
+            "height": 1250
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 76,
+        "y": 3,
+        "width": 1087,
+        "height": 1251
+      },
+      "safeMargins": {
+        "left": 76,
+        "top": 3,
+        "right": 91,
+        "bottom": 0
+      },
+      "safeMarginDisposition": "PREEXISTING_VERIFIED_SOURCE_GEOMETRY_PRESERVED_HUMAN_QA_PENDING"
+    },
+    {
+      "concept": "i prefer grapes",
+      "coversSemanticTargets": [
+        "i prefer grapes"
+      ],
+      "file": "images/DUDUQ-Y4M05-I-PREFER-GRAPES.png",
+      "sha256": "0f16d25eccf0648830dd8b5de9bd02f3d7fb78abdff205bd8e3fc9a1cd285ca5",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 706273,
+      "componentCount": 3,
+      "largestComponentPixels": 706266,
+      "largestComponentCoverage": 0.99999009,
+      "secondaryComponentCount": 2,
+      "microOpaqueIslandPixelLimit": 70,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 706266,
+          "maxAlpha": 255,
+          "meanAlpha": 251.52,
+          "bbox": {
+            "x": 167,
+            "y": 8,
+            "width": 879,
+            "height": 1246
+          }
+        },
+        {
+          "pixels": 5,
+          "maxAlpha": 90,
+          "meanAlpha": 81.8,
+          "bbox": {
+            "x": 189,
+            "y": 254,
+            "width": 1,
+            "height": 5
+          }
+        },
+        {
+          "pixels": 2,
+          "maxAlpha": 77,
+          "meanAlpha": 74,
+          "bbox": {
+            "x": 728,
+            "y": 250,
+            "width": 1,
+            "height": 2
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 703619,
+          "maxAlpha": 255,
+          "meanAlpha": 252.11,
+          "bbox": {
+            "x": 168,
+            "y": 8,
+            "width": 877,
+            "height": 1246
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 167,
+        "y": 8,
+        "width": 879,
+        "height": 1246
+      },
+      "safeMargins": {
+        "left": 167,
+        "top": 8,
+        "right": 208,
+        "bottom": 0
+      },
+      "safeMarginDisposition": "PREEXISTING_VERIFIED_SOURCE_GEOMETRY_PRESERVED_HUMAN_QA_PENDING"
+    },
+    {
+      "concept": "jacket",
+      "coversSemanticTargets": [
+        "jacket"
+      ],
+      "file": "images/DUDUQ-Y4M05-JACKET.png",
+      "sha256": "9b3385c6969b225c4b013649bdd93394e92b461c8f43ef78e8c10659b13a8551",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 995050,
+      "componentCount": 1,
+      "largestComponentPixels": 995050,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 99,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 995050,
+          "maxAlpha": 255,
+          "meanAlpha": 252.29,
+          "bbox": {
+            "x": 52,
+            "y": 41,
+            "width": 1150,
+            "height": 1167
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 993012,
+          "maxAlpha": 255,
+          "meanAlpha": 252.61,
+          "bbox": {
+            "x": 52,
+            "y": 41,
+            "width": 1150,
+            "height": 1167
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 52,
+        "y": 41,
+        "width": 1150,
+        "height": 1167
+      },
+      "safeMargins": {
+        "left": 52,
+        "top": 41,
+        "right": 52,
+        "bottom": 46
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "large",
+      "coversSemanticTargets": [
+        "large"
+      ],
+      "file": "images/DUDUQ-Y4M05-LARGE.png",
+      "sha256": "71ef4290fd60783cc62684b21d498c6ecd41b6cbc35ce08eccf2e9d4fd159291",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 1076633,
+      "componentCount": 1,
+      "largestComponentPixels": 1076633,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 107,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 1076633,
+          "maxAlpha": 255,
+          "meanAlpha": 252.4,
+          "bbox": {
+            "x": 53,
+            "y": 93,
+            "width": 1150,
+            "height": 1079
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 1075146,
+          "maxAlpha": 255,
+          "meanAlpha": 252.62,
+          "bbox": {
+            "x": 53,
+            "y": 93,
+            "width": 1149,
+            "height": 1079
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 53,
+        "y": 93,
+        "width": 1150,
+        "height": 1079
+      },
+      "safeMargins": {
+        "left": 53,
+        "top": 93,
+        "right": 51,
+        "bottom": 82
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "medium",
+      "coversSemanticTargets": [
+        "medium"
+      ],
+      "file": "images/DUDUQ-Y4M05-MEDIUM.png",
+      "sha256": "168e4bb854961334af9e3a360905591f9029b5465397c476aeedd0a4f53b8c27",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 355679,
+      "componentCount": 1,
+      "largestComponentPixels": 355679,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 35,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 355679,
+          "maxAlpha": 255,
+          "meanAlpha": 252.27,
+          "bbox": {
+            "x": 300,
+            "y": 342,
+            "width": 648,
+            "height": 632
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 354793,
+          "maxAlpha": 255,
+          "meanAlpha": 252.67,
+          "bbox": {
+            "x": 300,
+            "y": 342,
+            "width": 648,
+            "height": 631
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 300,
+        "y": 342,
+        "width": 648,
+        "height": 632
+      },
+      "safeMargins": {
+        "left": 300,
+        "top": 342,
+        "right": 306,
+        "bottom": 280
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "melon",
+      "coversSemanticTargets": [
+        "melon"
+      ],
+      "file": "images/DUDUQ-Y4M05-MELON.png",
+      "sha256": "0388cc1982c09a48f96152330b2ced86d41a0b0c6b6dadc4b21ca4a589278d4c",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 981005,
+      "componentCount": 1,
+      "largestComponentPixels": 981005,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 98,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 981005,
+          "maxAlpha": 255,
+          "meanAlpha": 251.82,
+          "bbox": {
+            "x": 62,
+            "y": 51,
+            "width": 1136,
+            "height": 1171
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 979548,
+          "maxAlpha": 255,
+          "meanAlpha": 252.06,
+          "bbox": {
+            "x": 62,
+            "y": 51,
+            "width": 1135,
+            "height": 1171
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 62,
+        "y": 51,
+        "width": 1136,
+        "height": 1171
+      },
+      "safeMargins": {
+        "left": 62,
+        "top": 51,
+        "right": 56,
+        "bottom": 32
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "orange",
+      "coversSemanticTargets": [
+        "orange"
+      ],
+      "file": "images/DUDUQ-Y4M05-ORANGE.png",
+      "sha256": "e3e755f38c2efb6c8637bc9f9def0bd706e0f5cf6821b3efdab454666ecaee77",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 887894,
+      "componentCount": 1,
+      "largestComponentPixels": 887894,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 88,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 887894,
+          "maxAlpha": 255,
+          "meanAlpha": 252.13,
+          "bbox": {
+            "x": 72,
+            "y": 64,
+            "width": 1115,
+            "height": 1129
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 886248,
+          "maxAlpha": 255,
+          "meanAlpha": 252.42,
+          "bbox": {
+            "x": 73,
+            "y": 64,
+            "width": 1113,
+            "height": 1129
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 72,
+        "y": 64,
+        "width": 1115,
+        "height": 1129
+      },
+      "safeMargins": {
+        "left": 72,
+        "top": 64,
+        "right": 67,
+        "bottom": 61
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "trousers",
+      "coversSemanticTargets": [
+        "pants",
+        "pants/trousers",
+        "trousers"
+      ],
+      "file": "images/DUDUQ-Y4M05-TROUSERS.png",
+      "sha256": "6673e77ea679348e41bed4ebcb0fea69922f56b17d3e7a301caddafa27d6978f",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 550877,
+      "componentCount": 1,
+      "largestComponentPixels": 550877,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 55,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 550877,
+          "maxAlpha": 255,
+          "meanAlpha": 252,
+          "bbox": {
+            "x": 321,
+            "y": 18,
+            "width": 589,
+            "height": 1219
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 549095,
+          "maxAlpha": 255,
+          "meanAlpha": 252.51,
+          "bbox": {
+            "x": 321,
+            "y": 19,
+            "width": 589,
+            "height": 1217
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 321,
+        "y": 18,
+        "width": 589,
+        "height": 1219
+      },
+      "safeMargins": {
+        "left": 321,
+        "top": 18,
+        "right": 344,
+        "bottom": 17
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "papaya",
+      "coversSemanticTargets": [
+        "papaya"
+      ],
+      "file": "images/DUDUQ-Y4M05-PAPAYA.png",
+      "sha256": "5908f5addad74506639b2d9211ee30852ea3dba7934d109b1edae4a90f26e748",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 889278,
+      "componentCount": 1,
+      "largestComponentPixels": 889278,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 88,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 889278,
+          "maxAlpha": 255,
+          "meanAlpha": 252.01,
+          "bbox": {
+            "x": 60,
+            "y": 51,
+            "width": 1133,
+            "height": 1151
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 887903,
+          "maxAlpha": 255,
+          "meanAlpha": 252.26,
+          "bbox": {
+            "x": 61,
+            "y": 52,
+            "width": 1131,
+            "height": 1149
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 60,
+        "y": 51,
+        "width": 1133,
+        "height": 1151
+      },
+      "safeMargins": {
+        "left": 60,
+        "top": 51,
+        "right": 61,
+        "bottom": 52
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "pear",
+      "coversSemanticTargets": [
+        "pear"
+      ],
+      "file": "images/DUDUQ-Y4M05-PEAR.png",
+      "sha256": "9ba03aac4d3d8383a8bb2fe038f23668f02cc4b68aeb99d0148915485087fd3b",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 718471,
+      "componentCount": 1,
+      "largestComponentPixels": 718471,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 71,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 718471,
+          "maxAlpha": 255,
+          "meanAlpha": 252,
+          "bbox": {
+            "x": 200,
+            "y": 8,
+            "width": 915,
+            "height": 1238
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 716835,
+          "maxAlpha": 255,
+          "meanAlpha": 252.36,
+          "bbox": {
+            "x": 200,
+            "y": 9,
+            "width": 915,
+            "height": 1237
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 200,
+        "y": 8,
+        "width": 915,
+        "height": 1238
+      },
+      "safeMargins": {
+        "left": 200,
+        "top": 8,
+        "right": 139,
+        "bottom": 8
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "red",
+      "coversSemanticTargets": [
+        "red"
+      ],
+      "file": "images/DUDUQ-Y4M05-RED.png",
+      "sha256": "484622d91bc0cba9e422a3fcfe990e5ea3c97297b0a97f3e084cb5a92022c3eb",
+      "width": 1265,
+      "height": 1243,
+      "alphaThreshold": 64,
+      "visiblePixels": 860940,
+      "componentCount": 1,
+      "largestComponentPixels": 860940,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 86,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 860940,
+          "maxAlpha": 255,
+          "meanAlpha": 252.37,
+          "bbox": {
+            "x": 108,
+            "y": 106,
+            "width": 1050,
+            "height": 1033
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 859887,
+          "maxAlpha": 255,
+          "meanAlpha": 252.57,
+          "bbox": {
+            "x": 109,
+            "y": 106,
+            "width": 1048,
+            "height": 1033
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 108,
+        "y": 106,
+        "width": 1050,
+        "height": 1033
+      },
+      "safeMargins": {
+        "left": 108,
+        "top": 106,
+        "right": 107,
+        "bottom": 104
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "shirt",
+      "coversSemanticTargets": [
+        "shirt"
+      ],
+      "file": "images/DUDUQ-Y4M05-SHIRT.png",
+      "sha256": "04a90d89d8c48a032fced9ee2e0ce748b8b1edea115a36aadb514b5128066268",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 912299,
+      "componentCount": 1,
+      "largestComponentPixels": 912299,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 91,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 912299,
+          "maxAlpha": 255,
+          "meanAlpha": 252.27,
+          "bbox": {
+            "x": 64,
+            "y": 41,
+            "width": 1129,
+            "height": 1181
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 910186,
+          "maxAlpha": 255,
+          "meanAlpha": 252.64,
+          "bbox": {
+            "x": 65,
+            "y": 42,
+            "width": 1128,
+            "height": 1180
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 64,
+        "y": 41,
+        "width": 1129,
+        "height": 1181
+      },
+      "safeMargins": {
+        "left": 64,
+        "top": 41,
+        "right": 61,
+        "bottom": 32
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "shoes",
+      "coversSemanticTargets": [
+        "shoes"
+      ],
+      "file": "images/DUDUQ-Y4M05-SHOES.png",
+      "sha256": "47cc3d8a9c063d1ce433aad06754590a36bf1518a22e136a23ed6639415fe801",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 604806,
+      "componentCount": 2,
+      "largestComponentPixels": 303238,
+      "largestComponentCoverage": 0.50138061,
+      "secondaryComponentCount": 1,
+      "microOpaqueIslandPixelLimit": 60,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 303238,
+          "maxAlpha": 255,
+          "meanAlpha": 251.92,
+          "bbox": {
+            "x": 642,
+            "y": 274,
+            "width": 585,
+            "height": 779
+          }
+        },
+        {
+          "pixels": 301568,
+          "maxAlpha": 255,
+          "meanAlpha": 251.92,
+          "bbox": {
+            "x": 27,
+            "y": 273,
+            "width": 581,
+            "height": 780
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 2,
+      "coreComponents": [
+        {
+          "pixels": 302277,
+          "maxAlpha": 255,
+          "meanAlpha": 252.42,
+          "bbox": {
+            "x": 643,
+            "y": 275,
+            "width": 584,
+            "height": 778
+          }
+        },
+        {
+          "pixels": 300565,
+          "maxAlpha": 255,
+          "meanAlpha": 252.45,
+          "bbox": {
+            "x": 28,
+            "y": 273,
+            "width": 579,
+            "height": 780
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 27,
+        "y": 273,
+        "width": 1200,
+        "height": 780
+      },
+      "safeMargins": {
+        "left": 27,
+        "top": 273,
+        "right": 27,
+        "bottom": 201
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "small",
+      "coversSemanticTargets": [
+        "small"
+      ],
+      "file": "images/DUDUQ-Y4M05-SMALL.png",
+      "sha256": "1fc7d977aa858df0350df3394bc145f3669f830fd827efb6c1ab6f9ba2b1b7f6",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 110863,
+      "componentCount": 1,
+      "largestComponentPixels": 110863,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 32,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 110863,
+          "maxAlpha": 255,
+          "meanAlpha": 251.75,
+          "bbox": {
+            "x": 445,
+            "y": 468,
+            "width": 364,
+            "height": 351
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 110403,
+          "maxAlpha": 255,
+          "meanAlpha": 252.41,
+          "bbox": {
+            "x": 445,
+            "y": 469,
+            "width": 363,
+            "height": 349
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 445,
+        "y": 468,
+        "width": 364,
+        "height": 351
+      },
+      "safeMargins": {
+        "left": 445,
+        "top": 468,
+        "right": 445,
+        "bottom": 435
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "t-shirt",
+      "coversSemanticTargets": [
+        "t-shirt"
+      ],
+      "file": "images/DUDUQ-Y4M05-T-SHIRT.png",
+      "sha256": "cee9b8a5bfd7b14f016fb17d86ae1042f8996e0005b65bcdda6dde2a7f29be1a",
+      "width": 1254,
+      "height": 1254,
+      "alphaThreshold": 64,
+      "visiblePixels": 855259,
+      "componentCount": 1,
+      "largestComponentPixels": 855259,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 85,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 855259,
+          "maxAlpha": 255,
+          "meanAlpha": 252.41,
+          "bbox": {
+            "x": 68,
+            "y": 48,
+            "width": 1117,
+            "height": 1177
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 853657,
+          "maxAlpha": 255,
+          "meanAlpha": 252.7,
+          "bbox": {
+            "x": 68,
+            "y": 48,
+            "width": 1117,
+            "height": 1177
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 68,
+        "y": 48,
+        "width": 1117,
+        "height": 1177
+      },
+      "safeMargins": {
+        "left": 68,
+        "top": 48,
+        "right": 69,
+        "bottom": 29
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    },
+    {
+      "concept": "yellow",
+      "coversSemanticTargets": [
+        "yellow"
+      ],
+      "file": "images/DUDUQ-Y4M05-YELLOW.png",
+      "sha256": "5951ca4746171d3ec5c8a96588a3b288eb6ea075f9ea5977fb5bc91c45e31803",
+      "width": 1330,
+      "height": 1183,
+      "alphaThreshold": 64,
+      "visiblePixels": 859455,
+      "componentCount": 1,
+      "largestComponentPixels": 859455,
+      "largestComponentCoverage": 1,
+      "secondaryComponentCount": 0,
+      "microOpaqueIslandPixelLimit": 85,
+      "microOpaqueIslandCount": 0,
+      "microOpaqueIslandPixels": 0,
+      "components": [
+        {
+          "pixels": 859455,
+          "maxAlpha": 255,
+          "meanAlpha": 252.37,
+          "bbox": {
+            "x": 133,
+            "y": 71,
+            "width": 1058,
+            "height": 1031
+          }
+        }
+      ],
+      "coreAlphaThreshold": 128,
+      "meaningfulCoreComponentCount": 1,
+      "coreComponents": [
+        {
+          "pixels": 858305,
+          "maxAlpha": 255,
+          "meanAlpha": 252.58,
+          "bbox": {
+            "x": 133,
+            "y": 72,
+            "width": 1058,
+            "height": 1029
+          }
+        }
+      ],
+      "visibleSubjectBbox": {
+        "x": 133,
+        "y": 71,
+        "width": 1058,
+        "height": 1031
+      },
+      "safeMargins": {
+        "left": 133,
+        "top": 71,
+        "right": 139,
+        "bottom": 81
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX"
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "DUDUQ_Y4M05_GENERATION_PLAN_V1",
+  "createdAt": "2026-11-08T19:24:27.8647413Z",
+  "moduleId": "Y4M05",
+  "lane": "generation",
+  "candidateOnly": true,
+  "sourceQuestionSha256": "608389293ff083675048bac23c45b10bed017853fba40c31fdd6d0a8e806f6a8",
+  "sourceRegistrySha256": "f11c12fe929379947e7d4f76736f8f73bc6320618bf01265bfb48a4e18ef5e30",
+  "sourceLedgerSha256": "3c3d6a19632b488651d20d373ffd0a70819896a6d1b8246bb2adb7a3f9a5b837",
+  "questionCount": 20,
+  "visualUsageCount": 94,
+  "sourcePendingMediaIds": 54,
+  "globalPendingMediaIds": 1055,
+  "semanticConcepts": [
+    "apple",
+    "banana",
+    "black",
+    "blue",
+    "carrot",
+    "dress",
+    "grape",
+    "gray",
+    "i do not like carrots",
+    "i like apples",
+    "i like papaya",
+    "i prefer grapes",
+    "jacket",
+    "large",
+    "medium",
+    "melon",
+    "orange",
+    "pants",
+    "pants/trousers",
+    "papaya",
+    "pear",
+    "red",
+    "shirt",
+    "shoes",
+    "small",
+    "t-shirt",
+    "trousers",
+    "yellow"
+  ],
+  "semanticAssetGroups": [
+    {
+      "assetConcept": "trousers",
+      "coversSemanticTargets": [
+        "pants",
+        "pants/trousers",
+        "trousers"
+      ],
+      "decision": "ONE_NON_DUPLICATE_VISUAL_FOR_EXACT_ENGLISH_SYNONYMS_IN_THE_SOURCE_CONTRACT",
+      "evidence": "Y4M05-Q004, Q007, Q010, Q013 and Q016 use pants, trousers or pants/trousers for the same full-length two-leg garment concept."
+    },
+    {
+      "assetConcept": "large",
+      "coversSemanticTargets": [
+        "large"
+      ],
+      "reuseSourceSemanticTarget": "big",
+      "decision": "REUSE_THE_VERIFIED_BIG_CUBE_AS_THE_EXACT_SIZE_SYNONYM_LARGE",
+      "evidence": "Y4M05-Q002, Q011 and Q020 require the adjective large; the verified neutral cube was generated specifically to teach big by scale only, with no competing semantic cue."
+    }
+  ],
+  "reusedVerifiedSources": [
+    "apple",
+    "banana",
+    "black",
+    "blue",
+    "carrot",
+    "grape",
+    "gray",
+    "i do not like carrots",
+    "i like apples",
+    "i like papaya",
+    "i prefer grapes",
+    "large",
+    "melon",
+    "orange",
+    "papaya",
+    "pear",
+    "red",
+    "small",
+    "yellow"
+  ],
+  "generationQueue": [
+    {
+      "concept": "dress",
+      "slug": "DRESS",
+      "coversSemanticTargets": [
+        "dress"
+      ],
+      "expectedCoreComponents": 1,
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational clothing concept PNG for Year 4 children\nPrimary request: exactly one unmistakable child-size dress\nSubject: one cheerful sunflower-yellow short-sleeved knee-length dress, a single complete garment with a clear fitted bodice and gently flared skirt, no patterns and no writing\nStyle/medium: premium polished rounded 3D children's animation render, soft realistic fabric folds, crisp clean silhouette\nComposition/framing: isolated centered front three-quarter view, the complete dress fills about 84% of a square canvas with a safe transparent margin and no cutoff\nLighting/mood: soft bright studio lighting, friendly and clean, highlights contained within the garment\nConstraints: genuinely transparent alpha background; exactly one dress and no other garment; no person, body, mannequin, hanger, jacket, shirt, T-shirt, trousers, shoes, accessories, floor, cast shadow, scenery, text, letters, numbers, logo, watermark, border, frame, collage, duplicate garment, or cutoff",
+      "transparentBackground": true,
+      "status": "GENERATED_ACCEPTED_CANDIDATE",
+      "generatorCallId": "exec-289ddb09-89c8-48f7-b352-df301010d796",
+      "originalSha256": "161a74ce04a7c68c5a15bc3a0c0c12e626bc2fffbb793072acfbd677cf191fba",
+      "candidateSha256": "d0ac6cf96eafd6eb956d7582ecba8c6b56b16bd2540beff4540a5f2b69e7b240"
+    },
+    {
+      "concept": "jacket",
+      "slug": "JACKET",
+      "coversSemanticTargets": [
+        "jacket"
+      ],
+      "expectedCoreComponents": 1,
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational clothing concept PNG for Year 4 children\nPrimary request: exactly one unmistakable child-size jacket\nSubject: one royal-blue zip-front jacket with long sleeves, raised collar, visible central zipper, cuffs and two simple pockets; clearly outerwear and fully closed\nStyle/medium: premium polished rounded 3D children's animation render, soft realistic fabric folds, crisp clean silhouette\nComposition/framing: isolated centered front three-quarter view, the complete jacket fills about 84% of a square canvas with a safe transparent margin and no cutoff\nLighting/mood: soft bright studio lighting, friendly and clean, highlights contained within the garment\nConstraints: genuinely transparent alpha background; exactly one jacket and no other garment; no person, body, mannequin, hanger, shirt underneath, dress, T-shirt, trousers, shoes, accessories, floor, cast shadow, scenery, text, letters, numbers, logo, watermark, border, frame, collage, duplicate garment, or cutoff",
+      "transparentBackground": true,
+      "status": "GENERATED_ACCEPTED_CANDIDATE",
+      "generatorCallId": "exec-7687ef58-e269-4932-8426-c76574cd0eb9",
+      "originalSha256": "53e654cc0052faf5a6c86c8155300b4e264e6cbba322b02de9b0a60566c63deb",
+      "candidateSha256": "9b3385c6969b225c4b013649bdd93394e92b461c8f43ef78e8c10659b13a8551"
+    },
+    {
+      "concept": "medium",
+      "slug": "MEDIUM",
+      "coversSemanticTargets": [
+        "medium"
+      ],
+      "expectedCoreComponents": 1,
+      "inputImages": [
+        {
+          "path": "qa/media-candidates/y1m06-official-20261030/images/DUDUQ-Y1M06-SMALL.png",
+          "role": "small-size and exact cube style reference"
+        },
+        {
+          "path": "qa/media-candidates/y1m06-official-20261030/images/DUDUQ-Y1M06-BIG.png",
+          "role": "large-size and exact cube style reference"
+        }
+      ],
+      "prompt": "Use case: precise-object-edit\nAsset type: DUDUQ English educational size concept PNG for Year 4 children\nPrimary request: create the medium-size member of the exact same neutral gray rounded toy-cube set\nInput images: Image 1 is the verified small cube and Image 2 is the verified big cube; both are style, material, viewpoint and scale endpoints\nSubject: exactly one smooth rounded neutral medium-gray toy cube with no markings\nComposition/framing: centered cube occupying about 56% of the square canvas, visibly midway between Image 1 at about 30% and Image 2 at about 82%, with a generous transparent safe margin\nPreserve: the same cube geometry, neutral-gray material, three-quarter viewpoint, soft studio lighting and clean alpha silhouette shown in both references\nConstraints: genuinely transparent alpha background; exactly one cube; no red, blue, yellow or green material; no floor, cast shadow, glow, halo, text, letters, numbers, symbols, logo, watermark, border, frame, collage, grid, additional object, or cutoff",
+      "transparentBackground": true,
+      "status": "GENERATED_ACCEPTED_CANDIDATE",
+      "generatorCallId": "exec-429589b9-1ea6-4e3f-b571-83fba1d781e1",
+      "originalSha256": "9b9c3a5cc0fa0ca0ff9be98abe547f637edc1be685cf73a1086cfcb5b2d89d2f",
+      "candidateSha256": "168e4bb854961334af9e3a360905591f9029b5465397c476aeedd0a4f53b8c27"
+    },
+    {
+      "concept": "shirt",
+      "slug": "SHIRT",
+      "coversSemanticTargets": [
+        "shirt"
+      ],
+      "expectedCoreComponents": 1,
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational clothing concept PNG for Year 4 children\nPrimary request: exactly one unmistakable child-size shirt, clearly different from a T-shirt\nSubject: one light-blue long-sleeved button-up shirt with a pointed collar, full row of visible buttons, buttoned cuffs and a small chest pocket; complete garment with no writing or pattern\nStyle/medium: premium polished rounded 3D children's animation render, soft realistic fabric folds, crisp clean silhouette\nComposition/framing: isolated centered front three-quarter view, the complete shirt fills about 84% of a square canvas with a safe transparent margin and no cutoff\nLighting/mood: soft bright studio lighting, friendly and clean, highlights contained within the garment\nConstraints: genuinely transparent alpha background; exactly one shirt and no other garment; it must have long sleeves, collar and buttons; no person, body, mannequin, hanger, tie, jacket, dress, T-shirt, trousers, shoes, accessories, floor, cast shadow, scenery, text, letters, numbers, logo, watermark, border, frame, collage, duplicate garment, or cutoff",
+      "transparentBackground": true,
+      "status": "GENERATED_ACCEPTED_CANDIDATE",
+      "generatorCallId": "exec-6eedc77f-a9ce-4365-8636-5e06cc9db602",
+      "originalSha256": "6f81579962aed5b0c520f32542d80652999b93342f68f5940a6e396d33b26017",
+      "candidateSha256": "04a90d89d8c48a032fced9ee2e0ce748b8b1edea115a36aadb514b5128066268"
+    },
+    {
+      "concept": "shoes",
+      "slug": "SHOES",
+      "coversSemanticTargets": [
+        "shoes"
+      ],
+      "expectedCoreComponents": 2,
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational clothing concept PNG for Year 4 children\nPrimary request: exactly one matching pair of unmistakable children's shoes\nSubject: two separate matching red-and-white lace-up sneakers, one left shoe and one right shoe, both complete and clearly visible, simple unbranded design\nStyle/medium: premium polished rounded 3D children's animation render, soft realistic fabric and rubber materials, crisp clean silhouettes\nComposition/framing: isolated centered three-quarter view, the two shoes sit side by side with a clear transparent gap, together filling about 84% of a square canvas with safe transparent margins and no cutoff\nLighting/mood: soft bright studio lighting, friendly and clean, highlights contained within the shoes\nConstraints: genuinely transparent alpha background; exactly two shoes forming one matching pair; no extra shoe, foot, leg, sock, person, shoebox, floor, cast shadow, scenery, text, letters, numbers, brand, logo, watermark, border, frame, collage, duplicate fragment, or cutoff",
+      "transparentBackground": true,
+      "status": "GENERATED_ACCEPTED_CANDIDATE",
+      "generatorCallId": "exec-84b460ec-2765-4e3d-b003-72211be02a21",
+      "originalSha256": "76d4b7a2f536cbe818572d558475e2ee6de62e9eea7598362397249daa451c94",
+      "candidateSha256": "47cc3d8a9c063d1ce433aad06754590a36bf1518a22e136a23ed6639415fe801"
+    },
+    {
+      "concept": "t-shirt",
+      "slug": "T-SHIRT",
+      "coversSemanticTargets": [
+        "t-shirt"
+      ],
+      "expectedCoreComponents": 1,
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational clothing concept PNG for Year 4 children\nPrimary request: exactly one unmistakable child-size T-shirt, clearly different from a button-up shirt\nSubject: one bright-green short-sleeved crew-neck T-shirt with a plain front, classic T-shaped silhouette, no collar, no buttons, no pocket, no writing and no pattern\nStyle/medium: premium polished rounded 3D children's animation render, soft realistic cotton folds, crisp clean silhouette\nComposition/framing: isolated centered front three-quarter view, the complete T-shirt fills about 84% of a square canvas with a safe transparent margin and no cutoff\nLighting/mood: soft bright studio lighting, friendly and clean, highlights contained within the garment\nConstraints: genuinely transparent alpha background; exactly one T-shirt and no other garment; no long sleeves, collar or buttons; no person, body, mannequin, hanger, jacket, dress, shirt, trousers, shoes, accessories, floor, cast shadow, scenery, text, letters, numbers, logo, watermark, border, frame, collage, duplicate garment, or cutoff",
+      "transparentBackground": true,
+      "status": "GENERATED_ACCEPTED_CANDIDATE",
+      "generatorCallId": "exec-c4e0259d-eac1-4870-bbd0-7a76eb6710f7",
+      "originalSha256": "a580d7035f8917f7f9105791267c7053fc2a9f7477e2bacf84b2dca1a81f9ad1",
+      "candidateSha256": "cee9b8a5bfd7b14f016fb17d86ae1042f8996e0005b65bcdda6dde2a7f29be1a"
+    },
+    {
+      "concept": "trousers",
+      "slug": "TROUSERS",
+      "coversSemanticTargets": [
+        "pants",
+        "pants/trousers",
+        "trousers"
+      ],
+      "expectedCoreComponents": 1,
+      "prompt": "Use case: stylized-concept\nAsset type: DUDUQ English educational clothing concept PNG for Year 4 children\nPrimary request: exactly one unmistakable pair of full-length trousers, also teaching the exact synonym pants\nSubject: one navy-blue child-size pair of full-length trousers as a single complete garment, with a clear waistband, button, zipper seam, two front pockets and two long separate legs; plain fabric, not denim\nStyle/medium: premium polished rounded 3D children's animation render, soft realistic fabric folds, crisp clean silhouette\nComposition/framing: isolated centered front three-quarter view, the complete trousers fill about 84% of a square canvas with a safe transparent margin and no cutoff\nLighting/mood: soft bright studio lighting, friendly and clean, highlights contained within the garment\nConstraints: genuinely transparent alpha background; exactly one pair of trousers and no other garment; no shorts, skirt, dress, jeans distressing, belt, person, body, mannequin, hanger, shirt, jacket, shoes, accessories, floor, cast shadow, scenery, text, letters, numbers, logo, watermark, border, frame, collage, duplicate garment, or cutoff",
+      "transparentBackground": true,
+      "status": "GENERATED_ACCEPTED_CANDIDATE",
+      "generatorCallId": "exec-229c5533-1233-4ccf-a34e-ebf708e4ff98",
+      "originalSha256": "20ff2110ac49a7cd5c9989ca95fc4e83e4b20f101cd23c611d907a38814724c2",
+      "candidateSha256": "6673e77ea679348e41bed4ebcb0fea69922f56b17d3e7a301caddafa27d6978f"
+    }
+  ],
+  "safety": {
+    "writeBoundary": "qa/media-candidates/y4m05-official-20261108",
+    "productionApproved": false,
+    "humanApprovalClaimed": false,
+    "integrated": false,
+    "deployed": false,
+    "questionsModified": false,
+    "registryModified": false,
+    "runtimeModified": false,
+    "goldMastersModified": false,
+    "mediaOverlaysApplied": false,
+    "existingReferencedAssetsRemoved": false
+  }
+}

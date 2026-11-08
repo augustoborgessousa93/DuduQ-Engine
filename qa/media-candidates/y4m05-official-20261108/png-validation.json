@@ -1,0 +1,820 @@
+{
+  "schemaVersion": "DUDUQ_Y4M05_PNG_VALIDATION_V1",
+  "createdAt": "2026-11-08T19:39:20.7749891Z",
+  "moduleId": "Y4M05",
+  "validator": "qa/validate-duduq-png.mjs",
+  "assetCount": 26,
+  "passed": 26,
+  "failed": 0,
+  "assets": [
+    {
+      "concept": "apple",
+      "coversSemanticTargets": [
+        "apple"
+      ],
+      "file": "images/DUDUQ-Y4M05-APPLE.png",
+      "sha256": "979dccae9a68c40ae43693c8d99dbe3362c02827b518a820cf704270b2389805",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 606342,
+      "opaquePixels": 943412,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 98,
+        "y": 30,
+        "width": 1121,
+        "height": 1193
+      },
+      "safeMargins": {
+        "left": 98,
+        "top": 30,
+        "right": 35,
+        "bottom": 31
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "banana",
+      "coversSemanticTargets": [
+        "banana"
+      ],
+      "file": "images/DUDUQ-Y4M05-BANANA.png",
+      "sha256": "184fbc78aa409e71a4d6f0242082c84c9c6c573ca900037670489e84814c010e",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1047543,
+      "opaquePixels": 507077,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 27,
+        "y": 54,
+        "width": 1205,
+        "height": 1123
+      },
+      "safeMargins": {
+        "left": 27,
+        "top": 54,
+        "right": 22,
+        "bottom": 77
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "black",
+      "coversSemanticTargets": [
+        "black"
+      ],
+      "file": "images/DUDUQ-Y4M05-BLACK.png",
+      "sha256": "26f14f9c23067dd533ecf1cdb10d0626c3a2f42d82e3d7c281611104c23dc3ed",
+      "width": 1287,
+      "height": 1222,
+      "transparentPixels": 822796,
+      "opaquePixels": 740388,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 154,
+        "y": 137,
+        "width": 977,
+        "height": 955
+      },
+      "safeMargins": {
+        "left": 154,
+        "top": 137,
+        "right": 156,
+        "bottom": 130
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "blue",
+      "coversSemanticTargets": [
+        "blue"
+      ],
+      "file": "images/DUDUQ-Y4M05-BLUE.png",
+      "sha256": "af47ea2a8ce91f4544b3626157f7e64bb64498b981014a42383ff2798029a584",
+      "width": 1287,
+      "height": 1222,
+      "transparentPixels": 649570,
+      "opaquePixels": 912236,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 103,
+        "y": 94,
+        "width": 1086,
+        "height": 1056
+      },
+      "safeMargins": {
+        "left": 103,
+        "top": 94,
+        "right": 98,
+        "bottom": 72
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "carrot",
+      "coversSemanticTargets": [
+        "carrot"
+      ],
+      "file": "images/DUDUQ-Y4M05-CARROT.png",
+      "sha256": "1522fa92079f8412040ba7a206533bb4bd4cd6bf5ed0f62cdd449e2e254bc0a5",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1137721,
+      "opaquePixels": 379007,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 48,
+        "y": 11,
+        "width": 1171,
+        "height": 1208
+      },
+      "safeMargins": {
+        "left": 48,
+        "top": 11,
+        "right": 35,
+        "bottom": 35
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "dress",
+      "coversSemanticTargets": [
+        "dress"
+      ],
+      "file": "images/DUDUQ-Y4M05-DRESS.png",
+      "sha256": "d0ac6cf96eafd6eb956d7582ecba8c6b56b16bd2540beff4540a5f2b69e7b240",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 823759,
+      "opaquePixels": 734388,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 149,
+        "y": 24,
+        "width": 946,
+        "height": 1208
+      },
+      "safeMargins": {
+        "left": 149,
+        "top": 24,
+        "right": 159,
+        "bottom": 22
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "grape",
+      "coversSemanticTargets": [
+        "grape"
+      ],
+      "file": "images/DUDUQ-Y4M05-GRAPE.png",
+      "sha256": "535d16680693e2ff3c8e20ce085b6e6976382f62fb795e28fc9c30eedc5789f6",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 804623,
+      "opaquePixels": 743528,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 137,
+        "y": 18,
+        "width": 1046,
+        "height": 1211
+      },
+      "safeMargins": {
+        "left": 137,
+        "top": 18,
+        "right": 71,
+        "bottom": 25
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "gray",
+      "coversSemanticTargets": [
+        "gray"
+      ],
+      "file": "images/DUDUQ-Y4M05-GRAY.png",
+      "sha256": "a495b16ffedf658cee6e8e4c9c48f2ba051d6d5d664317c9a7545b1956c8e904",
+      "width": 1287,
+      "height": 1222,
+      "transparentPixels": 641541,
+      "opaquePixels": 917704,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 102,
+        "y": 94,
+        "width": 1088,
+        "height": 1058
+      },
+      "safeMargins": {
+        "left": 102,
+        "top": 94,
+        "right": 97,
+        "bottom": 70
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "i do not like carrots",
+      "coversSemanticTargets": [
+        "i do not like carrots"
+      ],
+      "file": "images/DUDUQ-Y4M05-I-DO-NOT-LIKE-CARROTS.png",
+      "sha256": "78e59be1986c13e2b05ed24395c0b1d64b0d3b8534480ecc8fa59f30d4fe369b",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 732746,
+      "opaquePixels": 796920,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 19,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 63,
+        "y": 15,
+        "width": 1188,
+        "height": 1239
+      },
+      "safeMargins": {
+        "left": 63,
+        "top": 15,
+        "right": 3,
+        "bottom": 0
+      },
+      "safeMarginDisposition": "PREEXISTING_VERIFIED_SOURCE_GEOMETRY_PRESERVED_HUMAN_QA_PENDING",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "i like apples",
+      "coversSemanticTargets": [
+        "i like apples"
+      ],
+      "file": "images/DUDUQ-Y4M05-I-LIKE-APPLES.png",
+      "sha256": "b378dc8a885e07048273a3393518f5a33fd2e4e9051ae359527e9ca34347a8b6",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 796102,
+      "opaquePixels": 758709,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 96,
+        "y": 4,
+        "width": 1057,
+        "height": 1250
+      },
+      "safeMargins": {
+        "left": 96,
+        "top": 4,
+        "right": 101,
+        "bottom": 0
+      },
+      "safeMarginDisposition": "PREEXISTING_VERIFIED_SOURCE_GEOMETRY_PRESERVED_HUMAN_QA_PENDING",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "i like papaya",
+      "coversSemanticTargets": [
+        "i like papaya"
+      ],
+      "file": "images/DUDUQ-Y4M05-I-LIKE-PAPAYA.png",
+      "sha256": "e26d040391bd80af05431960976ae994d8828bb7b33d74663f81a248f50cb4cc",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 681677,
+      "opaquePixels": 867700,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 2,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 76,
+        "y": 3,
+        "width": 1087,
+        "height": 1251
+      },
+      "safeMargins": {
+        "left": 76,
+        "top": 3,
+        "right": 91,
+        "bottom": 0
+      },
+      "safeMarginDisposition": "PREEXISTING_VERIFIED_SOURCE_GEOMETRY_PRESERVED_HUMAN_QA_PENDING",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "i prefer grapes",
+      "coversSemanticTargets": [
+        "i prefer grapes"
+      ],
+      "file": "images/DUDUQ-Y4M05-I-PREFER-GRAPES.png",
+      "sha256": "0f16d25eccf0648830dd8b5de9bd02f3d7fb78abdff205bd8e3fc9a1cd285ca5",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 852710,
+      "opaquePixels": 695678,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 3,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 167,
+        "y": 8,
+        "width": 879,
+        "height": 1246
+      },
+      "safeMargins": {
+        "left": 167,
+        "top": 8,
+        "right": 208,
+        "bottom": 0
+      },
+      "safeMarginDisposition": "PREEXISTING_VERIFIED_SOURCE_GEOMETRY_PRESERVED_HUMAN_QA_PENDING",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "jacket",
+      "coversSemanticTargets": [
+        "jacket"
+      ],
+      "file": "images/DUDUQ-Y4M05-JACKET.png",
+      "sha256": "9b3385c6969b225c4b013649bdd93394e92b461c8f43ef78e8c10659b13a8551",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 566536,
+      "opaquePixels": 988194,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 52,
+        "y": 41,
+        "width": 1150,
+        "height": 1167
+      },
+      "safeMargins": {
+        "left": 52,
+        "top": 41,
+        "right": 52,
+        "bottom": 46
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "large",
+      "coversSemanticTargets": [
+        "large"
+      ],
+      "file": "images/DUDUQ-Y4M05-LARGE.png",
+      "sha256": "71ef4290fd60783cc62684b21d498c6ecd41b6cbc35ce08eccf2e9d4fd159291",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 488418,
+      "opaquePixels": 1071885,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 53,
+        "y": 93,
+        "width": 1150,
+        "height": 1079
+      },
+      "safeMargins": {
+        "left": 53,
+        "top": 93,
+        "right": 51,
+        "bottom": 82
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "medium",
+      "coversSemanticTargets": [
+        "medium"
+      ],
+      "file": "images/DUDUQ-Y4M05-MEDIUM.png",
+      "sha256": "168e4bb854961334af9e3a360905591f9029b5465397c476aeedd0a4f53b8c27",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1213446,
+      "opaquePixels": 353051,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 300,
+        "y": 342,
+        "width": 648,
+        "height": 632
+      },
+      "safeMargins": {
+        "left": 300,
+        "top": 342,
+        "right": 306,
+        "bottom": 280
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "melon",
+      "coversSemanticTargets": [
+        "melon"
+      ],
+      "file": "images/DUDUQ-Y4M05-MELON.png",
+      "sha256": "0388cc1982c09a48f96152330b2ced86d41a0b0c6b6dadc4b21ca4a589278d4c",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 568324,
+      "opaquePixels": 976015,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 62,
+        "y": 51,
+        "width": 1136,
+        "height": 1171
+      },
+      "safeMargins": {
+        "left": 62,
+        "top": 51,
+        "right": 56,
+        "bottom": 32
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "orange",
+      "coversSemanticTargets": [
+        "orange"
+      ],
+      "file": "images/DUDUQ-Y4M05-ORANGE.png",
+      "sha256": "e3e755f38c2efb6c8637bc9f9def0bd706e0f5cf6821b3efdab454666ecaee77",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 668152,
+      "opaquePixels": 882335,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 72,
+        "y": 64,
+        "width": 1115,
+        "height": 1129
+      },
+      "safeMargins": {
+        "left": 72,
+        "top": 64,
+        "right": 67,
+        "bottom": 61
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "trousers",
+      "coversSemanticTargets": [
+        "pants",
+        "pants/trousers",
+        "trousers"
+      ],
+      "file": "images/DUDUQ-Y4M05-TROUSERS.png",
+      "sha256": "6673e77ea679348e41bed4ebcb0fea69922f56b17d3e7a301caddafa27d6978f",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1013305,
+      "opaquePixels": 545133,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 321,
+        "y": 18,
+        "width": 589,
+        "height": 1219
+      },
+      "safeMargins": {
+        "left": 321,
+        "top": 18,
+        "right": 344,
+        "bottom": 17
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "papaya",
+      "coversSemanticTargets": [
+        "papaya"
+      ],
+      "file": "images/DUDUQ-Y4M05-PAPAYA.png",
+      "sha256": "5908f5addad74506639b2d9211ee30852ea3dba7934d109b1edae4a90f26e748",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 669825,
+      "opaquePixels": 884799,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 60,
+        "y": 51,
+        "width": 1133,
+        "height": 1151
+      },
+      "safeMargins": {
+        "left": 60,
+        "top": 51,
+        "right": 61,
+        "bottom": 52
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "pear",
+      "coversSemanticTargets": [
+        "pear"
+      ],
+      "file": "images/DUDUQ-Y4M05-PEAR.png",
+      "sha256": "9ba03aac4d3d8383a8bb2fe038f23668f02cc4b68aeb99d0148915485087fd3b",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 829508,
+      "opaquePixels": 712882,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 200,
+        "y": 8,
+        "width": 915,
+        "height": 1238
+      },
+      "safeMargins": {
+        "left": 200,
+        "top": 8,
+        "right": 139,
+        "bottom": 8
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "red",
+      "coversSemanticTargets": [
+        "red"
+      ],
+      "file": "images/DUDUQ-Y4M05-RED.png",
+      "sha256": "484622d91bc0cba9e422a3fcfe990e5ea3c97297b0a97f3e084cb5a92022c3eb",
+      "width": 1265,
+      "height": 1243,
+      "transparentPixels": 704170,
+      "opaquePixels": 857303,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 108,
+        "y": 106,
+        "width": 1050,
+        "height": 1033
+      },
+      "safeMargins": {
+        "left": 108,
+        "top": 106,
+        "right": 107,
+        "bottom": 104
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "shirt",
+      "coversSemanticTargets": [
+        "shirt"
+      ],
+      "file": "images/DUDUQ-Y4M05-SHIRT.png",
+      "sha256": "04a90d89d8c48a032fced9ee2e0ce748b8b1edea115a36aadb514b5128066268",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 648538,
+      "opaquePixels": 905544,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 64,
+        "y": 41,
+        "width": 1129,
+        "height": 1181
+      },
+      "safeMargins": {
+        "left": 64,
+        "top": 41,
+        "right": 61,
+        "bottom": 32
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "shoes",
+      "coversSemanticTargets": [
+        "shoes"
+      ],
+      "file": "images/DUDUQ-Y4M05-SHOES.png",
+      "sha256": "47cc3d8a9c063d1ce433aad06754590a36bf1518a22e136a23ed6639415fe801",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 955538,
+      "opaquePixels": 598313,
+      "valid": true,
+      "expectedCoreComponents": 2,
+      "alphaComponentCountAt64": 2,
+      "meaningfulCoreComponentCountAt128": 2,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 27,
+        "y": 273,
+        "width": 1200,
+        "height": 780
+      },
+      "safeMargins": {
+        "left": 27,
+        "top": 273,
+        "right": 27,
+        "bottom": 201
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "small",
+      "coversSemanticTargets": [
+        "small"
+      ],
+      "file": "images/DUDUQ-Y4M05-SMALL.png",
+      "sha256": "1fc7d977aa858df0350df3394bc145f3669f830fd827efb6c1ab6f9ba2b1b7f6",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 1459224,
+      "opaquePixels": 109306,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 445,
+        "y": 468,
+        "width": 364,
+        "height": 351
+      },
+      "safeMargins": {
+        "left": 445,
+        "top": 468,
+        "right": 445,
+        "bottom": 435
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "t-shirt",
+      "coversSemanticTargets": [
+        "t-shirt"
+      ],
+      "file": "images/DUDUQ-Y4M05-T-SHIRT.png",
+      "sha256": "cee9b8a5bfd7b14f016fb17d86ae1042f8996e0005b65bcdda6dde2a7f29be1a",
+      "width": 1254,
+      "height": 1254,
+      "transparentPixels": 707833,
+      "opaquePixels": 850005,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 68,
+        "y": 48,
+        "width": 1117,
+        "height": 1177
+      },
+      "safeMargins": {
+        "left": 68,
+        "top": 48,
+        "right": 69,
+        "bottom": 29
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    },
+    {
+      "concept": "yellow",
+      "coversSemanticTargets": [
+        "yellow"
+      ],
+      "file": "images/DUDUQ-Y4M05-YELLOW.png",
+      "sha256": "5951ca4746171d3ec5c8a96588a3b288eb6ea075f9ea5977fb5bc91c45e31803",
+      "width": 1330,
+      "height": 1183,
+      "transparentPixels": 706633,
+      "opaquePixels": 855568,
+      "valid": true,
+      "expectedCoreComponents": 1,
+      "alphaComponentCountAt64": 1,
+      "meaningfulCoreComponentCountAt128": 1,
+      "microOpaqueIslandCount": 0,
+      "visibleSubjectBbox": {
+        "x": 133,
+        "y": 71,
+        "width": 1058,
+        "height": 1031
+      },
+      "safeMargins": {
+        "left": 133,
+        "top": 71,
+        "right": 139,
+        "bottom": 81
+      },
+      "safeMarginDisposition": "PASS_MINIMUM_8PX",
+      "status": "PNG_RGBA_ALPHA_QA_PASS"
+    }
+  ],
+  "productionApproved": false
+}

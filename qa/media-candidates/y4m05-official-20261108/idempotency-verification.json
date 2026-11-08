@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "DUDUQ_Y4M05_IDEMPOTENCY_VERIFICATION_V1",
+  "verifiedAt": "2026-11-08T19:39:20.7749891Z",
+  "moduleId": "Y4M05",
+  "lane": "generation",
+  "status": "IDEMPOTENT_PASS",
+  "command": "node qa/media-candidates/y4m05-official-20261108/prepare-generation-bundle.mjs",
+  "scope": "all 78 batch artifacts existing before this verification report",
+  "artifactCountBefore": 78,
+  "artifactCountAfter": 78,
+  "changedArtifactCount": 0,
+  "removedArtifactCount": 0,
+  "checkpointSha256Before": "4d8b5a5cd54380afa23dcca8ade03a69bdd6a6cebf3181ec049e2f151cde5bcf",
+  "checkpointSha256After": "4d8b5a5cd54380afa23dcca8ade03a69bdd6a6cebf3181ec049e2f151cde5bcf",
+  "batchManifestSha256Before": "420be3b152eb0de9b7cd4bc9c8e1650c8a41ef84ee4221dbd9d3349fa2eec1b1",
+  "batchManifestSha256After": "420be3b152eb0de9b7cd4bc9c8e1650c8a41ef84ee4221dbd9d3349fa2eec1b1",
+  "preparationScriptSha256": "36b21aa862a697b7232c2ef61860e6c6f91871e0b5e4dae0e3847d89964b6cb1",
+  "productionApproved": false,
+  "integrated": false,
+  "deployed": false
+}

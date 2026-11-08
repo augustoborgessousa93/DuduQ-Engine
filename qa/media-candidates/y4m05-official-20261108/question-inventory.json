@@ -1,0 +1,2724 @@
+{
+  "schemaVersion": "DUDUQ_Y4M05_QUESTION_INVENTORY_V1",
+  "auditedAt": "2026-11-08T19:19:56.253Z",
+  "moduleId": "Y4M05",
+  "sourceQuestionFile": "dist-pages/content/english/year-4/module-05/questions.json",
+  "sourceQuestionSha256": "608389293ff083675048bac23c45b10bed017853fba40c31fdd6d0a8e806f6a8",
+  "sourceRegistryFile": "dist-pages/content/english/media/media-registry.json",
+  "sourceRegistrySha256": "f11c12fe929379947e7d4f76736f8f73bc6320618bf01265bfb48a4e18ef5e30",
+  "sourceLedgerFile": "qa/results/media-module-closure.json",
+  "sourceLedgerSha256": "3c3d6a19632b488651d20d373ffd0a70819896a6d1b8246bb2adb7a3f9a5b837",
+  "questionCount": 20,
+  "globalPendingMediaIds": 1055,
+  "moduleLedger": {
+    "referencedMediaIds": 54,
+    "provisionalOrBlockedReferencedIds": 54,
+    "unverifiedReferencedIds": 0,
+    "brokenReferencedIds": 0
+  },
+  "visualUsageCount": 94,
+  "sourceMediaIds": [
+    "IMG-V11-2B-0C2E37014FB8B5AF",
+    "IMG-V11-2B-1DB896CF7FCECC4A",
+    "IMG-V11-2B-1EABF9E8AAAB576B",
+    "IMG-V11-2B-20C32A7B846CD05A",
+    "IMG-V11-2B-26D44842889AB747",
+    "IMG-V11-2B-3272A25234DFCFBA",
+    "IMG-V11-2B-37D4A49BBE547EF2",
+    "IMG-V11-2B-3DA65911425B1F0A",
+    "IMG-V11-2B-3E8B870AE9E69B6A",
+    "IMG-V11-2B-48CA6C8720A28B20",
+    "IMG-V11-2B-4A0D07AA7BBF6562",
+    "IMG-V11-2B-4E8C7B72B1EE887C",
+    "IMG-V11-2B-500B7CA70EE94EA9",
+    "IMG-V11-2B-54F22DA60F173DD1",
+    "IMG-V11-2B-5596327D2C423D85",
+    "IMG-V11-2B-55B8783BBC22D23D",
+    "IMG-V11-2B-5BBD35AAD770FC3F",
+    "IMG-V11-2B-5D2F313F53720CE9",
+    "IMG-V11-2B-6E361BB260D62CB6",
+    "IMG-V11-2B-6ECEED6F29B3CD6A",
+    "IMG-V11-2B-719454C9113F5766",
+    "IMG-V11-2B-7A8EE9CA12A18B37",
+    "IMG-V11-2B-8050E659DDF0AE39",
+    "IMG-V11-2B-8402FF71A9476919",
+    "IMG-V11-2B-8FA451D965C6EB75",
+    "IMG-V11-2B-9308452ECEE535F7",
+    "IMG-V11-2B-946C6EFC936156EA",
+    "IMG-V11-2B-95FE0C0B6DED7EFB",
+    "IMG-V11-2B-97050C4338A5B73F",
+    "IMG-V11-2B-9F1B693E24177567",
+    "IMG-V11-2B-9FC2369A0CEEEEB0",
+    "IMG-V11-2B-B251C4169436B57F",
+    "IMG-V11-2B-B397BAF495CC8462",
+    "IMG-V11-2B-B932F9C5DA901E52",
+    "IMG-V11-2B-BB75FBB04D7641DD",
+    "IMG-V11-2B-BC3B9081178AE7A4",
+    "IMG-V11-2B-BCD95D77D8D2E855",
+    "IMG-V11-2B-BD7447F51CDEA5B8",
+    "IMG-V11-2B-C84E311AA3E3AF40",
+    "IMG-V11-2B-D1344634366B33A5",
+    "IMG-V11-2B-D44395DF6FD6A093",
+    "IMG-V11-2B-E2B7CEC954F9AAA9",
+    "IMG-V11-2B-E5DAEC3F8D2DDA4B",
+    "IMG-V11-2B-F2722554CD82ACE3",
+    "IMG-V11-2B-F2B1512D42DAD7B2",
+    "IMG-V11-2B-F586E01965033EE8",
+    "IMG-V11-2B-FA05AA0B6003C6A5",
+    "IMG-Y1M03-Q001-BLACK",
+    "IMG-Y1M03-Q001-BLUE",
+    "IMG-Y1M03-Q001-ORANGE",
+    "IMG-Y1M03-Q001-RED",
+    "IMG-Y1M03-Q001-YELLOW",
+    "IMG-Y1M03-Q006-GRAY",
+    "IMG-Y1M06-Q014-SMALL"
+  ],
+  "sourceMediaIdCount": 54,
+  "visualConcepts": [
+    "apple",
+    "banana",
+    "black",
+    "blue",
+    "carrot",
+    "dress",
+    "grape",
+    "gray",
+    "i do not like carrots",
+    "i like apples",
+    "i like papaya",
+    "i prefer grapes",
+    "jacket",
+    "large",
+    "medium",
+    "melon",
+    "orange",
+    "pants",
+    "pants/trousers",
+    "papaya",
+    "pear",
+    "red",
+    "shirt",
+    "shoes",
+    "small",
+    "t-shirt",
+    "trousers",
+    "yellow"
+  ],
+  "visualConceptCount": 28,
+  "allSemanticTargets": [
+    "apple",
+    "banana",
+    "black",
+    "blue",
+    "carrot",
+    "dress",
+    "grape",
+    "gray",
+    "i do not like carrots",
+    "i like apples",
+    "i like papaya",
+    "i prefer grapes",
+    "jacket",
+    "large",
+    "medium",
+    "melon",
+    "orange",
+    "pants",
+    "pants/trousers",
+    "papaya",
+    "pear",
+    "red",
+    "shirt",
+    "shoes",
+    "small",
+    "t-shirt",
+    "trousers",
+    "yellow"
+  ],
+  "allSemanticTargetCount": 28,
+  "nonVisualOnlySemanticTargets": [],
+  "occurrenceScopedBindingPlanCount": 86,
+  "occurrenceGroups": [
+    {
+      "sourceMediaId": "IMG-V11-2B-3DA65911425B1F0A",
+      "questionId": "Y4M05-Q001",
+      "semanticTarget": "dress",
+      "plannedMediaId": "IMG-Y4M05-Q001-CTX-253C283A51E6",
+      "contractPaths": [
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q001-O2"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-6E361BB260D62CB6",
+      "questionId": "Y4M05-Q001",
+      "semanticTarget": "jacket",
+      "plannedMediaId": "IMG-Y4M05-Q001-CTX-FE2B66BD6F16",
+      "contractPaths": [
+        "options[0]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q001-O1"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-946C6EFC936156EA",
+      "questionId": "Y4M05-Q001",
+      "semanticTarget": "shirt",
+      "plannedMediaId": "IMG-Y4M05-Q001-CTX-99C54E831308",
+      "contractPaths": [
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q001-O3"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-9FC2369A0CEEEEB0",
+      "questionId": "Y4M05-Q001",
+      "semanticTarget": "t-shirt",
+      "plannedMediaId": "IMG-Y4M05-Q001-CTX-499D1DAB7403",
+      "contractPaths": [
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q001-O4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-8FA451D965C6EB75",
+      "questionId": "Y4M05-Q002",
+      "semanticTarget": "medium",
+      "plannedMediaId": "IMG-Y4M05-Q002-CTX-402EF35334EF",
+      "contractPaths": [
+        "targets[0]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q002-T1"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-C84E311AA3E3AF40",
+      "questionId": "Y4M05-Q002",
+      "semanticTarget": "large",
+      "plannedMediaId": "IMG-Y4M05-Q002-CTX-8A5374F71791",
+      "contractPaths": [
+        "targets[1]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q002-T2"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-Y1M03-Q001-BLUE",
+      "questionId": "Y4M05-Q002",
+      "semanticTarget": "blue",
+      "plannedMediaId": "IMG-Y4M05-Q002-CTX-661AA85EDA63",
+      "contractPaths": [
+        "targets[3]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q002-T4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-Y1M03-Q001-RED",
+      "questionId": "Y4M05-Q002",
+      "semanticTarget": "red",
+      "plannedMediaId": "IMG-Y4M05-Q002-CTX-CB77650DF243",
+      "contractPaths": [
+        "targets[2]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q002-T3"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-0C2E37014FB8B5AF",
+      "questionId": "Y4M05-Q003",
+      "semanticTarget": "carrot",
+      "plannedMediaId": "IMG-Y4M05-Q003-CTX-8C8912830E30",
+      "contractPaths": [
+        "pairs[5].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q003-R6"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-1EABF9E8AAAB576B",
+      "questionId": "Y4M05-Q003",
+      "semanticTarget": "melon",
+      "plannedMediaId": "IMG-Y4M05-Q003-CTX-A71995E59835",
+      "contractPaths": [
+        "pairs[4].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q003-R5"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-3E8B870AE9E69B6A",
+      "questionId": "Y4M05-Q003",
+      "semanticTarget": "pear",
+      "plannedMediaId": "IMG-Y4M05-Q003-CTX-72A28770CB98",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q003-R1"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-BC3B9081178AE7A4",
+      "questionId": "Y4M05-Q003",
+      "semanticTarget": "grape",
+      "plannedMediaId": "IMG-Y4M05-Q003-CTX-B63D8BC67600",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q003-R3"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-D1344634366B33A5",
+      "questionId": "Y4M05-Q003",
+      "semanticTarget": "papaya",
+      "plannedMediaId": "IMG-Y4M05-Q003-CTX-F1C539B2A000",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q003-R4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-Y1M03-Q001-ORANGE",
+      "questionId": "Y4M05-Q003",
+      "semanticTarget": "orange",
+      "plannedMediaId": "IMG-Y4M05-Q003-CTX-99E781E86AA8",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q003-R2"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-500B7CA70EE94EA9",
+      "questionId": "Y4M05-Q004",
+      "semanticTarget": "pants/trousers",
+      "plannedMediaId": "IMG-Y4M05-Q004-CTX-6F87FA44D9CF",
+      "contractPaths": [
+        "pairs[1].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": []
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-B932F9C5DA901E52",
+      "questionId": "Y4M05-Q004",
+      "semanticTarget": "shoes",
+      "plannedMediaId": "IMG-Y4M05-Q004-CTX-A4196544323D",
+      "contractPaths": [
+        "pairs[2].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": []
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-BB75FBB04D7641DD",
+      "questionId": "Y4M05-Q004",
+      "semanticTarget": "jacket",
+      "plannedMediaId": "IMG-Y4M05-Q004-CTX-473235693A75",
+      "contractPaths": [
+        "pairs[3].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": []
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-BCD95D77D8D2E855",
+      "questionId": "Y4M05-Q004",
+      "semanticTarget": "t-shirt",
+      "plannedMediaId": "IMG-Y4M05-Q004-CTX-24651A3FCA64",
+      "contractPaths": [
+        "pairs[0].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": []
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-BD7447F51CDEA5B8",
+      "questionId": "Y4M05-Q004",
+      "semanticTarget": "shirt",
+      "plannedMediaId": "IMG-Y4M05-Q004-CTX-448DDAFE377F",
+      "contractPaths": [
+        "pairs[5].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": []
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-E5DAEC3F8D2DDA4B",
+      "questionId": "Y4M05-Q004",
+      "semanticTarget": "dress",
+      "plannedMediaId": "IMG-Y4M05-Q004-CTX-20B78963EBA3",
+      "contractPaths": [
+        "pairs[4].cards[1]"
+      ],
+      "roles": [
+        "memory_pair"
+      ],
+      "optionOrCardIds": []
+    },
+    {
+      "sourceMediaId": "IMG-Y1M03-Q001-BLACK",
+      "questionId": "Y4M05-Q005",
+      "semanticTarget": "black",
+      "plannedMediaId": "IMG-Y4M05-Q005-CTX-4A0B71CA3DC3",
+      "contractPaths": [
+        "options[0]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q005-O1"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-Y1M03-Q001-BLUE",
+      "questionId": "Y4M05-Q005",
+      "semanticTarget": "blue",
+      "plannedMediaId": "IMG-Y4M05-Q005-CTX-00608F024D42",
+      "contractPaths": [
+        "options[2]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q005-O3"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-Y1M03-Q001-RED",
+      "questionId": "Y4M05-Q005",
+      "semanticTarget": "red",
+      "plannedMediaId": "IMG-Y4M05-Q005-CTX-AE4A01B1B348",
+      "contractPaths": [
+        "options[1]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q005-O2"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-Y1M03-Q001-YELLOW",
+      "questionId": "Y4M05-Q005",
+      "semanticTarget": "yellow",
+      "plannedMediaId": "IMG-Y4M05-Q005-CTX-C572BD6CE598",
+      "contractPaths": [
+        "options[3]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q005-O4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-26D44842889AB747",
+      "questionId": "Y4M05-Q006",
+      "semanticTarget": "grape",
+      "plannedMediaId": "IMG-Y4M05-Q006-CTX-D6839DB27EA8",
+      "contractPaths": [
+        "items[5]"
+      ],
+      "roles": [
+        "grouping_card"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q006-I6"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-4A0D07AA7BBF6562",
+      "questionId": "Y4M05-Q006",
+      "semanticTarget": "jacket",
+      "plannedMediaId": "IMG-Y4M05-Q006-CTX-49BB9C7BBD12",
+      "contractPaths": [
+        "items[0]"
+      ],
+      "roles": [
+        "grouping_card"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q006-I1"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-4E8C7B72B1EE887C",
+      "questionId": "Y4M05-Q006",
+      "semanticTarget": "apple",
+      "plannedMediaId": "IMG-Y4M05-Q006-CTX-5D61B6E5D62E",
+      "contractPaths": [
+        "items[3]"
+      ],
+      "roles": [
+        "grouping_card"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q006-I4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-54F22DA60F173DD1",
+      "questionId": "Y4M05-Q006",
+      "semanticTarget": "t-shirt",
+      "plannedMediaId": "IMG-Y4M05-Q006-CTX-C5BBC0418DA1",
+      "contractPaths": [
+        "items[2]"
+      ],
+      "roles": [
+        "grouping_card"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q006-I3"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-5596327D2C423D85",
+      "questionId": "Y4M05-Q006",
+      "semanticTarget": "banana",
+      "plannedMediaId": "IMG-Y4M05-Q006-CTX-880FF9AF6B5B",
+      "contractPaths": [
+        "items[4]"
+      ],
+      "roles": [
+        "grouping_card"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q006-I5"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-7A8EE9CA12A18B37",
+      "questionId": "Y4M05-Q006",
+      "semanticTarget": "dress",
+      "plannedMediaId": "IMG-Y4M05-Q006-CTX-5600456513EB",
+      "contractPaths": [
+        "items[1]"
+      ],
+      "roles": [
+        "grouping_card"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q006-I2"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-37D4A49BBE547EF2",
+      "questionId": "Y4M05-Q007",
+      "semanticTarget": "trousers",
+      "plannedMediaId": "IMG-Y4M05-Q007-CTX-2B31B23E31DB",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q007-R4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-55B8783BBC22D23D",
+      "questionId": "Y4M05-Q007",
+      "semanticTarget": "t-shirt",
+      "plannedMediaId": "IMG-Y4M05-Q007-CTX-4B6FF5D8BA35",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q007-R2"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-F2722554CD82ACE3",
+      "questionId": "Y4M05-Q007",
+      "semanticTarget": "pants",
+      "plannedMediaId": "IMG-Y4M05-Q007-CTX-61643AEEAA44",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q007-R3"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-F586E01965033EE8",
+      "questionId": "Y4M05-Q007",
+      "semanticTarget": "shirt",
+      "plannedMediaId": "IMG-Y4M05-Q007-CTX-10A411E597B3",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q007-R1"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-FA05AA0B6003C6A5",
+      "questionId": "Y4M05-Q007",
+      "semanticTarget": "dress",
+      "plannedMediaId": "IMG-Y4M05-Q007-CTX-331C227A5A17",
+      "contractPaths": [
+        "pairs[4].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q007-R5"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-Y1M03-Q001-RED",
+      "questionId": "Y4M05-Q008",
+      "semanticTarget": "red",
+      "plannedMediaId": "IMG-Y4M05-Q008-CTX-4C98AA0AAE5A",
+      "contractPaths": [
+        "mediaBindings[0]"
+      ],
+      "roles": [
+        "SUPPORTING_IMAGE"
+      ],
+      "optionOrCardIds": []
+    },
+    {
+      "sourceMediaId": "IMG-Y1M03-Q001-BLUE",
+      "questionId": "Y4M05-Q009",
+      "semanticTarget": "blue",
+      "plannedMediaId": "IMG-Y4M05-Q009-CTX-B00B80778923",
+      "contractPaths": [
+        "options[2]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q009-O3"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-Y1M03-Q001-RED",
+      "questionId": "Y4M05-Q009",
+      "semanticTarget": "red",
+      "plannedMediaId": "IMG-Y4M05-Q009-CTX-0209691AF1E7",
+      "contractPaths": [
+        "options[1]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q009-O2"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-Y1M03-Q001-YELLOW",
+      "questionId": "Y4M05-Q009",
+      "semanticTarget": "yellow",
+      "plannedMediaId": "IMG-Y4M05-Q009-CTX-890DBDB61F3E",
+      "contractPaths": [
+        "options[3]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q009-O4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-Y1M03-Q006-GRAY",
+      "questionId": "Y4M05-Q009",
+      "semanticTarget": "gray",
+      "plannedMediaId": "IMG-Y4M05-Q009-CTX-08039FB1D04B",
+      "contractPaths": [
+        "options[0]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q009-O1"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-37D4A49BBE547EF2",
+      "questionId": "Y4M05-Q010",
+      "semanticTarget": "trousers",
+      "plannedMediaId": "IMG-Y4M05-Q010-CTX-4F1A7775F6ED",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q010-R4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-55B8783BBC22D23D",
+      "questionId": "Y4M05-Q010",
+      "semanticTarget": "t-shirt",
+      "plannedMediaId": "IMG-Y4M05-Q010-CTX-C310057AB127",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q010-R2"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-9F1B693E24177567",
+      "questionId": "Y4M05-Q010",
+      "semanticTarget": "shoes",
+      "plannedMediaId": "IMG-Y4M05-Q010-CTX-21587C213E4F",
+      "contractPaths": [
+        "pairs[4].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q010-R5"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-E2B7CEC954F9AAA9",
+      "questionId": "Y4M05-Q010",
+      "semanticTarget": "jacket",
+      "plannedMediaId": "IMG-Y4M05-Q010-CTX-77B1EF4B46FE",
+      "contractPaths": [
+        "pairs[5].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q010-R6"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-F2722554CD82ACE3",
+      "questionId": "Y4M05-Q010",
+      "semanticTarget": "pants",
+      "plannedMediaId": "IMG-Y4M05-Q010-CTX-8E7BD0239CDD",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q010-R3"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-F586E01965033EE8",
+      "questionId": "Y4M05-Q010",
+      "semanticTarget": "shirt",
+      "plannedMediaId": "IMG-Y4M05-Q010-CTX-9D426869E410",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q010-R1"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-3DA65911425B1F0A",
+      "questionId": "Y4M05-Q011",
+      "semanticTarget": "dress",
+      "plannedMediaId": "IMG-Y4M05-Q011-CTX-7122115F54F9",
+      "contractPaths": [
+        "bubbleDistractorPool[1]",
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q011-D2",
+        "Y4M05-Q011-O3"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-6E361BB260D62CB6",
+      "questionId": "Y4M05-Q011",
+      "semanticTarget": "jacket",
+      "plannedMediaId": "IMG-Y4M05-Q011-CTX-373A3104A7E3",
+      "contractPaths": [
+        "bubbleDistractorPool[0]",
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q011-D1",
+        "Y4M05-Q011-O2"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-946C6EFC936156EA",
+      "questionId": "Y4M05-Q011",
+      "semanticTarget": "shirt",
+      "plannedMediaId": "IMG-Y4M05-Q011-CTX-E3C30AA31532",
+      "contractPaths": [
+        "bubbleDistractorPool[2]",
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q011-D3",
+        "Y4M05-Q011-O4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-9FC2369A0CEEEEB0",
+      "questionId": "Y4M05-Q011",
+      "semanticTarget": "t-shirt",
+      "plannedMediaId": "IMG-Y4M05-Q011-CTX-6165F3B35D20",
+      "contractPaths": [
+        "bubbleDistractorPool[3]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M05-Q011-D4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-B251C4169436B57F",
+      "questionId": "Y4M05-Q011",
+      "semanticTarget": "medium",
+      "plannedMediaId": "IMG-Y4M05-Q011-CTX-C274609902CF",
+      "contractPaths": [
+        "options[0]",
+        "targetsToFind[0]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q011-O1"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-C84E311AA3E3AF40",
+      "questionId": "Y4M05-Q011",
+      "semanticTarget": "large",
+      "plannedMediaId": "IMG-Y4M05-Q011-CTX-AEE8A6AD0EBF",
+      "contractPaths": [
+        "bubbleDistractorPool[4]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M05-Q011-D5"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-3272A25234DFCFBA",
+      "questionId": "Y4M05-Q012",
+      "semanticTarget": "i like apples",
+      "plannedMediaId": "IMG-Y4M05-Q012-CTX-D3D95BD9B726",
+      "contractPaths": [
+        "targets[1]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q012-T2"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-719454C9113F5766",
+      "questionId": "Y4M05-Q012",
+      "semanticTarget": "i like papaya",
+      "plannedMediaId": "IMG-Y4M05-Q012-CTX-BF61EBDA6C44",
+      "contractPaths": [
+        "targets[0]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q012-T1"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-95FE0C0B6DED7EFB",
+      "questionId": "Y4M05-Q012",
+      "semanticTarget": "i do not like carrots",
+      "plannedMediaId": "IMG-Y4M05-Q012-CTX-D17F0715E056",
+      "contractPaths": [
+        "targets[3]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q012-T4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-D44395DF6FD6A093",
+      "questionId": "Y4M05-Q012",
+      "semanticTarget": "i prefer grapes",
+      "plannedMediaId": "IMG-Y4M05-Q012-CTX-52C89FE2A066",
+      "contractPaths": [
+        "targets[2]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q012-T3"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-37D4A49BBE547EF2",
+      "questionId": "Y4M05-Q013",
+      "semanticTarget": "trousers",
+      "plannedMediaId": "IMG-Y4M05-Q013-CTX-6E41A93FFEE2",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q013-R2"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-55B8783BBC22D23D",
+      "questionId": "Y4M05-Q013",
+      "semanticTarget": "t-shirt",
+      "plannedMediaId": "IMG-Y4M05-Q013-CTX-07895C0D601B",
+      "contractPaths": [
+        "pairs[4].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q013-R5"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-9F1B693E24177567",
+      "questionId": "Y4M05-Q013",
+      "semanticTarget": "shoes",
+      "plannedMediaId": "IMG-Y4M05-Q013-CTX-80F257B561A6",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q013-R3"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-F2722554CD82ACE3",
+      "questionId": "Y4M05-Q013",
+      "semanticTarget": "pants",
+      "plannedMediaId": "IMG-Y4M05-Q013-CTX-C0D5CA89C3DA",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q013-R1"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-F586E01965033EE8",
+      "questionId": "Y4M05-Q013",
+      "semanticTarget": "shirt",
+      "plannedMediaId": "IMG-Y4M05-Q013-CTX-4F48D6B3F947",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q013-R4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-20C32A7B846CD05A",
+      "questionId": "Y4M05-Q015",
+      "semanticTarget": "i do not like carrots",
+      "plannedMediaId": "IMG-Y4M05-Q015-CTX-08ADC467A0A1",
+      "contractPaths": [
+        "pairs[0].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q015-R1"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-8050E659DDF0AE39",
+      "questionId": "Y4M05-Q015",
+      "semanticTarget": "i like papaya",
+      "plannedMediaId": "IMG-Y4M05-Q015-CTX-0DC33F808659",
+      "contractPaths": [
+        "pairs[1].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q015-R2"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-9308452ECEE535F7",
+      "questionId": "Y4M05-Q015",
+      "semanticTarget": "i like apples",
+      "plannedMediaId": "IMG-Y4M05-Q015-CTX-36125F553B39",
+      "contractPaths": [
+        "pairs[2].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q015-R3"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-F2B1512D42DAD7B2",
+      "questionId": "Y4M05-Q015",
+      "semanticTarget": "i prefer grapes",
+      "plannedMediaId": "IMG-Y4M05-Q015-CTX-040F6A706AA6",
+      "contractPaths": [
+        "pairs[3].b"
+      ],
+      "roles": [
+        "matching_pair"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q015-R4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-1DB896CF7FCECC4A",
+      "questionId": "Y4M05-Q016",
+      "semanticTarget": "pants",
+      "plannedMediaId": "IMG-Y4M05-Q016-CTX-775079AFB167",
+      "contractPaths": [
+        "targets[3]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q016-T4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-5BBD35AAD770FC3F",
+      "questionId": "Y4M05-Q016",
+      "semanticTarget": "shirt",
+      "plannedMediaId": "IMG-Y4M05-Q016-CTX-F817973A9148",
+      "contractPaths": [
+        "targets[1]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q016-T2"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-6ECEED6F29B3CD6A",
+      "questionId": "Y4M05-Q016",
+      "semanticTarget": "dress",
+      "plannedMediaId": "IMG-Y4M05-Q016-CTX-19039DA119EA",
+      "contractPaths": [
+        "targets[0]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q016-T1"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-B397BAF495CC8462",
+      "questionId": "Y4M05-Q016",
+      "semanticTarget": "t-shirt",
+      "plannedMediaId": "IMG-Y4M05-Q016-CTX-84D93CA94138",
+      "contractPaths": [
+        "targets[2]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q016-T3"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-3DA65911425B1F0A",
+      "questionId": "Y4M05-Q017",
+      "semanticTarget": "dress",
+      "plannedMediaId": "IMG-Y4M05-Q017-CTX-53C7DB065A07",
+      "contractPaths": [
+        "bubbleDistractorPool[4]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M05-Q017-D5"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-48CA6C8720A28B20",
+      "questionId": "Y4M05-Q017",
+      "semanticTarget": "i do not like carrots",
+      "plannedMediaId": "IMG-Y4M05-Q017-CTX-63A55ADB7ED6",
+      "contractPaths": [
+        "bubbleDistractorPool[1]",
+        "options[2]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q017-D2",
+        "Y4M05-Q017-O3"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-5D2F313F53720CE9",
+      "questionId": "Y4M05-Q017",
+      "semanticTarget": "i prefer grapes",
+      "plannedMediaId": "IMG-Y4M05-Q017-CTX-515C782BFAF3",
+      "contractPaths": [
+        "bubbleDistractorPool[0]",
+        "options[1]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q017-D1",
+        "Y4M05-Q017-O2"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-6E361BB260D62CB6",
+      "questionId": "Y4M05-Q017",
+      "semanticTarget": "jacket",
+      "plannedMediaId": "IMG-Y4M05-Q017-CTX-8C5C3D687675",
+      "contractPaths": [
+        "bubbleDistractorPool[3]"
+      ],
+      "roles": [],
+      "optionOrCardIds": [
+        "Y4M05-Q017-D4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-8402FF71A9476919",
+      "questionId": "Y4M05-Q017",
+      "semanticTarget": "i like papaya",
+      "plannedMediaId": "IMG-Y4M05-Q017-CTX-3484EAA34AFC",
+      "contractPaths": [
+        "bubbleDistractorPool[2]",
+        "options[3]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q017-D3",
+        "Y4M05-Q017-O4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-97050C4338A5B73F",
+      "questionId": "Y4M05-Q017",
+      "semanticTarget": "i like apples",
+      "plannedMediaId": "IMG-Y4M05-Q017-CTX-A543DD40F3D1",
+      "contractPaths": [
+        "options[0]",
+        "targetsToFind[0]"
+      ],
+      "roles": [
+        "option"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q017-O1"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-9FC2369A0CEEEEB0",
+      "questionId": "Y4M05-Q018",
+      "semanticTarget": "t-shirt",
+      "plannedMediaId": "IMG-Y4M05-Q018-CTX-345C39B3D072",
+      "contractPaths": [
+        "mediaBindings[0]"
+      ],
+      "roles": [
+        "SUPPORTING_IMAGE"
+      ],
+      "optionOrCardIds": []
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-26D44842889AB747",
+      "questionId": "Y4M05-Q019",
+      "semanticTarget": "grape",
+      "plannedMediaId": "IMG-Y4M05-Q019-CTX-11838AF962EB",
+      "contractPaths": [
+        "items[5]"
+      ],
+      "roles": [
+        "grouping_card"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q019-I6"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-4A0D07AA7BBF6562",
+      "questionId": "Y4M05-Q019",
+      "semanticTarget": "jacket",
+      "plannedMediaId": "IMG-Y4M05-Q019-CTX-AE5754B2C14F",
+      "contractPaths": [
+        "items[0]"
+      ],
+      "roles": [
+        "grouping_card"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q019-I1"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-4E8C7B72B1EE887C",
+      "questionId": "Y4M05-Q019",
+      "semanticTarget": "apple",
+      "plannedMediaId": "IMG-Y4M05-Q019-CTX-DEF46DD2B1E7",
+      "contractPaths": [
+        "items[3]"
+      ],
+      "roles": [
+        "grouping_card"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q019-I4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-54F22DA60F173DD1",
+      "questionId": "Y4M05-Q019",
+      "semanticTarget": "t-shirt",
+      "plannedMediaId": "IMG-Y4M05-Q019-CTX-B50A3C08E11B",
+      "contractPaths": [
+        "items[2]"
+      ],
+      "roles": [
+        "grouping_card"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q019-I3"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-5596327D2C423D85",
+      "questionId": "Y4M05-Q019",
+      "semanticTarget": "banana",
+      "plannedMediaId": "IMG-Y4M05-Q019-CTX-226FE4683633",
+      "contractPaths": [
+        "items[4]"
+      ],
+      "roles": [
+        "grouping_card"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q019-I5"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-7A8EE9CA12A18B37",
+      "questionId": "Y4M05-Q019",
+      "semanticTarget": "dress",
+      "plannedMediaId": "IMG-Y4M05-Q019-CTX-9A01A394A108",
+      "contractPaths": [
+        "items[1]"
+      ],
+      "roles": [
+        "grouping_card"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q019-I2"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-8FA451D965C6EB75",
+      "questionId": "Y4M05-Q020",
+      "semanticTarget": "medium",
+      "plannedMediaId": "IMG-Y4M05-Q020-CTX-98F892A80292",
+      "contractPaths": [
+        "targets[2]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q020-T3"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-V11-2B-C84E311AA3E3AF40",
+      "questionId": "Y4M05-Q020",
+      "semanticTarget": "large",
+      "plannedMediaId": "IMG-Y4M05-Q020-CTX-EAB33AF11DA5",
+      "contractPaths": [
+        "targets[3]"
+      ],
+      "roles": [
+        "ddm_destination"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q020-T4"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-Y1M03-Q001-BLUE",
+      "questionId": "Y4M05-Q020",
+      "semanticTarget": "blue",
+      "plannedMediaId": "IMG-Y4M05-Q020-CTX-6FC2BECE5C43",
+      "contractPaths": [
+        "targets[0]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q020-T1"
+      ]
+    },
+    {
+      "sourceMediaId": "IMG-Y1M06-Q014-SMALL",
+      "questionId": "Y4M05-Q020",
+      "semanticTarget": "small",
+      "plannedMediaId": "IMG-Y4M05-Q020-CTX-AC14DD30DD87",
+      "contractPaths": [
+        "targets[1]"
+      ],
+      "roles": [
+        "CONTENT"
+      ],
+      "optionOrCardIds": [
+        "Y4M05-Q020-T2"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "questionId": "Y4M05-Q001",
+      "sourceSha256": "0ca61fab4b18f97e93054c5fe451e98195753b207316f4ef9f0f96d5905da0d8",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "titleEn": "jacket",
+      "instructionEn": "Listen and shoot the matching choice.",
+      "stimulusTarget": "jacket",
+      "answerKey": "Y4M05-Q001-O1",
+      "allSemanticTargets": [
+        "dress",
+        "jacket",
+        "shirt",
+        "t-shirt"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q001",
+          "mediaId": "IMG-V11-2B-6E361BB260D62CB6",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "jacket",
+          "correct": true,
+          "optionOrCardId": "Y4M05-Q001-O1"
+        },
+        {
+          "questionId": "Y4M05-Q001",
+          "mediaId": "IMG-V11-2B-3DA65911425B1F0A",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "dress",
+          "correct": false,
+          "optionOrCardId": "Y4M05-Q001-O2"
+        },
+        {
+          "questionId": "Y4M05-Q001",
+          "mediaId": "IMG-V11-2B-946C6EFC936156EA",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "shirt",
+          "correct": false,
+          "optionOrCardId": "Y4M05-Q001-O3"
+        },
+        {
+          "questionId": "Y4M05-Q001",
+          "mediaId": "IMG-V11-2B-9FC2369A0CEEEEB0",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "t-shirt",
+          "correct": false,
+          "optionOrCardId": "Y4M05-Q001-O4"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q002",
+      "sourceSha256": "cb3263db3bf59ddad3d19b8ca7344050373a92cecc727373f1312021d40612e8",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "titleEn": "medium, large, red, blue",
+      "instructionEn": "Match each audio to its picture.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M05-Q002-I1": "Y4M05-Q002-T1",
+        "Y4M05-Q002-I2": "Y4M05-Q002-T2",
+        "Y4M05-Q002-I3": "Y4M05-Q002-T3",
+        "Y4M05-Q002-I4": "Y4M05-Q002-T4"
+      },
+      "allSemanticTargets": [
+        "blue",
+        "large",
+        "medium",
+        "red"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q002",
+          "mediaId": "IMG-V11-2B-8FA451D965C6EB75",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "medium",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q002-T1"
+        },
+        {
+          "questionId": "Y4M05-Q002",
+          "mediaId": "IMG-V11-2B-C84E311AA3E3AF40",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "large",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q002-T2"
+        },
+        {
+          "questionId": "Y4M05-Q002",
+          "mediaId": "IMG-Y1M03-Q001-RED",
+          "contractPath": "targets[2]",
+          "role": "CONTENT",
+          "semanticTarget": "red",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q002-T3"
+        },
+        {
+          "questionId": "Y4M05-Q002",
+          "mediaId": "IMG-Y1M03-Q001-BLUE",
+          "contractPath": "targets[3]",
+          "role": "CONTENT",
+          "semanticTarget": "blue",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q002-T4"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q003",
+      "sourceSha256": "366add9363840e0250a1458634ec6dde2f302c15a7c2c6d2a857ded464029774",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "titleEn": "pear, orange, grape, papaya, melon, carrot",
+      "instructionEn": "Match each item to its pair.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M05-Q003-L1": "Y4M05-Q003-R1",
+        "Y4M05-Q003-L2": "Y4M05-Q003-R2",
+        "Y4M05-Q003-L3": "Y4M05-Q003-R3",
+        "Y4M05-Q003-L4": "Y4M05-Q003-R4",
+        "Y4M05-Q003-L5": "Y4M05-Q003-R5",
+        "Y4M05-Q003-L6": "Y4M05-Q003-R6"
+      },
+      "allSemanticTargets": [
+        "carrot",
+        "grape",
+        "melon",
+        "orange",
+        "papaya",
+        "pear"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q003",
+          "mediaId": "IMG-V11-2B-3E8B870AE9E69B6A",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "pear",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q003-R1"
+        },
+        {
+          "questionId": "Y4M05-Q003",
+          "mediaId": "IMG-Y1M03-Q001-ORANGE",
+          "contractPath": "pairs[1].b",
+          "role": "CONTENT",
+          "semanticTarget": "orange",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q003-R2"
+        },
+        {
+          "questionId": "Y4M05-Q003",
+          "mediaId": "IMG-V11-2B-BC3B9081178AE7A4",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "grape",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q003-R3"
+        },
+        {
+          "questionId": "Y4M05-Q003",
+          "mediaId": "IMG-V11-2B-D1344634366B33A5",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "papaya",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q003-R4"
+        },
+        {
+          "questionId": "Y4M05-Q003",
+          "mediaId": "IMG-V11-2B-1EABF9E8AAAB576B",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "melon",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q003-R5"
+        },
+        {
+          "questionId": "Y4M05-Q003",
+          "mediaId": "IMG-V11-2B-0C2E37014FB8B5AF",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "carrot",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q003-R6"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q004",
+      "sourceSha256": "4c0654a643c1b7cc4dfdfe96b71ddb001d70ea54301d1ae7211fef3bb96bad35",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "TEXT_IMAGE",
+      "titleEn": "T-shirt, pants/trousers, shoes, jacket, dress, shirt",
+      "instructionEn": "Find the matching pairs.",
+      "stimulusTarget": null,
+      "answerKey": [
+        "Y4M05-Q004-P1",
+        "Y4M05-Q004-P2",
+        "Y4M05-Q004-P3",
+        "Y4M05-Q004-P4",
+        "Y4M05-Q004-P5",
+        "Y4M05-Q004-P6"
+      ],
+      "allSemanticTargets": [
+        "dress",
+        "jacket",
+        "pants/trousers",
+        "shirt",
+        "shoes",
+        "t-shirt"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q004",
+          "mediaId": "IMG-V11-2B-BCD95D77D8D2E855",
+          "contractPath": "pairs[0].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "t-shirt",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y4M05-Q004",
+          "mediaId": "IMG-V11-2B-500B7CA70EE94EA9",
+          "contractPath": "pairs[1].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "pants/trousers",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y4M05-Q004",
+          "mediaId": "IMG-V11-2B-B932F9C5DA901E52",
+          "contractPath": "pairs[2].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "shoes",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y4M05-Q004",
+          "mediaId": "IMG-V11-2B-BB75FBB04D7641DD",
+          "contractPath": "pairs[3].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "jacket",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y4M05-Q004",
+          "mediaId": "IMG-V11-2B-E5DAEC3F8D2DDA4B",
+          "contractPath": "pairs[4].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "dress",
+          "correct": null,
+          "optionOrCardId": null
+        },
+        {
+          "questionId": "Y4M05-Q004",
+          "mediaId": "IMG-V11-2B-BD7447F51CDEA5B8",
+          "contractPath": "pairs[5].cards[1]",
+          "role": "memory_pair",
+          "semanticTarget": "shirt",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q005",
+      "sourceSha256": "8e85826b78d3ed0fc5c8f527db8511eedbf97625f23a95b11f8cc1831dcd8726",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "titleEn": "black",
+      "instructionEn": "Listen and shoot the matching choice.",
+      "stimulusTarget": "black",
+      "answerKey": "Y4M05-Q005-O1",
+      "allSemanticTargets": [
+        "black",
+        "blue",
+        "red",
+        "yellow"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q005",
+          "mediaId": "IMG-Y1M03-Q001-BLACK",
+          "contractPath": "options[0]",
+          "role": "CONTENT",
+          "semanticTarget": "black",
+          "correct": true,
+          "optionOrCardId": "Y4M05-Q005-O1"
+        },
+        {
+          "questionId": "Y4M05-Q005",
+          "mediaId": "IMG-Y1M03-Q001-RED",
+          "contractPath": "options[1]",
+          "role": "CONTENT",
+          "semanticTarget": "red",
+          "correct": false,
+          "optionOrCardId": "Y4M05-Q005-O2"
+        },
+        {
+          "questionId": "Y4M05-Q005",
+          "mediaId": "IMG-Y1M03-Q001-BLUE",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "blue",
+          "correct": false,
+          "optionOrCardId": "Y4M05-Q005-O3"
+        },
+        {
+          "questionId": "Y4M05-Q005",
+          "mediaId": "IMG-Y1M03-Q001-YELLOW",
+          "contractPath": "options[3]",
+          "role": "CONTENT",
+          "semanticTarget": "yellow",
+          "correct": false,
+          "optionOrCardId": "Y4M05-Q005-O4"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q006",
+      "sourceSha256": "bd7a02905e2bafc4c84a7c5854e90ff02b3bdcfe8d52a44179886b8c7d035d66",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+      "instructionEn": "Sort each item: clothes or foods.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M05-Q006-I1": "clothes",
+        "Y4M05-Q006-I2": "clothes",
+        "Y4M05-Q006-I3": "clothes",
+        "Y4M05-Q006-I4": "foods",
+        "Y4M05-Q006-I5": "foods",
+        "Y4M05-Q006-I6": "foods"
+      },
+      "allSemanticTargets": [
+        "apple",
+        "banana",
+        "dress",
+        "grape",
+        "jacket",
+        "t-shirt"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q006",
+          "mediaId": "IMG-V11-2B-4A0D07AA7BBF6562",
+          "contractPath": "items[0]",
+          "role": "grouping_card",
+          "semanticTarget": "jacket",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q006-I1"
+        },
+        {
+          "questionId": "Y4M05-Q006",
+          "mediaId": "IMG-V11-2B-7A8EE9CA12A18B37",
+          "contractPath": "items[1]",
+          "role": "grouping_card",
+          "semanticTarget": "dress",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q006-I2"
+        },
+        {
+          "questionId": "Y4M05-Q006",
+          "mediaId": "IMG-V11-2B-54F22DA60F173DD1",
+          "contractPath": "items[2]",
+          "role": "grouping_card",
+          "semanticTarget": "t-shirt",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q006-I3"
+        },
+        {
+          "questionId": "Y4M05-Q006",
+          "mediaId": "IMG-V11-2B-4E8C7B72B1EE887C",
+          "contractPath": "items[3]",
+          "role": "grouping_card",
+          "semanticTarget": "apple",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q006-I4"
+        },
+        {
+          "questionId": "Y4M05-Q006",
+          "mediaId": "IMG-V11-2B-5596327D2C423D85",
+          "contractPath": "items[4]",
+          "role": "grouping_card",
+          "semanticTarget": "banana",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q006-I5"
+        },
+        {
+          "questionId": "Y4M05-Q006",
+          "mediaId": "IMG-V11-2B-26D44842889AB747",
+          "contractPath": "items[5]",
+          "role": "grouping_card",
+          "semanticTarget": "grape",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q006-I6"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q007",
+      "sourceSha256": "b648ab7bbf8d5484df8069f998ef181641ad6076d66fade6cbbef1b9c709d7fb",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "titleEn": "shirt, T-shirt, pants, trousers, dress",
+      "instructionEn": "Match each item to its pair.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M05-Q007-L1": "Y4M05-Q007-R1",
+        "Y4M05-Q007-L2": "Y4M05-Q007-R2",
+        "Y4M05-Q007-L3": "Y4M05-Q007-R3",
+        "Y4M05-Q007-L4": "Y4M05-Q007-R4",
+        "Y4M05-Q007-L5": "Y4M05-Q007-R5"
+      },
+      "allSemanticTargets": [
+        "dress",
+        "pants",
+        "shirt",
+        "t-shirt",
+        "trousers"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q007",
+          "mediaId": "IMG-V11-2B-F586E01965033EE8",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "shirt",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q007-R1"
+        },
+        {
+          "questionId": "Y4M05-Q007",
+          "mediaId": "IMG-V11-2B-55B8783BBC22D23D",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "t-shirt",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q007-R2"
+        },
+        {
+          "questionId": "Y4M05-Q007",
+          "mediaId": "IMG-V11-2B-F2722554CD82ACE3",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "pants",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q007-R3"
+        },
+        {
+          "questionId": "Y4M05-Q007",
+          "mediaId": "IMG-V11-2B-37D4A49BBE547EF2",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "trousers",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q007-R4"
+        },
+        {
+          "questionId": "Y4M05-Q007",
+          "mediaId": "IMG-V11-2B-FA05AA0B6003C6A5",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "dress",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q007-R5"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q008",
+      "sourceSha256": "129c464f5be4babc10ab119694e855100826ef1c9a3f666fd792679f11ac6dc1",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "titleEn": "What color is it? It is red.",
+      "instructionEn": "Look at the picture and complete the sentence.",
+      "stimulusTarget": null,
+      "answerKey": "red",
+      "allSemanticTargets": [
+        "red"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q008",
+          "mediaId": "IMG-Y1M03-Q001-RED",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "red",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q009",
+      "sourceSha256": "56585f42b100ce85975359cffc6052845d8b6514a105d7cbeb3d0f66e0913ca4",
+      "mechanicId": "target-shooter",
+      "mechanicMode": "single-target-choice",
+      "titleEn": "gray",
+      "instructionEn": "Listen and shoot the matching choice.",
+      "stimulusTarget": "gray",
+      "answerKey": "Y4M05-Q009-O1",
+      "allSemanticTargets": [
+        "blue",
+        "gray",
+        "red",
+        "yellow"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q009",
+          "mediaId": "IMG-Y1M03-Q006-GRAY",
+          "contractPath": "options[0]",
+          "role": "CONTENT",
+          "semanticTarget": "gray",
+          "correct": true,
+          "optionOrCardId": "Y4M05-Q009-O1"
+        },
+        {
+          "questionId": "Y4M05-Q009",
+          "mediaId": "IMG-Y1M03-Q001-RED",
+          "contractPath": "options[1]",
+          "role": "CONTENT",
+          "semanticTarget": "red",
+          "correct": false,
+          "optionOrCardId": "Y4M05-Q009-O2"
+        },
+        {
+          "questionId": "Y4M05-Q009",
+          "mediaId": "IMG-Y1M03-Q001-BLUE",
+          "contractPath": "options[2]",
+          "role": "CONTENT",
+          "semanticTarget": "blue",
+          "correct": false,
+          "optionOrCardId": "Y4M05-Q009-O3"
+        },
+        {
+          "questionId": "Y4M05-Q009",
+          "mediaId": "IMG-Y1M03-Q001-YELLOW",
+          "contractPath": "options[3]",
+          "role": "CONTENT",
+          "semanticTarget": "yellow",
+          "correct": false,
+          "optionOrCardId": "Y4M05-Q009-O4"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q010",
+      "sourceSha256": "1beffe711cf17e3cef676ea1bfd0c8971b1ab6a67f0f9c7460cc73664033d826",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "titleEn": "shirt, T-shirt, pants, trousers, shoes, jacket",
+      "instructionEn": "Match each item to its pair.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M05-Q010-L1": "Y4M05-Q010-R1",
+        "Y4M05-Q010-L2": "Y4M05-Q010-R2",
+        "Y4M05-Q010-L3": "Y4M05-Q010-R3",
+        "Y4M05-Q010-L4": "Y4M05-Q010-R4",
+        "Y4M05-Q010-L5": "Y4M05-Q010-R5",
+        "Y4M05-Q010-L6": "Y4M05-Q010-R6"
+      },
+      "allSemanticTargets": [
+        "jacket",
+        "pants",
+        "shirt",
+        "shoes",
+        "t-shirt",
+        "trousers"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q010",
+          "mediaId": "IMG-V11-2B-F586E01965033EE8",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "shirt",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q010-R1"
+        },
+        {
+          "questionId": "Y4M05-Q010",
+          "mediaId": "IMG-V11-2B-55B8783BBC22D23D",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "t-shirt",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q010-R2"
+        },
+        {
+          "questionId": "Y4M05-Q010",
+          "mediaId": "IMG-V11-2B-F2722554CD82ACE3",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "pants",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q010-R3"
+        },
+        {
+          "questionId": "Y4M05-Q010",
+          "mediaId": "IMG-V11-2B-37D4A49BBE547EF2",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "trousers",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q010-R4"
+        },
+        {
+          "questionId": "Y4M05-Q010",
+          "mediaId": "IMG-V11-2B-9F1B693E24177567",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "shoes",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q010-R5"
+        },
+        {
+          "questionId": "Y4M05-Q010",
+          "mediaId": "IMG-V11-2B-E2B7CEC954F9AAA9",
+          "contractPath": "pairs[5].b",
+          "role": "matching_pair",
+          "semanticTarget": "jacket",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q010-R6"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q011",
+      "sourceSha256": "c65c826521ce210bf62d1c749591b8701d85e77b8b5771f995870111d8d04327",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "titleEn": "medium",
+      "instructionEn": "Listen and pop the matching bubble.",
+      "stimulusTarget": "medium",
+      "answerKey": "Y4M05-Q011-O1",
+      "allSemanticTargets": [
+        "dress",
+        "jacket",
+        "large",
+        "medium",
+        "shirt",
+        "t-shirt"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q011",
+          "mediaId": "IMG-V11-2B-B251C4169436B57F",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "medium",
+          "correct": true,
+          "optionOrCardId": "Y4M05-Q011-O1"
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "mediaId": "IMG-V11-2B-6E361BB260D62CB6",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "jacket",
+          "correct": false,
+          "optionOrCardId": "Y4M05-Q011-O2"
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "mediaId": "IMG-V11-2B-3DA65911425B1F0A",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "dress",
+          "correct": false,
+          "optionOrCardId": "Y4M05-Q011-O3"
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "mediaId": "IMG-V11-2B-946C6EFC936156EA",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "shirt",
+          "correct": false,
+          "optionOrCardId": "Y4M05-Q011-O4"
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "mediaId": "IMG-V11-2B-B251C4169436B57F",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "medium",
+          "correct": true,
+          "optionOrCardId": "Y4M05-Q011-O1"
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "mediaId": "IMG-V11-2B-6E361BB260D62CB6",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "jacket",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q011-D1"
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "mediaId": "IMG-V11-2B-3DA65911425B1F0A",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "option",
+          "semanticTarget": "dress",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q011-D2"
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "mediaId": "IMG-V11-2B-946C6EFC936156EA",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "option",
+          "semanticTarget": "shirt",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q011-D3"
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "mediaId": "IMG-V11-2B-9FC2369A0CEEEEB0",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "t-shirt",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q011-D4"
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "mediaId": "IMG-V11-2B-C84E311AA3E3AF40",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "large",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q011-D5"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q012",
+      "sourceSha256": "33227e10604feeda94ece0bf96b05c6ff5cf8b37fb0ccef3b135553ecadd3a41",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "titleEn": "I like papaya, I like apples, I prefer grapes, I do not like carrots",
+      "instructionEn": "Match each audio to its picture.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M05-Q012-I1": "Y4M05-Q012-T1",
+        "Y4M05-Q012-I2": "Y4M05-Q012-T2",
+        "Y4M05-Q012-I3": "Y4M05-Q012-T3",
+        "Y4M05-Q012-I4": "Y4M05-Q012-T4"
+      },
+      "allSemanticTargets": [
+        "i do not like carrots",
+        "i like apples",
+        "i like papaya",
+        "i prefer grapes"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q012",
+          "mediaId": "IMG-V11-2B-719454C9113F5766",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "i like papaya",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q012-T1"
+        },
+        {
+          "questionId": "Y4M05-Q012",
+          "mediaId": "IMG-V11-2B-3272A25234DFCFBA",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "i like apples",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q012-T2"
+        },
+        {
+          "questionId": "Y4M05-Q012",
+          "mediaId": "IMG-V11-2B-D44395DF6FD6A093",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "i prefer grapes",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q012-T3"
+        },
+        {
+          "questionId": "Y4M05-Q012",
+          "mediaId": "IMG-V11-2B-95FE0C0B6DED7EFB",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "i do not like carrots",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q012-T4"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q013",
+      "sourceSha256": "5e87a53a34b140617d0a08aebc0374517e9a888a1a09ccdc77f4e5d69790184c",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "titleEn": "pants, trousers, shoes, shirt, T-shirt",
+      "instructionEn": "Match each item to its pair.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M05-Q013-L1": "Y4M05-Q013-R1",
+        "Y4M05-Q013-L2": "Y4M05-Q013-R2",
+        "Y4M05-Q013-L3": "Y4M05-Q013-R3",
+        "Y4M05-Q013-L4": "Y4M05-Q013-R4",
+        "Y4M05-Q013-L5": "Y4M05-Q013-R5"
+      },
+      "allSemanticTargets": [
+        "pants",
+        "shirt",
+        "shoes",
+        "t-shirt",
+        "trousers"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q013",
+          "mediaId": "IMG-V11-2B-F2722554CD82ACE3",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "pants",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q013-R1"
+        },
+        {
+          "questionId": "Y4M05-Q013",
+          "mediaId": "IMG-V11-2B-37D4A49BBE547EF2",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "trousers",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q013-R2"
+        },
+        {
+          "questionId": "Y4M05-Q013",
+          "mediaId": "IMG-V11-2B-9F1B693E24177567",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "shoes",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q013-R3"
+        },
+        {
+          "questionId": "Y4M05-Q013",
+          "mediaId": "IMG-V11-2B-F586E01965033EE8",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "shirt",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q013-R4"
+        },
+        {
+          "questionId": "Y4M05-Q013",
+          "mediaId": "IMG-V11-2B-55B8783BBC22D23D",
+          "contractPath": "pairs[4].b",
+          "role": "matching_pair",
+          "semanticTarget": "t-shirt",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q013-R5"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q014",
+      "sourceSha256": "0023f376c33e853abd5f96bfdcf15c64ccfd418575c883dc51ed91428fc8e84a",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_TEXT",
+      "titleEn": "banana, pear, orange, apple",
+      "instructionEn": "Find the matching pairs.",
+      "stimulusTarget": null,
+      "answerKey": [
+        "Y4M05-Q014-P1",
+        "Y4M05-Q014-P2",
+        "Y4M05-Q014-P3",
+        "Y4M05-Q014-P4"
+      ],
+      "allSemanticTargets": [
+        "apple",
+        "banana",
+        "orange",
+        "pear"
+      ],
+      "visualUsages": []
+    },
+    {
+      "questionId": "Y4M05-Q015",
+      "sourceSha256": "ffb7f5aa3048846080e48d44a38cbf27434669b39e7c894fe05a646e8f242025",
+      "mechanicId": "matching",
+      "mechanicMode": "semantic-pair",
+      "titleEn": "I do not like carrots, I like papaya, I like apples, I prefer grapes",
+      "instructionEn": "Match each item to its pair.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M05-Q015-L1": "Y4M05-Q015-R1",
+        "Y4M05-Q015-L2": "Y4M05-Q015-R2",
+        "Y4M05-Q015-L3": "Y4M05-Q015-R3",
+        "Y4M05-Q015-L4": "Y4M05-Q015-R4"
+      },
+      "allSemanticTargets": [
+        "i do not like carrots",
+        "i like apples",
+        "i like papaya",
+        "i prefer grapes"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q015",
+          "mediaId": "IMG-V11-2B-20C32A7B846CD05A",
+          "contractPath": "pairs[0].b",
+          "role": "matching_pair",
+          "semanticTarget": "i do not like carrots",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q015-R1"
+        },
+        {
+          "questionId": "Y4M05-Q015",
+          "mediaId": "IMG-V11-2B-8050E659DDF0AE39",
+          "contractPath": "pairs[1].b",
+          "role": "matching_pair",
+          "semanticTarget": "i like papaya",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q015-R2"
+        },
+        {
+          "questionId": "Y4M05-Q015",
+          "mediaId": "IMG-V11-2B-9308452ECEE535F7",
+          "contractPath": "pairs[2].b",
+          "role": "matching_pair",
+          "semanticTarget": "i like apples",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q015-R3"
+        },
+        {
+          "questionId": "Y4M05-Q015",
+          "mediaId": "IMG-V11-2B-F2B1512D42DAD7B2",
+          "contractPath": "pairs[3].b",
+          "role": "matching_pair",
+          "semanticTarget": "i prefer grapes",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q015-R4"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q016",
+      "sourceSha256": "ac6290bd55904fa9314c49b133a3e44ae84129917e5e4ba7924a39d97c566c17",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "titleEn": "dress, shirt, T-shirt, pants",
+      "instructionEn": "Match each audio to its picture.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M05-Q016-I1": "Y4M05-Q016-T1",
+        "Y4M05-Q016-I2": "Y4M05-Q016-T2",
+        "Y4M05-Q016-I3": "Y4M05-Q016-T3",
+        "Y4M05-Q016-I4": "Y4M05-Q016-T4"
+      },
+      "allSemanticTargets": [
+        "dress",
+        "pants",
+        "shirt",
+        "t-shirt"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q016",
+          "mediaId": "IMG-V11-2B-6ECEED6F29B3CD6A",
+          "contractPath": "targets[0]",
+          "role": "ddm_destination",
+          "semanticTarget": "dress",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q016-T1"
+        },
+        {
+          "questionId": "Y4M05-Q016",
+          "mediaId": "IMG-V11-2B-5BBD35AAD770FC3F",
+          "contractPath": "targets[1]",
+          "role": "ddm_destination",
+          "semanticTarget": "shirt",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q016-T2"
+        },
+        {
+          "questionId": "Y4M05-Q016",
+          "mediaId": "IMG-V11-2B-B397BAF495CC8462",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "t-shirt",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q016-T3"
+        },
+        {
+          "questionId": "Y4M05-Q016",
+          "mediaId": "IMG-V11-2B-1DB896CF7FCECC4A",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "pants",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q016-T4"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q017",
+      "sourceSha256": "8e65f0f4594596b8a9248789dd6838cdf6f360aa5209f4c34af2611932609fe8",
+      "mechanicId": "bubble-pop",
+      "mechanicMode": "single-target-find",
+      "titleEn": "I like apples",
+      "instructionEn": "Listen and pop the matching bubble.",
+      "stimulusTarget": "I like apples",
+      "answerKey": "Y4M05-Q017-O1",
+      "allSemanticTargets": [
+        "dress",
+        "i do not like carrots",
+        "i like apples",
+        "i like papaya",
+        "i prefer grapes",
+        "jacket"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q017",
+          "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "contractPath": "options[0]",
+          "role": "option",
+          "semanticTarget": "i like apples",
+          "correct": true,
+          "optionOrCardId": "Y4M05-Q017-O1"
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+          "contractPath": "options[1]",
+          "role": "option",
+          "semanticTarget": "i prefer grapes",
+          "correct": false,
+          "optionOrCardId": "Y4M05-Q017-O2"
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+          "contractPath": "options[2]",
+          "role": "option",
+          "semanticTarget": "i do not like carrots",
+          "correct": false,
+          "optionOrCardId": "Y4M05-Q017-O3"
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "mediaId": "IMG-V11-2B-8402FF71A9476919",
+          "contractPath": "options[3]",
+          "role": "option",
+          "semanticTarget": "i like papaya",
+          "correct": false,
+          "optionOrCardId": "Y4M05-Q017-O4"
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "mediaId": "IMG-V11-2B-97050C4338A5B73F",
+          "contractPath": "targetsToFind[0]",
+          "role": "option",
+          "semanticTarget": "i like apples",
+          "correct": true,
+          "optionOrCardId": "Y4M05-Q017-O1"
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "mediaId": "IMG-V11-2B-5D2F313F53720CE9",
+          "contractPath": "bubbleDistractorPool[0]",
+          "role": "option",
+          "semanticTarget": "i prefer grapes",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q017-D1"
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "mediaId": "IMG-V11-2B-48CA6C8720A28B20",
+          "contractPath": "bubbleDistractorPool[1]",
+          "role": "option",
+          "semanticTarget": "i do not like carrots",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q017-D2"
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "mediaId": "IMG-V11-2B-8402FF71A9476919",
+          "contractPath": "bubbleDistractorPool[2]",
+          "role": "option",
+          "semanticTarget": "i like papaya",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q017-D3"
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "mediaId": "IMG-V11-2B-6E361BB260D62CB6",
+          "contractPath": "bubbleDistractorPool[3]",
+          "role": null,
+          "semanticTarget": "jacket",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q017-D4"
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "mediaId": "IMG-V11-2B-3DA65911425B1F0A",
+          "contractPath": "bubbleDistractorPool[4]",
+          "role": null,
+          "semanticTarget": "dress",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q017-D5"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q018",
+      "sourceSha256": "671cac8dd4218b6468e73132ced3f0ff28ce0e97b6f9657093f2eeb724e92e74",
+      "mechanicId": "smart-sentence-complete",
+      "mechanicMode": "complete",
+      "titleEn": "I like the T-shirt.",
+      "instructionEn": "Look at the picture and complete the sentence.",
+      "stimulusTarget": null,
+      "answerKey": "T-shirt",
+      "allSemanticTargets": [
+        "t-shirt"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q018",
+          "mediaId": "IMG-V11-2B-9FC2369A0CEEEEB0",
+          "contractPath": "mediaBindings[0]",
+          "role": "SUPPORTING_IMAGE",
+          "semanticTarget": "t-shirt",
+          "correct": null,
+          "optionOrCardId": null
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q019",
+      "sourceSha256": "cd6663c9b33b5cf627f2a0b46f79169409a83fd70bf2ceaed5ee6a0ab644bed1",
+      "mechanicId": "drag-drop",
+      "mechanicMode": "grouping",
+      "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+      "instructionEn": "Sort each item: clothes or foods.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M05-Q019-I1": "clothes",
+        "Y4M05-Q019-I2": "clothes",
+        "Y4M05-Q019-I3": "clothes",
+        "Y4M05-Q019-I4": "foods",
+        "Y4M05-Q019-I5": "foods",
+        "Y4M05-Q019-I6": "foods"
+      },
+      "allSemanticTargets": [
+        "apple",
+        "banana",
+        "dress",
+        "grape",
+        "jacket",
+        "t-shirt"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q019",
+          "mediaId": "IMG-V11-2B-4A0D07AA7BBF6562",
+          "contractPath": "items[0]",
+          "role": "grouping_card",
+          "semanticTarget": "jacket",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q019-I1"
+        },
+        {
+          "questionId": "Y4M05-Q019",
+          "mediaId": "IMG-V11-2B-7A8EE9CA12A18B37",
+          "contractPath": "items[1]",
+          "role": "grouping_card",
+          "semanticTarget": "dress",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q019-I2"
+        },
+        {
+          "questionId": "Y4M05-Q019",
+          "mediaId": "IMG-V11-2B-54F22DA60F173DD1",
+          "contractPath": "items[2]",
+          "role": "grouping_card",
+          "semanticTarget": "t-shirt",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q019-I3"
+        },
+        {
+          "questionId": "Y4M05-Q019",
+          "mediaId": "IMG-V11-2B-4E8C7B72B1EE887C",
+          "contractPath": "items[3]",
+          "role": "grouping_card",
+          "semanticTarget": "apple",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q019-I4"
+        },
+        {
+          "questionId": "Y4M05-Q019",
+          "mediaId": "IMG-V11-2B-5596327D2C423D85",
+          "contractPath": "items[4]",
+          "role": "grouping_card",
+          "semanticTarget": "banana",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q019-I5"
+        },
+        {
+          "questionId": "Y4M05-Q019",
+          "mediaId": "IMG-V11-2B-26D44842889AB747",
+          "contractPath": "items[5]",
+          "role": "grouping_card",
+          "semanticTarget": "grape",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q019-I6"
+        }
+      ]
+    },
+    {
+      "questionId": "Y4M05-Q020",
+      "sourceSha256": "80260d587a7bdcb7ad2872fc9a5bd80749d9f224c592af21baf1e1082e5039fe",
+      "mechanicId": "drag-drop-multimedia",
+      "mechanicMode": "audio-4-to-visual-4-multimatch",
+      "titleEn": "blue, small, medium, large",
+      "instructionEn": "Match each audio to its picture.",
+      "stimulusTarget": null,
+      "answerKey": {
+        "Y4M05-Q020-I1": "Y4M05-Q020-T1",
+        "Y4M05-Q020-I2": "Y4M05-Q020-T2",
+        "Y4M05-Q020-I3": "Y4M05-Q020-T3",
+        "Y4M05-Q020-I4": "Y4M05-Q020-T4"
+      },
+      "allSemanticTargets": [
+        "blue",
+        "large",
+        "medium",
+        "small"
+      ],
+      "visualUsages": [
+        {
+          "questionId": "Y4M05-Q020",
+          "mediaId": "IMG-Y1M03-Q001-BLUE",
+          "contractPath": "targets[0]",
+          "role": "CONTENT",
+          "semanticTarget": "blue",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q020-T1"
+        },
+        {
+          "questionId": "Y4M05-Q020",
+          "mediaId": "IMG-Y1M06-Q014-SMALL",
+          "contractPath": "targets[1]",
+          "role": "CONTENT",
+          "semanticTarget": "small",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q020-T2"
+        },
+        {
+          "questionId": "Y4M05-Q020",
+          "mediaId": "IMG-V11-2B-8FA451D965C6EB75",
+          "contractPath": "targets[2]",
+          "role": "ddm_destination",
+          "semanticTarget": "medium",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q020-T3"
+        },
+        {
+          "questionId": "Y4M05-Q020",
+          "mediaId": "IMG-V11-2B-C84E311AA3E3AF40",
+          "contractPath": "targets[3]",
+          "role": "ddm_destination",
+          "semanticTarget": "large",
+          "correct": null,
+          "optionOrCardId": "Y4M05-Q020-T4"
+        }
+      ]
+    }
+  ],
+  "safety": {
+    "questionMutation": false,
+    "registryMutation": false,
+    "runtimeMutation": false,
+    "goldMasterMutation": false,
+    "productionMutation": false
+  }
+}

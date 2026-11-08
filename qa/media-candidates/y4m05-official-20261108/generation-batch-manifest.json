@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "DUDUQ_Y4M05_NATIVE_GENERATION_BATCH_V1",
+  "createdAt": "2026-11-08T19:39:20.7749891Z",
+  "moduleId": "Y4M05",
+  "requestedConcepts": [
+    "dress",
+    "jacket",
+    "medium",
+    "shirt",
+    "shoes",
+    "t-shirt",
+    "trousers"
+  ],
+  "generatedConcepts": [
+    "dress",
+    "jacket",
+    "medium",
+    "trousers",
+    "shirt",
+    "shoes",
+    "t-shirt"
+  ],
+  "generatedCount": 7,
+  "acceptedCount": 7,
+  "failedAttempts": [],
+  "generatorLimitReached": false,
+  "blockedGenerator": false,
+  "receiptsFile": "generation-receipts.json",
+  "provenanceFile": "generation-provenance.json"
+}

@@ -1,0 +1,709 @@
+{
+  "schemaVersion": "DUDUQ_Y4M05_GENERATED_ASSET_SEMANTIC_EVIDENCE_V1",
+  "createdAt": "2026-11-08T19:39:20.7749891Z",
+  "moduleId": "Y4M05",
+  "sourceQuestionSha256": "608389293ff083675048bac23c45b10bed017853fba40c31fdd6d0a8e806f6a8",
+  "questionContractsReviewed": 20,
+  "assets": [
+    {
+      "concept": "dress",
+      "coversSemanticTargets": [
+        "dress"
+      ],
+      "file": "images/DUDUQ-Y4M05-DRESS.png",
+      "sha256": "d0ac6cf96eafd6eb956d7582ecba8c6b56b16bd2540beff4540a5f2b69e7b240",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "Exactly one complete yellow child-size dress is visible; no other garment is present.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q001",
+          "sourceSha256": "0ca61fab4b18f97e93054c5fe451e98195753b207316f4ef9f0f96d5905da0d8",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "jacket",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "coveredSemanticTargets": [
+            "dress"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q004",
+          "sourceSha256": "4c0654a643c1b7cc4dfdfe96b71ddb001d70ea54301d1ae7211fef3bb96bad35",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "TEXT_IMAGE",
+          "titleEn": "T-shirt, pants/trousers, shoes, jacket, dress, shirt",
+          "instructionEn": "Find the matching pairs.",
+          "coveredSemanticTargets": [
+            "dress"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q006",
+          "sourceSha256": "bd7a02905e2bafc4c84a7c5854e90ff02b3bdcfe8d52a44179886b8c7d035d66",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "dress"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q007",
+          "sourceSha256": "b648ab7bbf8d5484df8069f998ef181641ad6076d66fade6cbbef1b9c709d7fb",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, dress",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "dress"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "sourceSha256": "c65c826521ce210bf62d1c749591b8701d85e77b8b5771f995870111d8d04327",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "medium",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "dress"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q016",
+          "sourceSha256": "ac6290bd55904fa9314c49b133a3e44ae84129917e5e4ba7924a39d97c566c17",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "dress, shirt, T-shirt, pants",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "dress"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "sourceSha256": "8e65f0f4594596b8a9248789dd6838cdf6f360aa5209f4c34af2611932609fe8",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "I like apples",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "dress"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q019",
+          "sourceSha256": "cd6663c9b33b5cf627f2a0b46f79169409a83fd70bf2ceaed5ee6a0ab644bed1",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "dress"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "jacket",
+      "coversSemanticTargets": [
+        "jacket"
+      ],
+      "file": "images/DUDUQ-Y4M05-JACKET.png",
+      "sha256": "9b3385c6969b225c4b013649bdd93394e92b461c8f43ef78e8c10659b13a8551",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "Exactly one complete blue zip-front jacket is visible; no shirt, dress or other garment is present.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q001",
+          "sourceSha256": "0ca61fab4b18f97e93054c5fe451e98195753b207316f4ef9f0f96d5905da0d8",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "jacket",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "coveredSemanticTargets": [
+            "jacket"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q004",
+          "sourceSha256": "4c0654a643c1b7cc4dfdfe96b71ddb001d70ea54301d1ae7211fef3bb96bad35",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "TEXT_IMAGE",
+          "titleEn": "T-shirt, pants/trousers, shoes, jacket, dress, shirt",
+          "instructionEn": "Find the matching pairs.",
+          "coveredSemanticTargets": [
+            "jacket"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q006",
+          "sourceSha256": "bd7a02905e2bafc4c84a7c5854e90ff02b3bdcfe8d52a44179886b8c7d035d66",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "jacket"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q010",
+          "sourceSha256": "1beffe711cf17e3cef676ea1bfd0c8971b1ab6a67f0f9c7460cc73664033d826",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, shoes, jacket",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "jacket"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "sourceSha256": "c65c826521ce210bf62d1c749591b8701d85e77b8b5771f995870111d8d04327",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "medium",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "jacket"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q017",
+          "sourceSha256": "8e65f0f4594596b8a9248789dd6838cdf6f360aa5209f4c34af2611932609fe8",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "I like apples",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "jacket"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q019",
+          "sourceSha256": "cd6663c9b33b5cf627f2a0b46f79169409a83fd70bf2ceaed5ee6a0ab644bed1",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "jacket"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "medium",
+      "coversSemanticTargets": [
+        "medium"
+      ],
+      "file": "images/DUDUQ-Y4M05-MEDIUM.png",
+      "sha256": "168e4bb854961334af9e3a360905591f9029b5465397c476aeedd0a4f53b8c27",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "Exactly one neutral gray rounded cube is shown midway between the verified small and large endpoints; no competing cue is present.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q002",
+          "sourceSha256": "cb3263db3bf59ddad3d19b8ca7344050373a92cecc727373f1312021d40612e8",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "medium, large, red, blue",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "medium"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "sourceSha256": "c65c826521ce210bf62d1c749591b8701d85e77b8b5771f995870111d8d04327",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "medium",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "medium"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q020",
+          "sourceSha256": "80260d587a7bdcb7ad2872fc9a5bd80749d9f224c592af21baf1e1082e5039fe",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "blue, small, medium, large",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "medium"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "trousers",
+      "coversSemanticTargets": [
+        "pants",
+        "pants/trousers",
+        "trousers"
+      ],
+      "file": "images/DUDUQ-Y4M05-TROUSERS.png",
+      "sha256": "6673e77ea679348e41bed4ebcb0fea69922f56b17d3e7a301caddafa27d6978f",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "Exactly one complete pair of full-length trousers is visible, correctly covering the exact source synonyms pants and trousers.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q004",
+          "sourceSha256": "4c0654a643c1b7cc4dfdfe96b71ddb001d70ea54301d1ae7211fef3bb96bad35",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "TEXT_IMAGE",
+          "titleEn": "T-shirt, pants/trousers, shoes, jacket, dress, shirt",
+          "instructionEn": "Find the matching pairs.",
+          "coveredSemanticTargets": [
+            "pants/trousers"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q007",
+          "sourceSha256": "b648ab7bbf8d5484df8069f998ef181641ad6076d66fade6cbbef1b9c709d7fb",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, dress",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "pants",
+            "trousers"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q010",
+          "sourceSha256": "1beffe711cf17e3cef676ea1bfd0c8971b1ab6a67f0f9c7460cc73664033d826",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, shoes, jacket",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "pants",
+            "trousers"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q013",
+          "sourceSha256": "5e87a53a34b140617d0a08aebc0374517e9a888a1a09ccdc77f4e5d69790184c",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "pants, trousers, shoes, shirt, T-shirt",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "pants",
+            "trousers"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q016",
+          "sourceSha256": "ac6290bd55904fa9314c49b133a3e44ae84129917e5e4ba7924a39d97c566c17",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "dress, shirt, T-shirt, pants",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "pants"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "shirt",
+      "coversSemanticTargets": [
+        "shirt"
+      ],
+      "file": "images/DUDUQ-Y4M05-SHIRT.png",
+      "sha256": "04a90d89d8c48a032fced9ee2e0ce748b8b1edea115a36aadb514b5128066268",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "Exactly one long-sleeved collared button-up shirt is visible, clearly distinct from a T-shirt.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q001",
+          "sourceSha256": "0ca61fab4b18f97e93054c5fe451e98195753b207316f4ef9f0f96d5905da0d8",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "jacket",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "coveredSemanticTargets": [
+            "shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q004",
+          "sourceSha256": "4c0654a643c1b7cc4dfdfe96b71ddb001d70ea54301d1ae7211fef3bb96bad35",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "TEXT_IMAGE",
+          "titleEn": "T-shirt, pants/trousers, shoes, jacket, dress, shirt",
+          "instructionEn": "Find the matching pairs.",
+          "coveredSemanticTargets": [
+            "shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q007",
+          "sourceSha256": "b648ab7bbf8d5484df8069f998ef181641ad6076d66fade6cbbef1b9c709d7fb",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, dress",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q010",
+          "sourceSha256": "1beffe711cf17e3cef676ea1bfd0c8971b1ab6a67f0f9c7460cc73664033d826",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, shoes, jacket",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "sourceSha256": "c65c826521ce210bf62d1c749591b8701d85e77b8b5771f995870111d8d04327",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "medium",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "shirt"
+          ],
+          "visualBindingCount": 2,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q013",
+          "sourceSha256": "5e87a53a34b140617d0a08aebc0374517e9a888a1a09ccdc77f4e5d69790184c",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "pants, trousers, shoes, shirt, T-shirt",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q016",
+          "sourceSha256": "ac6290bd55904fa9314c49b133a3e44ae84129917e5e4ba7924a39d97c566c17",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "dress, shirt, T-shirt, pants",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "shoes",
+      "coversSemanticTargets": [
+        "shoes"
+      ],
+      "file": "images/DUDUQ-Y4M05-SHOES.png",
+      "sha256": "47cc3d8a9c063d1ce433aad06754590a36bf1518a22e136a23ed6639415fe801",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "Exactly one matching pair of two red-and-white shoes is visible; no foot, leg or extra shoe is present.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q004",
+          "sourceSha256": "4c0654a643c1b7cc4dfdfe96b71ddb001d70ea54301d1ae7211fef3bb96bad35",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "TEXT_IMAGE",
+          "titleEn": "T-shirt, pants/trousers, shoes, jacket, dress, shirt",
+          "instructionEn": "Find the matching pairs.",
+          "coveredSemanticTargets": [
+            "shoes"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q010",
+          "sourceSha256": "1beffe711cf17e3cef676ea1bfd0c8971b1ab6a67f0f9c7460cc73664033d826",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, shoes, jacket",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "shoes"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q013",
+          "sourceSha256": "5e87a53a34b140617d0a08aebc0374517e9a888a1a09ccdc77f4e5d69790184c",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "pants, trousers, shoes, shirt, T-shirt",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "shoes"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    },
+    {
+      "concept": "t-shirt",
+      "coversSemanticTargets": [
+        "t-shirt"
+      ],
+      "file": "images/DUDUQ-Y4M05-T-SHIRT.png",
+      "sha256": "cee9b8a5bfd7b14f016fb17d86ae1042f8996e0005b65bcdda6dde2a7f29be1a",
+      "generationClass": "CODEX_NATIVE_IMAGE_GEN_ORIGINAL",
+      "statement": "Exactly one short-sleeved crew-neck T-shirt is visible, with no collar or buttons and no other garment.",
+      "wrongDistractorsExcluded": true,
+      "questionContracts": [
+        {
+          "questionId": "Y4M05-Q001",
+          "sourceSha256": "0ca61fab4b18f97e93054c5fe451e98195753b207316f4ef9f0f96d5905da0d8",
+          "mechanicId": "target-shooter",
+          "mechanicMode": "single-target-choice",
+          "titleEn": "jacket",
+          "instructionEn": "Listen and shoot the matching choice.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q004",
+          "sourceSha256": "4c0654a643c1b7cc4dfdfe96b71ddb001d70ea54301d1ae7211fef3bb96bad35",
+          "mechanicId": "memory-quest",
+          "mechanicMode": "TEXT_IMAGE",
+          "titleEn": "T-shirt, pants/trousers, shoes, jacket, dress, shirt",
+          "instructionEn": "Find the matching pairs.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q006",
+          "sourceSha256": "bd7a02905e2bafc4c84a7c5854e90ff02b3bdcfe8d52a44179886b8c7d035d66",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q007",
+          "sourceSha256": "b648ab7bbf8d5484df8069f998ef181641ad6076d66fade6cbbef1b9c709d7fb",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, dress",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q010",
+          "sourceSha256": "1beffe711cf17e3cef676ea1bfd0c8971b1ab6a67f0f9c7460cc73664033d826",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "shirt, T-shirt, pants, trousers, shoes, jacket",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q011",
+          "sourceSha256": "c65c826521ce210bf62d1c749591b8701d85e77b8b5771f995870111d8d04327",
+          "mechanicId": "bubble-pop",
+          "mechanicMode": "single-target-find",
+          "titleEn": "medium",
+          "instructionEn": "Listen and pop the matching bubble.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q013",
+          "sourceSha256": "5e87a53a34b140617d0a08aebc0374517e9a888a1a09ccdc77f4e5d69790184c",
+          "mechanicId": "matching",
+          "mechanicMode": "semantic-pair",
+          "titleEn": "pants, trousers, shoes, shirt, T-shirt",
+          "instructionEn": "Match each item to its pair.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q016",
+          "sourceSha256": "ac6290bd55904fa9314c49b133a3e44ae84129917e5e4ba7924a39d97c566c17",
+          "mechanicId": "drag-drop-multimedia",
+          "mechanicMode": "audio-4-to-visual-4-multimatch",
+          "titleEn": "dress, shirt, T-shirt, pants",
+          "instructionEn": "Match each audio to its picture.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q018",
+          "sourceSha256": "671cac8dd4218b6468e73132ced3f0ff28ce0e97b6f9657093f2eeb724e92e74",
+          "mechanicId": "smart-sentence-complete",
+          "mechanicMode": "complete",
+          "titleEn": "I like the T-shirt.",
+          "instructionEn": "Look at the picture and complete the sentence.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        },
+        {
+          "questionId": "Y4M05-Q019",
+          "sourceSha256": "cd6663c9b33b5cf627f2a0b46f79169409a83fd70bf2ceaed5ee6a0ab644bed1",
+          "mechanicId": "drag-drop",
+          "mechanicMode": "grouping",
+          "titleEn": "jacket, dress, T-shirt, apple, banana, grape",
+          "instructionEn": "Sort each item: clothes or foods.",
+          "coveredSemanticTargets": [
+            "t-shirt"
+          ],
+          "visualBindingCount": 1,
+          "sourceHasNoVisualBinding": false
+        }
+      ],
+      "modelReview": "MODEL_SEMANTIC_PRECHECK_PASSED",
+      "humanHomologation": "PENDING",
+      "productionApproved": false
+    }
+  ],
+  "nonVisualQuestionContracts": [
+    {
+      "questionId": "Y4M05-Q014",
+      "sourceSha256": "0023f376c33e853abd5f96bfdcf15c64ccfd418575c883dc51ed91428fc8e84a",
+      "mechanicId": "memory-quest",
+      "mechanicMode": "AUDIO_TEXT",
+      "titleEn": "banana, pear, orange, apple",
+      "semanticTargets": [
+        "apple",
+        "banana",
+        "orange",
+        "pear"
+      ],
+      "action": "NO_MEDIA_BINDING_IN_SOURCE_CONTRACT_DO_NOT_INVENT_ONE"
+    }
+  ],
+  "summary": {
+    "generatedAssetsReviewed": 7,
+    "generatedSemanticTargetsCovered": 9,
+    "wrongDistractorFindings": 0,
+    "humanHomologationPending": 7
+  },
+  "productionApproved": false,
+  "integrated": false
+}
