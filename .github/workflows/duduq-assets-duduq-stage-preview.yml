@@ -1,0 +1,68 @@
+name: DUDUQ - Stage 6 pinned Assets-DuduQ PNGs for isolated public preview
+
+on:
+  push:
+    branches:
+      - integration/assets-duduq-resume-20261030
+    paths:
+      - ".github/workflows/duduq-assets-duduq-stage-preview.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: duduq-assets-stage-once
+  cancel-in-progress: false
+
+jobs:
+  stage-readonly-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout review-only game branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          path: game
+      - name: Checkout pinned source repository (never push here)
+        uses: actions/checkout@v4
+        with:
+          repository: augustoborgessousa93/Assets-DuduQ
+          ref: 658d94f08031820cfea5258a6f4e7c24f278df92
+          persist-credentials: false
+          path: assets-source
+          sparse-checkout: |
+            Imagens Ilustrativa
+          sparse-checkout-cone-mode: false
+      - name: Stage only 6 reviewed images, proving source blob identities
+        working-directory: game
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          export SRC="../assets-source/Imagens Ilustrativa"
+          export DEST="qa/assets-reuse-source/y1m04"
+          test "$(git -C ../assets-source rev-parse HEAD)" = 658d94f08031820cfea5258a6f4e7c24f278df92
+          mkdir -p "$DEST/Imagens Ilustrativa"
+          while IFS='|' read -r name blob; do
+            test -n "$name"
+            test "$(git -C ../assets-source hash-object "$PWD/$SRC/$name")" = "$blob"
+            cp "$SRC/$name" "$DEST/Imagens Ilustrativa/$name"
+          done <<'IMAGES'
+          school-object-backpack-mochila.png|f2f4ac58d70b8f25877e2fa3249a3bbc981e6da4
+          school-object-eraser-borracha.png|334a1fecdf362c6a19d50edb0ccc50db68606cb9
+          school-object-pencil-lapis.png|37a383e05c3c1bff123818b171c3bb9dc4a33c11
+          school-object-ruler-regua.png|2276abbd4f90caf142df84062c86d770ba394399
+          school-object-blue-pen-caneta-azul.png|a16e625f8f4d6e45e77542065946f81c69ac9e52
+          school-object-orange-crayon-giz-laranja.png|766e48fd1a750a0ceb723a4333e1515456a8d1f7
+          IMAGES
+          printf '%s\n' 658d94f08031820cfea5258a6f4e7c24f278df92 > "$DEST/.git-source-commit"
+          git add "$DEST"
+          test "$(git diff --cached --name-only | wc -l)" -eq 7
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "media(preview): stage 6 hash-pinned Assets-DuduQ images on QA branch only"
+          git push origin HEAD:integration/assets-duduq-resume-20261030
+
+      - name: Never merge or publish to official production
+        run: echo "Only image candidate files are committed to review branch. Official production unchanged."
