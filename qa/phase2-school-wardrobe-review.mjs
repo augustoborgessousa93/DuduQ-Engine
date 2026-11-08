@@ -8,7 +8,7 @@ assert.equal(process.env.DUDUQ_QA_ONLY,'1','QA_ONLY_REQUIRED');
 assert.equal(process.env.DUDUQ_VISUAL_REVIEW,'1','VISUAL_REVIEW_REQUIRED');
 const preview=process.argv.includes('--preview'),release=process.argv.includes('--release');
 assert(preview!==release,'EXPLICIT_MODE_REQUIRED');
-const plan=[{"concept":"wardrobe","filename":"Rug under the wardrobe.png","sha":"cabfeabf6ac782e8f7f9dcbe396c783cee465479","ids":["IMG-V11-2B-08D5ACD67E93CA67","IMG-V11-2B-0B16159183B80E80","IMG-V11-2B-F435C8A80D3092E3","IMG-V11-2B-F67459B4C2D5777B"]},{"concept":"school","filename":"Two schools — Duas escolas.png","sha":"702e16240ccdfd138d545e6725487b0cc3bc2848","ids":["IMG-V11-2B-55F3B7B7A481E819","IMG-V11-2B-86508FA2B8348F9D","IMG-V11-2B-A849656CB01FB3B4","IMG-V11-2B-E46D075F39FD3887"]}];
+const plan=[{"concept":"school","filename":"Two schools — Duas escolas.png","sha":"702e16240ccdfd138d545e6725487b0cc3bc2848","ids":["IMG-V11-2B-55F3B7B7A481E819","IMG-V11-2B-86508FA2B8348F9D","IMG-V11-2B-A849656CB01FB3B4","IMG-V11-2B-E46D075F39FD3887"]}];
 const sourceCommit='5d8a2e243eefaefaf403a0be838c529c6fe6ed64';
 const expectedRegistrySha='eea1cd3f6cff1cda4a18c3fa541786446a16b98524c35e27ced2c0db9b2aff21';
 const root='dist-pages/';
@@ -22,7 +22,7 @@ assert.equal(reg.entries.length,1166,'MEDIA_REGISTRY_COUNT_CHANGED');
 const byId=new Map(reg.entries.map(e=>[e.mediaId,e]));
 assert.equal(byId.size,reg.entries.length,'DUPLICATE_MEDIA_ID');
 const targets=plan.flatMap(p=>p.ids);
-assert.equal(targets.length,8);
+assert.equal(targets.length,4);
 assert.equal(new Set(targets).size,targets.length,'TARGET_ID_REPEATED');
 const fixture=JSON.parse(readFileSync('qa/fixtures/phase2-source-tree-558-20261107.json'));
 assert.equal(fixture.sha,sourceCommit,'UNPINNED_SOURCE_INVENTORY');
@@ -115,7 +115,7 @@ async function worker(){while(queue.length){
  }
 }}
 await Promise.all(Array.from({length:5},()=>worker()));
-assert.equal(actualImages.length,2,'NOT_TWO_PICTURES');
+assert.equal(actualImages.length,1,'NOT_ONE_PICTURE');
 // Verify 600 authored questions are identical to the immutable build and
 // prevent newly introduced identical-PNG correct-vs-distractor collisions.
 let questions=0;const linkedQuestions=new Map();
@@ -162,9 +162,9 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
  }
 }
 assert.equal(questions,600,'NOT_600_CONTRACTS');
-assert.equal(new Set(targets).size,8,'DUPLICATE_8_IDS');
+assert.equal(new Set(targets).size,4,'DUPLICATE_4_IDS');
 const unusedIds=targets.filter(id=>!(linkedQuestions.get(id)||[]).length);
-console.log('DUDUQ_SCHOOL_WARDROBE_ORPHAN_IDS='+JSON.stringify(unusedIds));
+console.log('DUDUQ_SCHOOL_EXACT_ORPHAN_IDS='+JSON.stringify(unusedIds));
 // The registry includes legacy media IDs not referenced by the current 600
 // contracts; they must not count as question improvements.
 assert(unusedIds.length < targets.length,'ALL_TARGET_MEDIA_IDS_ORPHANED');
@@ -181,7 +181,7 @@ const manifestCheck=new Map(nextManifest.trimEnd().split(/\n/).map(x=>{
 }));
 assert.equal(manifestCheck.size,manifestLines.length,'MANIFEST_DUPLICATED_FILES');
 for(const part of actualImages)assert.equal(manifestCheck.get(part.url),part.sha256,'IMAGE_MANIFEST_DIFF');
-const report={schema:'DUDUQ_SCHOOL_WARDROBE_CANDIDATE_V1',
+const report={schema:'DUDUQ_SCHOOL_EXACT_QA_V1',
  sourceCommit,previousRegistrySha:expectedRegistrySha,newRegistrySha:nextRegistrySha,
  mediaIdsUpdated:targets.length,concepts:plan.map(p=>p.concept),images:actualImages,
  affectedQuestionCount:[...new Set([...linkedQuestions.values()].flat())].length,
@@ -189,18 +189,18 @@ const report={schema:'DUDUQ_SCHOOL_WARDROBE_CANDIDATE_V1',
  contracts:600,sourcePngCount:558,noGabaritoChanges:true,notGeneratedImages:true,
  productionDeployed:release};
 mkdirSync('qa/results',{recursive:true});
-writeFileSync('qa/results/school-wardrobe-review-20261107.json',JSON.stringify(report,null,2)+'\n');
+writeFileSync('qa/results/school-only-review-20261107.json',JSON.stringify(report,null,2)+'\n');
 if(preview){
  const dir=root+'media-review';mkdirSync(dir,{recursive:true});
  const cards=actualImages.map(x=>'<article><img src="/'+x.url+'" alt="'+x.concept+'">'+
  '<h2>'+x.concept+'</h2><p>'+x.filename+'</p><small>'+x.ids.length+' mediaIds</small></article>').join('');
- const html='<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DUDUQ — School e Wardrobe</title>'+
+ const html='<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DUDUQ — School</title>'+
  '<style>body{font:16px Nunito,Arial;background:#f6f9ff;color:#234;padding:22px;max-width:1150px;margin:auto}main{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}article{background:white;padding:16px;border-radius:16px}img{width:100%;height:210px;object-fit:contain}h2{font-size:1.15rem}</style>'+
- '<h1>Revisão pedagógica — School e Wardrobe</h1><p>8 mediaIds em prévia; nenhuma questão ou gabarito alterado. Candidata QA não homologada.</p><main>'+cards+'</main></html>';
- writeFileSync(dir+'/school-wardrobe-review-20261107.html',html);
- writeFileSync(dir+'/school-wardrobe-review-20261107.json',JSON.stringify(report,null,2)+'\n');
+ '<h1>Revisão pedagógica — School</h1><p>4 mediaIds em prévia; nenhuma questão ou gabarito alterado. Candidata QA não homologada.</p><main>'+cards+'</main></html>';
+ writeFileSync(dir+'/school-only-review-20261107.html',html);
+ writeFileSync(dir+'/school-only-review-20261107.json',JSON.stringify(report,null,2)+'\n');
 }
-console.log('DUDUQ_SCHOOL_WARDROBE_QA_PASS='+JSON.stringify({
+console.log('DUDUQ_SCHOOL_EXACT_QA_PASS='+JSON.stringify({
  mediaIds:targets.length,pngsAdded:actualImages.filter(x=>!x.reused).length,
  pngsReused:actualImages.filter(x=>x.reused).length,
  concepts:report.concepts,affectedQuestions:report.affectedQuestionCount,
