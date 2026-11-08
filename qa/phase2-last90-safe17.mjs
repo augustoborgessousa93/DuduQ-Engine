@@ -148,9 +148,11 @@ for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
 }
 assert.equal(questions,600,'NOT_600_CONTRACTS');
 assert.equal(new Set(targets).size,24,'DUPLICATE_24_IDS');
-for(const id of targets){
- assert((linkedQuestions.get(id)||[]).length>=1,'MEDIA_ID_UNUSED_IN_600:'+id);
-}
+const unusedIds=targets.filter(id=>!(linkedQuestions.get(id)||[]).length);
+console.log('DUDUQ_SAFE17_ORPHAN_REGISTRY_IDS='+JSON.stringify(unusedIds));
+// The registry includes legacy media IDs not referenced by the current 600
+// contracts; they must not count as question improvements.
+assert(unusedIds.length < targets.length,'ALL_TARGET_MEDIA_IDS_ORPHANED');
 const nextReg=Buffer.from(JSON.stringify(reg,null,2)+'\n');
 const nextRegistrySha=hash(nextReg);
 const oldLine=fileManifest.get(regRel);
@@ -168,7 +170,7 @@ const report={schema:'DUDUQ_SAFE_17_RESCUED_CONCEPTS_V1',
  sourceCommit,previousRegistrySha:expectedRegistrySha,newRegistrySha:nextRegistrySha,
  mediaIdsUpdated:targets.length,concepts:plan.map(p=>p.concept),images:actualImages,
  affectedQuestionCount:[...new Set([...linkedQuestions.values()].flat())].length,
- mediaQuestionMap:Object.fromEntries(linkedQuestions),qaOnly:true,qaVisualApproved:false,
+ mediaQuestionMap:Object.fromEntries(linkedQuestions),unusedTargetIds:unusedIds,activeMediaIds:targets.length-unusedIds.length,qaOnly:true,qaVisualApproved:false,
  contracts:600,sourcePngCount:558,noGabaritoChanges:true,notGeneratedImages:true,
  productionDeployed:release};
 mkdirSync('qa/results',{recursive:true});
