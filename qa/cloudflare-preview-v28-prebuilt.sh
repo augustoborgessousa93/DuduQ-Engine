@@ -230,4 +230,64 @@ assert(!existsSync(root+'media-review/five-concepts.json'),'QA_DATA_LEAK_TO_PROD
 // already verified earlier in this build and must remain untouched.
 console.log('DUDUQ_FIVE_CONCEPT_RELEASE_SHA_MATCH_QA_071D149D=PASS');
 NODE
+# Exact SHA-pinned release from successfully verified candidate 42ef1b45.
+node --check qa/phase2-new-37-exact-media.mjs
+DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/phase2-new-37-exact-media.mjs --release
+node --input-type=module <<'NODE'
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {readFileSync,existsSync} from 'node:fs';
+const root='dist-pages/';
+const sha=b=>createHash('sha256').update(b).digest('hex');
+const registry='content/english/media/media-registry.json';
+const expected='116136a437e561f4d99f3509c68dfe0a86bfbb6e7472cd723bb1323dd2f41882';
+const regBytes=readFileSync(root+registry),reg=JSON.parse(regBytes);
+assert.equal(sha(regBytes),expected,'RELEASE_REGISTRY_DIFFERS_FROM_SUCCESSFUL_PREVIEW');
+const report=JSON.parse(readFileSync('qa/results/new-37-exact-20261107.json'));
+assert.equal(report.newRegistrySha,expected,'REPORT_DIFFERENT_FROM_QA');
+assert.equal(report.previousRegistrySha,
+ 'f7c8db9bae95722fa8255a1df5f1b55f4033ae93010ebfa2caef7c41591327f9',
+ 'PREVIOUS_PRODUCTION_ASSOCIATIONS_REGRESSED');
+assert.equal(report.mediaIdsUpdated,48);
+assert.equal(report.concepts.length,37);
+assert.equal(report.images.length,37);
+assert.equal(report.images.filter(x=>!x.reused).length,37);
+assert.equal(report.affectedQuestionCount,21);
+assert.equal(report.contracts,600);
+assert.equal(report.sourcePngCount,558);
+assert.equal(reg.entries.length,1166,'REGISTRY_ENTRY_COUNT_DIFFERENT');
+const byId=new Map(reg.entries.map(e=>[e.mediaId,e]));
+assert.equal(byId.size,1166);
+const manifest=new Map();
+for(const line of readFileSync(root+'.duduq-pages-manifest','utf8').trimEnd().split(/\r?\n/)){
+ const i=line.lastIndexOf(' ');assert(i>0);
+ const name=line.slice(0,i),digest=line.slice(i+1);
+ assert(!manifest.has(name),'DUPLICATED_MANIFEST_ENTRY:'+name);
+ manifest.set(name,digest);
+}
+assert.equal(manifest.get(registry),expected);
+for(const img of report.images){
+ assert(img.width>=512&&img.height>=512,'SOURCE_RESOLUTION_FAILED');
+ assert.equal(manifest.get(img.url),img.sha256,'SOURCE_MANIFEST_SHA_MISMATCH:'+img.filename);
+ assert.equal(sha(readFileSync(root+img.url)),img.sha256,'SOURCE_BYTES_DIFFER_FROM_QA:'+img.filename);
+ for(const id of img.ids){
+  const e=byId.get(id);
+  assert(e,'SOURCE_ID_MISSING:'+id);
+  assert.equal(e.semantic,img.concept,'SOURCE_ID_WRONG_CONCEPT:'+id);
+  assert.equal(e.urlOrPath,img.url,'SOURCE_ID_WRONG_PNG:'+id);
+  assert.equal(e.sha256,img.sha256,'SOURCE_ID_WRONG_HASH:'+id);
+ }
+}
+let contracts=0;
+for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
+ const p='content/english/year-'+y+'/module-'+String(m).padStart(2,'0')+'/questions.json';
+ const q=JSON.parse(readFileSync(root+p));
+ assert.equal(q.items.length,20,'CONTRACT_MISSING:'+p);
+ contracts+=q.items.length;
+}
+assert.equal(contracts,600);
+assert(!existsSync(root+'media-review/new-37-exact-20261107.html'),'QA_GALLERY_SHOULD_NOT_BE_PRODUCTION');
+assert(!existsSync(root+'media-review/new-37-exact-20261107.json'),'QA_REPORT_SHOULD_NOT_BE_PRODUCTION');
+console.log('DUDUQ_NEW_37_EXACT_MEDIA_RELEASE_QA_IDENTICAL=PASS');
+NODE
 echo "DUDUQ_RELEASE_ARTIFACT_269_BINDINGS_97_PNGS_AND_PROPORTIONAL_MEDIA_FIT"
