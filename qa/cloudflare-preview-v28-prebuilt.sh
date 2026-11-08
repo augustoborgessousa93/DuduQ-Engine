@@ -412,4 +412,66 @@ assert(!existsSync(root+'media-review/school-only-review-20261107.html'),'QA_GAL
 assert(!existsSync(root+'media-review/school-only-review-20261107.json'),'QA_REPORT_IN_PROD');
 console.log('DUDUQ_SCHOOL_RELEASE_IDENTICAL_TO_PREVIEW_2349BEB3=PASS');
 NODE
+node --check qa/phase2-ben-nationality-review.mjs
+DUDUQ_QA_ONLY=1 DUDUQ_VISUAL_REVIEW=1 node qa/phase2-ben-nationality-review.mjs --release
+node --input-type=module <<'NODE'
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {readFileSync,existsSync} from 'node:fs';
+const root='dist-pages/',digest=b=>createHash('sha256').update(b).digest('hex');
+const registryRel='content/english/media/media-registry.json';
+const qaSha='e2d1236cdcd59c3ef64278d7299e9f024f29c76ddbe7a80c24511b9eabb2aaac';
+const previous='ae9e3142fdf7330534ebb063f57bf7ed69f33b8e41ac13a2cc87d5e5889c692a';
+const registryBytes=readFileSync(root+registryRel);
+assert.equal(digest(registryBytes),qaSha,'PRODUCTION_REGISTRY_DIFFERS_FROM_QA_PREVIEW');
+const reg=JSON.parse(registryBytes),byId=new Map(reg.entries.map(x=>[x.mediaId,x]));
+assert.equal(reg.entries.length,1166,'REGISTRY_COUNT_CHANGED');
+assert.equal(byId.size,1166,'DUPLICATE_MEDIA_ID');
+const report=JSON.parse(readFileSync('qa/results/ben-nationality-review-20261108.json'));
+assert.equal(report.previousRegistrySha,previous,'PREVIOUS_PUBLISHED_MEDIA_CHANGED');
+assert.equal(report.newRegistrySha,qaSha,'QA_HASH_MISMATCH');
+assert.deepEqual(report.concepts,['ben','nationality'],'UNEXPECTED_PEDAGOGICAL_CONCEPT');
+assert.equal(report.mediaIdsUpdated,2);
+assert.equal(report.activeMediaIds,2);
+assert.deepEqual(report.unusedTargetIds,[]);
+assert.equal(report.affectedQuestionCount,10);
+assert.equal(report.images.length,2);
+assert.equal(report.images.filter(x=>!x.reused).length,2);
+assert.equal(report.contracts,600);
+const pins=new Map([
+ ['ben',{name:'ben.png',blob:'b74ef11cf37987ead633c303226b85a24787a2b9',id:'Y1M01-EMOJI-BEN-001'}],
+ ['nationality',{name:'duas crianças em idade escolar representando nacionalidades diferentes.png',blob:'986eb7462629c1194e771270332c3e8234c5070e',id:'IMG-V11-2B-B659C004CC1CEFAF'}]
+]);
+const manifest=new Map();
+for(const line of readFileSync(root+'.duduq-pages-manifest','utf8').trimEnd().split(/\r?\n/)){
+ const at=line.lastIndexOf(' ');assert(at>0,'BAD_MANIFEST');
+ const p=line.slice(0,at),hash=line.slice(at+1);
+ assert(!manifest.has(p),'MANIFEST_DUPLICATE:'+p);
+ manifest.set(p,hash);
+}
+assert.equal(manifest.get(registryRel),qaSha);
+for(const image of report.images){
+ const pin=pins.get(image.concept);assert(pin);
+ assert.equal(image.filename,pin.name);
+ assert.equal(image.sha,pin.blob);
+ assert.deepEqual(image.ids,[pin.id]);
+ assert.equal(manifest.get(image.url),image.sha256,'SOURCE_NOT_MANIFESTED');
+ assert.equal(digest(readFileSync(root+image.url)),image.sha256,'SOURCE_PNG_BYTES_CHANGED');
+ assert(image.width>=512&&image.height>=512,'SOURCE_TOO_SMALL');
+ const entry=byId.get(pin.id);assert(entry,'SOURCE_MEDIA_ID_MISSING');
+ assert.equal(entry.semantic,image.concept);
+ assert.equal(entry.urlOrPath,image.url);
+ assert.equal(entry.sha256,image.sha256);
+}
+let count=0;
+for(let y=1;y<=5;y++)for(let m=1;m<=6;m++){
+ const p='content/english/year-'+y+'/module-'+String(m).padStart(2,'0')+'/questions.json';
+ const q=JSON.parse(readFileSync(root+p));assert.equal(q.items.length,20,'QUESTION_NOT_20:'+p);
+ count+=q.items.length;
+}
+assert.equal(count,600);
+assert(!existsSync(root+'media-review/ben-nationality-review-20261108.html'),'QA_PAGE_NOT_ALLOWED_IN_PROD');
+assert(!existsSync(root+'media-review/ben-nationality-review-20261108.json'),'QA_DATA_NOT_ALLOWED_IN_PROD');
+console.log('DUDUQ_BEN_NATIONALITY_RELEASE_QA_SHA_MATCH=PASS');
+NODE
 echo "DUDUQ_RELEASE_ARTIFACT_269_BINDINGS_97_PNGS_AND_PROPORTIONAL_MEDIA_FIT"
