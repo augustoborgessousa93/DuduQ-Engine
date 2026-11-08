@@ -362,7 +362,7 @@ import {createHash} from 'node:crypto';
 import {readFileSync,existsSync} from 'node:fs';
 const root='dist-pages/',sha=b=>createHash('sha256').update(b).digest('hex');
 const regRel='content/english/media/media-registry.json';
-const expected='ae9e3142fdf7330534abb063f57bf7ed69f33b8e41ac13a2cc87d5e5889c692a';
+const expected='ae9e3142fdf7330534ebb063f57bf7ed69f33b8e41ac13a2cc87d5e5889c692a';
 const before='eea1cd3f6cff1cda4a18c3fa541786446a16b98524c35e27ced2c0db9b2aff21';
 const regBytes=readFileSync(root+regRel);
 assert.equal(sha(regBytes),expected,'REGISTRY_DIFFERENT_FROM_SCHOOL_PREVIEW');
