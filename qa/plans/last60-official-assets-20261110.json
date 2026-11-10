@@ -285,11 +285,16 @@
     {
       "mediaId": "IMG-Q020-SMALL",
       "semantic": "small",
-      "filename": "small_red_apple.png",
-      "blobSha": "5fde7fc3b17d91a9c7ccd56c7050b65761e3e935",
-      "bytes": 2304255,
-      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
-      "pedagogicalRisk": "HEIGHTENED"
+      "filename": "small apple.png",
+      "blobSha": "b7608496a725003b781d901fb9dcb120a53f5999",
+      "bytes": 352930,
+      "reviewStatus": "VISUAL_COMPARISON_APPROVED_FOR_STAGING_REVIEW_ONLY",
+      "pedagogicalRisk": "HEIGHTENED",
+      "visualReviewEvidence": {
+        "workflowRun": 42925605454,
+        "comparison": "qa/results/apple-compare/comparison.png",
+        "finding": "Visible apple occupies substantially smaller rendered area than small_red_apple.png; pedagogical QA still pending."
+      }
     },
     {
       "mediaId": "IMG-V11-2B-522ABAF0F8E39107",
