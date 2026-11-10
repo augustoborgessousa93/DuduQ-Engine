@@ -160,6 +160,13 @@ jobs:
           console.log('6_REAL_BROWSER_SCREENSHOTS_PASS_NOT_PEDAGOGICAL_HOMOLOGATION');
           NODE
 
+      - name: Boot all 65 affected question routes in mobile and desktop Chromium
+        env:
+          BASE_URL: http://127.0.0.1:4175
+        run: |
+          node --check qa/last60-affected-question-chromium.mjs
+          node qa/last60-affected-question-chromium.mjs
+
       - name: Archive reproducible compiled QA candidate
         if: success()
         run: |
@@ -177,6 +184,7 @@ jobs:
           if-no-files-found: warn
           path: |
             qa/results/last60-candidate-20261110.json
+            qa/results/last60-affected-question-chromium-20261110.json
             qa/results/last60-baseline-manifest-drift.json
             qa/results/last60-browser-20261110/**
             qa/results/last60-archive-sha256.txt
