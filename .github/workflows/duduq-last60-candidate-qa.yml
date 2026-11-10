@@ -55,6 +55,12 @@ jobs:
           bash qa/cloudflare-preview-v28-prebuilt.sh
           test -s dist-pages/.duduq-pages-manifest
 
+      - name: Normalize only verified stale predecessor manifest hash (fail-closed)
+        run: |
+          set -Eeuo pipefail
+          node --check qa/normalize-last60-baseline-manifest.mjs
+          node qa/normalize-last60-baseline-manifest.mjs
+
       - name: Integrate 60 candidate assets without touching production
         run: |
           set -Eeuo pipefail
@@ -171,6 +177,7 @@ jobs:
           if-no-files-found: warn
           path: |
             qa/results/last60-candidate-20261110.json
+            qa/results/last60-baseline-manifest-drift.json
             qa/results/last60-browser-20261110/**
             qa/results/last60-archive-sha256.txt
             qa/results/duduq-last60-candidate.tar.gz
