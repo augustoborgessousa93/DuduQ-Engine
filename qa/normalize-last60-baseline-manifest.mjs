@@ -13,6 +13,9 @@ const sha=b=>createHash('sha256').update(b).digest('hex');
 const allowed=new Map([['play/bubble-pop/index.html',{
  expected:'b9a36fb206af68f50859b17d8e0a9811ce6562c4289c4dc25a0add98b4fe002d',
  actual:'9c8ed6d154dcc2bd7fa24245c135b2cdeb67d08ea2501a854a301536199c3fa5'
+}],['play/target-shooter/index.html',{
+ expected:'b6d6f17ed6643b4a33cb15f937198f01043e43a9b080f7c4adc9ba298dec00f4',
+ actual:'d7d314127040f5696d2e9e5cc142c2fe9886127af74b1c705d5c62f81385a93a'
 }]]);
 const original=readFileSync(mp,'utf8'),rows=original.trimEnd().split(/\r?\n/),seen=new Set(),drifts=[];
 rows.forEach((row,i)=>{
