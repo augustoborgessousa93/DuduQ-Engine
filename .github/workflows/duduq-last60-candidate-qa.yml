@@ -1,0 +1,183 @@
+name: DUDUQ Last60 Isolated Media QA
+
+on:
+  push:
+    branches:
+      - staging/duduq-last60-new-assets-20261110
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: duduq-last60-staging-20261110
+  cancel-in-progress: true
+
+jobs:
+  review-compiled-60:
+    runs-on: ubuntu-latest
+    timeout-minutes: 85
+    env:
+      CI: "true"
+      DUDUQ_QA_ONLY: "1"
+      DUDUQ_VISUAL_REVIEW: "1"
+      CF_PAGES_BRANCH: release/duduq-phase2-orange-fruit-20261103
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Verify exact source plan and candidate syntax
+        run: |
+          set -Eeuo pipefail
+          node --check qa/phase2-last60-candidate.mjs
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          const p=JSON.parse(readFileSync('qa/plans/last60-official-assets-20261110.json'));
+          const t=JSON.parse(readFileSync('qa/fixtures/source-tree-617-20261110.json'));
+          assert.equal(p.assignments.length,60);
+          assert.equal(new Set(p.assignments.map(x=>x.mediaId)).size,60);
+          assert.equal(new Set(p.assignments.map(x=>x.semantic)).size,25);
+          assert.equal(new Set(p.assignments.map(x=>x.blobSha)).size,59);
+          assert.equal(t.sha,p.sourceCommit);
+          assert.equal(t.tree.filter(x=>x.path.startsWith('Imagens Ilustrativa/')&&/\.png$/i.test(x.path)).length,617);
+          console.log('SOURCE_PINS_PASS_60_MEDIA_59_PNGS');
+          NODE
+
+      - name: Reconstruct exact 08-Nov published release (isolated)
+        run: |
+          set -Eeuo pipefail
+          bash qa/cloudflare-preview-v28-prebuilt.sh
+          test -s dist-pages/.duduq-pages-manifest
+
+      - name: Integrate 60 candidate assets without touching production
+        run: |
+          set -Eeuo pipefail
+          node qa/phase2-last60-candidate.mjs --preview
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          import path from 'node:path';
+          const r=JSON.parse(readFileSync('qa/results/last60-candidate-20261110.json'));
+          const root=path.resolve('dist-pages');
+          const sha=b=>createHash('sha256').update(b).digest('hex');
+          assert.equal(r.mediaIdsUpdated,60);
+          assert.equal(r.uniqueSourcePngs,59);
+          assert.equal(r.provisionalSvgLinksInCandidate,0);
+          assert.equal(r.contracts,600);
+          assert.equal(r.modules,30);
+          assert.equal(r.productionDeployed,false);
+          assert.equal(r.pedagogicalQaApproved,false);
+          const known=new Set();
+          for(const row of readFileSync(path.join(root,'.duduq-pages-manifest'),'utf8').trimEnd().split(/\r?\n/)){
+            const i=row.lastIndexOf(' '),file=row.slice(0,i),digest=row.slice(i+1);
+            assert(i>0&&/^[a-f0-9]{64}$/.test(digest)&&!known.has(file),'MANIFEST_FORMAT_FAIL');
+            const abs=path.resolve(root,file);
+            assert(abs.startsWith(root+path.sep),'UNSAFE_MANIFEST_PATH');
+            assert.equal(sha(readFileSync(abs)),digest,'HASH_MISMATCH:'+file);
+            known.add(file);
+          }
+          console.log('COMPILED_MANIFEST_AND_600_QUESTION_QA_PASS');
+          NODE
+
+      - name: Start local QA HTTP server
+        run: |
+          set -Eeuo pipefail
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory dist-pages >/tmp/duduq-last60-http.log 2>&1 &
+          for n in $(seq 1 35); do
+            if curl -fsS http://127.0.0.1:4175/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-last60-http.log
+          exit 1
+
+      - name: Smoke 30 public QA routes and all 59 distinct source images
+        run: |
+          set -Eeuo pipefail
+          for y in 1 2 3 4 5; do
+            for m in 01 02 03 04 05 06; do
+              curl -fsSL "http://127.0.0.1:4175/play/english/year-$y/module-$m/" >/dev/null
+            done
+          done
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const r=JSON.parse(readFileSync('qa/results/last60-candidate-20261110.json'));
+          const paths=new Map(r.bindings.map(x=>[x.url,x.sha256]));
+          assert.equal(paths.size,59);
+          for(const [url,digest] of paths){
+            const response=await fetch('http://127.0.0.1:4175/'+url);
+            assert(response.ok,'PNG_HTTP_NOT_200:'+url);
+            const bytes=Buffer.from(await response.arrayBuffer());
+            assert.equal(createHash('sha256').update(bytes).digest('hex'),digest,'HTTP_IMAGE_HASH_CHANGED:'+url);
+          }
+          console.log('30_MODULE_ROUTES_AND_59_PNGS_HTTP_PASS');
+          NODE
+
+      - name: Install actual Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Capture 3 viewports in two affected modules
+        run: |
+          node --input-type=module <<'NODE'
+          import {chromium} from 'playwright';
+          import {mkdirSync,writeFileSync} from 'node:fs';
+          import assert from 'node:assert/strict';
+          mkdirSync('qa/results/last60-browser-20261110',{recursive:true});
+          const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+          const report=[];
+          try {
+            for(const mod of ['year-1/module-06','year-5/module-05'])
+              for(const [w,h] of [[390,844],[844,390],[1280,800]]){
+                const page=await browser.newPage({viewport:{width:w,height:h}});
+                const errors=[];page.on('pageerror',e=>errors.push(e.message));
+                const resp=await page.goto('http://127.0.0.1:4175/play/english/'+mod+'/',{waitUntil:'domcontentloaded',timeout:45000});
+                assert.equal(resp.status(),200,'ROUTE_ERROR:'+mod);
+                await page.waitForTimeout(2500);
+                const screenshot='qa/results/last60-browser-20261110/'+mod.replace('/','-')+'-'+w+'x'+h+'.png';
+                await page.screenshot({path:screenshot,fullPage:true});
+                report.push({module:mod,viewport:w+'x'+h,errors,screenshot});
+                assert.equal(errors.length,0,'CHROMIUM_PAGEERROR:'+mod+':'+errors.join(','));
+                await page.close();
+              }
+          }finally{await browser.close();}
+          writeFileSync('qa/results/last60-browser-20261110/summary.json',JSON.stringify(report,null,2));
+          console.log('6_REAL_BROWSER_SCREENSHOTS_PASS_NOT_PEDAGOGICAL_HOMOLOGATION');
+          NODE
+
+      - name: Archive reproducible compiled QA candidate
+        if: success()
+        run: |
+          set -Eeuo pipefail
+          tar -czf qa/results/duduq-last60-candidate.tar.gz -C dist-pages .
+          sha256sum qa/results/duduq-last60-candidate.tar.gz >qa/results/last60-archive-sha256.txt
+
+      - name: Save QA report, screenshots and compiled review candidate
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-last60-qa-${{ github.run_id }}
+          retention-days: 14
+          compression-level: 0
+          if-no-files-found: warn
+          path: |
+            qa/results/last60-candidate-20261110.json
+            qa/results/last60-browser-20261110/**
+            qa/results/last60-archive-sha256.txt
+            qa/results/duduq-last60-candidate.tar.gz
+            qa/plans/last60-official-assets-20261110.json
+
+      - name: Release boundary
+        if: always()
+        run: |
+          echo "NO PRODUCTION DEPLOY. NO MERGE. NO GOLD MASTER OR QUESTION CHANGES."
+          echo "Visual and pedagogical QA remain required before release."
