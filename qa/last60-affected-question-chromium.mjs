@@ -38,7 +38,7 @@ const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 const jobs=viewports.flatMap(view=>active.map(id=>({view,id,q:questionMap.get(id)})));
 const output={schema:'DUDUQ_LAST60_REAL_CHROMIUM_AFFECTED_QUESTION_BOOT_V1',date:'2026-11-10',
  mediaIds:60,pngs:59,affectedQuestions:65,viewports:viewports.map(v=>v.name),
- expectedRouteBoots:jobs.length,results:[],failed:[],renderedMediaIds:[],allGameplayInteractionsTested:false,
+ expectedRouteBoots:jobs.length,sessionGateMode:'Y1M01 official Q001 bootstrap then synthetic QA index; not gameplay',results:[],failed:[],renderedMediaIds:[],allGameplayInteractionsTested:false,
  productionDeployed:false,pedagogicalQaApproved:false};
 let cursor=0;
 async function work(){
@@ -54,6 +54,35 @@ async function work(){
   page.on('response',r=>{if(r.url().includes('assets-duduq/')&&r.status()>=400)pngNetworkFailures.push({url:r.url(),status:r.status()});});
   const entry={id,module,mechanic:mech,viewport:view.name,url,expectedMediaIds:(bindByQuestion.get(id)||[]).map(x=>x.id),loadedMediaIds:[],brokenExpectedImages:[],httpStatus:null,gameRootFound:false,pageErrors:[],pass:false,error:null};
   try{
+   // Y1M01 has a canonical session gate. Direct URLs for Q011/Q015 without
+   // session are intentionally rejected. Bootstrap through the real Q001
+   // launch route, verify its session, then set the specific test index.
+   // This is a TARGETED BOOT TEST ONLY, NOT a gameplay completion proof.
+   if(module==='Y1M01'&&id!=='Y1M01-Q001'){
+    const firstUrl=base+'/play/target-shooter/?duduqModule=Y1M01&duduqItem=Y1M01-Q001&duduqStart=Y1M01';
+    const first=await page.goto(firstUrl,{waitUntil:'domcontentloaded',timeout:40000});
+    assert.equal(first?.status(),200,'Y1M01_SESSION_START_NOT_200');
+    await page.waitForFunction(()=>{
+      for(const key of Object.keys(sessionStorage)){
+       try{
+        const state=JSON.parse(sessionStorage.getItem(key)||'null');
+        if(state?.moduleId==='Y1M01'&&state.index===0&&state.itemId==='Y1M01-Q001')return true;
+       }catch{}
+      }
+      return false;
+    },null,{timeout:18000});
+    const sessionIndex=Number(id.slice(-3))-1;
+    assert(Number.isInteger(sessionIndex)&&sessionIndex>=1&&sessionIndex<20,'INVALID_Y1M01_TARGET_INDEX');
+    await page.evaluate(({sessionIndex,selectedId})=>{
+      const sessionKey=Object.keys(sessionStorage).find(key=>{
+       try{return JSON.parse(sessionStorage.getItem(key)||'null')?.moduleId==='Y1M01';}catch{return false;}
+      });
+      if(!sessionKey)throw Error('Y1M01_OFFICIAL_SESSION_NOT_INITIALIZED');
+      sessionStorage.setItem(sessionKey,JSON.stringify({moduleId:'Y1M01',index:sessionIndex,itemId:selectedId}));
+    },{sessionIndex,selectedId:id});
+    entry.syntheticQaSessionIndex=sessionIndex;
+    entry.canonicalSessionBootstrapped=true;
+   }
    const resp=await page.goto(url,{waitUntil:'domcontentloaded',timeout:40000});
    entry.httpStatus=resp?.status()??null;
    await page.locator('#game').waitFor({state:'attached',timeout:20000});
