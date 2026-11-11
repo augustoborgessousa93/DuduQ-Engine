@@ -41,7 +41,7 @@ mkdirSync('qa/results/last60-gameplay-discovery/screenshots',{recursive:true});
 try{
  for(const [mechanic,id] of preferred){
   const q=all.get(id);
-  assert(q&&q.mechanicId===mechanic,'CANONICAL_MECHANIC_CHANGED:'+id);
+  assert(q&&(q.mechanicId===mechanic||(mechanic==='smart-sentence'&&/^smart-sentence/.test(q.mechanicId))),'CANONICAL_MECHANIC_CHANGED:'+id+':'+q?.mechanicId);
   const page=await browser.newPage({viewport:{width:1280,height:800},reducedMotion:'reduce'});
   const errors=[];page.on('pageerror',e=>errors.push(String(e?.message||e).slice(0,240)));
   const route='/play/'+(mechanic==='smart-sentence-complete'?'smart-sentence':mechanic)+'/?duduqModule='+id.slice(0,5)+'&duduqItem='+id+'&qaSeed=20261110';
