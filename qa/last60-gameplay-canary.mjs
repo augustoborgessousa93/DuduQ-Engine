@@ -120,6 +120,14 @@ async function testSmart(page,q,r){
  await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',null,{timeout:20000});
  await realClick(page.locator('.smart-sentence-option[data-option-id$="-'+answer+'"]'),r,'correct-word');
  await page.locator('.smart-sentence-confirm-action').waitFor({state:'visible',timeout:9000});
+ await page.waitForTimeout(900);
+ const confirmState=await page.locator('.smart-sentence-confirm-action').evaluate(e=>({
+   disabled:e.disabled,ariaDisabled:e.getAttribute('aria-disabled'),
+   hidden:e.hidden,visualState:document.querySelector('[data-answer-slot]')?.dataset?.visualState,
+   optionTexts:[...document.querySelectorAll('.smart-sentence-option')].filter(n=>n.classList.contains('is-selected')).map(n=>n.textContent?.trim())
+ }));
+ r.confirmAfterRetry=confirmState;
+ assert(!confirmState.disabled,'SMART_CONFIRM_NATIVE_DISABLED_AFTER_RETRY:'+JSON.stringify(confirmState));
  await realClick(page.locator('.smart-sentence-confirm-action'),r,'confirm-correct');
  await feedback(page,'correct',r);await snap(page,r,'correct');
 }
@@ -140,6 +148,7 @@ async function testMatching(page,q,r){
   await realClick(page.locator('.matching-card[data-id="'+right+'"]'),r,'pair-right-'+right);
   await page.waitForTimeout(250);
  }
+ await realClick(page.getByRole('button',{name:/confirmar/i}).last(),r,'matching-confirm-all-pairs');
  await feedback(page,'correct',r);await snap(page,r,'correct');
 }
 async function testMemory(page,q,r){
@@ -165,7 +174,7 @@ async function testMultimedia(page,q,r){
  const assignments=q.answerKey;assert(assignments&&typeof assignments==='object'&&!Array.isArray(assignments),'MULTIMEDIA_PLACEMENTS_MISSING');
  r.canonical={assignments};
  for(const [source,target] of Object.entries(assignments)){
-  await realDrag(page.locator('[data-item-id="'+source+'"]').first(),page.locator('[data-target-id="'+target+'"]').first(),r,'audio-drag-'+source+'-'+target);
+  await realDrag(page.locator('[data-item-id="'+source+'"]').first(),page.locator('[data-drop-target-id="'+target+'"]').first(),r,'audio-drag-'+source+'-'+target);
   await page.waitForTimeout(140);
  }
  await page.locator('.dnd-confirm-action').waitFor({state:'visible',timeout:13000});
@@ -188,20 +197,40 @@ async function testGrouping(page,q,r){
 async function testBubble(page,q,r){
  const answer=q.answerKey;assert(typeof answer==='string','BUBBLE_TARGET_MISSING');
  r.canonical={answer};
- let successful=false;
- for(let i=0;i<28;i++){
-  const a=page.locator('.feedback-ribbon[data-feedback="correct"]');
-  if(await a.isVisible().catch(()=>false)){successful=true;break;}
-  const b=page.locator('.bubble-pop-playable:not([disabled])').first();
-  await b.waitFor({state:'visible',timeout:13000});
-  const sig=await b.evaluate(e=>({id:e.dataset.bubbleId,text:e.querySelector('.bubble-pop-content')?.textContent?.trim().slice(0,70),alt:e.querySelector('.bubble-pop-content img')?.alt||null}));
-  await realClick(b,r,'pop-bubble-'+i);
-  r.bubbles??=[];r.bubbles.push(sig);
-  await page.waitForTimeout(700);
+ const seen=new Set();
+ for(let i=0;i<32;i++){
+  const good=page.locator('.feedback-ribbon[data-feedback="correct"]');
+  if(await good.isVisible().catch(()=>false))break;
+  const bad=page.locator('.feedback-ribbon[data-feedback="incorrect"]');
+  if(await bad.isVisible().catch(()=>false)){
+   const label=(await page.locator('.feedback-action').textContent()).trim();
+   assert(/tentar|retry/i.test(label),'BUBBLE_RETRY_TEXT_MISSING');
+   r.feedbackStates.push({kind:'incorrect',text:label});
+   await snap(page,r,'incorrect-'+i);
+   await realClick(page.locator('.feedback-action'),r,'bubble-retry-'+i);
+   await page.waitForFunction(()=>document.querySelector('.feedback-ribbon')?.hidden===true,null,{timeout:14000});
+   await page.waitForTimeout(400);
+   continue;
+  }
+  await page.waitForFunction(seen=>{
+    return [...document.querySelectorAll('.bubble-pop-playable:not([disabled])')]
+      .some(el=>!seen.includes(el.dataset.bubbleId)&&el.getBoundingClientRect().width>10);
+  },[...seen],{timeout:13500});
+  const candidates=await page.locator('.bubble-pop-playable:not([disabled])').evaluateAll(els=>els.map(el=>({
+   id:el.dataset.bubbleId,text:el.querySelector('.bubble-pop-content')?.textContent?.trim()||'',
+   alt:el.querySelector('.bubble-pop-content img')?.alt||''
+  })));
+  const candidate=candidates.find(c=>!seen.has(c.id));
+  assert(candidate,'NEW_BUBBLE_NOT_FOUND');
+  seen.add(candidate.id);
+  r.bubbles??=[];r.bubbles.push(candidate);
+  await realClick(page.locator('.bubble-pop-playable[data-bubble-id="'+candidate.id+'"]'),r,'pop-'+candidate.id);
+  await page.waitForTimeout(1100);
  }
- if(!successful)await page.locator('.feedback-ribbon[data-feedback="correct"]').waitFor({state:'visible',timeout:12000});
+ const good=page.locator('.feedback-ribbon[data-feedback="correct"]');
+ await good.waitFor({state:'visible',timeout:16000});
  r.correctFeedbackSeen=true;
- r.feedbackStates.push({kind:'correct',text:(await page.locator('.feedback-ribbon[data-feedback="correct"]').textContent()).trim().slice(0,140)});
+ r.feedbackStates.push({kind:'correct',text:(await good.textContent()).trim().slice(0,140)});
  await snap(page,r,'correct');
 }
 const games={ 'target-shooter':testTarget,'matching':testMatching,'smart-sentence':testSmart,
