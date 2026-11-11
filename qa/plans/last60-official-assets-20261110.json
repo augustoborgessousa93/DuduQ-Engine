@@ -1,0 +1,561 @@
+{
+  "schema": "DUDUQ_LAST60_MEDIA_REVIEW_PLAN_V1",
+  "created": "2026-11-10",
+  "productionDeploymentId": "c84a66a2-d311-4d2b-96ce-90165db4171c",
+  "baseReleaseSha": "c250b1a942ecce5c27670411906550b7f06ec362",
+  "baseRegistrySha256": "e2d1236cdcd59c3ef64278d7299e9f024f29c76ddbe7a80c24511b9eabb2aaac",
+  "sourceRepo": "augustoborgessousa93/Assets-DuduQ",
+  "sourceCommit": "d73bd053f241e84ffae9a554b5dc7d3d53df0139",
+  "expectedEntries": 1166,
+  "expectedPendingSvg": 60,
+  "expectedConcepts": 25,
+  "expectedSourcePngs": 617,
+  "mode": "ISOLATED_QA_ONLY",
+  "assignments": [
+    {
+      "mediaId": "Y1M01-EMOJI-BOOK-001",
+      "semantic": "book",
+      "filename": "Reading — Lendo.png",
+      "blobSha": "52019f75341009c2e3900e1581e7da1baac2c036",
+      "bytes": 1500527,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "Y1M01-EMOJI-OBJECTS-001",
+      "semantic": "objects",
+      "filename": "Objects.png",
+      "blobSha": "069a71b610e7ccc54715996eb9b0656cd4bb5bab",
+      "bytes": 1386102,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "Y1M01-EMOJI-THINKING-001",
+      "semantic": "thinking",
+      "filename": "thinking.png",
+      "blobSha": "66edcced915b164c726eda3a5bd144e24bdad9b7",
+      "bytes": 802963,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-Y1M05-Q001-LEGS",
+      "semantic": "legs",
+      "filename": "Criança de corpo inteiro em pé, vestindo bermuda, com as duas pernas claramente visíveis.png",
+      "blobSha": "256612c710c733a4abfc9ad302b6788eda72c85c",
+      "bytes": 763980,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q003-YELLOW-FISH",
+      "semantic": "yellow fish",
+      "filename": "yellow_fish.png",
+      "blobSha": "d62a7eb945a9f0254ab3d7805fa236fb2ac772bc",
+      "bytes": 1099233,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-Q003-YELLOW-FISH",
+      "semantic": "yellow fish",
+      "filename": "yellow_fish.png",
+      "blobSha": "d62a7eb945a9f0254ab3d7805fa236fb2ac772bc",
+      "bytes": 1099233,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q003-GREEN-RABBIT",
+      "semantic": "green rabbit",
+      "filename": "Coelho verde.png",
+      "blobSha": "4d9897e6453a1fc5e28b03b63c92c332de0f66c8",
+      "bytes": 1491527,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q003-RED-BIRD",
+      "semantic": "red bird",
+      "filename": "Passaro vermelho.png",
+      "blobSha": "82498faf47d7ffbcaeb3a52c8cdbfa1fef3cb2fd",
+      "bytes": 1566853,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q003-BLUE-TURTLE",
+      "semantic": "blue turtle",
+      "filename": "Tartaruga azul.png",
+      "blobSha": "e76c3d5228d14b09ac62ac81df679a2fc524e5b0",
+      "bytes": 1328766,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q003-YELLOW-HAMSTER",
+      "semantic": "yellow hamster",
+      "filename": "Hamster amarelo.png",
+      "blobSha": "b836ae25578f4cd7182b7e821527e0103a4465ce",
+      "bytes": 1927278,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q003-GREEN-SPIDER",
+      "semantic": "green spider",
+      "filename": "Aranha verde.png",
+      "blobSha": "5a22f6e15600245a23d666b73acb55655f32ac3c",
+      "bytes": 1322312,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q003-RED-DOG",
+      "semantic": "red dog",
+      "filename": "Dog vermelho.png",
+      "blobSha": "c92212c0363473af180db1f43240c356c3c0a6d1",
+      "bytes": 1753736,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-Q008-SPIDER",
+      "semantic": "spider",
+      "filename": "Aranha marrom.png",
+      "blobSha": "c408c69c7fc80928f6300232e0985948dc4fbaf7",
+      "bytes": 1503835,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q009-SPIDER",
+      "semantic": "spider",
+      "filename": "Aranha roxa.png",
+      "blobSha": "7a78253001a468919d16a32e27be21782f7ba91b",
+      "bytes": 1223706,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q011-SPIDER",
+      "semantic": "spider",
+      "filename": "Aranha azul.png",
+      "blobSha": "92d23180731660e7d0c5f94026a3004fadc2feb5",
+      "bytes": 1252763,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q012-SPIDER",
+      "semantic": "spider",
+      "filename": "Aranha laranja.png",
+      "blobSha": "8ea9226de996a12a1fa2f09a409b6e95f87eaed5",
+      "bytes": 1164237,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q014-SPIDER",
+      "semantic": "spider",
+      "filename": "Aranha rosa.png",
+      "blobSha": "c110523778d5bb26d64c149c0d59015a73ef6984",
+      "bytes": 1424889,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q016-SPIDER",
+      "semantic": "spider",
+      "filename": "Aranha cinza-escura.png",
+      "blobSha": "d3ce5d10897c7159708929b6f7c7d54d3bea60ec",
+      "bytes": 1141749,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-Q016-SPIDER",
+      "semantic": "spider",
+      "filename": "Aranha turquesa.png",
+      "blobSha": "997297b12312121214ce46648aae169d0615b657",
+      "bytes": 1181690,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-Q018-SPIDER",
+      "semantic": "spider",
+      "filename": "Aranha lilás.png",
+      "blobSha": "fc4c1870dc81aa501e25267b279b978a567970b3",
+      "bytes": 1278960,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-Q009-BIG",
+      "semantic": "big",
+      "filename": "duduq_big_blue_ball.png",
+      "blobSha": "2a0b8ad6182a283652a76f1f3d6d442f8791db57",
+      "bytes": 1816519,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q011-BIG",
+      "semantic": "big",
+      "filename": "big_apple.png",
+      "blobSha": "26afcecb2808abd5813257d7bca724060fe37145",
+      "bytes": 3793831,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q012-BIG",
+      "semantic": "big",
+      "filename": "duduq_big_yellow_cube.png",
+      "blobSha": "13a6d371da43d1f114721940dddaa3b4efe0cb56",
+      "bytes": 1960330,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q014-BIG",
+      "semantic": "big",
+      "filename": "duduq_big_purple_balloon.png",
+      "blobSha": "fda132534037626cbb8d79afc720b38f7a533138",
+      "bytes": 1334737,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q016-BIG",
+      "semantic": "big",
+      "filename": "duduq_big_orange_star.png",
+      "blobSha": "7f70ac51ea95f62b4fa775e41389a71d77073437",
+      "bytes": 1797266,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-Q019-BIG",
+      "semantic": "big",
+      "filename": "duduq_big_green_pencil.png",
+      "blobSha": "5d867b79ec5ca62010eb0884064aef5c255f7479",
+      "bytes": 1477809,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q018-BIG-SPIDER",
+      "semantic": "big",
+      "filename": "duduq_big_spider.png",
+      "blobSha": "02ccf981c92b03a1dbabc09491ab0c3392efeb81",
+      "bytes": 2965111,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q014-SMALL",
+      "semantic": "small",
+      "filename": "duduq_small_purple_balloon.png",
+      "blobSha": "1b5e737464dfd3d465cb49ec17e37ad221e23390",
+      "bytes": 501635,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q016-SMALL",
+      "semantic": "small",
+      "filename": "duduq_small_orange_star.png",
+      "blobSha": "266ebd45898be78f2da44428bd424b59c64274fb",
+      "bytes": 565546,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-Y1M06-Q020-SMALL",
+      "semantic": "small",
+      "filename": "duduq_small_blue_ball.png",
+      "blobSha": "eed6bf9584a8384d04211b044bd85fe57b0a8040",
+      "bytes": 657600,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-Q020-SMALL",
+      "semantic": "small",
+      "filename": "small apple.png",
+      "blobSha": "b7608496a725003b781d901fb9dcb120a53f5999",
+      "bytes": 352930,
+      "reviewStatus": "VISUAL_COMPARISON_APPROVED_FOR_STAGING_REVIEW_ONLY",
+      "pedagogicalRisk": "HEIGHTENED",
+      "visualReviewEvidence": {
+        "workflowRun": 42925605454,
+        "comparison": "qa/results/apple-compare/comparison.png",
+        "finding": "Visible apple occupies substantially smaller rendered area than small_red_apple.png; pedagogical QA still pending."
+      }
+    },
+    {
+      "mediaId": "IMG-V11-2B-522ABAF0F8E39107",
+      "semantic": "chicken",
+      "filename": "Galinha adulta branca.png",
+      "blobSha": "e999afe5bfacdd9ce3a64bc8f789877188cbf7d1",
+      "bytes": 1309836,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-62CA7F8826BA3BC3",
+      "semantic": "chicken",
+      "filename": "Galinha adulta marrom.png",
+      "blobSha": "4b9af50ec031869e6bfa22e09a61cdad046ea337",
+      "bytes": 1246866,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-A3A6A7268C4B4D93",
+      "semantic": "chicken",
+      "filename": "Galinha adulta caramelo.png",
+      "blobSha": "e5e40b81da8e5b6d5401da1fd5f8cba7344784d7",
+      "bytes": 1325134,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-20AE57661EE55EE3",
+      "semantic": "chicken",
+      "filename": "Galinha adulta creme.png",
+      "blobSha": "f0d6f58e35ed222ea5f0084ecba6700949a8762d",
+      "bytes": 1372904,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-DC36218AFD429860",
+      "semantic": "cloudy",
+      "filename": "Nuvem nublado.png",
+      "blobSha": "9d604d091100a71284a1ff03aae718c6e3847d2c",
+      "bytes": 1074674,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-0B16159183B80E80",
+      "semantic": "wardrobe",
+      "filename": "Guarda-roupa de madeira marrom.png",
+      "blobSha": "4d438286a9ce9aa7de8e9fb0a71ad71caacd9e94",
+      "bytes": 1646115,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-V11-2B-F67459B4C2D5777B",
+      "semantic": "wardrobe",
+      "filename": "Guarda-roupa branco.png",
+      "blobSha": "e4bae4f34d0d827a53642fe73e8fa4883bf46283",
+      "bytes": 1398151,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-V11-2B-08D5ACD67E93CA67",
+      "semantic": "wardrobe",
+      "filename": "Guarda-roupa azul-claro infantil.png",
+      "blobSha": "263727acc2b83eb3ced300e3f2555c8be59b4875",
+      "bytes": 1360102,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-V11-2B-F435C8A80D3092E3",
+      "semantic": "wardrobe",
+      "filename": "Guarda-roupa bege premium de três portas.png",
+      "blobSha": "4adbae8b1af16fedfe84752772a4b0452b34b50e",
+      "bytes": 1769485,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-V11-2B-C5F7668B41FC5A55",
+      "semantic": "50",
+      "filename": "50 verde.png",
+      "blobSha": "4c77fdd7295265e98b7af5ce80b784cb943e6a21",
+      "bytes": 1240474,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-E2302199CB7460B5",
+      "semantic": "plus",
+      "filename": "duduq_plus_01.png",
+      "blobSha": "60eb73a45207d30b0903186b1fa83319cef7027a",
+      "bytes": 1961604,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-8138254DEC43D7BC",
+      "semantic": "plus",
+      "filename": "duduq_plus_02.png",
+      "blobSha": "dafe4ad71d5edf2a495500871e64ef062b7567b5",
+      "bytes": 2312960,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-4E8B1F3C6B88B0EC",
+      "semantic": "minus",
+      "filename": "duduq_minus_01.png",
+      "blobSha": "995e3dab4ce4e96d7774b94ffc8f00226674ce33",
+      "bytes": 80622,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-37302AEA2B306D70",
+      "semantic": "minus",
+      "filename": "duduq_minus_02.png",
+      "blobSha": "60e111ec7486b6bd8b4bf50b7d8334eca5e9e299",
+      "bytes": 80620,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-091647FA0E3E3E68",
+      "semantic": "equals",
+      "filename": "duduq_equals_01.png",
+      "blobSha": "796557b9985a71fcb9b8f38778482b3654c8d362",
+      "bytes": 88542,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-3C01681DAFE96F83",
+      "semantic": "equals",
+      "filename": "duduq_equals_02.png",
+      "blobSha": "2c52a011e0dec60f0ca5d7e7eeb01e271fb31458",
+      "bytes": 88320,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-BE34171D033BB875",
+      "semantic": "six minus two equals four",
+      "filename": "six_minus_two_equals_four azul.png",
+      "blobSha": "cf6763141e68cd0fc9bfea3b2e77552edbf62ecd",
+      "bytes": 462805,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-6FFE58151EAD0CA0",
+      "semantic": "six minus two equals four",
+      "filename": "six_minus_two_equals_four amarelo.png",
+      "blobSha": "78ad2423de43638ef9475aca5b49d0348a7c71ed",
+      "bytes": 454500,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-7C65FD581AACF741",
+      "semantic": "six minus two equals four",
+      "filename": "six_minus_two_equals_four colorido.png",
+      "blobSha": "bf17104fcd6965160e0bcc5391c65dcd06250854",
+      "bytes": 494663,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-F8DAA4BC7576FC31",
+      "semantic": "volleyball",
+      "filename": "duduq_volleyball_01.png",
+      "blobSha": "a97ca8814465a39a8cb136487e41be3fcf1cf347",
+      "bytes": 2941922,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-B6BCF0D776C5D057",
+      "semantic": "volleyball",
+      "filename": "duduq_volleyball_02.png",
+      "blobSha": "6d434495c9f6579619eaff0ac525b1d55272d4eb",
+      "bytes": 2489909,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-45B3D0ADBD8A9EF6",
+      "semantic": "volleyball",
+      "filename": "duduq_volleyball_03.png",
+      "blobSha": "e4bab3e98b8852ee8984157f855b551461eff230",
+      "bytes": 3546194,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-AAA3714A83AE3CAD",
+      "semantic": "volleyball",
+      "filename": "duduq_volleyball_04.png",
+      "blobSha": "aac4ec6cc9599b31de347c0e38ac7005d34a08ba",
+      "bytes": 2932242,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-CE549BD5435AA2DC",
+      "semantic": "52",
+      "filename": "52.azul.png",
+      "blobSha": "6d70174ac9abdf15f4ec7f52c29df359669f4d3f",
+      "bytes": 1130915,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-80AAEF5A148232B4",
+      "semantic": "52",
+      "filename": "52 amarelo.png",
+      "blobSha": "90c918f454e61a54ff79b700cb4fbe87e678adf7",
+      "bytes": 1114623,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "STANDARD"
+    },
+    {
+      "mediaId": "IMG-V11-2B-5310995961ADDF9C",
+      "semantic": "shoe store",
+      "filename": "Fachada isolada de loja de calçados infantil.png",
+      "blobSha": "07a6dc82534b5b497cb648ce9030b646b33791df",
+      "bytes": 2135973,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-V11-2B-6C0C9384392A972C",
+      "semantic": "shoe store",
+      "filename": "Loja de calçados moderna.png",
+      "blobSha": "7e80bdadda8ac9e86d8d00dc5c56d6cc8c4ea3fb",
+      "bytes": 1823405,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-V11-2B-30AE918E26C66C62",
+      "semantic": "shoe store",
+      "filename": "Pequena sapataria colorida.png",
+      "blobSha": "27a7f66270238ca969e0ef512ff63d443bf7d1f1",
+      "bytes": 2339751,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    },
+    {
+      "mediaId": "IMG-V11-2B-87D41B641E2F0AA6",
+      "semantic": "shoe store",
+      "filename": "Loja de calçados premium infantil.png",
+      "blobSha": "d22c508d2c4bfe8fb93681333b1477a26ff60829",
+      "bytes": 2346914,
+      "reviewStatus": "PENDING_VISUAL_PEDAGOGICAL_QA",
+      "pedagogicalRisk": "HEIGHTENED"
+    }
+  ]
+}
