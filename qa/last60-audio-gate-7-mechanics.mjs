@@ -56,6 +56,10 @@ async function worker(){
    if((await game.getAttribute('data-duduq-interaction-state'))!=='READY')await clickAudio('replay-instruction');
    await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',null,{timeout:48000});
    result.ready=true;
+   // Bubble Pop deliberately creates its first interactive bubble on a later
+   // animation frame (firstInteractiveSpawnMs + spawn throttling), not on READY.
+   // Wait for a visible pointer target before treating a blank arena as broken.
+   if(mechanic==='bubble-pop')await page.locator('.bubble-pop-playable').first().waitFor({state:'visible',timeout:15000});
    result.unlockedState=await game.getAttribute('data-duduq-interaction-state');
    result.lastAudioState=await audio.getAttribute('data-audio-state');
    result.playableCount=await page.locator('.matching-card:not(.duduq-interaction-locked),.target-shooter-target:not(.duduq-interaction-locked),.bubble-pop-playable:not(.duduq-interaction-locked),[data-memory-card-component]:not(.duduq-interaction-locked),.smart-sentence-option:not(.duduq-interaction-locked),.dnd-option-image-card:not(.duduq-interaction-locked),.dnd-multimedia-audio-item:not(.duduq-interaction-locked)').count();
