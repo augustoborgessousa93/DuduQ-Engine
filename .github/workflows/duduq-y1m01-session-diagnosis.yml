@@ -1,0 +1,35 @@
+name: DUDUQ Y1M01 session gate diagnosis
+
+on:
+  push:
+    branches:
+      - staging/duduq-last60-new-assets-20261110
+    paths:
+      - qa/diagnose-y1m01-session-gate.mjs
+      - .github/workflows/duduq-y1m01-session-diagnosis.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  read-only-diagnosis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch exact production scripts and show current session gate
+        run: |
+          node --check qa/diagnose-y1m01-session-gate.mjs
+          node qa/diagnose-y1m01-session-gate.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: duduq-y1m01-session-diagnosis-${{ github.run_id }}
+          retention-days: 7
+          path: qa/results/y1m01-session-gate-diagnosis.json
