@@ -71,6 +71,12 @@ async function work(){
       }
       return false;
     },null,{timeout:18000});
+    // readSession() is written before async Q001 media/route initialization.
+    // Wait for its real HTTP media requests to settle before leaving Q001;
+    // otherwise navigation aborts the registry fetch and creates a false
+    // REGISTRY_UNAVAILABLE error against the next deep-linked QA item.
+    await page.waitForLoadState('networkidle',{timeout:16000});
+    await page.waitForTimeout(300);
     const sessionIndex=Number(id.slice(-3))-1;
     assert(Number.isInteger(sessionIndex)&&sessionIndex>=1&&sessionIndex<20,'INVALID_Y1M01_TARGET_INDEX');
     await page.evaluate(({sessionIndex,selectedId})=>{
