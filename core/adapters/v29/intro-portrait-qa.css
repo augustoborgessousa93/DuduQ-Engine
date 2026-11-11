@@ -1,0 +1,258 @@
+/*
+ * DUDUQ English V29 - portrait intro responsive QA candidate
+ * Scope: only module introduction, small portrait and shallow landscape.
+ * Does not alter any question, runtime logic, approved Gold Master, audio or scoring.
+ * Never modify production without QA acceptance.
+ */
+@media (orientation: portrait) and (max-width: 600px) {
+  html, body, #intro-module-root {
+    width: 100% !important;
+    height: 100dvh !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  #intro-module-root .duduq-module-intro {
+    position: absolute !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    transform-origin: center center !important;
+    overflow: hidden !important;
+    contain: layout style !important;
+    --intro-mobile-control-top: clamp(268px, 38dvh, 326px);
+  }
+
+  #intro-module-root .duduq-module-intro::before {
+    background-color: #afc5f0 !important;
+    background-size: 100% auto !important;
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+  }
+
+  .duduq-module-intro .duduq-intro-footer-blur { display: none !important; }
+
+  .duduq-module-intro .duduq-intro-mascot-motion {
+    position: absolute !important;
+    left: 4px !important;
+    top: clamp(114px, 16dvh, 142px) !important;
+    width: clamp(116px, 34vw, 152px) !important;
+    height: clamp(116px, 34vw, 152px) !important;
+    pointer-events: none !important;
+    z-index: 2 !important;
+  }
+
+  .duduq-module-intro .duduq-intro-mascot {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
+
+  .duduq-module-intro .intro-info {
+    position: absolute !important;
+    left: 16px !important;
+    right: 16px !important;
+    top: var(--intro-mobile-control-top) !important;
+    bottom: auto !important;
+    width: auto !important;
+    height: 224px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 6 !important;
+  }
+
+  .duduq-module-intro .duduq-year-card-v2,
+  .duduq-module-intro .duduq-module-card-v2,
+  .duduq-module-intro .duduq-subject-card {
+    box-sizing: border-box !important;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    flex: 0 0 68px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 68px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 2px solid #d7edff !important;
+    border-bottom: 5px solid #318fc7 !important;
+    border-radius: 18px !important;
+    background: linear-gradient(166deg, #fff 0%, #fbfdff 53%, #e6f5ff 100%) !important;
+    box-shadow: 0 6px 14px rgba(12, 54, 113, .2), inset 0 2px 0 rgba(255,255,255,.95) !important;
+    isolation: isolate !important;
+    overflow: hidden !important;
+  }
+  .duduq-module-intro .duduq-module-card-v2 {
+    background: linear-gradient(166deg, #fff 0%, #fff9ee 53%, #fceac7 100%) !important;
+    border-bottom-color: #e8a93d !important;
+  }
+  .duduq-module-intro .duduq-subject-card {
+    background: linear-gradient(166deg, #fff 0%, #f7fbff 53%, #dceafe 100%) !important;
+    border-bottom-color: #5088d5 !important;
+  }
+
+  .duduq-module-intro .duduq-year-card-v2__surface,
+  .duduq-module-intro .duduq-module-card-v2__visual,
+  .duduq-module-intro .duduq-subject-card__vector {
+    display: none !important;
+  }
+
+  .duduq-module-intro .duduq-year-card-v2__label,
+  .duduq-module-intro .duduq-module-card-v2__label,
+  .duduq-module-intro .duduq-subject-card__label {
+    position: absolute !important;
+    left: 78px !important;
+    top: 9px !important;
+    right: 12px !important;
+    width: auto !important;
+    height: auto !important;
+    color: #607b96 !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important;
+    letter-spacing: .035em !important;
+    text-align: left !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+  }
+
+  .duduq-module-intro .duduq-year-card-v2__value,
+  .duduq-module-intro .duduq-module-card-v2__value,
+  .duduq-module-intro .intro-info .duduq-subject-card__value {
+    position: absolute !important;
+    left: 78px !important;
+    top: 27px !important;
+    right: 14px !important;
+    width: auto !important;
+    max-width: calc(100% - 92px) !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 !important;
+    text-align: left !important;
+    font-family: Fredoka, ui-rounded, system-ui, sans-serif !important;
+    font-size: clamp(17px, 5vw, 21px) !important;
+    font-weight: 700 !important;
+    line-height: 1.15 !important;
+    letter-spacing: 0 !important;
+    color: #244360 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+  .duduq-module-intro .intro-info .duduq-subject-card__value {
+    font-size: clamp(16px, 4.4vw, 19px) !important;
+  }
+
+  .duduq-module-intro .duduq-year-card-v2__icon,
+  .duduq-module-intro .duduq-module-card-v2__icon,
+  .duduq-module-intro .duduq-subject-card__icon {
+    position: absolute !important;
+    left: 17px !important;
+    top: 10px !important;
+    width: 46px !important;
+    height: 46px !important;
+    object-fit: contain !important;
+  }
+
+  .duduq-module-intro .duduq-start-button-motion {
+    position: absolute !important;
+    left: 18px !important;
+    right: 18px !important;
+    top: calc(var(--intro-mobile-control-top) + 247px) !important;
+    bottom: auto !important;
+    width: auto !important;
+    height: 66px !important;
+    transform-origin: center center !important;
+    z-index: 8 !important;
+  }
+  .duduq-module-intro .duduq-start-button-motion .intro-start {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    min-height: 66px !important;
+    height: 66px !important;
+    border-radius: 18px !important;
+    touch-action: manipulation !important;
+  }
+
+  .duduq-module-intro .intro-start__outer-shadow {
+    position: absolute !important;
+    inset: 7px 4px -3px !important;
+    width: auto !important;
+    height: auto !important;
+    border-radius: 18px !important;
+  }
+  .duduq-module-intro .intro-start__depth,
+  .duduq-module-intro .intro-start__surface {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+    border-radius: 18px !important;
+  }
+  .duduq-module-intro .intro-start__depth { top: 6px !important; }
+  .duduq-module-intro .intro-start__highlight { display: none !important; }
+  .duduq-module-intro .intro-start__play {
+    position: absolute !important;
+    left: 19px !important;
+    top: 12px !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .duduq-module-intro .intro-start__play-shape {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    clip-path: polygon(13% 0, 100% 50%, 13% 100%) !important;
+    background: #fff !important;
+  }
+  .duduq-module-intro .intro-start__label {
+    position: absolute !important;
+    left: 67px !important;
+    right: 11px !important;
+    top: 18px !important;
+    width: auto !important;
+    height: auto !important;
+    font-size: clamp(19px, 6vw, 26px) !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+  }
+  .duduq-module-intro .intro-start-hint {
+    position: absolute !important;
+    left: 20px !important;
+    right: 20px !important;
+    top: calc(var(--intro-mobile-control-top) + 321px) !important;
+    width: auto !important;
+    height: auto !important;
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    letter-spacing: .08em !important;
+    text-align: center !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 520px) and (max-width: 1024px) {
+  /* On landscape phones preserve the approved 1366x768 stage but FIT rather
+   * than COVER: no clipping of the footer or controls.
+   * CSS typed arithmetic returns a number (length divided by length). */
+  .duduq-module-intro {
+    --intro-scale: calc(100dvh / 768px) !important;
+  }
+}
