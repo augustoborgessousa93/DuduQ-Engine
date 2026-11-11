@@ -256,3 +256,75 @@
     --intro-scale: calc(100dvh / 768px) !important;
   }
 }
+
+
+/* QA refinement after actual 390x844 Chromium screenshot: the official scene
+ * lives on #intro-module-root (not on .duduq-module-intro::before), and the
+ * original animated button artwork does not reflow cleanly at portrait sizes. */
+@media (orientation: portrait) and (max-width: 600px) {
+  #intro-module-root {
+    background-image: url("/core/assets/Background%20Tela%20Inicial.png") !important;
+    background-color: #afc5ef !important;
+    background-size: 100% auto !important;
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+  }
+  #intro-module-root .duduq-module-intro::before {
+    background: linear-gradient(180deg,
+      transparent 0%, transparent 21%,
+      rgba(175,195,239,.1) 25%, rgba(175,195,239,.62) 33%,
+      #afc5ef 43%, #aebfee 100%) !important;
+    opacity: 1 !important;
+  }
+
+  .duduq-module-intro .duduq-start-button-motion .intro-start {
+    display: block !important;
+    background: linear-gradient(180deg,#55c6f4 0%,#2da4e0 56%,#258ac8 100%) !important;
+    border: 2px solid #1777ba !important;
+    border-bottom: 7px solid #105d95 !important;
+    border-radius: 19px !important;
+    box-shadow: 0 6px 0 #0d5286,0 14px 20px rgba(16,73,129,.3),inset 0 2px 0 #8fe8ff !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+  }
+  .duduq-module-intro .intro-start__motion {
+    display: contents !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .duduq-module-intro .intro-start__outer-shadow,
+  .duduq-module-intro .intro-start__depth,
+  .duduq-module-intro .intro-start__surface,
+  .duduq-module-intro .intro-start__highlight,
+  .duduq-module-intro .intro-start__play {
+    display: none !important;
+  }
+  .duduq-module-intro .intro-start::before {
+    content: "" !important;
+    display: block !important;
+    position: absolute !important;
+    left: 18px !important;
+    top: 13px !important;
+    z-index: 3 !important;
+    width: 34px !important;
+    height: 28px !important;
+    clip-path: polygon(0 0, 100% 50%, 0 100%) !important;
+    background: #fff !important;
+    filter: drop-shadow(0 2px 0 rgba(19,76,137,.4));
+    pointer-events: none !important;
+  }
+  .duduq-module-intro .intro-start__label {
+    display: block !important;
+    position: absolute !important;
+    top: 14px !important;
+    left: 63px !important;
+    right: 10px !important;
+    width: auto !important;
+    height: 32px !important;
+    text-align: center !important;
+    font-size: clamp(20px,5.8vw,25px) !important;
+    line-height: 1.24 !important;
+    text-shadow: 0 2px 1px rgba(15,73,125,.32) !important;
+    z-index: 5 !important;
+  }
+}
