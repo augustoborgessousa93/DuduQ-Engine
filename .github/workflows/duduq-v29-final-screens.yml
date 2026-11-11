@@ -1,0 +1,49 @@
+name: DUDUQ V29 Compact Final Visual Evidence
+
+on:
+  push:
+    branches:
+      - review/duduq-last60-v29-20261110
+    paths:
+      - .github/workflows/duduq-v29-final-screens.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  screenshot-packet:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download exact successful V29 compiled candidate
+        uses: actions/download-artifact@v4
+        with:
+          name: duduq-last60-qa-42930537914
+          run-id: 42930537914
+          github-token: ${{ github.token }}
+          path: qa/input-v29-final
+      - name: Verify source PNG hashes and create six review sheets
+        run: |
+          python -m pip install --quiet "Pillow>=10,<12"
+          python qa/build-last60-visual-review.py qa/input-v29-final qa/results/v29-visual-compact
+          test -s qa/results/v29-visual-compact/browser/year-1-module-06-390x844.png
+          test -s qa/results/v29-visual-compact/browser/year-1-module-06-844x390.png
+          test -s qa/results/v29-visual-compact/browser/year-1-module-06-1280x800.png
+          test -s qa/results/v29-visual-compact/summary.json
+      - name: Attach compact visual material, not the 800 MB QA archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-v29-final-visual-${{ github.run_id }}
+          retention-days: 14
+          if-no-files-found: error
+          path: qa/results/v29-visual-compact/**
+      - name: No deployment allowed
+        run: echo "No merge, Gold Master edit, or production deploy."
