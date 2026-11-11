@@ -342,3 +342,206 @@
     filter: blur(35px) !important;
   }
 }
+
+
+/* V29 QA landscape-compact: true responsive UI rather than shrinking all
+ * approved desktop controls below child-readable dimensions. 844x390 target. */
+@media (orientation: landscape) and (max-width: 1024px) and (max-height: 520px) {
+  #intro-module-root .duduq-module-intro {
+    position: absolute !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%,-50%) !important;
+    overflow: hidden !important;
+    --intro-landscape-bottom: 37px;
+  }
+  #intro-module-root .duduq-module-intro::before {
+    background: linear-gradient(to top,
+       #aabff0 0%, rgba(170,191,240,.82) 13%,
+       rgba(170,191,240,.12) 34%, transparent 48%) !important;
+  }
+  .duduq-module-intro .duduq-intro-mascot-motion {
+    position: absolute !important;
+    top: 53px !important;
+    left: 24px !important;
+    width: 228px !important;
+    height: 228px !important;
+    pointer-events: none !important;
+  }
+  .duduq-module-intro .duduq-intro-mascot {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
+  .duduq-module-intro .duduq-intro-footer-blur { display: none !important; }
+  .duduq-module-intro .intro-info {
+    position: absolute !important;
+    left: 15px !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: var(--intro-landscape-bottom) !important;
+    width: min(58vw, 495px) !important;
+    height: 61px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    gap: 7px !important;
+    z-index: 6 !important;
+  }
+  .duduq-module-intro .duduq-year-card-v2,
+  .duduq-module-intro .duduq-module-card-v2,
+  .duduq-module-intro .duduq-subject-card {
+    box-sizing: border-box !important;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    flex: 1 1 0 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: 60px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 2px solid #d7ecff !important;
+    border-bottom: 4px solid #378fc8 !important;
+    border-radius: 12px !important;
+    background: linear-gradient(153deg,#fff,#e9f5ff) !important;
+    box-shadow: 0 4px 10px rgba(9,51,113,.23) !important;
+    overflow: hidden !important;
+  }
+  .duduq-module-intro .duduq-module-card-v2 {
+    border-bottom-color: #e6a42e !important;
+    background: linear-gradient(153deg,#fff,#fff1d1) !important;
+  }
+  .duduq-module-intro .duduq-subject-card {
+    border-bottom-color: #5c87d4 !important;
+    background: linear-gradient(153deg,#fff,#e1edff) !important;
+  }
+  .duduq-module-intro .duduq-year-card-v2__surface,
+  .duduq-module-intro .duduq-module-card-v2__visual,
+  .duduq-module-intro .duduq-subject-card__vector { display: none !important; }
+  .duduq-module-intro .duduq-year-card-v2__label,
+  .duduq-module-intro .duduq-module-card-v2__label,
+  .duduq-module-intro .duduq-subject-card__label {
+    position: absolute !important;
+    left: 43px !important;
+    top: 8px !important;
+    right: 4px !important;
+    width: auto !important;
+    height: 13px !important;
+    font-family: Fredoka,ui-rounded,sans-serif !important;
+    color: #627a91 !important;
+    font-size: 9px !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-align: left !important;
+  }
+  .duduq-module-intro .duduq-year-card-v2__value,
+  .duduq-module-intro .duduq-module-card-v2__value,
+  .duduq-module-intro .intro-info .duduq-subject-card__value {
+    position: absolute !important;
+    left: 43px !important;
+    top: 23px !important;
+    right: 3px !important;
+    width: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 !important;
+    text-align: left !important;
+    font-size: clamp(12px, 1.75vw, 16px) !important;
+    line-height: 1.1 !important;
+    color: #23415e !important;
+    font-weight: 700 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+  .duduq-module-intro .intro-info .duduq-subject-card__value {
+    font-size: clamp(11px,1.5vw,14px) !important;
+  }
+  .duduq-module-intro .duduq-year-card-v2__icon,
+  .duduq-module-intro .duduq-module-card-v2__icon,
+  .duduq-module-intro .duduq-subject-card__icon {
+    position: absolute !important;
+    left: 7px !important;
+    top: 12px !important;
+    width: 31px !important;
+    height: 31px !important;
+    object-fit: contain !important;
+  }
+  .duduq-module-intro .duduq-start-button-motion {
+    position: absolute !important;
+    left: min(calc(58vw + 35px), 548px) !important;
+    right: 14px !important;
+    top: auto !important;
+    bottom: var(--intro-landscape-bottom) !important;
+    width: auto !important;
+    height: 62px !important;
+    z-index: 8 !important;
+  }
+  .duduq-module-intro .duduq-start-button-motion .intro-start {
+    position: absolute !important;
+    inset: 0 !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    width: 100% !important;
+    height: 62px !important;
+    min-height: 62px !important;
+    padding: 0 !important;
+    border: 2px solid #197cba !important;
+    border-bottom: 6px solid #105e94 !important;
+    border-radius: 16px !important;
+    background: linear-gradient(180deg,#57c9f9,#229ad7) !important;
+    box-shadow: 0 4px 0 #0c5588,0 8px 15px rgba(13,72,123,.2) !important;
+    touch-action: manipulation !important;
+    overflow: hidden !important;
+  }
+  .duduq-module-intro .intro-start__motion {
+    display: contents !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  .duduq-module-intro .intro-start__outer-shadow,
+  .duduq-module-intro .intro-start__depth,
+  .duduq-module-intro .intro-start__surface,
+  .duduq-module-intro .intro-start__highlight,
+  .duduq-module-intro .intro-start__play { display: none !important; }
+  .duduq-module-intro .intro-start::before {
+    content: "" !important;
+    position: absolute !important;
+    display: block !important;
+    left: 17px !important;
+    top: 13px !important;
+    width: 29px !important;
+    height: 27px !important;
+    background: #fff !important;
+    clip-path: polygon(0 0,100% 50%,0 100%) !important;
+    z-index: 3 !important;
+    pointer-events: none !important;
+  }
+  .duduq-module-intro .intro-start__label {
+    display: block !important;
+    position: absolute !important;
+    left: 50px !important;
+    right: 6px !important;
+    top: 15px !important;
+    width: auto !important;
+    height: auto !important;
+    font-size: clamp(17px,2.55vw,22px) !important;
+    line-height: 1.25 !important;
+    font-weight: 700 !important;
+    color: #fff !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    z-index: 5 !important;
+  }
+  .duduq-module-intro .intro-start-hint { display: none !important; }
+}
