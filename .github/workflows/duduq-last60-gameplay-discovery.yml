@@ -89,6 +89,11 @@ jobs:
           node --check qa/last60-audio-gate-7-mechanics.mjs
           node qa/last60-audio-gate-7-mechanics.mjs
 
+      - name: Exercise seven real interactive gameplay canaries (correct/wrong/pairs/drag/bubble)
+        run: |
+          node --check qa/last60-gameplay-canary.mjs
+          node qa/last60-gameplay-canary.mjs
+
       - name: Attach seven screenshots, canonical question contracts and DOM evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -99,6 +104,7 @@ jobs:
           path: |
             qa/results/last60-gameplay-discovery/**
             qa/results/last60-gameplay-gates/**
+            qa/results/last60-gameplay-canary/**
             qa/results/last60-candidate-20261110.json
       - name: Safety boundary
         if: always()
