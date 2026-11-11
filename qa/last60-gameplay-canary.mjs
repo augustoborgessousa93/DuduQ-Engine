@@ -64,7 +64,8 @@ async function realPointerDrag(page,source,target,result,label){
  await target.waitFor({state:'visible',timeout:10000});
  const a=await source.boundingBox(),b=await target.boundingBox();
  assert(a&&b&&a.width>8&&b.width>8,'DRAG_POINTER_TARGET_MISSING:'+label);
- const start={x:a.x+a.width/2,y:a.y+a.height/2},dest={x:b.x+b.width/2,y:b.y+b.height/2};
+ // The center of an audio item is its PLAY button; drag from the left grip.
+ const start={x:a.x+Math.min(24,Math.max(12,a.width*0.10)),y:a.y+a.height/2},dest={x:b.x+b.width/2,y:b.y+b.height/2};
  await page.mouse.move(start.x,start.y);
  await page.mouse.down();
  await page.mouse.move(start.x+10,start.y+10,{steps:4});
@@ -246,7 +247,10 @@ async function testBubble(page,q,r){
   seen.add(candidate.id);
   r.bubbles??=[];r.bubbles.push(candidate);
   await realClick(page.locator('.bubble-pop-playable[data-bubble-id="'+candidate.id+'"]'),r,'pop-'+candidate.id);
-  await page.waitForTimeout(1100);
+  // The bubble engine runs a two-stage pop FX before revealing wrong feedback.
+  // Wait for that phase instead of looking for a new bubble while the overlay
+  // is still playing its animation.
+  await page.waitForTimeout(1900);
  }
  const good=page.locator('.feedback-ribbon[data-feedback="correct"]');
  await good.waitFor({state:'visible',timeout:16000});
