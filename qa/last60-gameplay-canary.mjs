@@ -47,7 +47,8 @@ async function realClick(locator,result,label){
  await locator.waitFor({state:'visible',timeout:12000});
  const b=await locator.boundingBox();
  assert(b&&b.width>8&&b.height>8,'CLICKABLE_TARGET_MISSING:'+label);
- await locator.click({timeout:12000});
+ const animationSensitive=label==='matching-confirm-all-pairs'||label.startsWith('pop-');
+ await locator.click({timeout:12000,force:animationSensitive});
  result.actions.push({kind:'playwrightRealClick',label,x:Math.round(b.x+b.width/2),y:Math.round(b.y+b.height/2)});
 }
 async function realDrag(source,target,result,label){
@@ -57,6 +58,19 @@ async function realDrag(source,target,result,label){
  assert(a&&b&&a.width>8&&b.width>8,'DRAG_TARGET_MISSING:'+label);
  await source.dragTo(target,{sourcePosition:{x:a.width/2,y:a.height/2},targetPosition:{x:b.width/2,y:b.height/2},timeout:13000});
  result.actions.push({kind:'playwrightPointerDrag',label,from:{x:Math.round(a.x+a.width/2),y:Math.round(a.y+a.height/2)},to:{x:Math.round(b.x+b.width/2),y:Math.round(b.y+b.height/2)}});
+}
+async function realPointerDrag(page,source,target,result,label){
+ await source.waitFor({state:'visible',timeout:10000});
+ await target.waitFor({state:'visible',timeout:10000});
+ const a=await source.boundingBox(),b=await target.boundingBox();
+ assert(a&&b&&a.width>8&&b.width>8,'DRAG_POINTER_TARGET_MISSING:'+label);
+ const start={x:a.x+a.width/2,y:a.y+a.height/2},dest={x:b.x+b.width/2,y:b.y+b.height/2};
+ await page.mouse.move(start.x,start.y);
+ await page.mouse.down();
+ await page.mouse.move(start.x+10,start.y+10,{steps:4});
+ await page.mouse.move(dest.x,dest.y,{steps:18});
+ await page.mouse.up();
+ result.actions.push({kind:'realMouseDownMoveUp',label,from:start,to:dest});
 }
 async function feedback(page,kind,result){
  const selector='.feedback-ribbon[data-feedback="'+kind+'"]';
@@ -124,7 +138,8 @@ async function testSmart(page,q,r){
  const confirmState=await page.locator('.smart-sentence-confirm-action').evaluate(e=>({
    disabled:e.disabled,ariaDisabled:e.getAttribute('aria-disabled'),
    hidden:e.hidden,visualState:document.querySelector('[data-answer-slot]')?.dataset?.visualState,
-   optionTexts:[...document.querySelectorAll('.smart-sentence-option')].filter(n=>n.classList.contains('is-selected')).map(n=>n.textContent?.trim())
+   optionTexts:[...document.querySelectorAll('.smart-sentence-option')].filter(n=>n.classList.contains('is-selected')).map(n=>n.textContent?.trim()),
+   engine:window.DuduQSmartSentenceShell?.engine?.snapshot?.()||null
  }));
  r.confirmAfterRetry=confirmState;
  assert(!confirmState.disabled,'SMART_CONFIRM_NATIVE_DISABLED_AFTER_RETRY:'+JSON.stringify(confirmState));
@@ -174,8 +189,14 @@ async function testMultimedia(page,q,r){
  const assignments=q.answerKey;assert(assignments&&typeof assignments==='object'&&!Array.isArray(assignments),'MULTIMEDIA_PLACEMENTS_MISSING');
  r.canonical={assignments};
  for(const [source,target] of Object.entries(assignments)){
-  await realDrag(page.locator('[data-item-id="'+source+'"]').first(),page.locator('[data-drop-target-id="'+target+'"]').first(),r,'audio-drag-'+source+'-'+target);
-  await page.waitForTimeout(140);
+  await realPointerDrag(page,page.locator('[data-item-id="'+source+'"]').first(),page.locator('[data-drop-target-id="'+target+'"]').first(),r,'audio-drag-'+source+'-'+target);
+  await page.waitForTimeout(350);
+  const placement=await page.locator('[data-item-id="'+source+'"]').first().evaluate(el=>({
+    id:el.dataset.itemId,state:el.dataset.state,placement:el.dataset.placement,
+    assignedSlot:el.closest('[data-drop-target-id]')?.dataset.dropTargetId||null
+  }));
+  r.placements??=[];r.placements.push(placement);
+  assert.equal(placement.assignedSlot,target,'AUDIO_POINTER_DROP_NOT_REGISTERED:'+JSON.stringify(placement));
  }
  await page.locator('.dnd-confirm-action').waitFor({state:'visible',timeout:13000});
  await realClick(page.locator('.dnd-confirm-action'),r,'confirm-all-audio-scenes');
