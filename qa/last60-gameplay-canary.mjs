@@ -97,12 +97,12 @@ async function testTarget(page,q,r){
  const wrong=ids.find(id=>id!==correct);
  assert(wrong&&ids.includes(correct),'TARGET_ANSWER_OPTION_NOT_RENDERED');
  r.canonical={correct,wrong,visibleTargetIds:ids};
- await realClick(page,page.locator('.target-shooter-target[data-target-id="'+wrong+'"]'),r,'wrong-target');
+ await realClick(page.locator('.target-shooter-target[data-target-id="'+wrong+'"]'),r,'wrong-target');
  await feedback(page,'incorrect',r);
  await snap(page,r,'incorrect');
- await realClick(page,page.locator('.feedback-action'),r,'retry');
+ await realClick(page.locator('.feedback-action'),r,'retry');
  await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',null,{timeout:20000});
- await realClick(page,page.locator('.target-shooter-target[data-target-id="'+correct+'"]'),r,'correct-target');
+ await realClick(page.locator('.target-shooter-target[data-target-id="'+correct+'"]'),r,'correct-target');
  await feedback(page,'correct',r);
  await snap(page,r,'correct');
 }
@@ -112,15 +112,15 @@ async function testSmart(page,q,r){
  const wrong=q.options.find(o=>o.answerKey!==answer);
  assert(wrong,'SMART_DISTRACTOR_MISSING');
  r.canonical={correct:answer,wrong:wrong.answerKey};
- await realClick(page,page.locator('.smart-sentence-option[data-option-id$="-'+wrong.answerKey+'"]'),r,'wrong-word');
+ await realClick(page.locator('.smart-sentence-option[data-option-id$="-'+wrong.answerKey+'"]'),r,'wrong-word');
  await page.locator('.smart-sentence-confirm-action').waitFor({state:'visible',timeout:9000});
- await realClick(page,page.locator('.smart-sentence-confirm-action'),r,'confirm-wrong');
+ await realClick(page.locator('.smart-sentence-confirm-action'),r,'confirm-wrong');
  await feedback(page,'incorrect',r);await snap(page,r,'incorrect');
- await realClick(page,page.locator('.feedback-action'),r,'retry');
+ await realClick(page.locator('.feedback-action'),r,'retry');
  await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',null,{timeout:20000});
- await realClick(page,page.locator('.smart-sentence-option[data-option-id$="-'+answer+'"]'),r,'correct-word');
+ await realClick(page.locator('.smart-sentence-option[data-option-id$="-'+answer+'"]'),r,'correct-word');
  await page.locator('.smart-sentence-confirm-action').waitFor({state:'visible',timeout:9000});
- await realClick(page,page.locator('.smart-sentence-confirm-action'),r,'confirm-correct');
+ await realClick(page.locator('.smart-sentence-confirm-action'),r,'confirm-correct');
  await feedback(page,'correct',r);await snap(page,r,'correct');
 }
 async function testMatching(page,q,r){
@@ -129,15 +129,15 @@ async function testMatching(page,q,r){
  const first=Object.entries(pairs)[0];
  const second=Object.entries(pairs)[1];
  if(second){
-  await realClick(page,page.locator('.matching-card[data-id="'+first[0]+'"]'),r,'wrong-pair-left');
-  await realClick(page,page.locator('.matching-card[data-id="'+second[1]+'"]'),r,'wrong-pair-right');
+  await realClick(page.locator('.matching-card[data-id="'+first[0]+'"]'),r,'wrong-pair-left');
+  await realClick(page.locator('.matching-card[data-id="'+second[1]+'"]'),r,'wrong-pair-right');
   await page.waitForTimeout(1150);
   r.incorrectPairState=await page.locator('.matching-card[data-id="'+first[0]+'"]').getAttribute('data-state');
   await snap(page,r,'wrong-pair');
  }
  for(const [left,right]of Object.entries(pairs)){
-  await realClick(page,page.locator('.matching-card[data-id="'+left+'"]'),r,'pair-left-'+left);
-  await realClick(page,page.locator('.matching-card[data-id="'+right+'"]'),r,'pair-right-'+right);
+  await realClick(page.locator('.matching-card[data-id="'+left+'"]'),r,'pair-left-'+left);
+  await realClick(page.locator('.matching-card[data-id="'+right+'"]'),r,'pair-right-'+right);
   await page.waitForTimeout(250);
  }
  await feedback(page,'correct',r);await snap(page,r,'correct');
@@ -147,14 +147,14 @@ async function testMemory(page,q,r){
  r.canonical={pairs};
  const key=pair=>page.locator('[data-card-id="'+pair+'"]');
  if(pairs.length>1){
-  await realClick(page,key(pairs[0]+'-A'),r,'memory-wrong-first');
-  await realClick(page,key(pairs[1]+'-A'),r,'memory-wrong-second');
+  await realClick(key(pairs[0]+'-A'),r,'memory-wrong-first');
+  await realClick(key(pairs[1]+'-A'),r,'memory-wrong-second');
   await page.waitForTimeout(1500);
   r.wrongPairChecked=true;
  }
  for(const pair of pairs){
-  await realClick(page,key(pair+'-A'),r,'memory-'+pair+'-A');
-  await realClick(page,key(pair+'-B'),r,'memory-'+pair+'-B');
+  await realClick(key(pair+'-A'),r,'memory-'+pair+'-A');
+  await realClick(key(pair+'-B'),r,'memory-'+pair+'-B');
   await page.waitForFunction(pair=>{
    return [...document.querySelectorAll('[data-card-id]')].filter(x=>x.dataset.cardId===pair+'-A'||x.dataset.cardId===pair+'-B').every(x=>x.classList.contains('is-matched'));
   },pair,{timeout:13000});
@@ -165,11 +165,11 @@ async function testMultimedia(page,q,r){
  const assignments=q.answerKey;assert(assignments&&typeof assignments==='object'&&!Array.isArray(assignments),'MULTIMEDIA_PLACEMENTS_MISSING');
  r.canonical={assignments};
  for(const [source,target] of Object.entries(assignments)){
-  await realDrag(page,page.locator('[data-item-id="'+source+'"]').first(),page.locator('[data-target-id="'+target+'"]').first(),r,'audio-drag-'+source+'-'+target);
+  await realDrag(page.locator('[data-item-id="'+source+'"]').first(),page.locator('[data-target-id="'+target+'"]').first(),r,'audio-drag-'+source+'-'+target);
   await page.waitForTimeout(140);
  }
  await page.locator('.dnd-confirm-action').waitFor({state:'visible',timeout:13000});
- await realClick(page,page.locator('.dnd-confirm-action'),r,'confirm-all-audio-scenes');
+ await realClick(page.locator('.dnd-confirm-action'),r,'confirm-all-audio-scenes');
  await feedback(page,'correct',r);await snap(page,r,'correct');
 }
 async function testGrouping(page,q,r){
@@ -178,11 +178,11 @@ async function testGrouping(page,q,r){
  for(const [id,group]of Object.entries(assignments)){
   const zone=page.locator('[data-drop-zone-content="'+group+'"]').first();
   assert(await zone.count(),'GROUPING_ZONE_NOT_FOUND:'+group);
-  await realDrag(page,page.locator('.dnd-option-image-card[data-item-id="'+id+'"]').first(),zone,r,'group-'+id+'-'+group);
+  await realDrag(page.locator('.dnd-option-image-card[data-item-id="'+id+'"]').first(),zone,r,'group-'+id+'-'+group);
   await page.waitForTimeout(160);
  }
  await page.locator('.dnd-confirm-action').waitFor({state:'visible',timeout:13000});
- await realClick(page,page.locator('.dnd-confirm-action'),r,'confirm-classification');
+ await realClick(page.locator('.dnd-confirm-action'),r,'confirm-classification');
  await feedback(page,'correct',r);await snap(page,r,'correct');
 }
 async function testBubble(page,q,r){
@@ -195,7 +195,7 @@ async function testBubble(page,q,r){
   const b=page.locator('.bubble-pop-playable:not([disabled])').first();
   await b.waitFor({state:'visible',timeout:13000});
   const sig=await b.evaluate(e=>({id:e.dataset.bubbleId,text:e.querySelector('.bubble-pop-content')?.textContent?.trim().slice(0,70),alt:e.querySelector('.bubble-pop-content img')?.alt||null}));
-  await realClick(page,b,r,'pop-bubble-'+i);
+  await realClick(b,r,'pop-bubble-'+i);
   r.bubbles??=[];r.bubbles.push(sig);
   await page.waitForTimeout(700);
  }
