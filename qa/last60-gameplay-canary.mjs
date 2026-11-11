@@ -201,6 +201,7 @@ async function testBubble(page,q,r){
  }
  if(!successful)await page.locator('.feedback-ribbon[data-feedback="correct"]').waitFor({state:'visible',timeout:12000});
  r.correctFeedbackSeen=true;
+ r.feedbackStates.push({kind:'correct',text:(await page.locator('.feedback-ribbon[data-feedback="correct"]').textContent()).trim().slice(0,140)});
  await snap(page,r,'correct');
 }
 const games={ 'target-shooter':testTarget,'matching':testMatching,'smart-sentence':testSmart,
