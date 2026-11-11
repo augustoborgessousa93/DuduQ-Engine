@@ -7,6 +7,7 @@ on:
     paths:
       - qa/last60-seven-mechanic-discovery.mjs
       - qa/last60-gameplay-canary.mjs
+      - qa/last60-audio-gate-7-mechanics.mjs
       - .github/workflows/duduq-last60-gameplay-discovery.yml
   workflow_dispatch:
 
@@ -83,6 +84,11 @@ jobs:
       - name: Inspect the seven real mechanics, exact curricular options and active controls
         run: |
           node qa/last60-seven-mechanic-discovery.mjs
+      - name: Real mouse audio-control unlock, one canary per game mechanic
+        run: |
+          node --check qa/last60-audio-gate-7-mechanics.mjs
+          node qa/last60-audio-gate-7-mechanics.mjs
+
       - name: Attach seven screenshots, canonical question contracts and DOM evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -92,6 +98,7 @@ jobs:
           if-no-files-found: warn
           path: |
             qa/results/last60-gameplay-discovery/**
+            qa/results/last60-gameplay-gates/**
             qa/results/last60-candidate-20261110.json
       - name: Safety boundary
         if: always()
