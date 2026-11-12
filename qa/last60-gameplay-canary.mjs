@@ -83,13 +83,13 @@ async function feedback(page,kind,result){
   return (r?.dataset.feedback===kind&&!r.hidden)||
     (document.querySelector('#game')?.dataset.duduqInteractionState==='AWAITING_CONFIRM'&&
     rect?.width>4&&rect?.height>4&&style.display!=='none'&&/confirmar/i.test(button?.textContent||''));
- },kind,{timeout:18000});
+ },kind,{timeout:result.mechanic==='smart-sentence'?90000:18000});
  const c=page.locator('.feedback-action').first();
  const text=(await c.textContent().catch(()=>''))?.trim()||'';
  if(/confirmar/i.test(text)&&await c.isVisible()){
   await realClick(c,result,'confirm-'+kind);
  }
- await page.locator(selector).waitFor({state:'visible',timeout:22000});
+ await page.locator(selector).waitFor({state:'visible',timeout:result.mechanic==='smart-sentence'?90000:22000});
  result.feedbackStates.push({kind,text:(await page.locator(selector).textContent()).trim().slice(0,140)});
 }
 async function unlockAudio(page,result){
@@ -127,38 +127,41 @@ async function testSmart(page,q,r){
  const wrong=q.options.find(o=>o.answerKey!==answer);
  assert(wrong,'SMART_DISTRACTOR_MISSING');
  r.canonical={correct:answer,wrong:wrong.answerKey};
+ r.smartAudioGates=[];
+ const snapshot=()=>page.evaluate(()=>{
+   const engine=window.DuduQSmartSentenceShell?.engine?.snapshot?.();
+   const button=document.querySelector('.smart-sentence-confirm-action');
+   const ribbon=document.querySelector('.feedback-ribbon');
+   return {gate:document.querySelector('#game')?.dataset.duduqInteractionState||null,
+    engine:{status:engine?.status,canConfirm:engine?.canConfirm,selected:engine?.selected?.map(x=>x?.answerKey)},
+    nativeConfirm:{disabled:button?.disabled,hidden:button?.hidden,onclickBound:Boolean(button?.onclick)},
+    feedback:{hidden:ribbon?.hidden,type:ribbon?.dataset.feedback}};
+ });
+ const confirmAfterRequiredAudio=async label=>{
+   // The compiled Smart Sentence runtime explicitly requires completion of
+   // selected-word audio and retry reinforcement. engine.canConfirm is NOT
+   // enough: confirmSelection also tests pedagogicalWordPending and
+   // wordAudioReady. Never override disabled to bypass this teacher gate.
+   await page.waitForFunction(()=>{
+      const root=document.querySelector('#game');
+      const b=root?.querySelector('.smart-sentence-confirm-action');
+      const state=window.DuduQSmartSentenceShell?.engine?.snapshot?.();
+      return b&&!b.hidden&&!b.disabled&&Boolean(b.onclick)&&
+        root?.dataset.duduqInteractionState==='READY'&&
+        state?.status==='playing'&&state?.canConfirm===true;
+   },null,{timeout:75000});
+   const state=await snapshot();
+   r.smartAudioGates.push({label,passed:true,state});
+ };
  await realClick(page.locator('.smart-sentence-option[data-option-id$="-'+wrong.answerKey+'"]'),r,'wrong-word');
- await page.locator('.smart-sentence-confirm-action').waitFor({state:'visible',timeout:9000});
- const smartDiag=()=>page.evaluate(()=>({
-    engine:window.DuduQSmartSentenceShell?.engine?.snapshot?.(),
-    button:(()=>{let e=document.querySelector('.smart-sentence-confirm-action');return e?{disabled:e.disabled,hidden:e.hidden,aria:e.getAttribute('aria-disabled')}:null})(),
-    feedback:(()=>{let e=document.querySelector('.feedback-ribbon');return e?{hidden:e.hidden,kind:e.dataset.feedback,text:e.textContent?.trim().slice(0,120)}:null})(),
-    adapter:window.__DUDUQ_V29_SMART_CONFIRM_QA__||null,
-    gate:document.querySelector('#game')?.dataset?.duduqInteractionState||null
- }));
- r.smartPreWrongConfirm=await smartDiag();
+ await confirmAfterRequiredAudio('wrong-word-audio-finished');
  await realClick(page.locator('.smart-sentence-confirm-action'),r,'confirm-wrong');
- await page.waitForTimeout(550);
- r.smartPostWrongConfirm=await smartDiag();
- if(r.smartPostWrongConfirm?.engine?.status==='playing'&&r.smartPostWrongConfirm?.feedback?.hidden){
-   throw Error('SMART_CONFIRM_WRONG_CLICK_NO_STATE_CHANGE:'+JSON.stringify({
-     pre:r.smartPreWrongConfirm,post:r.smartPostWrongConfirm
-   }).slice(0,2600));
- }
  await feedback(page,'incorrect',r);await snap(page,r,'incorrect');
  await realClick(page.locator('.feedback-action'),r,'retry');
- await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',null,{timeout:20000});
+ await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',null,{timeout:75000});
  await realClick(page.locator('.smart-sentence-option[data-option-id$="-'+answer+'"]'),r,'correct-word');
- await page.locator('.smart-sentence-confirm-action').waitFor({state:'visible',timeout:9000});
- await page.waitForTimeout(900);
- const confirmState=await page.locator('.smart-sentence-confirm-action').evaluate(e=>({
-   disabled:e.disabled,ariaDisabled:e.getAttribute('aria-disabled'),
-   hidden:e.hidden,visualState:document.querySelector('[data-answer-slot]')?.dataset?.visualState,
-   optionTexts:[...document.querySelectorAll('.smart-sentence-option')].filter(n=>n.classList.contains('is-selected')).map(n=>n.textContent?.trim()),
-   engine:window.DuduQSmartSentenceShell?.engine?.snapshot?.()||null
- }));
- r.confirmAfterRetry=confirmState;
- assert(!confirmState.disabled,'SMART_CONFIRM_NATIVE_DISABLED_AFTER_RETRY:'+JSON.stringify(confirmState));
+ await confirmAfterRequiredAudio('correct-word-audio-and-reinforcement-finished');
+ r.confirmAfterRetry=await snapshot();
  await realClick(page.locator('.smart-sentence-confirm-action'),r,'confirm-correct');
  await feedback(page,'correct',r);await snap(page,r,'correct');
 }
