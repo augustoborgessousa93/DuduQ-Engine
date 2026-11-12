@@ -8,8 +8,6 @@ on:
       - qa/last60-seven-mechanic-discovery.mjs
       - qa/last60-gameplay-canary.mjs
       - qa/last60-audio-gate-7-mechanics.mjs
-      - qa/apply-v29-smart-confirm-qa.mjs
-      - core/adapters/v29/smart-sentence-confirm-qa.js
       - .github/workflows/duduq-last60-gameplay-discovery.yml
   workflow_dispatch:
 
@@ -69,12 +67,6 @@ jobs:
           node qa/phase2-last60-candidate.mjs --preview
           node qa/apply-last60-intro-responsive-preview.mjs --preview
           test -s qa/results/last60-candidate-20261110.json
-      - name: Inject Smart Sentence QA-only native Confirm synchronization with hash contract
-        run: |
-          node --check qa/apply-v29-smart-confirm-qa.mjs
-          node qa/apply-v29-smart-confirm-qa.mjs --preview
-          test -s qa/results/v29-smart-confirm-qa-adapter.json
-
       - name: Start local isolated distribution
         run: |
           set -Eeuo pipefail
@@ -113,7 +105,6 @@ jobs:
             qa/results/last60-gameplay-discovery/**
             qa/results/last60-gameplay-gates/**
             qa/results/last60-gameplay-canary/**
-            qa/results/v29-smart-confirm-qa-adapter.json
             qa/results/last60-candidate-20261110.json
       - name: Safety boundary
         if: always()
