@@ -14,14 +14,14 @@
   if (!location.pathname.startsWith("/play/smart-sentence/")) return;
   const MARK = "__DUDUQ_V29_SMART_CONFIRM_QA__";
   if (window[MARK]) return;
-  const stats = {version:"V29_QA_ONLY",registered:false,repaired:0,lastQuestion:null,lastEngineCanConfirm:null,notes:[]};
+  const stats = {version:"V29_QA_ONLY",registered:false,hasIncorrect:false,repaired:0,lastQuestion:null,lastEngineCanConfirm:null,notes:[]};
   Object.defineProperty(window,MARK,{value:stats,writable:false,configurable:false});
 
   let attachedTo = null;
   let observer = null;
   let ticking = false;
   function sync() {
-    if(ticking)return;
+    if(ticking || !stats.hasIncorrect)return;
     ticking = true;
     try {
       const shell=window.DuduQSmartSentenceShell;
@@ -50,11 +50,16 @@
     if(!shell?.engine || !root || attachedTo===shell.engine)return;
     attachedTo=shell.engine;
     stats.registered=true;
-    shell.engine.onStateChange(()=>queueMicrotask(sync));
+    shell.engine.onStateChange(snapshot=>{
+      // Never interfere with the first submission. A prior QA run proved that
+      // early native enabling could make the first Confirm click inert.
+      if(snapshot.status==="incorrect")stats.hasIncorrect=true;
+      requestAnimationFrame(sync);
+    });
     observer?.disconnect();
-    observer=new MutationObserver(()=>queueMicrotask(sync));
+    observer=new MutationObserver(()=>{if(stats.hasIncorrect)requestAnimationFrame(sync);});
     observer.observe(root,{subtree:true,attributes:true,attributeFilter:["disabled","hidden","data-duduq-interaction-state"]});
-    queueMicrotask(sync);
+    requestAnimationFrame(sync);
   }
   const timer=setInterval(()=>{attach();sync();if(stats.registered)clearInterval(timer);},100);
   window.addEventListener("load",attach,{once:true});
