@@ -129,7 +129,22 @@ async function testSmart(page,q,r){
  r.canonical={correct:answer,wrong:wrong.answerKey};
  await realClick(page.locator('.smart-sentence-option[data-option-id$="-'+wrong.answerKey+'"]'),r,'wrong-word');
  await page.locator('.smart-sentence-confirm-action').waitFor({state:'visible',timeout:9000});
+ const smartDiag=()=>page.evaluate(()=>({
+    engine:window.DuduQSmartSentenceShell?.engine?.snapshot?.(),
+    button:(()=>{let e=document.querySelector('.smart-sentence-confirm-action');return e?{disabled:e.disabled,hidden:e.hidden,aria:e.getAttribute('aria-disabled')}:null})(),
+    feedback:(()=>{let e=document.querySelector('.feedback-ribbon');return e?{hidden:e.hidden,kind:e.dataset.feedback,text:e.textContent?.trim().slice(0,120)}:null})(),
+    adapter:window.__DUDUQ_V29_SMART_CONFIRM_QA__||null,
+    gate:document.querySelector('#game')?.dataset?.duduqInteractionState||null
+ }));
+ r.smartPreWrongConfirm=await smartDiag();
  await realClick(page.locator('.smart-sentence-confirm-action'),r,'confirm-wrong');
+ await page.waitForTimeout(550);
+ r.smartPostWrongConfirm=await smartDiag();
+ if(r.smartPostWrongConfirm?.engine?.status==='playing'&&r.smartPostWrongConfirm?.feedback?.hidden){
+   throw Error('SMART_CONFIRM_WRONG_CLICK_NO_STATE_CHANGE:'+JSON.stringify({
+     pre:r.smartPreWrongConfirm,post:r.smartPostWrongConfirm
+   }).slice(0,2600));
+ }
  await feedback(page,'incorrect',r);await snap(page,r,'incorrect');
  await realClick(page.locator('.feedback-action'),r,'retry');
  await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',null,{timeout:20000});
@@ -216,46 +231,76 @@ async function testGrouping(page,q,r){
  await realClick(page.locator('.dnd-confirm-action'),r,'confirm-classification');
  await feedback(page,'correct',r);await snap(page,r,'correct');
 }
-async function testBubble(page,q,r){
- const answer=q.answerKey;assert(typeof answer==='string','BUBBLE_TARGET_MISSING');
- r.canonical={answer};
- const seen=new Set();
- for(let i=0;i<32;i++){
-  const good=page.locator('.feedback-ribbon[data-feedback="correct"]');
-  if(await good.isVisible().catch(()=>false))break;
-  const bad=page.locator('.feedback-ribbon[data-feedback="incorrect"]');
-  if(await bad.isVisible().catch(()=>false)){
-   const label=(await page.locator('.feedback-action').textContent()).trim();
-   assert(/tentar|retry/i.test(label),'BUBBLE_RETRY_TEXT_MISSING');
-   r.feedbackStates.push({kind:'incorrect',text:label});
-   await snap(page,r,'incorrect-'+i);
-   await realClick(page.locator('.feedback-action'),r,'bubble-retry-'+i);
-   await page.waitForFunction(()=>document.querySelector('.feedback-ribbon')?.hidden===true,null,{timeout:14000});
-   await page.waitForTimeout(400);
-   continue;
+async function testBubble(page,q,r) {
+ const answer=q.answerKey; assert(typeof answer==='string','BUBBLE_TARGET_MISSING');
+ r.canonical={answer};r.bubbles=[];r.bubbleStates=[];
+ const clicked=new Set();
+ const getState=()=>page.evaluate(()=>{
+   const engine=window.DuduQBubblePopShell?.engine;
+   const ribbon=document.querySelector('.feedback-ribbon');
+   const all=[...document.querySelectorAll('.bubble-pop-playable:not([disabled])')];
+   return {
+    engine:engine?.snapshot?.()||null,
+    ribbon:ribbon?{hidden:ribbon.hidden,kind:ribbon.dataset.feedback,action:ribbon.querySelector('.feedback-action')?.textContent?.trim()}:null,
+    candidates:all.filter(el=>{
+      const b=el.getBoundingClientRect(),x=b.x+b.width/2,y=b.y+b.height/2;
+      return b.width>25&&b.height>25&&x>18&&y>220&&x<innerWidth-18&&y<innerHeight-110 &&
+        (document.elementFromPoint(x,y)===el||el.contains(document.elementFromPoint(x,y)));
+    }).map(el=>{const b=el.getBoundingClientRect();return{id:el.dataset.bubbleId,text:el.querySelector('.bubble-pop-content')?.textContent?.trim()||'',
+     alt:el.querySelector('.bubble-pop-content img')?.alt||'',x:Math.round(b.x+b.width/2),y:Math.round(b.y+b.height/2)};})
+   };
+ });
+ let wrongClicked=0,correctClicked=0;
+ for(let step=0;step<50;step++){
+  await page.waitForFunction((prior)=>{
+   const ribbon=document.querySelector('.feedback-ribbon');
+   if(ribbon&&!ribbon.hidden)return true;
+   const available=[...document.querySelectorAll('.bubble-pop-playable:not([disabled])')];
+   return available.some(el=>{
+    const b=el.getBoundingClientRect(),x=b.x+b.width/2,y=b.y+b.height/2;
+    if(prior.includes(el.dataset.bubbleId))return false;
+    return b.width>25&&b.height>25&&x>18&&y>220&&x<innerWidth-18&&y<innerHeight-110 &&
+      (document.elementFromPoint(x,y)===el||el.contains(document.elementFromPoint(x,y)));
+   });
+  },[...clicked],{timeout:24000});
+  const state=await getState();
+  r.bubbleStates.push({step,engine:state.engine?{status:state.engine.status,found:state.engine.foundTargetIds,incorrectHits:state.engine.incorrectHits,entities:state.engine.entities?.length}:null,ribbon:state.ribbon,candidates:state.candidates.length});
+  if(state.ribbon&&!state.ribbon.hidden){
+    if(state.ribbon.kind==='correct')break;
+    if(state.ribbon.kind==='incorrect'){
+      const retry=page.locator('.feedback-action').first();
+      await realClick(retry,r,'bubble-retry-'+step);
+      r.feedbackStates.push({kind:'incorrect',text:state.ribbon.action});
+      await page.waitForFunction(()=>document.querySelector('.feedback-ribbon')?.hidden===true,null,{timeout:16000});
+      continue;
+    }
+    throw Error('BUBBLE_UNEXPECTED_FEEDBACK:'+JSON.stringify(state.ribbon));
   }
-  await page.waitForFunction(seen=>{
-    return [...document.querySelectorAll('.bubble-pop-playable:not([disabled])')]
-      .some(el=>!seen.includes(el.dataset.bubbleId)&&el.getBoundingClientRect().width>10);
-  },[...seen],{timeout:13500});
-  const candidates=await page.locator('.bubble-pop-playable:not([disabled])').evaluateAll(els=>els.map(el=>({
-   id:el.dataset.bubbleId,text:el.querySelector('.bubble-pop-content')?.textContent?.trim()||'',
-   alt:el.querySelector('.bubble-pop-content img')?.alt||''
-  })));
-  const candidate=candidates.find(c=>!seen.has(c.id));
-  assert(candidate,'NEW_BUBBLE_NOT_FOUND');
-  seen.add(candidate.id);
-  r.bubbles??=[];r.bubbles.push(candidate);
-  await realClick(page.locator('.bubble-pop-playable[data-bubble-id="'+candidate.id+'"]'),r,'pop-'+candidate.id);
-  // The bubble engine runs a two-stage pop FX before revealing wrong feedback.
-  // Wait for that phase instead of looking for a new bubble while the overlay
-  // is still playing its animation.
-  await page.waitForTimeout(1900);
+  // At least one real incorrect answer, then prioritize engine-created target
+  // bubbles to avoid an artificial 50-click stress test with moving distractors.
+  const valid=state.candidates.filter(x=>!clicked.has(x.id));
+  const chosen=(wrongClicked===0?valid.find(x=>x.id.includes('-incorrect-')):null)||
+    valid.find(x=>x.id.includes('-target-'))||valid[0];
+  if(!chosen)continue;
+  clicked.add(chosen.id);
+  const before=state.engine?.entities?.find(x=>x.id===chosen.id)?.state||null;
+  await page.mouse.click(chosen.x,chosen.y,{delay:25});
+  await page.waitForTimeout(380);
+  const after=await getState();
+  const changed=after.engine?.entities?.find(x=>x.id===chosen.id)?.state||null;
+  r.bubbles.push({...chosen,before,after:changed});
+  r.actions.push({kind:'realViewportMouseClick',label:'bubble-'+chosen.id,x:chosen.x,y:chosen.y});
+  if(changed==='POPPING'||changed==='POPPED'||changed==='popping'||changed==='popped'){
+    if(chosen.id.includes('-incorrect-'))wrongClicked++;
+    else correctClicked++;
+  }
+  await page.waitForTimeout(700);
  }
  const good=page.locator('.feedback-ribbon[data-feedback="correct"]');
- await good.waitFor({state:'visible',timeout:16000});
- r.correctFeedbackSeen=true;
+ await good.waitFor({state:'visible',timeout:14000});
  r.feedbackStates.push({kind:'correct',text:(await good.textContent()).trim().slice(0,140)});
+ r.correctFeedbackSeen=true;
+ r.bubbleOutcome={wrongClicked,correctClicked,roundSnapshot:await page.evaluate(()=>window.DuduQBubblePopShell?.engine?.snapshot?.())};
  await snap(page,r,'correct');
 }
 const games={ 'target-shooter':testTarget,'matching':testMatching,'smart-sentence':testSmart,
