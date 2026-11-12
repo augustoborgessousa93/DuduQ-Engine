@@ -47,7 +47,7 @@ async function realClick(locator,result,label){
  await locator.waitFor({state:'visible',timeout:12000});
  const b=await locator.boundingBox();
  assert(b&&b.width>8&&b.height>8,'CLICKABLE_TARGET_MISSING:'+label);
- const animationSensitive=label==='matching-confirm-all-pairs'||label.startsWith('pop-');
+ const animationSensitive=label==='matching-confirm-all-pairs'||label.startsWith('pop-')||label==='confirm-wrong'||label==='confirm-correct';
  await locator.click({timeout:12000,force:animationSensitive});
  result.actions.push({kind:'playwrightRealClick',label,x:Math.round(b.x+b.width/2),y:Math.round(b.y+b.height/2)});
 }
