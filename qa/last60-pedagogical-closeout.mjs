@@ -22,8 +22,8 @@ const rows=[],dimensions={};
 for(const b of candidate.bindings){
  const a=source.get(b.mediaId);
  assert(a,'SOURCE_ASSIGNMENT_NOT_FOUND:'+b.mediaId);
- assert(typeof b.url==='string'&&b.url.startsWith('/'),'INVALID_URL:'+b.mediaId);
- const file=path.join('dist-pages',b.url.slice(1));
+ assert(typeof b.url==='string'&&!b.url.startsWith('http')&&!b.url.includes('..')&&b.url.length>2,'INVALID_URL:'+b.mediaId);
+ const file=path.join('dist-pages',b.url.replace(/^\/+/,''));
  const png=readFileSync(file);
  assert(png.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),'NON_PNG:'+file);
  const width=png.readUInt32BE(16),height=png.readUInt32BE(20),colorType=png[25];
