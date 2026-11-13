@@ -1,0 +1,93 @@
+name: DUDUQ Last60 Final Gate - 65 Real Gameplays and Pedagogical Review
+on:
+  push:
+    branches:
+      - qa/duduq-last60-gameplay-20261110
+    paths:
+      - qa/last60-gameplay-full65.mjs
+      - qa/last60-pedagogical-closeout.mjs
+      - .github/workflows/duduq-last60-final65-gate.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: last60-final65-qa-v29
+  cancel-in-progress: true
+
+jobs:
+  final-65-interactions:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 115
+    env:
+      CI: 'true'
+      DUDUQ_QA_ONLY: '1'
+      DUDUQ_VISUAL_REVIEW: '1'
+      BASE_URL: http://127.0.0.1:4175
+      CF_PAGES_BRANCH: release/duduq-phase2-orange-fruit-20261103
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify 65-gameplay and pedagogical audit scripts
+        run: |
+          node --check qa/last60-gameplay-full65.mjs
+          node --check qa/last60-pedagogical-closeout.mjs
+          node --check qa/phase2-last60-candidate.mjs
+          node --check qa/apply-last60-intro-responsive-preview.mjs
+      - name: Reconstruct immutable production and last60 QA candidate
+        run: |
+          set -Eeuo pipefail
+          bash qa/cloudflare-preview-v28-prebuilt.sh
+          node qa/normalize-last60-baseline-manifest.mjs
+          node qa/phase2-last60-candidate.mjs --preview
+          node qa/apply-last60-intro-responsive-preview.mjs --preview
+          test -s qa/results/last60-candidate-20261110.json
+      - name: Audit every media SHA PNG alpha resolution and curriculum context
+        run: node qa/last60-pedagogical-closeout.mjs
+      - name: Local QA HTTP server
+        run: |
+          python3 -m http.server 4175 --bind 127.0.0.1 --directory dist-pages >/tmp/duduq-65.log 2>&1 &
+          for i in $(seq 1 50); do
+            if curl -fsS "$BASE_URL/" >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/duduq-65.log
+          exit 1
+      - name: Install pinned Chromium supported on Ubuntu 24.04
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Execute 65 official question completions on desktop and mobile
+        run: |
+          set +e
+          echo "START_DESKTOP_65"
+          DUDUQ_QA_VIEWPORT=desktop node qa/last60-gameplay-full65.mjs
+          desktop_exit=$?
+          echo "START_MOBILE_65"
+          DUDUQ_QA_VIEWPORT=mobile node qa/last60-gameplay-full65.mjs
+          mobile_exit=$?
+          echo "DUDUQ_65_FINAL_STATUS desktop=$desktop_exit mobile=$mobile_exit"
+          test "$desktop_exit" -eq 0 && test "$mobile_exit" -eq 0
+      - name: Collect per-question evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: duduq-last60-final65-${{ github.run_id }}
+          retention-days: 21
+          if-no-files-found: warn
+          compression-level: 5
+          path: |
+            qa/results/last60-gameplay-full65-desktop/**
+            qa/results/last60-gameplay-full65-mobile/**
+            qa/results/last60-final-pedagogical-review/**
+            qa/results/last60-candidate-20261110.json
+      - name: No production release
+        if: always()
+        run: |
+          echo "QA ONLY. 7-canary success + 65 tests are not human pedagogical approval."
+          echo "Do not merge PR129 or deploy Cloudflare without approved final release gate."
