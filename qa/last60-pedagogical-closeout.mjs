@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Read-only pedagogical/media closure audit. Does not approve content. */
 import assert from 'node:assert/strict';
-import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+import {readFileSync,writeFileSync,mkdirSync,existsSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import path from 'node:path';
 assert.equal(process.env.DUDUQ_QA_ONLY,'1');
@@ -18,6 +18,18 @@ assert.equal(candidate.mediaIdsUpdated,60);
 assert.equal(candidate.affectedQuestions.length,65);
 assert.equal(plan.assignments.length,60);
 const source=new Map(plan.assignments.map(a=>[a.mediaId,a]));
+const scopedPath='qa/results/last60-banana-context-correction.json';
+const scoped=existsSync(scopedPath)?JSON.parse(readFileSync(scopedPath,'utf8')):null;
+if(scoped){
+ assert.equal(scoped.question,'Y2M06-Q018');
+ const actual=qs.get('Y2M06-Q018');
+ const txt=JSON.stringify(actual);
+ assert(txt.includes(scoped.scopedMediaId)&&!txt.includes(scoped.originalMediaId),'CONTEXTUAL_BANANA_NOT_SELECTED');
+ assert.equal(actual.answerKey,'big','CONTEXTUAL_Q_ANSWER_MUST_STAY_BIG');
+ assert(scoped.answerKeyPreserved&&scoped.textPreserved&&scoped.audioPreserved&&scoped.goldMastersPreserved);
+ const data=readFileSync('dist-pages/'+scoped.sourceUrl);
+ assert.equal(createHash('sha256').update(data).digest('hex'),scoped.sha256,'BANANA_SOURCE_SHA_MISMATCH');
+}
 const rows=[],dimensions={};
 for(const b of candidate.bindings){
  const a=source.get(b.mediaId);
@@ -32,7 +44,7 @@ for(const b of candidate.bindings){
  assert(width>=512&&height>=512,'TOO_SMALL:'+file);
  assert(colorType===6||colorType===4||png.includes(Buffer.from('tRNS')),'NO_ALPHA_CHANNEL:'+file);
  dimensions[width+'x'+height]=(dimensions[width+'x'+height]||0)+1;
- const refs=b.referencedQuestions.map(id=>{
+ const refs=b.referencedQuestions.filter(id=>!(scoped&&b.mediaId===scoped.originalMediaId&&id===scoped.question)).map(id=>{
   const q=qs.get(id);assert(q,'QUESTION_NOT_FOUND:'+id);
   return {id,mechanic:q.mechanicId,instructionEn:q.primaryInstructionEn||q.promptEn||null,
    instructionPt:q.primaryInstructionPt||q.instructionPt||null,answerKey:q.answerKey,
@@ -49,7 +61,9 @@ const pending=rows.filter(x=>x.reviewStatus!=='APPROVED');
 const orphan=rows.filter(x=>x.refs.length===0);
 const report={schema:'DUDUQ_LAST60_PEDAGOGICAL_CLOSEOUT_V1',qaOnly:true,productionPublished:false,
  verifiedPngBindings:60,uniquePngs:unique.size,questions:600,affectedQuestions:65,dimensions,
- approvedItems:60-pending.length,humanReviewPending:pending.length,orphanBindings:orphan.length,
+ approvedItems:60-pending.length,humanReviewPending:pending.length+(scoped?1:0),
+ contextualRemediation:scoped?{question:scoped.question,source:scoped.sourceFile,mediaId:scoped.scopedMediaId,sha256:scoped.sha256,approval:'PENDING'}:null,
+ orphanBindings:orphan.length,
  releaseGate:{passed:pending.length===0,reason:pending.length?'HUMAN_PEDAGOGICAL_REVIEW_PENDING':'ALL_SOURCE_REVIEWS_MARKED_APPROVED'},
  items:rows};
 const dir='qa/results/last60-final-pedagogical-review';mkdirSync(dir,{recursive:true});
@@ -67,4 +81,4 @@ for(const x of rows.sort((a,b)=>a.concept.localeCompare(b.concept)||a.mediaId.lo
 }
 md.push('','Os gabaritos e distratores da fonte constam no arquivo checklist.json. Este documento não constitui homologação humana.');
 writeFileSync(dir+'/checklist.md',md.join('\n')+'\n');
-console.log('LAST60_PEDAGOGICAL_REVIEW='+JSON.stringify({items:rows.length,unique:unique.size,dimensions,pending:pending.length,orphan:orphan.length,affected:65}));
+console.log('LAST60_PEDAGOGICAL_REVIEW='+JSON.stringify({items:rows.length,unique:unique.size,dimensions,pending:pending.length,bananaContextPatched:Boolean(scoped),orphan:orphan.length,affected:65}));
