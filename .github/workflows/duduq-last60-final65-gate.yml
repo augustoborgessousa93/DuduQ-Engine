@@ -6,6 +6,7 @@ on:
     paths:
       - qa/last60-gameplay-full65.mjs
       - qa/last60-pedagogical-closeout.mjs
+      - qa/apply-last60-big-banana-context.mjs
       - .github/workflows/duduq-last60-final65-gate.yml
   workflow_dispatch:
 
@@ -37,6 +38,7 @@ jobs:
         run: |
           node --check qa/last60-gameplay-full65.mjs
           node --check qa/last60-pedagogical-closeout.mjs
+          node --check qa/apply-last60-big-banana-context.mjs
           node --check qa/phase2-last60-candidate.mjs
           node --check qa/apply-last60-intro-responsive-preview.mjs
       - name: Reconstruct immutable production and last60 QA candidate
@@ -46,6 +48,8 @@ jobs:
           node qa/normalize-last60-baseline-manifest.mjs
           node qa/phase2-last60-candidate.mjs --preview
           node qa/apply-last60-intro-responsive-preview.mjs --preview
+          node qa/apply-last60-big-banana-context.mjs --preview
+          test -s qa/results/last60-banana-context-correction.json
           test -s qa/results/last60-candidate-20261110.json
       - name: Audit every media SHA PNG alpha resolution and curriculum context
         run: node qa/last60-pedagogical-closeout.mjs
@@ -85,6 +89,7 @@ jobs:
             qa/results/last60-gameplay-full65-desktop/**
             qa/results/last60-gameplay-full65-mobile/**
             qa/results/last60-final-pedagogical-review/**
+            qa/results/last60-banana-context-correction.json
             qa/results/last60-candidate-20261110.json
       - name: No production release
         if: always()
