@@ -164,7 +164,10 @@ async function testSmart(page,q,r){
  await realClick(page.locator('.feedback-action'),r,'retry');
  await page.waitForFunction(()=>document.querySelector('#game')?.dataset.duduqInteractionState==='READY',null,{timeout:75000});
  }
- const correctByLabel=page.locator('.smart-sentence-option').filter({hasText:new RegExp('^\\s*'+answer.replace(/[.*+?^${}()|[\]\\]/g,'\\ await realClick(page.locator('.smart-sentence-option[data-option-id$="-'+answer+'"]'),r,'correct-word');')+'\\s*
+ const correctByLabel=page.locator('.smart-sentence-option').filter({hasText:answer}).first();
+ await correctByLabel.waitFor({state:'visible',timeout:15000});
+ assert.equal((await correctByLabel.textContent()).trim().toLowerCase(),answer.trim().toLowerCase(),'VISIBLE_SMART_ANSWER_DIFFERS_FROM_KEY');
+ await realClick(correctByLabel,r,'correct-word');
  await confirmAfterRequiredAudio('correct-word-audio-and-reinforcement-finished');
  r.confirmAfterRetry=await snapshot();
  await realClick(page.locator('.smart-sentence-confirm-action'),r,'confirm-correct');
