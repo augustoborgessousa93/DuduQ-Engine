@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "timestamp": "2026-11-27T10:35:30.250Z",
+  "timestamp": "2026-11-27T10:43:08.558Z",
   "checks": [
     {
       "name": "JSON design-system/duduq-component-manifest.json",
